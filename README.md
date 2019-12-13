@@ -1,5 +1,5 @@
 # cgdps
-Consocio del puerto de dock sud 
+Consorcio del puerto de dock sud 
 
 El objetivo actual es desarrollar una herramienta web útil para los procesos administrativos vinculados a giro de buques
 
