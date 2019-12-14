@@ -1,0 +1,13 @@
+{
+    "sqltools.connections": [
+        {
+            "database": "cgpds",
+            "dialect": "MySQL",
+            "name": "PDS",
+            "password": "1234",
+            "port": 3306,
+            "server": "localhost",
+            "username": "root"
+        }
+    ]
+}
