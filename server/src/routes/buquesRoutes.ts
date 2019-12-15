@@ -1,24 +1,23 @@
-import express, { Router } from 'express';
-
+import { Router } from 'express';
 import buquesController from '../controllers/buquesController';
 
-class ShipsRoutes {
+class BuquesRoutes {
 
-    router: Router = Router();
+    public router: Router = Router();
 
     constructor() {
         this.config();
     }
 
-    config() {
+    config() : void {
         this.router.get('/', buquesController.list);
         this.router.get('/:id', buquesController.getOne);
-        this.router.post('/', buquesController.create);
-        this.router.put('/:id', buquesController.update);
-        this.router.delete('/:id', buquesController.delete);
+        this.router.post('/', buquesController.prueba)
+
     }
 
 }
 
-export default new ShipsRoutes().router;
+const buquesRoutes = new BuquesRoutes();
+export default buquesRoutes.router;
 

@@ -1,9 +1,11 @@
-import { Request, Response } from 'express';
+import { Request, Response, Router } from 'express';
 
 import pool from '../database';
 
 class BuquesController {
-
+    public prueba(req: Request, res: Response){
+        res.json({text: 'Probando Router BuquesController'})
+    }
     public async list(req: Request, res: Response): Promise<void> {
         const buques = await pool.query('SELECT * FROM buques');
         res.json(buques);
@@ -11,7 +13,7 @@ class BuquesController {
 
     public async getOne(req: Request, res: Response): Promise<any> {
         const { id } = req.params;
-        const buques = await pool.query('SELECT * FROM buques WHERE id = ?', [id]);
+        const buques = await pool.query('SELECT * FROM buques WHERE ORDEN = ?', [id]);
         console.log(buques.length);
         if (buques.length > 0) {
             return res.json(buques[0]);
@@ -27,16 +29,16 @@ class BuquesController {
     public async update(req: Request, res: Response): Promise<void> {
         const { id } = req.params;
         const oldBuque = req.body;
-        await pool.query('UPDATE buques set ? WHERE id = ?', [req.body, id]);
+        await pool.query('UPDATE buques set ? WHERE otden = ?', [req.body, id]);
         res.json({ message: "The buque was Updated" });
     }
 
     public async delete(req: Request, res: Response): Promise<void> {
         const { id } = req.params;
-        await pool.query('DELETE FROM buques WHERE id = ?', [id]);
+        await pool.query('DELETE FROM buques WHERE ORDEN = ?', [id]);
         res.json({ message: "The buque was deleted" });
     }
 }
 
-const buquesController = new buquesController;
+const buquesController = new BuquesController;
 export default buquesController;
