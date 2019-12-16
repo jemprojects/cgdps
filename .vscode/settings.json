@@ -1,9 +1,9 @@
 {
     "sqltools.connections": [
         {
-            "database": "cgpds",
+            "database": "migration",
             "dialect": "MySQL",
-            "name": "PDS",
+            "name": "pds",
             "password": "1234",
             "port": 3306,
             "server": "localhost",

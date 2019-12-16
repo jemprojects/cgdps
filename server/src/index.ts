@@ -4,6 +4,7 @@ Application
 
 import buquesRoutes from './routes/buquesRoutes';
 import cors from 'cors';
+import entradasRoutes from './routes/entradasRoutes'
 import indexRoutes from './routes/indexRoutes';
 import morgan from 'morgan';
 
@@ -31,6 +32,7 @@ class Server {
     routes(): void {
         this.app.use('/', indexRoutes);
         this.app.use('/buques', buquesRoutes);
+        this.app.use('/entradas', entradasRoutes);
     }
 
     start() {
