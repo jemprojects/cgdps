@@ -11,6 +11,7 @@ import { MatListModule } from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MaterialModule } from './material.module';
 import { NavegationComponent } from './components/navegation/navegation.component';
 import { NgModule } from '@angular/core';
 
@@ -25,15 +26,16 @@ import { NgModule } from '@angular/core';
   ],
   imports: [
     BrowserModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MaterialModule,
     AppRoutingModule,
-    MatMenuModule,
     BrowserAnimationsModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
-    MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
