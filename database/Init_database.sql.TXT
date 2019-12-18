@@ -2,27 +2,27 @@ CREATE DATABASE cgpds;
 
 USE cgpds;
 
-CREATE TABLE IF NOT EXISTS `cgpds`.`AGENCIAS` (`ORDEN` int(3), `Agencia` varchar(26), `Cuit` varchar(13), `Direccion` varchar(40), `Telefono` int(7)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE TABLE IF NOT EXISTS `cgpds`.`ARBOLADURA` (`CODIGO` int(2), `ARBOLADURA` varchar(25)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE TABLE IF NOT EXISTS `cgpds`.`BANDERA` (`ORDEN` int(2), `Bandera` varchar(16)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE TABLE IF NOT EXISTS `cgpds`.`BUQUES` (`ORDEN` int(4), `NOMBRE` varchar(30), `BANDERA` int(2), `ARBOLADURA` int(2), `ESLORA` int(5), `MANGA` int(4), `PUNTAL` int(3), `TRN` int(5), `TRB` int(6), `IMO` int(9), `Campo1` int(4)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE TABLE IF NOT EXISTS `cgpds`.`DOCUMENTO` (`DOCUMENTO` varchar(10), `ID` int(1)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE TABLE IF NOT EXISTS `cgpds`.`EMP_SERV_PORT` (`id` int(3), `ESP` varchar(44)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE TABLE IF NOT EXISTS `cgpds`.`EMPRESAS_CARGA` (`ID` int(2), `EMPRESA` varchar(30)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE TABLE IF NOT EXISTS `cgpds`.`EMPRESAS_DESCARGA` (`ID` int(2), `EMPRESA` varchar(30)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE TABLE IF NOT EXISTS `cgpds`.`ENTRADAS` (`ID` int(5), `GIRO` int(4), `BUQUE` int(4), `AGENCIA` int(3), `PROCEDENCIA` int(3), `DESTINO` int(3), `ENTRADA` varchar(10), `SALIDA` varchar(10), `MUELLE` int(2), `TRAFICO` int(1), `DOCUMENTO` int(1), `Nº` int(5), `CAL_ENT` int(2), `CAL_SAL` int(1), `ENVASE DESC` varchar(10), `EMPRESAS_DEC` varchar(10), `CARGA` varchar(10), `TNS_CARG` varchar(10), `ENVASE CARG` varchar(10), `EMPRESAS_CAR` varchar(10), `CAL_ENT1` varchar(10), `CAL_SAL1` varchar(10), `TIPO` varchar(10)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE TABLE IF NOT EXISTS `cgpds`.`ENVASE_CARG` (`ID` int(2), `ENVASE` varchar(14)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE TABLE IF NOT EXISTS `cgpds`.`ENVASE_DESC` (`ID` int(2), `ENVASE` varchar(14)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE TABLE IF NOT EXISTS `cgpds`.`Errores_de_pegado` (`GIRO` int(2), `BUQUE` varchar(4), `AGENCIA` varchar(13), `PROCEDENCIA` varchar(10), `DESTINO` varchar(10), `ENTRADA` varchar(10), `SALIDA` varchar(10), `MUELLE` varchar(4), `TRAFICO` varchar(8), `DOCUMENTO` varchar(9), `Nº` int(5), `DESCARGA` varchar(6), `TNS_DES` int(1), `ENVASE DESC` varchar(10), `EMPRESAS_DEC` varchar(10), `CARGA` varchar(22), `TNS_CARG` int(4), `ENVASE CARG` varchar(14), `EMPRESAS_CAR` varchar(11), `CAL_ENT` int(1), `CAL_SAL` int(1), `TIPO` varchar(6)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE TABLE IF NOT EXISTS `cgpds`.`ESP` (`id` int(5), `EMP SERV POR` int(3), `RUBRO` int(2), `EMPRESA` int(5)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE TABLE IF NOT EXISTS `cgpds`.`GIROS` (`ORDEN` int(2), `MUELLE` varchar(10), `SECTOR` varchar(10)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE TABLE IF NOT EXISTS `cgpds`.`MERCADERIAS` (`ORDEN` int(3), `TIPO` varchar(44)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE TABLE IF NOT EXISTS `cgpds`.`OPERACION` (`Id` int(4), `MERCADERIA` int(3), `TNS` varchar(11), `TIPO` int(2), `giro_id` int(5)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE TABLE IF NOT EXISTS `cgpds`.`PUERTOS` (`ORDEN` int(3), `Puerto` varchar(22), `Pais` varchar(20)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE TABLE IF NOT EXISTS `cgpds`.`PUERTOS1` (`ORDEN` int(3), `Puerto` varchar(22), `Pais` varchar(19)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE TABLE IF NOT EXISTS `cgpds`.`RUBRO_ESP` (`ID` int(2), `RUBRO ESP` varchar(40)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE TABLE IF NOT EXISTS `cgpds`.`TIPO` (`Id` int(2), `TIPO` varchar(10)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE TABLE IF NOT EXISTS `cgpds`.`TRAFICO` (`ID` int(1), `TRAFICO` varchar(12)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE TABLE IF NOT EXISTS `cgpds`.`AGENCIAS` (`ORDEN` int(3), `Agencia` varchar(26), `Cuit` varchar(13), `Direccion` varchar(40), `Telefono` int(7)) ;
+CREATE TABLE IF NOT EXISTS `cgpds`.`ARBOLADURA` (`CODIGO` int(2), `ARBOLADURA` varchar(25)) ;
+CREATE TABLE IF NOT EXISTS `cgpds`.`BANDERA` (`ORDEN` int(2), `Bandera` varchar(16)) ;
+CREATE TABLE IF NOT EXISTS `cgpds`.`BUQUES` (`ORDEN` int(4), `NOMBRE` varchar(30), `BANDERA` int(2), `ARBOLADURA` int(2), `ESLORA` int(5), `MANGA` int(4), `PUNTAL` int(3), `TRN` int(5), `TRB` int(6), `IMO` int(9), `Campo1` int(4)) ;
+CREATE TABLE IF NOT EXISTS `cgpds`.`DOCUMENTO` (`DOCUMENTO` varchar(10), `ID` int(1)) ;
+CREATE TABLE IF NOT EXISTS `cgpds`.`EMP_SERV_PORT` (`id` int(3), `ESP` varchar(44)) ;
+CREATE TABLE IF NOT EXISTS `cgpds`.`EMPRESAS_CARGA` (`ID` int(2), `EMPRESA` varchar(30)) ;
+CREATE TABLE IF NOT EXISTS `cgpds`.`EMPRESAS_DESCARGA` (`ID` int(2), `EMPRESA` varchar(30)) ;
+CREATE TABLE IF NOT EXISTS `cgpds`.`ENTRADAS` (`ID` int(5), `GIRO` int(4), `BUQUE` int(4), `AGENCIA` int(3), `PROCEDENCIA` int(3), `DESTINO` int(3), `ENTRADA` varchar(10), `SALIDA` varchar(10), `MUELLE` int(2), `TRAFICO` int(1), `DOCUMENTO` int(1), `Nº` int(5), `CAL_ENT` int(2), `CAL_SAL` int(1), `ENVASE DESC` varchar(10), `EMPRESAS_DEC` varchar(10), `CARGA` varchar(10), `TNS_CARG` varchar(10), `ENVASE CARG` varchar(10), `EMPRESAS_CAR` varchar(10), `CAL_ENT1` varchar(10), `CAL_SAL1` varchar(10), `TIPO` varchar(10)) ;
+CREATE TABLE IF NOT EXISTS `cgpds`.`ENVASE_CARG` (`ID` int(2), `ENVASE` varchar(14)) ;
+CREATE TABLE IF NOT EXISTS `cgpds`.`ENVASE_DESC` (`ID` int(2), `ENVASE` varchar(14)) ;
+CREATE TABLE IF NOT EXISTS `cgpds`.`Errores_de_pegado` (`GIRO` int(2), `BUQUE` varchar(4), `AGENCIA` varchar(13), `PROCEDENCIA` varchar(10), `DESTINO` varchar(10), `ENTRADA` varchar(10), `SALIDA` varchar(10), `MUELLE` varchar(4), `TRAFICO` varchar(8), `DOCUMENTO` varchar(9), `Nº` int(5), `DESCARGA` varchar(6), `TNS_DES` int(1), `ENVASE DESC` varchar(10), `EMPRESAS_DEC` varchar(10), `CARGA` varchar(22), `TNS_CARG` int(4), `ENVASE CARG` varchar(14), `EMPRESAS_CAR` varchar(11), `CAL_ENT` int(1), `CAL_SAL` int(1), `TIPO` varchar(6)) ;
+CREATE TABLE IF NOT EXISTS `cgpds`.`ESP` (`id` int(5), `EMP SERV POR` int(3), `RUBRO` int(2), `EMPRESA` int(5)) ;
+CREATE TABLE IF NOT EXISTS `cgpds`.`GIROS` (`ORDEN` int(2), `MUELLE` varchar(10), `SECTOR` varchar(10)) ;
+CREATE TABLE IF NOT EXISTS `cgpds`.`MERCADERIAS` (`ORDEN` int(3), `TIPO` varchar(44)) ;
+CREATE TABLE IF NOT EXISTS `cgpds`.`OPERACION` (`Id` int(4), `MERCADERIA` int(3), `TNS` varchar(11), `TIPO` int(2), `giro_id` int(5)) ;
+CREATE TABLE IF NOT EXISTS `cgpds`.`PUERTOS` (`ORDEN` int(3), `Puerto` varchar(22), `Pais` varchar(20)) ;
+CREATE TABLE IF NOT EXISTS `cgpds`.`PUERTOS1` (`ORDEN` int(3), `Puerto` varchar(22), `Pais` varchar(19)) ;
+CREATE TABLE IF NOT EXISTS `cgpds`.`RUBRO_ESP` (`ID` int(2), `RUBRO ESP` varchar(40)) ;
+CREATE TABLE IF NOT EXISTS `cgpds`.`TIPO` (`Id` int(2), `TIPO` varchar(10)) ;
+CREATE TABLE IF NOT EXISTS `cgpds`.`TRAFICO` (`ID` int(1), `TRAFICO` varchar(12)) ;
 
 INSERT INTO `cgpds`.`DOCUMENTO` (`ID`,`DOCUMENTO`) VALUES (2, `PASAVANTE`), (3, `NO INGRESO`),(4, `NO INGRESO`)
 INSERT INTO `cgpds`.`AGENCIAS` (`ORDEN`, `Agencia`, `Cuit`, `Direccion`, `Telefono`) VALUES (1, 'SHIPS', NULL, 'Piedras 77 6º (1002) C.F.', 3421958),
