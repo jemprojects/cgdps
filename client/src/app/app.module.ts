@@ -17,7 +17,7 @@ import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MaterialModule } from './material.module'
 import { NavegatorComponent } from './components/navegator/navegator.component'
-import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core'
 
 //https://github.com/FaztWeb/angular7-mysql-crud
 //youtube.com/watch?v=lxYB79ANJM8
@@ -44,7 +44,7 @@ import { NgModule } from '@angular/core';
     MatIconModule,
     MatListModule,
     MatSidenavModule,
-  
+
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
