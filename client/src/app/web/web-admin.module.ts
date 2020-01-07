@@ -6,6 +6,7 @@ import { EntradasListComponent } from './components/entradas-list/entradas-list.
 import { MaterialModule } from './web-admin.material.module';
 import { NavegatorComponent } from './components/navegator/navegator.component';
 import { NgModule } from '@angular/core';
+import { WebAdminComponent } from './web-admin.component';
 import { WebRoutingModule } from './web-admin-routing.module';
 
 @NgModule({
@@ -14,7 +15,8 @@ import { WebRoutingModule } from './web-admin-routing.module';
     BuquesListComponent,
     EntradasFormComponent,
     EntradasListComponent,
-    NavegatorComponent
+    NavegatorComponent,
+    WebAdminComponent
   ],
   imports: [
     CommonModule,
