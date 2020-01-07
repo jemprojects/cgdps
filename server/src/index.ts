@@ -16,6 +16,8 @@ class Server {
         this.app = express();
         this.config();
         this.routes();
+        
+
     }
 
     config(): void {
@@ -30,9 +32,11 @@ class Server {
     }
 
     routes(): void {
+        const userRouter = require("./api/users/user.router");
         this.app.use('/', indexRoutes);
         this.app.use('/buques', buquesRoutes);
         this.app.use('/entradas', entradasRoutes);
+        this.app.use('/users', userRouter)
     }
 
     start() {
