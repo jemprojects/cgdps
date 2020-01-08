@@ -1,17 +1,16 @@
 import { RouterModule, Routes } from '@angular/router';
 
-import { LoginComponent } from './components/users/login/login.component'
+import { LoginComponent } from './components/login/login.component'
 import { NgModule } from '@angular/core';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component'
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: '',
     redirectTo: 'CGPDS',
-    pathMatch: 'full',
+    pathMatch: 'full'
   },
   { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ]
 
