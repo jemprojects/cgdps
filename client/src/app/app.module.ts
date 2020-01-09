@@ -1,7 +1,7 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
-import { AngularFireAuthModule } from "@angular/fire/auth";
-import { AngularFireModule } from "@angular/fire";
+import { AngularFireAuthModule } from 'angularfire2/auth'
+import { AngularFireModule } from 'angularfire2'
 import { AppComponent } from './app.component'
 import { AppRoutingModule } from './app-routing.module'
 import { AuthGuard } from './auth/auth-guard.service'
