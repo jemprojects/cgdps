@@ -1,10 +1,11 @@
 import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from '../auth/auth-guard.service';
-import { BuquesFormComponent } from './components/buques-form/buques-form.component';
-import { BuquesListComponent } from './components/buques-list/buques-list.component';
-import { EntradasFormComponent } from './components/entradas-form/entradas-form.component';
-import { EntradasListComponent } from './components/entradas-list/entradas-list.component';
+import { BuqueDetailComponent } from './components/buques/buque-detail/buque-detail.component';
+import { BuquesFormComponent } from './components/buques/buques-form/buques-form.component';
+import { BuquesListComponent } from './components/buques/buques-list/buques-list.component';
+import { EntradasFormComponent } from './components/entradas/entradas-form/entradas-form.component';
+import { EntradasListComponent } from './components/entradas/entradas-list/entradas-list.component';
 import { NgModule } from '@angular/core';
 import { WebAdminComponent } from './web-admin.component';
 
@@ -13,7 +14,16 @@ const routes: Routes = [
     path: '',
     component: WebAdminComponent,
     children: [
-      { path: '', redirectTo: 'cgpds', pathMatch: 'full' },
+      {
+        path: '',
+        redirectTo: 'cgpds',
+        pathMatch: 'full'
+      },
+      {
+        path: 'cgpds',
+        component: BuquesListComponent,
+        canActivate: [AuthGuard],
+      },
       {
         path: 'cgpds/entradas/edit/:id',
         component: EntradasFormComponent,
@@ -22,11 +32,6 @@ const routes: Routes = [
       {
         path: 'cgpds/entradas',
         component: EntradasFormComponent,
-        canActivate: [AuthGuard],
-      },
-      {
-        path: 'cgpds/buques',
-        component: BuquesListComponent,
         canActivate: [AuthGuard],
       },
       {
@@ -41,13 +46,12 @@ const routes: Routes = [
       },
       {
         path: 'cgpds/buques',
-        component: BuquesFormComponent,
+        component: BuqueDetailComponent,
         canActivate: [AuthGuard],
       },
 
     ],
-  },
-]
+  }];
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

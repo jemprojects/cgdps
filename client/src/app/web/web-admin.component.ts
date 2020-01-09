@@ -11,11 +11,11 @@ import { Router } from '@angular/router';
 export class WebAdminComponent implements OnInit {
   siteMapLabel: string
   constructor(public authService: AuthService, public router: Router) {
-    this.siteMapLabel = 'Administración'
+    this.siteMapLabel = 'CGPDS'
   }
 
   changeSiteMapLabel(page) {
-    this.siteMapLabel = `Administración/${page}`
+    this.siteMapLabel = `CGPDS/${page}`
   }
 
   ngOnInit() { }

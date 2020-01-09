@@ -1,0 +1,54 @@
+<p>buques-list works!</p>
+<div>
+  <mat-card>
+    <div class="head-content-card">
+      <h2>Buques</h2>
+      <button class="buttonAdd" mat-raised-button color="primary"
+        [routerLink]="['/buques/buque',{id: null} ]">Agregar
+        Nuevo</button>
+    </div>
+    <div class='mat-typography' *ngIf="buquesFiltrados!=null">
+      <div *ngFor="let buque of buquesFiltrados">
+        <mat-card-content class="box buqueBoxItem">
+          <div class="box1">
+            <button class="buttonInfo" mat-mini-fab matTooltip="Más información" >
+              <mat-icon>info_outline</mat-icon>
+            </button>
+            &nbsp; &nbsp; &nbsp;
+            <button class="buttonEdit" mat-mini-fab matTooltip="Editar"
+              [routerLink]="['/buques/buque',{id: buque.key} ]">
+              <mat-icon>edit</mat-icon>
+            </button>
+            &nbsp; &nbsp; &nbsp;
+
+          </div>
+          <div class="box2">
+            <p mat-line>
+              <mat-icon class="iconCenter">home_outline</mat-icon><span
+                class='mat-body-strong'>{{buque.nombre}}</span>
+
+            </p>
+            <p mat-line>
+              <mat-icon class="iconCenter">contact_phone</mat-icon>
+              <span class='mat-body'>{{buque.nombre}} &nbsp;{{buque.bandera}}</span>
+              <span> &nbsp;{{buque.eslora}}</span>
+            </p>
+            <p *ngIf="buque.orden" mat-line>
+              <mat-icon class="iconCenter">person</mat-icon>
+              <span class='mat-body-strong'>Cuil/Cuit:</span> <span class='mat-body'>{{buque.orden}}</span>
+            </p>
+            <p *ngIf="buque.arboladura" mat-line>
+              <mat-icon class="iconCenter">local_atm</mat-icon>
+              <span class='mat-body-strong'>NroCuenta:</span> <span class='mat-body'>{{buque.arboladura}}</span>
+            </p>
+            <p mat-line>
+              <mat-chip-list>
+
+              </mat-chip-list>
+            </p>
+          </div>
+        </mat-card-content>
+      </div>
+    </div>
+  </mat-card>
+</div>

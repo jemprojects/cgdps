@@ -17,11 +17,13 @@ import {
   MatSelectModule,
   MatSidenavModule,
   MatTabsModule,
+  MatToolbarModule,
   MatTooltipModule
-} from "@angular/material";
+}
+ from '@angular/material';
 
-import { FlexLayoutModule } from "@angular/flex-layout";
-import { NgModule } from "@angular/core";
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { NgModule } from '@angular/core';
 
 @NgModule({
   declarations: [],
@@ -44,7 +46,8 @@ import { NgModule } from "@angular/core";
     MatTabsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
+    MatToolbarModule
   ],
   exports: [
     MatButtonModule,
@@ -66,7 +69,8 @@ import { NgModule } from "@angular/core";
     MatDatepickerModule,
     MatNativeDateModule,
     MatTabsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatToolbarModule
   ]
 })
-export class MaterialModule {}
+export class WebAdminMaterialModule {}
