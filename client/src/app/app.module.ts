@@ -1,7 +1,7 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
-import { AngularFireAuthModule } from "@angular/fire/auth";
-import { AngularFireModule } from "@angular/fire";
+import { AngularFireAuthModule } from 'angularfire2/auth'
+import { AngularFireModule } from 'angularfire2'
 import { AppComponent } from './app.component'
 import { AppRoutingModule } from './app-routing.module'
 import { AuthGuard } from './auth/auth-guard.service'
@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { BrowserModule } from '@angular/platform-browser'
 import { CommonModule } from '@angular/common'
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { LoginComponent } from './components/users/login/login.component'
+
 import { MatPseudoCheckboxModule } from '@angular/material/core'
 import { MaterialModule } from './material.module'
 import { NgModule } from '@angular/core'
@@ -19,7 +19,9 @@ import { WebModule } from './web/web-admin.module'
 import { environment } from '../environments/environment'
 
 @NgModule({
-  declarations: [AppComponent, PageNotFoundComponent, LoginComponent],
+  declarations: [AppComponent,
+   PageNotFoundComponent, 
+   LoginComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
