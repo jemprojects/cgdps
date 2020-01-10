@@ -2,11 +2,12 @@ import * as firebase from 'firebase/app'
 
 import { BehaviorSubject, Observable, from } from 'rxjs'
 import { IAuthService, IAuthStatus } from './interfaces'
+
+import { AngularFireAuth } from '@angular/fire/auth'
 import { CacheService } from './cache.service'
 import { Injectable } from '@angular/core'
 import { Role } from './role.enum'
 import { map } from 'rxjs/operators'
-import { AngularFireAuth } from '@angular/fire/auth'
 
 export const defaultAuthStatus: IAuthStatus = {
   isAuthenticated: false,
@@ -32,14 +33,14 @@ export class AuthService extends CacheService implements IAuthService {
   }
 
   login(email: string, pass: string): Observable<IAuthStatus> {
-    return from(<Promise<any>>(
+    return from((
       this.firebaseAuth.auth
         .signInWithEmailAndPassword(email, pass)
         .then(
           loginOkResponse => this.onFirebaseLoginSuccessfull(loginOkResponse),
           loginErrorResponse => this.onFirebaseLoginFail(loginErrorResponse)
         )
-    )).pipe(
+    ) as Promise<any>).pipe(
       map(() => {
         return this.getItem('authStatus') as IAuthStatus
       })

@@ -6,11 +6,13 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'CGPDS',
+    path: 'home',
+    redirectTo: 'cgpds',
     pathMatch: 'full'
   },
+
   { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ]
 

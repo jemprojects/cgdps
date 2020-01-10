@@ -6,6 +6,7 @@ import buquesRoutes from './routes/buquesRoutes';
 import cors from 'cors';
 import entradasRoutes from './routes/entradasRoutes'
 import indexRoutes from './routes/indexRoutes';
+import loginRoutes from './routes/loginRoutes';
 import morgan from 'morgan';
 
 class Server {
@@ -29,14 +30,26 @@ class Server {
         this.app.use(express.urlencoded({
             extended: false
         }));
+        var bodyParser=require("body-parser")
+        var session = require('express-session');
+        var bodyParser = require('body-parser');
+        
+        
+        this.app.use(session({
+            secret: 'secret',
+            resave: true,
+            saveUninitialized: true
+        }));
+        this.app.use(bodyParser.urlencoded({extended : true}));
+        this.app.use(bodyParser.json());
     }
 
     routes(): void {
-        const userRouter = require("./api/users/user.router");
+   
         this.app.use('/', indexRoutes);
         this.app.use('/buques', buquesRoutes);
         this.app.use('/entradas', entradasRoutes);
-        this.app.use('/users', userRouter)
+  
     }
 
     start() {

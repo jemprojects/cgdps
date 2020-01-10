@@ -1,0 +1,18 @@
+<mat-toolbar *ngIf="(authService.authStatus | async) as authStatus" class='mat-typography' color="primary" id="header">
+  <span fxShow fxHide.xs='true' fxShow.gt-xs='true' id="logo" class='mat-title titulo sombra'>
+    <img src="../../assets/img/logo.png" alt="logo" />
+  </span>
+  <span class="fill-remaining-space"></span>
+  <span *ngIf="authStatus.isAuthenticated" fxLayoutAlign='center center' fxShow fxHide.xs='true' fxShow.gt-xs='true'
+    class='mat-display-1 titulo sombra'>
+    {{authStatus.organizationName}}
+  </span>
+  <span fxLayoutAlign='center center' fxShow fxHide.xs='false' fxShow.gt-xs='false' class='mat-title titulo sombra'>
+    CGPDS<br>
+    Organización Social y Política
+  </span>
+  <span fxShow fxHide.xs='true' fxShow.gt-xs='true' class="fill-remaining-space"></span>
+  <span class="fill-remaining-space">
+  </span>
+
+</mat-toolbar>

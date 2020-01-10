@@ -23,7 +23,8 @@ import { NgModule } from '@angular/core';
     MatInputModule,
     MatFormFieldModule,
     MatTabsModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatToolbarModule,
   ],
   exports: [
     MatButtonModule,
@@ -33,7 +34,8 @@ import { NgModule } from '@angular/core';
     MatInputModule,
     MatFormFieldModule,
     MatTabsModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatToolbarModule
   ]
 })
 export class MaterialModule {}
