@@ -20,7 +20,7 @@ export class EntradasFormComponent implements OnInit {
   agencias: Array<Agencias>
   selectedAgencia: string
   puertosService: PuertosService;
-  puerto: Array<Agencias>
+  puertos: Array<Agencias>
   selectedPuerto: string
 
   constructor(public dialog: MatDialog, serviceBuques: BuquesService, serviceAgencias: AgenciasService,servicePuertos: PuertosService) {

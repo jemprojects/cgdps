@@ -1,29 +1,29 @@
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database'
 
 import { Injectable } from '@angular/core'
-import { Puertos } from '../models/puertos'
+import { Puerto } from '../models/puertos'
 import { map } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root',
 })
 export class PuertosService {
-  puertosRef: AngularFireList<Puertos> = null
+  puertosRef: AngularFireList<Puerto> = null
   puertos: any
 
   constructor(private db: AngularFireDatabase) {
     this.puertosRef = db.list('/puertos')
   }
-  getpuertos(onpuertosLoaded) {
+  getPuertos(onpuertosLoaded) {
     this.puertosRef
       .snapshotChanges()
       .pipe(
         map(changes => changes.map(c => ({ key: c.payload.key, ...c.payload.val() })))
       )
       .subscribe(puertos => {
-        const listPuertos = Array<Puertos>()
+        const listPuertos = Array<Puerto>()
         puertos.forEach(function(puerto) {
-          listPuertos.push(new Puertos(puerto))
+          listPuertos.push(new Puerto(puerto))
         })
         onpuertosLoaded(listPuertos)
       }, this.handleError)
@@ -36,7 +36,7 @@ export class PuertosService {
       .subscribe(data => onLoaded(data.payload.val()))
   }
 
-  createPuerto(puerto: Puertos, onSaved): void {
+  createPuerto(puerto: Puerto, onSaved): void {
     this.puertosRef.push(puerto).then(onSaved)
   }
 
