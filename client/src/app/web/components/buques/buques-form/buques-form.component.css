@@ -1,0 +1,30 @@
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  position: center;
+  text-align: center;
+}
+
+.example-full-width {
+  width: 100%;
+}
+.formEntradas{
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 10px;
+
+  width: 500px;
+}
+.example-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.example-container > * {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 10px;
+
+}

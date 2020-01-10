@@ -1,4 +1,4 @@
-<p>buques-list works!</p>
+
 <div>
   <mat-card>
     <div class="head-content-card">
@@ -26,20 +26,27 @@
             <p mat-line>
               <mat-icon class="iconCenter">home_outline</mat-icon><span
                 class='mat-body-strong'>{{buque.nombre}}</span>
-
             </p>
             <p mat-line>
               <mat-icon class="iconCenter">contact_phone</mat-icon>
-              <span class='mat-body'>{{buque.nombre}} &nbsp;{{buque.bandera}}</span>
-              <span> &nbsp;{{buque.eslora}}</span>
+              <span class='mat-body'>Bandera: {{buque.bandera}}</span>
+
             </p>
             <p *ngIf="buque.orden" mat-line>
               <mat-icon class="iconCenter">person</mat-icon>
-              <span class='mat-body-strong'>Cuil/Cuit:</span> <span class='mat-body'>{{buque.orden}}</span>
+              <span class='mat-body-strong'>Orden: </span> <span class='mat-body'>{{buque.orden}}</span>
             </p>
             <p *ngIf="buque.arboladura" mat-line>
+              <mat-icon class="iconCenter">person</mat-icon>
+              <span class='mat-body-strong'>Arboladura: </span> <span class='mat-body'>{{buque.arboladura}}</span>
+            </p>
+            <p *ngIf="buque.manga" mat-line>
+              <mat-icon class="iconCenter">person</mat-icon>
+              <span class='mat-body-strong'>manga: </span> <span class='mat-body'>{{buque.manga}}</span>
+            </p>
+            <p *ngIf="buque.puntal" mat-line>
               <mat-icon class="iconCenter">local_atm</mat-icon>
-              <span class='mat-body-strong'>NroCuenta:</span> <span class='mat-body'>{{buque.arboladura}}</span>
+              <span class='mat-body-strong'>Puntal: </span> <span class='mat-body'>{{buque.puntal}}</span>
             </p>
             <p mat-line>
               <mat-chip-list>

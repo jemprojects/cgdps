@@ -1,1 +1,37 @@
-<p>entradas-form works!</p>
+
+<div >
+  <p><mat-form-field class="inputSmall" appearance="legacy">
+    <input matInput placeholder="Giro:" value="1">
+  </mat-form-field>
+</p>
+
+<mat-form-field>
+  <mat-label>Buque</mat-label>
+  <select matNativeControl [(ngModel)]="selectedBuque" name="buque">
+    <option value="" selected></option>
+    <option *ngFor="let buque of buques" [value]="buque.nombre">
+      {{buque.nombre}}
+    </option>
+  </select>
+</mat-form-field>
+  &nbsp; &nbsp; &nbsp;
+
+  <mat-form-field>
+    <mat-label>Agencia</mat-label>
+    <select matNativeControl [(ngModel)]="selectedAgencia" name="Agencia">
+      <option value="" selected></option>
+      <option *ngFor="let agencia of agencias" [value]="agencia.nombre">
+        {{agencia.nombre}}
+      </option>
+    </select>
+  </mat-form-field>
+  &nbsp; &nbsp; &nbsp;
+
+  <mat-form-field>
+    <input matInput placeholder="C/ENT">
+  </mat-form-field>
+  &nbsp; &nbsp; &nbsp;
+  <mat-form-field>
+    <input matInput placeholder="C/SAL">
+  </mat-form-field>
+</div>

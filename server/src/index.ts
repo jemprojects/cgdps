@@ -6,7 +6,6 @@ import buquesRoutes from './routes/buquesRoutes';
 import cors from 'cors';
 import entradasRoutes from './routes/entradasRoutes'
 import indexRoutes from './routes/indexRoutes';
-import loginRoutes from './routes/loginRoutes';
 import morgan from 'morgan';
 
 class Server {

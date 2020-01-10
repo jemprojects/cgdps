@@ -46,7 +46,7 @@ const routes: Routes = [
       },
       {
         path: 'cgpds/buques',
-        component: BuqueDetailComponent,
+        component: BuquesFormComponent,
         canActivate: [AuthGuard],
       },
 
