@@ -5,6 +5,7 @@ import { AgenciasService } from 'src/app/web/services/agencias.service';
 import { Buques } from 'src/app/web/models/buques';
 import { BuquesService } from 'src/app/web/services/buques.service';
 import { MatDialog } from '@angular/material';
+import { PuertosService } from 'src/app/web/services/puertos.service'
 
 @Component({
   selector: 'app-entradas-form',
@@ -15,13 +16,17 @@ export class EntradasFormComponent implements OnInit {
   buquesService: BuquesService;
   buques: Array<Buques>;
   selectedBuque: string;
-  agenciaService: AgenciasService;
+  agenciasService: AgenciasService;
   agencias: Array<Agencias>
   selectedAgencia: string
+  puertosService: PuertosService;
+  puerto: Array<Agencias>
+  selectedPuerto: string
 
-  constructor(public dialog: MatDialog, serviceBuques: BuquesService, serviceAgencias: AgenciasService) {
+  constructor(public dialog: MatDialog, serviceBuques: BuquesService, serviceAgencias: AgenciasService,servicePuertos: PuertosService) {
     this.buquesService = serviceBuques;
-    this.agenciaService = serviceAgencias;
+    this.agenciasService = serviceAgencias;
+    this.puertosService = servicePuertos
   }
   ngOnInit() {
     var scope = this
@@ -29,8 +34,11 @@ export class EntradasFormComponent implements OnInit {
     this.buquesService.getBuques(function(buques) {
       scope.buques = buques
     })
-    this.agenciaService.getAgencias(function(agencias){
+    this.agenciasService.getAgencias(function(agencias){
       scope.agencias = agencias
+    })
+    this.puertosService.getPuertos(function(puertos){
+      scope.puertos = puertos
     })
   }
 }
