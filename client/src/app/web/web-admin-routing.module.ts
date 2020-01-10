@@ -21,7 +21,7 @@ const routes: Routes = [
       },
       {
         path: 'cgpds',
-        component: BuquesListComponent,
+        component: EntradasFormComponent,
         canActivate: [AuthGuard],
       },
       {
