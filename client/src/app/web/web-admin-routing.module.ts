@@ -31,7 +31,7 @@ const routes: Routes = [
       },
       {
         path: 'cgpds/entradas',
-        component: EntradasFormComponent,
+        component: EntradasListComponent,
         canActivate: [AuthGuard],
       },
       {
@@ -46,10 +46,14 @@ const routes: Routes = [
       },
       {
         path: 'cgpds/buques',
-        component: BuquesFormComponent,
+        component: BuquesListComponent,
         canActivate: [AuthGuard],
       },
-
+      {
+        path: 'cgpds/consultas',
+        component: BuqueDetailComponent,
+        canActivate: [AuthGuard],
+      },
     ],
   }];
 @NgModule({

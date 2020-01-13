@@ -23,6 +23,8 @@ import {
  from '@angular/material';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MaterialModule } from '../material.module';
+import { MomentDateModule } from '@angular/material-moment-adapter';
 import { NgModule } from '@angular/core';
 
 @NgModule({
@@ -47,7 +49,8 @@ import { NgModule } from '@angular/core';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MomentDateModule
   ],
   exports: [
     MatButtonModule,
@@ -70,7 +73,9 @@ import { NgModule } from '@angular/core';
     MatNativeDateModule,
     MatTabsModule,
     MatSelectModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MomentDateModule
+
   ]
 })
 export class WebAdminMaterialModule {}

@@ -1,11 +1,11 @@
 export class Puerto {
   orden: number;
-  puerto: string;
+  nombre: string;
   pais: string;
 
   constructor(result) {
     this.orden = result.orden;
-    this.puerto = result.puerto;
+    this.nombre = result.puerto;
     this.pais = result.pais;
   }
 }

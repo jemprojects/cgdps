@@ -27,23 +27,54 @@
     </select>
   </mat-form-field>
   &nbsp; &nbsp; &nbsp;
-  &nbsp; &nbsp; &nbsp;<mat-form-field>
-    <mat-label>Puerto</mat-label>
-    <select matNativeControl [(ngModel)]="selectedPuerto" name="puerto">
+ <mat-form-field>
+    <mat-label>Procedencia</mat-label>
+    <select matNativeControl [(ngModel)]="selectedProcendencia" name="puerto">
       <option value="" selected></option>
       <option *ngFor="let puerto of puertos" [value]="puerto.nombre">
         {{puerto.nombre}}
       </option>
     </select>
   </mat-form-field>
-<p>&nbsp; &nbsp; &nbsp;<mat-form-field>
-  <input matInput placeholder="C/ ENT">
-</mat-form-field>
-</p>
+  &nbsp; &nbsp; &nbsp;<mat-form-field>
+    <mat-label>Destino</mat-label>
+      <select matNativeControl [(ngModel)]="selectedDestino" name="puerto">
+        <option value="" selected *ngIf="selectedProcendencia!=selectedDestino" ></option>
+        <option *ngFor="let puerto1 of puertos" [value]="puerto1.nombre" >
+
+          {{puerto1.nombre}}
+        </option>
+      </select>
+    </mat-form-field>
+
+    <p>&nbsp; &nbsp; &nbsp;
+
+      <mat-form-field>
+        <input matInput type="datetime-local" placeholder="Fecha de Entrada" [formControl]="entrada">
+
+      </mat-form-field>
+      &nbsp; &nbsp; &nbsp;
+      <mat-form-field>
+        <input matInput placeholder="C/ ENT">
+      </mat-form-field>
+
+      &nbsp; &nbsp; &nbsp;
+
+    </p>
 
 
-  <p>&nbsp; &nbsp; &nbsp; <mat-form-field>
-   <input matInput placeholder="C/SAL">
-  </mat-form-field></p>
+  <p>&nbsp; &nbsp; &nbsp;
+    <mat-form-field>
+      <input matInput type="datetime-local" placeholder="Fecha de Salida" [formControl]="salida">
+
+    </mat-form-field>
+    &nbsp; &nbsp; &nbsp; <mat-form-field>
+      <input matInput placeholder="C/SAL">
+     </mat-form-field>
+  </p>
+
+
+
+
 
 </div>
