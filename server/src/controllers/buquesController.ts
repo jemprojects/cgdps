@@ -7,7 +7,7 @@ class BuquesController {
         res.json({text: 'Probando Router BuquesController'})
     }
     public async list(req: Request, res: Response): Promise<void> {
-        const buques = await pool.query('SELECT * FROM esp');
+        const buques = await pool.query('SELECT * FROM puertos1');
         res.json(buques);
     }
 
