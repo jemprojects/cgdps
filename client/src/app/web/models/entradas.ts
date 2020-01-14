@@ -1,25 +1,47 @@
-export interface Buques {
-  ID?: number,
-  GIRO?: number,
-  BUQUE?: number,
-  AGENCIA?: number,
-  PROCEDENCIA?: number,
-  DESTINO?: number,
-  ENTRADA?: string,
-  SALIDA?: string,
-  MUELLE?: number,
-  TRAFICO?: number,
-  DOCUMENTO?: number,
-  Nº?: number,
-  CAL_ENT?: number,
-  CAL_SAL?: number,
-  ENVASE_DESC?: string,
-  EMPRESAS_DEC?: string,
-  CARGA?: string,
-  TNS_CARG?: string,
-  ENVASE?: string,
-  EMPRESAS_CAR?: string,
-  CAL_ENT1?: string,
-  CAL_SAL1?: string,
-  TIPO?: string,
+export class Entrada {
+  id: number;
+  giro: number;
+  buque: number;
+  agencia: number;
+  procedencia: number;
+  destino: number;
+  entrada: string;
+  salida: string;
+  muelle: number;
+  trafico: number;
+  documento: number;
+  nroPasavante: number;
+  cal_ent: number;
+  cal_sal: number;
+  envase_desc: string;
+  empresa_desc: string;
+  carga: string;
+  tns_carga: string;
+  envase_carg: string;
+  empresa_car: string;
+  cal_ent1: string;
+  cal_sal1: string;
+  tipo: string;
+  constructor(result) {
+    this.id = result.id;
+    this.giro = result.giro;
+    this.buque = result.buque;
+    this.agencia = result.agencia;
+    this.procedencia = result.procedencia;
+    this.destino = result.destino;
+    this.entrada = result.entrada;
+    this.salida = result.salida;
+    this.muelle = result.muelle;
+    this.trafico = result.trafico;
+    this.documento = result.documento;
+    this.nroPasavante = result.nro;
+    this.cal_ent = result.cal_ent;
+    this.cal_sal = result.cal_sal;
+    this.envase_carg = result.envase_carg;
+    this.envase_desc = result.envase_desc;
+    this.carga = result.carga;
+    this.tns_carga = result.tns_carga;
+    this.empresa_car = result.empresa_car;
+    this.empresa_desc = result.empresa_desc;
+  }
 }

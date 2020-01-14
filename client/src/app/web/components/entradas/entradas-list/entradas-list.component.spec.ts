@@ -1,24 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { EntradasListComponent } from './entradas-list.component'
+import { EntradasListComponent } from "./entradas-list.component";
 
-describe('EntradasListComponent', () => {
-  let component: EntradasListComponent
-  let fixture: ComponentFixture<EntradasListComponent>
+describe("EntradasListComponent", () => {
+  let component: EntradasListComponent;
+  let fixture: ComponentFixture<EntradasListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [EntradasListComponent],
-    }).compileComponents()
-  }))
+      declarations: [EntradasListComponent]
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EntradasListComponent)
-    component = fixture.componentInstance
-    fixture.detectChanges()
-  })
+    fixture = TestBed.createComponent(EntradasListComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-  it('should create', () => {
-    expect(component).toBeTruthy()
-  })
-})
+  it("should create", () => {
+    expect(component).toBeTruthy();
+  });
+});

@@ -1,63 +1,64 @@
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from "@angular/router";
 
-import { AuthGuard } from '../auth/auth-guard.service';
-import { BuqueDetailComponent } from './components/buques/buque-detail/buque-detail.component';
-import { BuquesFormComponent } from './components/buques/buques-form/buques-form.component';
-import { BuquesListComponent } from './components/buques/buques-list/buques-list.component';
-import { EntradasFormComponent } from './components/entradas/entradas-form/entradas-form.component';
-import { EntradasListComponent } from './components/entradas/entradas-list/entradas-list.component';
-import { NgModule } from '@angular/core';
-import { WebAdminComponent } from './web-admin.component';
+import { AuthGuard } from "../auth/auth-guard.service";
+import { BuqueDetailComponent } from "./components/buques/buque-detail/buque-detail.component";
+import { BuquesFormComponent } from "./components/buques/buques-form/buques-form.component";
+import { BuquesListComponent } from "./components/buques/buques-list/buques-list.component";
+import { EntradasFormComponent } from "./components/entradas/entradas-form/entradas-form.component";
+import { EntradasListComponent } from "./components/entradas/entradas-list/entradas-list.component";
+import { NgModule } from "@angular/core";
+import { WebAdminComponent } from "./web-admin.component";
 
 const routes: Routes = [
   {
-    path: '',
+    path: "",
     component: WebAdminComponent,
     children: [
       {
-        path: '',
-        redirectTo: 'cgpds',
-        pathMatch: 'full'
+        path: "",
+        redirectTo: "cgpds",
+        pathMatch: "full"
       },
       {
-        path: 'cgpds',
+        path: "cgpds",
         component: EntradasFormComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard]
       },
       {
-        path: 'cgpds/entradas/edit/:id',
+        path: "cgpds/entradas/edit/:id",
         component: EntradasFormComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard]
       },
       {
-        path: 'cgpds/entradas',
+        path: "cgpds/entradas",
         component: EntradasListComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard]
       },
       {
-        path: 'cgpds/buques/edit/:id',
+        path: "cgpds/buques/edit/:id",
         component: BuquesFormComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard]
       },
       {
-        path: 'cgpds/buques/add',
+        path: "cgpds/buques/add",
         component: BuquesFormComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard]
       },
       {
-        path: 'cgpds/buques',
+        path: "cgpds/buques",
         component: BuquesListComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard]
       },
       {
-        path: 'cgpds/consultas',
+        path: "cgpds/consultas",
         component: BuqueDetailComponent,
-        canActivate: [AuthGuard],
-      },
-    ],
-  }];
+        canActivate: [AuthGuard]
+      }
+    ]
+  }
+];
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class WebRoutingModule { }
+export class WebRoutingModule {}

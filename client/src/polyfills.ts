@@ -56,11 +56,10 @@
  * Zone JS is required by default for Angular itself.
  */
 
-import 'zone.js/dist/zone';
-import 'time-input-polyfill';
+import "zone.js/dist/zone";
+import "time-input-polyfill";
 
 // Included with Angular CLI.
-
 
 /***************************************************************************************************
  * APPLICATION IMPORTS

@@ -6,11 +6,11 @@ import {
   MatIconModule,
   MatTabsModule,
   MatToolbarModule
-} from '@angular/material';
+} from "@angular/material";
 
-import { CommonModule } from '@angular/common';
-import { MatInputModule } from '@angular/material/input';
-import { NgModule } from '@angular/core';
+import { CommonModule } from "@angular/common";
+import { MatInputModule } from "@angular/material/input";
+import { NgModule } from "@angular/core";
 
 @NgModule({
   declarations: [],
@@ -24,7 +24,7 @@ import { NgModule } from '@angular/core';
     MatFormFieldModule,
     MatTabsModule,
     MatDatepickerModule,
-    MatToolbarModule,
+    MatToolbarModule
   ],
   exports: [
     MatButtonModule,

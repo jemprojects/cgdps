@@ -19,13 +19,12 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule
-}
- from '@angular/material';
+} from "@angular/material";
 
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MaterialModule } from '../material.module';
-import { MomentDateModule } from '@angular/material-moment-adapter';
-import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { MaterialModule } from "../material.module";
+import { MomentDateModule } from "@angular/material-moment-adapter";
+import { NgModule } from "@angular/core";
 
 @NgModule({
   declarations: [],
@@ -75,7 +74,6 @@ import { NgModule } from '@angular/core';
     MatSelectModule,
     MatToolbarModule,
     MomentDateModule
-
   ]
 })
 export class WebAdminMaterialModule {}
