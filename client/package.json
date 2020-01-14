@@ -28,7 +28,6 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
-    "angular-material-time-picker": "^1.0.8",
     "angularfire2": "^5.3.0",
     "express-session": "^1.17.0",
     "firebase": "^7.6.1",
