@@ -18,7 +18,7 @@ export const defaultAuthStatus: IAuthStatus = {
 export const defaultOkAuthStatus: IAuthStatus = {
   isAuthenticated: true,
   userRole: Role.Admin,
-  organizationName: "Consorcio del Puerto De Dock Sud"
+  organizationName: "Consorcio de Gestion Puerto De Dock Sud"
 };
 
 @Injectable()

@@ -10,7 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy-dev": "npm run build && firebase deploy --project cgpds-6e853",
+    "deploy-dev": "npm run build && firebase deploy",
     "deploy-produccion": "npm run build-production && firebase deploy --project cgpds"
   },
   "private": true,

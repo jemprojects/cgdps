@@ -1,99 +1,115 @@
 
-<div >
-  <mat-spinner class="spinner" *ngIf="entradaInEdition == null"></mat-spinner>
-  <p>&nbsp; &nbsp; &nbsp;<mat-form-field class="inputSmall" appearance="legacy"  >
-    <input matInput placeholder="Giro" [(ngModel)]="entradaInEdition.giro" maxlength="4" >
-  </mat-form-field>
-</p>
-
-&nbsp; &nbsp; &nbsp;<mat-form-field>
-  <mat-label>Buque</mat-label>
-  <select matNativeControl [(ngModel)]="entradaInEdition.buque" name="buque">
-    <option value="" selected></option>
-    <option *ngFor="let buque of buques" [value]="buque.nombre">
-      {{buque.nombre}}
-    </option>
-  </select>
-</mat-form-field>
-
-  &nbsp; &nbsp; &nbsp;
-
-  &nbsp; &nbsp; &nbsp;  <mat-form-field>
-    <mat-label>Agencia</mat-label>
-    <select matNativeControl [(ngModel)]="entradaInEdition.agencia" name="Agencia">
-      <option value="" selected></option>
-      <option *ngFor="let agencia of agencias" [value]="agencia.nombre">
-        {{agencia.nombre}}
-      </option>
-    </select>
-  </mat-form-field>
-  &nbsp; &nbsp; &nbsp;
- <mat-form-field>
-    <mat-label>Procedencia</mat-label>
-    <select matNativeControl [(ngModel)]="entradaInEdition.procedencia" name="puerto">
-      <option value="" selected></option>
-      <option *ngFor="let puerto of puertos" [value]="puerto.nombre">
-        {{puerto.nombre}}
-      </option>
-    </select>
-  </mat-form-field>
-  &nbsp; &nbsp; &nbsp;<mat-form-field>
-    <mat-label>Destino</mat-label>
-      <select matNativeControl [(ngModel)]="entradaInEdition.procedencia" name="puerto">
-        <option value="" selected *ngIf="entradaInEdition.procedencia!=entradaInEdition.destino" ></option>
-        <option *ngFor="let puerto1 of puertos" [value]="puerto1.nombre" >
-
-          {{puerto1.nombre}}
-        </option>
-      </select>
-    </mat-form-field>
-
-  <p>&nbsp; &nbsp; &nbsp;
-    <mat-form-field>
-      <input matInput type="datetime-local" placeholder="Fecha de Entrada" [(ngModel)]="entradaInEdition.entrada">
-    </mat-form-field>
-    &nbsp; &nbsp; &nbsp;
-    <mat-form-field class="inputSmall">
-      <input matInput placeholder="C/ ENT ">
-    </mat-form-field>
-    &nbsp; &nbsp; &nbsp;
-    <mat-form-field>
-      <mat-label>Muelle</mat-label>
-      <select matNativeControl [(ngModel)]="entradaInEdition.muelle" name="Muelle">
-        <option value="" selected></option>
-        <option *ngFor="let giro of giros" [value]="giro.muelle">
-          {{giro.muelle}}
-        </option>
-      </select>
-    </mat-form-field>
-    &nbsp; &nbsp; &nbsp;
-    <mat-form-field>
-      <mat-label>Trafico</mat-label>
-      <select matNativeControl [(ngModel)]="entradaInEdition.trafico" name="Trafico">
-        <option value="" selected></option>
-        <option *ngFor="let trafico of traficos" [value]="trafico.nombre">
-          {{trafico.nombre}}
-        </option>
-      </select>
-    </mat-form-field>
-  </p>
-
-  <p>&nbsp; &nbsp; &nbsp;
-    <mat-form-field>
-      <input matInput type="datetime-local" placeholder="Fecha de Salida" [(ngModel)]="entradaInEdition.salida">
-    </mat-form-field>
-    &nbsp; &nbsp; &nbsp;
-    <mat-form-field class="inputSmall">
-      <input matInput placeholder="C/SAL" [(ngModel)]="entradaInEdition.cal_sal" >
-     </mat-form-field>
-     &nbsp; &nbsp; &nbsp;
-     <mat-form-field >
-      <input matInput placeholder="Pasavante Nº" [(ngModel)]="entradaInEdition.nroPasavante">
-     </mat-form-field>
-  </p>
-
-
-
-
-
-</div>
+<mat-horizontal-stepper #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Giro</ng-template>
+      <div>
+      <mat-form-field class="inputSmall" appearance="legacy">
+        <input matInput placeholder="Giro" [(ngModel)]="entradaInEdition.giro" maxlength="4" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+      &nbsp; &nbsp; &nbsp;
+      <mat-form-field>
+        <mat-label>Buque</mat-label>
+        <select matNativeControl [(ngModel)]="entradaInEdition.buque" name="buque">
+          <option value="" selected></option>
+          <option *ngFor="let buque of buques" [value]="buque.nombre">
+            {{buque.nombre}}
+          </option>
+        </select>
+      </mat-form-field>
+      &nbsp; &nbsp; &nbsp;  <mat-form-field>
+        <mat-label>Agencia</mat-label>
+        <select matNativeControl [(ngModel)]="entradaInEdition.agencia" name="Agencia">
+          <option value="" selected></option>
+          <option *ngFor="let agencia of agencias" [value]="agencia.nombre">
+            {{agencia.nombre}}
+          </option>
+        </select>
+      </mat-form-field>
+      &nbsp; &nbsp; &nbsp;
+      <mat-form-field>
+         <mat-label>Procedencia</mat-label>
+         <select matNativeControl [(ngModel)]="entradaInEdition.procedencia" name="puerto">
+           <option value="" selected></option>
+           <option *ngFor="let puerto of puertos" [value]="puerto.nombre">
+             {{puerto.nombre}}
+           </option>
+         </select>
+       </mat-form-field>
+       &nbsp; &nbsp; &nbsp;<mat-form-field>
+         <mat-label>Destino</mat-label>
+           <select matNativeControl [(ngModel)]="entradaInEdition.procedencia" name="puerto">
+             <option value="" selected *ngIf="entradaInEdition.procedencia==entradaInEdition.destino" ></option>
+             <option *ngFor="let puerto1 of puertos" [value]="puerto1.nombre" >
+               {{puerto1.nombre}}
+             </option>
+           </select>
+         </mat-form-field></div>
+         <div> <mat-form-field>
+          <input matInput type="datetime-local" placeholder="Fecha de Entrada" [(ngModel)]="entradaInEdition.entrada" [ngModelOptions]="{standalone: true}">
+        </mat-form-field>
+        &nbsp; &nbsp; &nbsp;
+        <mat-form-field class="inputSmall">
+          <input matInput placeholder="C/ ENT ">
+        </mat-form-field>
+        &nbsp; &nbsp; &nbsp;
+        <mat-form-field>
+          <mat-label>Muelle</mat-label>
+          <select matNativeControl [(ngModel)]="entradaInEdition.muelle" name="Muelle">
+            <option value="" selected></option>
+            <option *ngFor="let giro of giros" [value]="giro.muelle">
+              {{giro.muelle}}
+            </option>
+          </select>
+        </mat-form-field>
+        &nbsp; &nbsp; &nbsp;
+        <mat-form-field>
+          <mat-label>Trafico</mat-label>
+          <select matNativeControl [(ngModel)]="entradaInEdition.trafico" name="Trafico">
+            <option value="" selected></option>
+            <option *ngFor="let trafico of traficos" [value]="trafico.nombre">
+              {{trafico.nombre}}
+            </option>
+          </select>
+        </mat-form-field>
+        &nbsp; &nbsp; &nbsp;
+        <mat-form-field >
+          <input matInput placeholder="Pasavante Nº" [(ngModel)]="entradaInEdition.nroPasavante" [ngModelOptions]="{standalone: true}">
+         </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput type="datetime-local" placeholder="Fecha de Salida" [(ngModel)]="entradaInEdition.salida">
+        </mat-form-field>
+        &nbsp; &nbsp; &nbsp;
+        <mat-form-field class="inputSmall">
+          <input matInput placeholder="C/SAL" [(ngModel)]="entradaInEdition.cal_sal" >
+         </mat-form-field>
+         &nbsp; &nbsp; &nbsp;
+      </div>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Carga</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Address" formControlName="secondCtrl" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

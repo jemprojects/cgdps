@@ -16,6 +16,7 @@ import {
   MatProgressSpinnerModule,
   MatSelectModule,
   MatSidenavModule,
+  MatStepperModule,
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule
@@ -23,7 +24,6 @@ import {
 
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MaterialModule } from "../material.module";
-import { MomentDateModule } from "@angular/material-moment-adapter";
 import { NgModule } from "@angular/core";
 
 @NgModule({
@@ -49,7 +49,7 @@ import { NgModule } from "@angular/core";
     MatNativeDateModule,
     MatSelectModule,
     MatToolbarModule,
-    MomentDateModule
+    MatStepperModule
   ],
   exports: [
     MatButtonModule,
@@ -73,7 +73,7 @@ import { NgModule } from "@angular/core";
     MatTabsModule,
     MatSelectModule,
     MatToolbarModule,
-    MomentDateModule
+    MatStepperModule
   ]
 })
 export class WebAdminMaterialModule {}
