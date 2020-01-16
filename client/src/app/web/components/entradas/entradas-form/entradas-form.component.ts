@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatDialog } from '@angular/material';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DATE_FORMATS, MatDialog } from '@angular/material';
+import {
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+  MAT_MOMENT_DATE_FORMATS,
+  MomentDateAdapter,
+} from '@angular/material-moment-adapter';
 
 import { Agencias } from 'src/app/web/models/agencias';
 import { AgenciasService } from 'src/app/web/services/agencias.service';
@@ -16,27 +21,31 @@ import { PuertosService } from 'src/app/web/services/puertos.service';
 import { Trafico } from 'src/app/web/models/trafico';
 import { TraficoService } from 'src/app/web/services/trafico.service';
 
-export const DD_MM_YYYY_Format = {
-  parse: {
-    dateInput: 'LL'
-  },
-  display: {
-    dateInput: 'DD/MM/YYYY',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY'
-  }
-};
 @Component({
   selector: 'app-entradas-form',
   templateUrl: './entradas-form.component.html',
   styleUrls: ['./entradas-form.component.css'],
-  providers: [{ provide: MAT_DATE_FORMATS, useValue: DD_MM_YYYY_Format }]
+  providers: [
+    // The locale would typically be provided on the root module of your application. We do it at
+    // the component level here, due to limitations of our example generation script.
+    {provide: MAT_DATE_LOCALE, useValue: 'es-Es'},
+
+    // `MomentDateAdapter` and `MAT_MOMENT_DATE_FORMATS` can be automatically provided by importing
+    // `MatMomentDateModule` in your applications root module. We provide it at the component level
+    // here, due to limitations of our example generation script.
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+  ],
 })
 export class EntradasFormComponent implements OnInit {
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  date= new FormControl(new Date());
   // Buques
   buquesService: BuquesService;
   buques: Array<Buques>;
@@ -60,9 +69,7 @@ export class EntradasFormComponent implements OnInit {
   entradaKey: string;
   entradasService: EntradasService;
   entradaInEdition: Entrada;
-  myGroup: FormGroup
   isNew: boolean;
-
   constructor(
     public dialog: MatDialog,
     serviceBuques: BuquesService,
@@ -71,7 +78,7 @@ export class EntradasFormComponent implements OnInit {
     serviceGiros: GirosService,
     serviceTrafico: TraficoService,
     serviceMercaderia: MercaderiasService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
   ) {
     this.buquesService = serviceBuques;
     this.agenciasService = serviceAgencias;
@@ -79,10 +86,7 @@ export class EntradasFormComponent implements OnInit {
     this.girosService = serviceGiros;
     this.traficoService = serviceTrafico;
     this.entradaInEdition = null;
-    this.mercaderiaService = serviceMercaderia;
-    this.myGroup = new FormGroup({
-      firstName: new FormControl()
-   });
+    this.mercaderiaService = serviceMercaderia
   }
   ngOnInit() {
     let scope = this;
@@ -105,13 +109,15 @@ export class EntradasFormComponent implements OnInit {
     this.mercaderiaService.getMercaderias(function(mercaderias) {
       scope.mercaderias = mercaderias;
     });
+
+    this.setupFormNewProvider();
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
+      
     });
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
-    this.setupFormNewProvider();
   }
   setupFormEditEntrada() {
     this.isNew = false;

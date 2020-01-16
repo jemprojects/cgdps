@@ -11,6 +11,7 @@ import {
 import { CommonModule } from "@angular/common";
 import { MatInputModule } from "@angular/material/input";
 import { NgModule } from "@angular/core";
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
@@ -24,7 +25,9 @@ import { NgModule } from "@angular/core";
     MatFormFieldModule,
     MatTabsModule,
     MatDatepickerModule,
-    MatToolbarModule
+    MatToolbarModule,
+    ReactiveFormsModule
+
   ],
   exports: [
     MatButtonModule,
@@ -35,7 +38,9 @@ import { NgModule } from "@angular/core";
     MatFormFieldModule,
     MatTabsModule,
     MatDatepickerModule,
-    MatToolbarModule
+    MatToolbarModule,
+ReactiveFormsModule
+
   ]
 })
 export class MaterialModule {}

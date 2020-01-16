@@ -12,7 +12,7 @@ export class EntradasService {
   entradas: any;
 
   constructor(private db: AngularFireDatabase) {
-    this.entradasRef = db.list("/entradas");
+    this.entradasRef = db.list("/entradas/2019");
   }
   getEntradas(onentradasLoaded) {
     this.entradasRef
@@ -33,7 +33,7 @@ export class EntradasService {
 
   getEntrada(key: string, onLoaded) {
     return this.db
-      .object(`entradas/${key}`)
+      .object(`entradas/2019/${key}`)
       .snapshotChanges()
       .subscribe(data => onLoaded(data.payload.val()));
   }

@@ -21,14 +21,15 @@ import {
   MatToolbarModule,
   MatTooltipModule
 } from "@angular/material";
+import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from 'ngx-mat-datetime-picker';
 
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { MaterialModule } from "../material.module";
 import { NgModule } from "@angular/core";
 
 @NgModule({
   declarations: [],
   imports: [
+    MatDatepickerModule,
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
@@ -49,10 +50,13 @@ import { NgModule } from "@angular/core";
     MatNativeDateModule,
     MatSelectModule,
     MatToolbarModule,
-    MatStepperModule
+    MatStepperModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule
   ],
   exports: [
     MatButtonModule,
+    MatDatepickerModule,
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
@@ -73,7 +77,9 @@ import { NgModule } from "@angular/core";
     MatTabsModule,
     MatSelectModule,
     MatToolbarModule,
-    MatStepperModule
+    MatStepperModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule
   ]
 })
 export class WebAdminMaterialModule {}
