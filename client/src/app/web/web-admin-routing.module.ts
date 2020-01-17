@@ -1,10 +1,10 @@
 import { RouterModule, Routes } from "@angular/router";
 
 import { AuthGuard } from "../auth/auth-guard.service";
-import { BuqueDetailComponent } from "./components/buques/buque-detail/buque-detail.component";
 import { BuquesFormComponent } from "./components/buques/buques-form/buques-form.component";
 import { BuquesListComponent } from "./components/buques/buques-list/buques-list.component";
-import { EntradasFormComponent } from "./components/entradas/entradas-form/entradas-form.component";
+import { ConsultasComponent } from './components/consultas/consultas.component';
+import { EntradaComponent } from './components/entradas/entrada/entrada.component';
 import { EntradasListComponent } from "./components/entradas/entradas-list/entradas-list.component";
 import { NgModule } from "@angular/core";
 import { WebAdminComponent } from "./web-admin.component";
@@ -21,12 +21,12 @@ const routes: Routes = [
       },
       {
         path: "cgpds",
-        component: EntradasFormComponent,
+        component: EntradasListComponent,
         canActivate: [AuthGuard]
       },
       {
-        path: "cgpds/entradas/edit/:id",
-        component: EntradasFormComponent,
+        path: "cgpds/SolicitudGiro",
+        component: EntradaComponent,
         canActivate: [AuthGuard]
       },
       {
@@ -51,7 +51,7 @@ const routes: Routes = [
       },
       {
         path: "cgpds/consultas",
-        component: BuqueDetailComponent,
+        component: ConsultasComponent,
         canActivate: [AuthGuard]
       }
     ]

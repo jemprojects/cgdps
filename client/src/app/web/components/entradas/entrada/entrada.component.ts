@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatDialog } from '@angular/material';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -6,6 +7,7 @@ import {
   MAT_MOMENT_DATE_FORMATS,
   MomentDateAdapter,
 } from '@angular/material-moment-adapter';
+import { map, startWith } from 'rxjs/operators';
 
 import { Agencias } from 'src/app/web/models/agencias';
 import { AgenciasService } from 'src/app/web/services/agencias.service';
@@ -17,22 +19,19 @@ import { Giros } from 'src/app/web/models/giros';
 import { GirosService } from 'src/app/web/services/giros.service';
 import { Mercaderia } from 'src/app/web/models/mercaderia';
 import { MercaderiasService } from 'src/app/web/services/mercaderias.service';
+import { Observable } from 'rxjs';
 import { PuertosService } from 'src/app/web/services/puertos.service';
 import { Trafico } from 'src/app/web/models/trafico';
 import { TraficoService } from 'src/app/web/services/trafico.service';
 
 @Component({
-  selector: 'app-entradas-form',
-  templateUrl: './entradas-form.component.html',
-  styleUrls: ['./entradas-form.component.css'],
+  selector: 'app-entrada',
+  templateUrl: './entrada.component.html',
+  styleUrls: ['./entrada.component.css'],
   providers: [
     // The locale would typically be provided on the root module of your application. We do it at
     // the component level here, due to limitations of our example generation script.
     {provide: MAT_DATE_LOCALE, useValue: 'es-Es'},
-
-    // `MomentDateAdapter` and `MAT_MOMENT_DATE_FORMATS` can be automatically provided by importing
-    // `MatMomentDateModule` in your applications root module. We provide it at the component level
-    // here, due to limitations of our example generation script.
     {
       provide: DateAdapter,
       useClass: MomentDateAdapter,
@@ -41,11 +40,10 @@ import { TraficoService } from 'src/app/web/services/trafico.service';
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
   ],
 })
-export class EntradasFormComponent implements OnInit {
+export class EntradaComponent implements OnInit {
   isLinear = false;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  date= new FormControl(new Date());
+
+  date = new FormControl(new Date());
   // Buques
   buquesService: BuquesService;
   buques: Array<Buques>;
@@ -64,13 +62,20 @@ export class EntradasFormComponent implements OnInit {
   // Mercadeira
   mercaderiaService: MercaderiasService;
   mercaderias: Array<Mercaderia>;
-
+  ultimaSolicitudCargada: string;
+  continueAdding = false;
+  selectable = true;
+  removable = true;
   // Entradas
   entradaKey: string;
   entradasService: EntradasService;
   entradaInEdition: Entrada;
   isNew: boolean;
+  siteMapLabel: string
+
   constructor(
+    private route: Router,
+    private ruteActive: ActivatedRoute,
     public dialog: MatDialog,
     serviceBuques: BuquesService,
     serviceAgencias: AgenciasService,
@@ -78,22 +83,28 @@ export class EntradasFormComponent implements OnInit {
     serviceGiros: GirosService,
     serviceTrafico: TraficoService,
     serviceMercaderia: MercaderiasService,
-    private _formBuilder: FormBuilder,
+    serviceEntrada: EntradasService,
   ) {
     this.buquesService = serviceBuques;
     this.agenciasService = serviceAgencias;
     this.puertosService = servicePuertos;
     this.girosService = serviceGiros;
     this.traficoService = serviceTrafico;
+    this.mercaderiaService = serviceMercaderia;
+    this.entradasService = serviceEntrada;
     this.entradaInEdition = null;
-    this.mercaderiaService = serviceMercaderia
+    this.ultimaSolicitudCargada = null;
+
+
   }
   ngOnInit() {
-    let scope = this;
-    // tslint:disable-next-line: only-arrow-functions
+
+    this.setupFormNewEntrada();
+    const scope = this;
     this.buquesService.getBuques(function(buques) {
       scope.buques = buques;
     });
+
     this.agenciasService.getAgencias(function(agencias) {
       scope.agencias = agencias;
     });
@@ -110,24 +121,20 @@ export class EntradasFormComponent implements OnInit {
       scope.mercaderias = mercaderias;
     });
 
-    this.setupFormNewProvider();
-    this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
-      
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
+
+  }
+  changeSiteMapLabel(page) {
+    this.siteMapLabel = `cgpds/${page}`
   }
   setupFormEditEntrada() {
     this.isNew = false;
     this.entradasService.getEntrada(this.entradaKey, data => {
       this.entradaInEdition = new Entrada(data);
-      this.entradaInEdition.giro = 1;
+      console.log(this.entradaInEdition.id);
     });
   }
 
-  setupFormNewProvider() {
+  setupFormNewEntrada() {
     this.isNew = true;
     this.entradaInEdition = new Entrada({
       id: '',

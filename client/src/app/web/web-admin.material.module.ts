@@ -52,7 +52,8 @@ import { NgModule } from "@angular/core";
     MatToolbarModule,
     MatStepperModule,
     NgxMatDatetimePickerModule,
-    NgxMatTimepickerModule
+    NgxMatTimepickerModule,
+    MatAutocompleteModule
   ],
   exports: [
     MatButtonModule,
@@ -79,7 +80,8 @@ import { NgModule } from "@angular/core";
     MatToolbarModule,
     MatStepperModule,
     NgxMatDatetimePickerModule,
-    NgxMatTimepickerModule
+    NgxMatTimepickerModule,
+    MatAutocompleteModule
   ]
 })
 export class WebAdminMaterialModule {}

@@ -1,6 +1,13 @@
 
 <div>
   <mat-card>
+    <mat-spinner class="spinner" *ngIf="buquesFiltrados == null"></mat-spinner>
+    <div *ngIf="buquesFiltrados!=null">
+      <mat-form-field>
+        <mat-icon matPrefix>search</mat-icon>
+        <input class="search-content" matInput [formControl]="search" placeholder="Buscar a...">
+      </mat-form-field>
+    </div>
     <div class="head-content-card">
       <h2>Buques</h2>
       <button class="buttonAdd" mat-raised-button color="primary"

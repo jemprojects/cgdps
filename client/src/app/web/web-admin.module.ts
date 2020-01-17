@@ -9,7 +9,8 @@ import { BuqueDetailComponent } from "./components/buques/buque-detail/buque-det
 import { BuquesFormComponent } from "./components/buques/buques-form/buques-form.component";
 import { BuquesListComponent } from "./components/buques/buques-list/buques-list.component";
 import { CommonModule } from "@angular/common";
-import { EntradasFormComponent } from "./components/entradas/entradas-form/entradas-form.component";
+import { ConsultasComponent } from './components/consultas/consultas.component';
+import { EntradaComponent } from './components/entradas/entrada/entrada.component';
 import { EntradasListComponent } from "./components/entradas/entradas-list/entradas-list.component";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatMenuModule } from "@angular/material";
@@ -23,10 +24,11 @@ import { environment } from "../../environments/environment";
   declarations: [
     BuquesFormComponent,
     BuquesListComponent,
-    EntradasFormComponent,
     EntradasListComponent,
     WebAdminComponent,
-    BuqueDetailComponent
+    BuqueDetailComponent,
+    EntradaComponent,
+    ConsultasComponent
   ],
   imports: [
     BrowserAnimationsModule,

@@ -1,0 +1,110 @@
+<mat-horizontal-stepper>
+  <mat-step label="Solicitud De Giro">
+    <mat-form-field  appearance="outline" class="inputSmall">
+      <input matInput placeholder="Giro"  [(ngModel)]="entradaInEdition.giro"  required>
+    </mat-form-field >
+    &nbsp; &nbsp; &nbsp;
+    <mat-form-field  appearance="outline">
+      <mat-label>Buque</mat-label>
+      <select matNativeControl [(ngModel)]="entradaInEdition.buque" name="Buque">
+        <option value="*Agregar Nuevo*"  (click)="changeSiteMapLabel('buques')">*Agregar Nuevo*</option>
+        <option *ngFor="let buque of buques" [value]="buque.nombre">
+          {{buque.nombre}}
+        </option>
+      </select>
+    </mat-form-field>
+    &nbsp; &nbsp; &nbsp;
+    <mat-form-field appearance="outline">
+      <mat-label>Agencia</mat-label>
+      <select matNativeControl [(ngModel)]="entradaInEdition.agencia" name="Agencia">
+        <option *ngFor="let agencia of agencias" [value]="agencia.nombre">
+          {{agencia.nombre}}
+        </option>
+      </select>
+    </mat-form-field>
+    &nbsp; &nbsp; &nbsp;
+    <mat-form-field appearance="outline">
+      <mat-label>Procedencia</mat-label>
+      <select matNativeControl [(ngModel)]="entradaInEdition.procedencia" name="PuertoProcendencia">
+        <option value="" selected></option>
+        <option *ngFor="let puerto of puertos" [value]="puerto.nombre">
+          {{puerto.nombre}}
+        </option>
+      </select>
+    </mat-form-field>
+    &nbsp; &nbsp; &nbsp;
+    <mat-form-field appearance="outline">
+      <mat-label>Destino</mat-label>
+        <select matNativeControl [(ngModel)]="entradaInEdition.procedencia" name="PuertoDestino" >
+          <option value="" selected ></option>
+          <option *ngFor="let puerto1 of puertos" [value]="puerto1.nombre" >
+            {{puerto1.nombre}}
+          </option>
+        </select>
+      </mat-form-field>
+      <div></div>
+      <mat-form-field appearance="outline">
+        <input matInput [ngxMatDatetimePicker]="pickerEntrada" placeholder="Fecha de Entrada" [(ngModel)]="entradaInEdition.entrada" [formControl]="date">
+        <mat-datepicker-toggle matSuffix [for]="pickerEntrada"></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker #pickerEntrada></ngx-mat-datetime-picker>
+    </mat-form-field>
+      &nbsp; &nbsp; &nbsp;
+      <mat-form-field class="inputSmall" appearance="outline">
+        <input matInput placeholder="C/ ENT ">
+      </mat-form-field>
+      &nbsp; &nbsp; &nbsp;
+      <mat-form-field appearance="outline">
+        <mat-label>Muelle</mat-label>
+        <select matNativeControl [(ngModel)]="entradaInEdition.muelle" name="Muelle">
+          <option value="" selected></option>
+          <option *ngFor="let giro of giros" [value]="giro.muelle">
+            {{giro.muelle}}
+          </option>
+        </select>
+      </mat-form-field>
+      &nbsp; &nbsp; &nbsp;
+      <mat-form-field appearance="outline">
+        <mat-label>Trafico</mat-label>
+        <select matNativeControl [(ngModel)]="entradaInEdition.trafico" name="Trafico">
+          <option value="" selected></option>
+          <option *ngFor="let trafico of traficos" [value]="trafico.nombre">
+            {{trafico.nombre}}
+          </option>
+        </select>
+      </mat-form-field >
+       <div></div>
+       <mat-form-field appearance="outline">
+        <input matInput [ngxMatDatetimePicker]="pickerSalida" placeholder="Fecha de Salida" [(ngModel)]="entradaInEdition.salida" [formControl]="date">
+        <mat-datepicker-toggle matSuffix [for]="pickerSalida"></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker #pickerSalida></ngx-mat-datetime-picker>
+    </mat-form-field>
+      &nbsp; &nbsp; &nbsp;
+      <mat-form-field class="inputSmall" appearance="outline">
+        <input matInput placeholder="C/SAL" [(ngModel)]="entradaInEdition.cal_sal">
+       </mat-form-field>
+       &nbsp; &nbsp; &nbsp;
+
+    <div>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step label="Carga">
+    <mat-form-field >
+      <input matInput placeholder="Nº Pasavante" [(ngModel)]="entradaInEdition.nroPasavante" required>
+    </mat-form-field>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+
+</mat-step>
+<mat-step>
+  <ng-template matStepLabel>Done</ng-template>
+  You are now done.
+  <div>
+    <button mat-button matStepperPrevious>Back</button>
+  </div>
+</mat-step>
+<mat-step></mat-step>
+</mat-horizontal-stepper>
+
