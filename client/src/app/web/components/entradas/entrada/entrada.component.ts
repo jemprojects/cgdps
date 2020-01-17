@@ -74,7 +74,7 @@ export class EntradaComponent implements OnInit {
   siteMapLabel: string
 
   constructor(
-    private route: Router,
+    private router: Router,
     private ruteActive: ActivatedRoute,
     public dialog: MatDialog,
     serviceBuques: BuquesService,
@@ -123,9 +123,13 @@ export class EntradaComponent implements OnInit {
 
 
   }
-  changeSiteMapLabel(page) {
-    this.siteMapLabel = `cgpds/${page}`
-  }
+  navigateTo(value) {
+    if (value=="AgregarBuque" || value=="AgregarAgencia") {
+        this.router.navigate([`cgpds/${value}`]);
+    }
+    return false;
+}
+
   setupFormEditEntrada() {
     this.isNew = false;
     this.entradasService.getEntrada(this.entradaKey, data => {

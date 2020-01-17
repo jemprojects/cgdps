@@ -6,8 +6,9 @@
     &nbsp; &nbsp; &nbsp;
     <mat-form-field  appearance="outline">
       <mat-label>Buque</mat-label>
-      <select matNativeControl [(ngModel)]="entradaInEdition.buque" name="Buque">
-        <option value="*Agregar Nuevo*"  (click)="changeSiteMapLabel('buques')">*Agregar Nuevo*</option>
+      <select matNativeControl (change)="navigateTo($event.target.value)">
+        <option value=""></option>
+        <option value="AgregarBuque">*AGREGAR NUEVO*</option>
         <option *ngFor="let buque of buques" [value]="buque.nombre">
           {{buque.nombre}}
         </option>
@@ -16,8 +17,10 @@
     &nbsp; &nbsp; &nbsp;
     <mat-form-field appearance="outline">
       <mat-label>Agencia</mat-label>
-      <select matNativeControl [(ngModel)]="entradaInEdition.agencia" name="Agencia">
-        <option *ngFor="let agencia of agencias" [value]="agencia.nombre">
+      <select matNativeControl (change)="navigateTo($event.target.value)" >
+        <option value=""></option>
+        <option value="AgregarAgencia">*AGREGAR NUEVO*</option>
+        <option *ngFor="let agencia of agencias" [value]="agencia.nombre" >
           {{agencia.nombre}}
         </option>
       </select>
