@@ -13,10 +13,12 @@ import {
   MatListModule,
   MatMenuModule,
   MatNativeDateModule,
+  MatPaginatorModule,
   MatProgressSpinnerModule,
   MatSelectModule,
   MatSidenavModule,
   MatStepperModule,
+  MatTableModule,
   MatTabsModule,
   MatToolbarModule,
   MatTooltipModule
@@ -53,7 +55,9 @@ import { NgModule } from "@angular/core";
     MatStepperModule,
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   exports: [
     MatButtonModule,
@@ -81,7 +85,9 @@ import { NgModule } from "@angular/core";
     MatStepperModule,
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatTableModule,
+    MatPaginatorModule
   ]
 })
 export class WebAdminMaterialModule {}

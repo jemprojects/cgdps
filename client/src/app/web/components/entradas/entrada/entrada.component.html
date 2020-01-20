@@ -5,7 +5,7 @@
     </mat-form-field >
     &nbsp; &nbsp; &nbsp;
     <mat-form-field  appearance="outline">
-      <mat-label>Buque</mat-label>
+      <mat-label>Nombre del Buque</mat-label>
       <select matNativeControl (change)="navigateTo($event.target.value)">
         <option value=""></option>
         <option value="AgregarBuque">*AGREGAR NUEVO*</option>
@@ -16,7 +16,7 @@
     </mat-form-field>
     &nbsp; &nbsp; &nbsp;
     <mat-form-field appearance="outline">
-      <mat-label>Agencia</mat-label>
+      <mat-label>Agencia Maritima</mat-label>
       <select matNativeControl (change)="navigateTo($event.target.value)" >
         <option value=""></option>
         <option value="AgregarAgencia">*AGREGAR NUEVO*</option>
@@ -111,3 +111,15 @@
 <mat-step></mat-step>
 </mat-horizontal-stepper>
 
+<mat-card><mat-tab-group>
+  <mat-tab label="Buque"> buque </mat-tab>
+  <mat-tab label="Agencia Maritima"> Agencia Maritima </mat-tab>
+  <mat-tab label="Calado(Ingreso)"> Calado(Ingreso) </mat-tab>
+  <mat-tab label="Entrada"> Fecha de entrada </mat-tab>
+  <mat-tab label="Salida"> Fecha de salida </mat-tab>
+  <mat-tab label="Pais Procedencia"> Pais Procedencia </mat-tab>
+  <mat-tab label="Puerto Procedencia"> Puerto Procedencia </mat-tab>
+  <mat-tab label="Pais Destino">Pais Destino </mat-tab>
+  <mat-tab label="Puerto Destino"> Puerto Destino </mat-tab>
+  <mat-tab label="Accion"> Accion </mat-tab>
+</mat-tab-group></mat-card>

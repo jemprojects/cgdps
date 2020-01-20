@@ -1,68 +1,31 @@
+<mat-spinner class="spinner" *ngIf="buques == null"></mat-spinner>
+<div *ngIf="buques!=null">
+  <mat-form-field>
+    <mat-icon matPrefix>search</mat-icon>
+    <input class="search-content" matInput [formControl]="search" placeholder="Buscar a...">
+  </mat-form-field>
+</div>
+<div class='mat-typography' *ngIf="buques!=null">
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+      <div *ngIf="column=='bandera'; else other">
+      <th mat-header-cell *matHeaderCellDef > {{column}} </th>
 
-<div>
-  <mat-card>
-    <mat-spinner class="spinner" *ngIf="buquesFiltrados == null"></mat-spinner>
-    <div *ngIf="buquesFiltrados!=null">
-      <mat-form-field>
-        <mat-icon matPrefix>search</mat-icon>
-        <input class="search-content" matInput [formControl]="search" placeholder="Buscar a...">
-      </mat-form-field>
+      <td mat-cell *matCellDef="let elem" > {{getBandera(elem[column])}} </td>
     </div>
-    <div class="head-content-card">
-      <h2>Buques</h2>
-      <button class="buttonAdd" mat-raised-button color="primary"
-        [routerLink]="['/buques/buque',{id: null} ]">Agregar
-        Nuevo</button>
-    </div>
-    <div class='mat-typography' *ngIf="buquesFiltrados!=null">
-      <div *ngFor="let buque of buquesFiltrados">
-        <mat-card-content class="box buqueBoxItem">
-          <div class="box1">
-            <button class="buttonInfo" mat-mini-fab matTooltip="Más información" >
-              <mat-icon>info_outline</mat-icon>
-            </button>
-            &nbsp; &nbsp; &nbsp;
-            <button class="buttonEdit" mat-mini-fab matTooltip="Editar"
-              [routerLink]="['/buques/buque',{id: buque.key} ]">
-              <mat-icon>edit</mat-icon>
-            </button>
-            &nbsp; &nbsp; &nbsp;
+      <ng-template #other>
+        <th mat-header-cell *matHeaderCellDef > {{column}} </th>
 
-          </div>
-          <div class="box2">
-            <p mat-line>
-              <mat-icon class="iconCenter">home_outline</mat-icon><span
-                class='mat-body-strong'>{{buque.nombre}}</span>
-            </p>
-            <p mat-line>
-              <mat-icon class="iconCenter">contact_phone</mat-icon>
-              <span class='mat-body'>Bandera: {{buque.bandera}}</span>
+      <td mat-cell *matCellDef="let elem" >{{elem[column]}} </td>
+      </ng-template>
 
-            </p>
-            <p *ngIf="buque.orden" mat-line>
-              <mat-icon class="iconCenter">person</mat-icon>
-              <span class='mat-body-strong'>Orden: </span> <span class='mat-body'>{{buque.orden}}</span>
-            </p>
-            <p *ngIf="buque.arboladura" mat-line>
-              <mat-icon class="iconCenter">person</mat-icon>
-              <span class='mat-body-strong'>Arboladura: </span> <span class='mat-body'>{{buque.arboladura}}</span>
-            </p>
-            <p *ngIf="buque.manga" mat-line>
-              <mat-icon class="iconCenter">person</mat-icon>
-              <span class='mat-body-strong'>manga: </span> <span class='mat-body'>{{buque.manga}}</span>
-            </p>
-            <p *ngIf="buque.puntal" mat-line>
-              <mat-icon class="iconCenter">local_atm</mat-icon>
-              <span class='mat-body-strong'>Puntal: </span> <span class='mat-body'>{{buque.puntal}}</span>
-            </p>
-            <p mat-line>
-              <mat-chip-list>
 
-              </mat-chip-list>
-            </p>
-          </div>
-        </mat-card-content>
-      </div>
-    </div>
-  </mat-card>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[10, 15, 20, 100]"></mat-paginator>
+</div>
 </div>
