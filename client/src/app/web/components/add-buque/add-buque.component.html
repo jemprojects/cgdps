@@ -1,0 +1,91 @@
+<mat-card>
+  <div class="head">
+    <h2>{{formTitle}}</h2>
+    <!---span class="lastbuque" *ngIf="ultimobuqueCargado">{{ultimobuqueCargado}} ha sido creado!</span--->
+  </div>
+  <mat-spinner class="spinner" *ngIf="buqueInEdition == null"></mat-spinner>
+  <form class="form" *ngIf="buqueInEdition != null">
+     <mat-form-field class="full-width">
+      <input type="text" name="Orden" placeholder="Nro de orden" matInput
+        [(ngModel)]="buqueInEdition.orden">
+      <mat-icon matSuffix>mode_edit</mat-icon>
+    </mat-form-field>
+    &nbsp; &nbsp; &nbsp;
+    <p></p>
+
+    <mat-form-field class="full-width">
+      <input type="text" name="Nombre" placeholder="Nombre" matInput [(ngModel)]="buqueInEdition.nombre">
+      <mat-icon matSuffix>mode_edit</mat-icon>
+    </mat-form-field>
+    &nbsp; &nbsp; &nbsp;
+<!---Select Bandera-->
+<mat-form-field class="full-width">
+  <mat-label>Bandera</mat-label>
+  <select matNativeControl [(ngModel)]="buqueInEdition.bandera" name="Trafico">
+    <option value="" selected></option>
+    <option *ngFor="let bandera of banderas" [value]="bandera.bandera">
+      {{bandera.bandera}}
+    </option>
+  </select>
+</mat-form-field >
+&nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp;
+<!--Select Arboladura-->
+<mat-form-field  class="full-width">
+  <mat-label>Arboladura</mat-label>
+  <select matNativeControl [(ngModel)]="buqueInEdition.arboladura" name="Trafico">
+    <option value="" selected></option>
+    <option *ngFor="let arboladura of arboladuras" [value]="arboladura.arboladura">
+      {{arboladura.arboladura}}
+    </option>
+  </select>
+</mat-form-field >
+&nbsp; &nbsp; &nbsp;
+<p></p>
+    <mat-form-field class="full-width">
+      <input type="text" name="Manga" placeholder="Manga(mts)" matInput
+        [(ngModel)]="buqueInEdition.manga">
+      <mat-icon matSuffix>mode_edit</mat-icon>
+    </mat-form-field>
+    &nbsp; &nbsp; &nbsp;
+    <mat-form-field class="full-width">
+      <input type="text" name="Puntal" placeholder="Puntal(mts)" matInput [(ngModel)]="buqueInEdition.puntal">
+      <mat-icon matSuffix>mode_edit</mat-icon>
+    </mat-form-field>
+    &nbsp; &nbsp; &nbsp;
+    <mat-form-field class="full-width">
+      <input type="text" name="Eslora" placeholder="Eslora(mts)" matInput [(ngModel)]="buqueInEdition.eslora">
+      <mat-icon matSuffix>mode_edit</mat-icon>
+    </mat-form-field>
+    &nbsp; &nbsp; &nbsp;
+    <p></p>
+    <mat-form-field class="full-width">
+      <input type="text" name="TRB" placeholder="TRB" matInput [(ngModel)]="buqueInEdition.trb">
+      <mat-icon matSuffix>mode_edit</mat-icon>
+    </mat-form-field>
+    &nbsp; &nbsp; &nbsp;
+    <mat-form-field class="full-width">
+      <input type="text" name="TRN" placeholder="TRN" matInput [(ngModel)]="buqueInEdition.trn">
+      <mat-icon matSuffix>mode_edit</mat-icon>
+    </mat-form-field>
+    &nbsp; &nbsp; &nbsp;
+    <mat-form-field class="full-width">
+      <input type="text" name="IMO" placeholder="IMO" matInput [(ngModel)]="buqueInEdition.imo">
+      <mat-icon matSuffix>mode_edit</mat-icon>
+    </mat-form-field>
+    <div class="foot">
+      <section>
+        <mat-checkbox *ngIf="isNew" [(ngModel)]="continueAdding" [ngModelOptions]="{standalone: true}">Continuar
+          agregando
+        </mat-checkbox>
+      </section>
+      &nbsp; &nbsp; &nbsp;
+      <button mat-raised-button color="primary" (click)="savebuque(buqueInEdition)">Guardar</button>
+      &nbsp; &nbsp; &nbsp;
+      <button mat-raised-button (click)='backToEntradas()' color="accent">Cancelar</button>
+      &nbsp; &nbsp; &nbsp;
+    </div>
+
+  </form>
+
+</mat-card>

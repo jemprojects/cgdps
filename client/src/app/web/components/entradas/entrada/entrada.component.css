@@ -24,3 +24,10 @@
   height: 100px;
   width: 100px;
 }
+table {
+  width: 40%;
+}
+
+tr.mat-footer-row {
+  font-weight: bold;
+}

@@ -1,0 +1,63 @@
+<mat-card>
+  <div class="head">
+    <h2>{{formTitle}}</h2>
+    <!---span class="lastagencia" *ngIf="ultimoAgenciaCargado">{{ultimoAgenciaCargado}} ha sido creado!</span--->
+  </div>
+  <mat-spinner class="spinner" *ngIf="agenciaInEdition == null"></mat-spinner>
+  <form class="form" *ngIf="agenciaInEdition != null">
+     <mat-form-field class="full-width">
+      <input type="text" name="Orden" placeholder="Numero de orden" matInput
+        [(ngModel)]="agenciaInEdition.orden">
+      <mat-icon matSuffix>mode_edit</mat-icon>
+    </mat-form-field>
+    &nbsp; &nbsp; &nbsp;
+    <mat-form-field class="full-width">
+      <input type="text" name="nombre" placeholder="Nombre" matInput [(ngModel)]="agenciaInEdition.agencia">
+      <mat-icon matSuffix>mode_edit</mat-icon>
+    </mat-form-field>
+
+    &nbsp; &nbsp; &nbsp;
+    <mat-form-field class="full-width">
+      <input type="text" name="cuit" placeholder="Cuit" matInput [(ngModel)]="agenciaInEdition.cuit">
+      <mat-icon matSuffix>mode_edit</mat-icon>
+    </mat-form-field>
+    &nbsp; &nbsp; &nbsp;
+    <mat-form-field class="full-width">
+      <input type="text" name="telefonoContacto" placeholder="Teléfono de contacto" matInput
+        [(ngModel)]="agenciaInEdition.telefono">
+      <mat-icon matSuffix>mode_edit</mat-icon>
+    </mat-form-field>
+    <p>
+    <mat-form-field class="full-width">
+      <input type="text" name="direccion" placeholder="Direccion" matInput [(ngModel)]="agenciaInEdition.direccion">
+      <mat-icon matSuffix>mode_edit</mat-icon>
+    </mat-form-field>
+
+    &nbsp; &nbsp; &nbsp;
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Email" [formControl]="emailFormControl" [(ngModel)]="agenciaInEdition.mail">
+      <mat-icon matSuffix>mode_edit</mat-icon>
+      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+        Please enter a valid email address
+      </mat-error>
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    &nbsp; &nbsp; &nbsp;
+    <div class="foot">
+      <section>
+        <mat-checkbox *ngIf="isNew" [(ngModel)]="continueAdding" [ngModelOptions]="{standalone: true}">Continuar
+          agregando
+        </mat-checkbox>
+      </section>
+      &nbsp; &nbsp; &nbsp;
+      <button mat-raised-button color="primary" (click)="saveAgencia(agenciaInEdition)">Guardar</button>
+      &nbsp; &nbsp; &nbsp;
+      <button mat-raised-button (click)='backToEntradas()' color="accent">Cancelar</button>
+      &nbsp; &nbsp; &nbsp;
+    </div>
+
+  </form>
+
+</mat-card>

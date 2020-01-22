@@ -6,7 +6,7 @@
     &nbsp; &nbsp; &nbsp;
     <mat-form-field  appearance="outline">
       <mat-label>Nombre del Buque</mat-label>
-      <select matNativeControl (change)="navigateTo($event.target.value)">
+      <select matNativeControl (change)="navigateTo($event.target.value,entradaInEdition.id)">
         <option value=""></option>
         <option value="AgregarBuque">*AGREGAR NUEVO*</option>
         <option *ngFor="let buque of buques" [value]="buque.nombre">
@@ -17,11 +17,11 @@
     &nbsp; &nbsp; &nbsp;
     <mat-form-field appearance="outline">
       <mat-label>Agencia Maritima</mat-label>
-      <select matNativeControl (change)="navigateTo($event.target.value)" >
+      <select matNativeControl (change)="navigateTo($event.target.value,entradaInEdition.id)" >
         <option value=""></option>
         <option value="AgregarAgencia">*AGREGAR NUEVO*</option>
-        <option *ngFor="let agencia of agencias" [value]="agencia.nombre" >
-          {{agencia.nombre}}
+        <option *ngFor="let agencia of agencias" [value]="agencia.agencia" >
+          {{agencia.agencia}}
         </option>
       </select>
     </mat-form-field>
@@ -86,15 +86,54 @@
         <input matInput placeholder="C/SAL" [(ngModel)]="entradaInEdition.cal_sal">
        </mat-form-field>
        &nbsp; &nbsp; &nbsp;
+       <mat-form-field appearance="outline">
+        <input matInput placeholder="Nº Pasavante" [(ngModel)]="entradaInEdition.nroPasavante" required>
+      </mat-form-field>
+<p></p>
+<table mat-table [dataSource]="data" class="mat-elevation-z8">
+<!-- Item Column -->
+<ng-container matColumnDef="MERCADERIA">
+  <th mat-header-cell *matHeaderCellDef> MERCADERIA </th>
+  <td mat-cell *matCellDef="let element">
+     <mat-form-field appearance="outline">
+    <select matNativeControl [(ngModel)]="element" name="Mercaderia">
+      <option value="" selected></option>
+      <option *ngFor="let mercaderia of mercaderias" [value]="mercaderia.tipo">
+        {{mercaderia.tipo}}
+      </option>
+    </select>
+  </mat-form-field >
+  </td>
+  <td mat-footer-cell *matFooterCellDef> Total </td>
+</ng-container>
 
+<!-- Cost Column -->
+<ng-container matColumnDef="TNS">
+  <th mat-header-cell *matHeaderCellDef> TNS </th>
+  <td mat-cell *matCellDef="let element">
+    <mat-form-field  appearance="outline">
+    <input matInput placeholder="tns" [(ngModel)]="entradaInEdition.tns_carga">
+   </mat-form-field> </td>
+  <td mat-footer-cell *matFooterCellDef> {{getTotalCost() }} </td>
+</ng-container>
+<ng-container matColumnDef="TIPO">
+  <th mat-header-cell *matHeaderCellDef> TIPO </th>
+  <td mat-cell *matCellDef="let element">
+
+  </td>
+  <td mat-footer-cell *matFooterCellDef>  </td>
+</ng-container>
+<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+<tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+</table>
     <div>
       <button mat-button matStepperNext>Next</button>
     </div>
   </mat-step>
   <mat-step label="Carga">
-    <mat-form-field >
-      <input matInput placeholder="Nº Pasavante" [(ngModel)]="entradaInEdition.nroPasavante" required>
-    </mat-form-field>
+
+
     <div>
       <button mat-button matStepperPrevious>Back</button>
       <button mat-button matStepperNext>Next</button>
@@ -108,18 +147,6 @@
     <button mat-button matStepperPrevious>Back</button>
   </div>
 </mat-step>
-<mat-step></mat-step>
+
 </mat-horizontal-stepper>
 
-<mat-card><mat-tab-group>
-  <mat-tab label="Buque"> buque </mat-tab>
-  <mat-tab label="Agencia Maritima"> Agencia Maritima </mat-tab>
-  <mat-tab label="Calado(Ingreso)"> Calado(Ingreso) </mat-tab>
-  <mat-tab label="Entrada"> Fecha de entrada </mat-tab>
-  <mat-tab label="Salida"> Fecha de salida </mat-tab>
-  <mat-tab label="Pais Procedencia"> Pais Procedencia </mat-tab>
-  <mat-tab label="Puerto Procedencia"> Puerto Procedencia </mat-tab>
-  <mat-tab label="Pais Destino">Pais Destino </mat-tab>
-  <mat-tab label="Puerto Destino"> Puerto Destino </mat-tab>
-  <mat-tab label="Accion"> Accion </mat-tab>
-</mat-tab-group></mat-card>

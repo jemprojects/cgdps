@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { AfterViewChecked, Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatSort } from '@angular/material';
 
 import { Arboladura } from 'src/app/web/models/arboladura';
 import { ArboladurasService } from 'src/app/web/services/arboladura.service';
@@ -8,40 +8,41 @@ import { BanderasService } from 'src/app/web/services/bandera.service';
 import { Buques } from 'src/app/web/models/buques';
 import { BuquesService } from 'src/app/web/services/buques.service';
 import { FormControl } from '@angular/forms';
-import { Subject } from 'rxjs';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-buques-list',
   templateUrl: './buques-list.component.html',
   styleUrls: ['./buques-list.component.css']
 })
-export class BuquesListComponent implements OnInit, AfterViewInit {
-
+export class BuquesListComponent implements OnInit, AfterViewChecked {
   service: BuquesService;
   buques: Array<Buques>;
   search = new FormControl('');
-  serviceBandera: BanderasService
-  banderas: Array<Bandera>
-  arboladuras: Array<Arboladura>
-  serviceArboladura: ArboladurasService
-  displayedColumns: string[] = ['orden', 'nombre', 'bandera', 'arboladura', 'eslora','manga','puntal','imo', 'trn', 'trb'];
+  serviceBandera: BanderasService;
+  banderas: Array<Bandera>;
+  arboladuras: Array<Arboladura>;
+  serviceArboladura: ArboladurasService;
+    // tslint:disable-next-line: no-input-rename
+  dataSource = new  MatTableDataSource<Buques>(this.buques);
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  displayedColumns: string[] = ['orden', 'nombre', 'bandera', 'arboladura', 'eslora', 'manga', 'puntal', 'imo', 'trn', 'trb'];
   columnsToDisplay: string[] = this.displayedColumns.slice();
+
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  dataSource: MatTableDataSource<Buques>
-
-  constructor(public dialog: MatDialog, serviceBuques: BuquesService, serviceBanderas:BanderasService, serviceArboladura: ArboladurasService) {
+  constructor(public dialog: MatDialog, serviceBuques: BuquesService,
+              serviceBanderas: BanderasService, serviceArboladura: ArboladurasService) {
     this.service = serviceBuques;
-    this.serviceArboladura=serviceArboladura
-    this.serviceBandera= serviceBanderas
+    this.serviceArboladura = serviceArboladura;
+    this.serviceBandera = serviceBanderas;
     this.buques=null
-
   }
 
   ngOnInit() {
-    let scope = this;
+    const scope = this;
     this.service.getBuques(function(buques) {
-      scope.buques = buques;
+      scope.buques = buques
 
     });
     this.serviceArboladura.getarboladuras(function(arboladuras) {
@@ -54,27 +55,21 @@ export class BuquesListComponent implements OnInit, AfterViewInit {
     });
 
     this.dataSource.paginator = this.paginator;
+  }
+
+  ngAfterViewChecked() {
+    this.dataSource = new  MatTableDataSource<Buques>(this.buques);
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  getNameBandera(elem) {
+
+    return this.banderas.find((element)=> element.orden == elem).bandera
 
   }
-  ngAfterViewInit(): void {
-    let scope = this;
-    this.service.getBuques(function(buques) {
-      scope.buques = buques;
-
-    });
-  }
-  ngAfterViewChecked(){
-    this.dataSource = new MatTableDataSource(this.buques);
-
-  }
-  getBandera(orden: number) {
-    const result = this.banderas.filter(element => {
-      console.log(orden)
-      return element.orden === orden;
-    });
-
-    return result
+  getNameArboladura(elem) {
+    return this.arboladuras.find((element)=> element.codigo == elem).arboladura
   }
 
   applyFilter(filterValue: string) {
@@ -83,8 +78,6 @@ export class BuquesListComponent implements OnInit, AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-
   }
-
 }
 

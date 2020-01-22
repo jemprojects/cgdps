@@ -20,10 +20,25 @@ import { GirosService } from 'src/app/web/services/giros.service';
 import { Mercaderia } from 'src/app/web/models/mercaderia';
 import { MercaderiasService } from 'src/app/web/services/mercaderias.service';
 import { Observable } from 'rxjs';
+import { Operacion } from 'src/app/web/models/operacion';
+import { OperacionsService } from 'src/app/web/services/operacion.service';
+import { Puerto } from 'src/app/web/models/puertos';
 import { PuertosService } from 'src/app/web/services/puertos.service';
 import { Trafico } from 'src/app/web/models/trafico';
 import { TraficoService } from 'src/app/web/services/trafico.service';
 
+export interface ElementMercaderia {
+  mercaderia: string;
+  tns: number;
+  tipo: string;
+
+}
+
+const ELEMENT_DATA: ElementMercaderia[] = [
+  {mercaderia: 't', tns: 0, tipo: ''},
+  {mercaderia: '', tns: 0, tipo: ''},
+
+];
 @Component({
   selector: 'app-entrada',
   templateUrl: './entrada.component.html',
@@ -40,6 +55,7 @@ import { TraficoService } from 'src/app/web/services/trafico.service';
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
   ],
 })
+
 export class EntradaComponent implements OnInit {
   isLinear = false;
 
@@ -52,13 +68,16 @@ export class EntradaComponent implements OnInit {
   agencias: Array<Agencias>;
   // Puertos
   puertosService: PuertosService;
-  puertos: Array<Agencias>;
+  puertos: Array<Puerto>;
   // Giros
   girosService: GirosService;
   giros: Array<Giros>;
   // Trafico
   traficoService: TraficoService;
   traficos: Array<Trafico>;
+  //operaciones
+  operacionesService: OperacionsService;
+  operaciones: Array<Operacion>;
   // Mercadeira
   mercaderiaService: MercaderiasService;
   mercaderias: Array<Mercaderia>;
@@ -72,6 +91,9 @@ export class EntradaComponent implements OnInit {
   entradaInEdition: Entrada;
   isNew: boolean;
   siteMapLabel: string
+  displayedColumns: string[] = ['MERCADERIA', 'TNS','TIPO'];
+  columnsToDisplay: string[] = this.displayedColumns.slice();
+  data: ElementMercaderia[] = ELEMENT_DATA;
 
   constructor(
     private router: Router,
@@ -84,6 +106,7 @@ export class EntradaComponent implements OnInit {
     serviceTrafico: TraficoService,
     serviceMercaderia: MercaderiasService,
     serviceEntrada: EntradasService,
+    serviceOperations: OperacionsService
   ) {
     this.buquesService = serviceBuques;
     this.agenciasService = serviceAgencias;
@@ -92,6 +115,7 @@ export class EntradaComponent implements OnInit {
     this.traficoService = serviceTrafico;
     this.mercaderiaService = serviceMercaderia;
     this.entradasService = serviceEntrada;
+    this.operacionesService= serviceOperations
     this.entradaInEdition = null;
     this.ultimaSolicitudCargada = null;
 
@@ -120,12 +144,17 @@ export class EntradaComponent implements OnInit {
     this.mercaderiaService.getMercaderias(function(mercaderias) {
       scope.mercaderias = mercaderias;
     });
-
+    this.operacionesService.getOperacions(function(operaciones) {
+      scope.operaciones = operaciones;
+    });
 
   }
-  navigateTo(value) {
+  getTotalCost() {
+    return this.data.map(t => t.tns).reduce((acc, value) => acc + value, 0);
+  }
+  navigateTo(value, id) {
     if (value=="AgregarBuque" || value=="AgregarAgencia") {
-        this.router.navigate([`cgpds/${value}`]);
+        this.router.navigate([`cgpds/${value}/${id}`]);
     }
     return false;
 }

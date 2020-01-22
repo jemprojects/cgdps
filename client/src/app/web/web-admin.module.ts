@@ -19,6 +19,9 @@ import { WebAdminComponent } from "./web-admin.component";
 import { WebAdminMaterialModule } from "./web-admin.material.module";
 import { WebRoutingModule } from "./web-admin-routing.module";
 import { environment } from "../../environments/environment";
+import { AddBuqueComponent } from './components/add-buque/add-buque.component';
+import { AddAgenciaComponent } from './components/add-agencia/add-agencia.component';
+import { AddBuquesComponent } from './components/add-buques/add-buques.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,10 @@ import { environment } from "../../environments/environment";
     WebAdminComponent,
     BuqueDetailComponent,
     EntradaComponent,
-    ConsultasComponent
+    ConsultasComponent,
+    AddBuqueComponent,
+    AddAgenciaComponent,
+    AddBuquesComponent
   ],
   imports: [
     BrowserAnimationsModule,

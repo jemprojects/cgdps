@@ -24,7 +24,13 @@ export class Entrada {
    tipo: string;
 
   constructor(result) {
-    this.id = result.id;
+    if(result.id!=0){
+      this.id = result.id;
+    }
+    else{
+      this.id = +1;
+    }
+
     if(result.giro==0){
       this.giro=50000 + 1
     }

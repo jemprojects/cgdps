@@ -8,5 +8,11 @@ table {
 }
 
 td, th {
-  width: 5%;
+  width: 10px;
 }
+.example-container {
+  height: 700px;
+  width: 100%;
+  overflow: auto;
+}
+

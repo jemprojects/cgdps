@@ -4,7 +4,8 @@ export class Bandera {
 
 
   constructor(result) {
-    this.orden = result.orden;
+    this.orden = result.orden
+    ;
     this.bandera = result.bandera;
 
   }
