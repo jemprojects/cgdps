@@ -5,15 +5,7 @@
   </div>
   <mat-spinner class="spinner" *ngIf="buqueInEdition == null"></mat-spinner>
   <form class="form" *ngIf="buqueInEdition != null">
-     <mat-form-field class="full-width">
-      <input type="text" name="Orden" placeholder="Nro de orden" matInput
-        [(ngModel)]="buqueInEdition.orden">
-      <mat-icon matSuffix>mode_edit</mat-icon>
-    </mat-form-field>
-    &nbsp; &nbsp; &nbsp;
-    <p></p>
-
-    <mat-form-field class="full-width">
+      <mat-form-field class="full-width">
       <input type="text" name="Nombre" placeholder="Nombre" matInput [(ngModel)]="buqueInEdition.nombre">
       <mat-icon matSuffix>mode_edit</mat-icon>
     </mat-form-field>

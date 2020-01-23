@@ -19,26 +19,22 @@ import { Giros } from 'src/app/web/models/giros';
 import { GirosService } from 'src/app/web/services/giros.service';
 import { Mercaderia } from 'src/app/web/models/mercaderia';
 import { MercaderiasService } from 'src/app/web/services/mercaderias.service';
-import { Observable } from 'rxjs';
 import { Operacion } from 'src/app/web/models/operacion';
 import { OperacionsService } from 'src/app/web/services/operacion.service';
 import { Puerto } from 'src/app/web/models/puertos';
 import { PuertosService } from 'src/app/web/services/puertos.service';
+import { Tipo } from 'src/app/web/models/tipo';
+import { TipoService } from 'src/app/web/services/tipo.service';
 import { Trafico } from 'src/app/web/models/trafico';
 import { TraficoService } from 'src/app/web/services/trafico.service';
 
 export interface ElementMercaderia {
-  mercaderia: string;
-  tns: number;
-  tipo: string;
+  impo: Operacion
+  expo: Operacion
 
 }
 
-const ELEMENT_DATA: ElementMercaderia[] = [
-  {mercaderia: 't', tns: 0, tipo: ''},
-  {mercaderia: '', tns: 0, tipo: ''},
-
-];
+const ELEMENT_DATA: ElementMercaderia[] = [,,];
 @Component({
   selector: 'app-entrada',
   templateUrl: './entrada.component.html',
@@ -81,6 +77,9 @@ export class EntradaComponent implements OnInit {
   // Mercadeira
   mercaderiaService: MercaderiasService;
   mercaderias: Array<Mercaderia>;
+  //tipos
+  tipoService: TipoService;
+  tipos: Array<Tipo>;
   ultimaSolicitudCargada: string;
   continueAdding = false;
   selectable = true;
@@ -150,7 +149,7 @@ export class EntradaComponent implements OnInit {
 
   }
   getTotalCost() {
-    return this.data.map(t => t.tns).reduce((acc, value) => acc + value, 0);
+    return this.data.map(t => t.expo.tns + t.impo.tns).reduce((acc, value) => acc + value, 0);
   }
   navigateTo(value, id) {
     if (value=="AgregarBuque" || value=="AgregarAgencia") {
