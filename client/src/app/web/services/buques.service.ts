@@ -14,6 +14,7 @@ export class BuquesService {
   constructor(private db: AngularFireDatabase) {
     this.buquesRef = db.list("/buques");
   }
+
   getBuques(onBuquesLoaded) {
     this.buquesRef
       .snapshotChanges()

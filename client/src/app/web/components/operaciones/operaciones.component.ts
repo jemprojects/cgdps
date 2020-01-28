@@ -16,8 +16,8 @@ export class OperacionesComponent implements OnInit {
     //operaciones
     operacionesService: OperacionsService;
     operaciones: Array<Operacion>;
-    impo:Operacion
-    expo:Operacion
+    impo: Operacion
+    expo: Operacion
     // Mercadeira
     mercaderiaService: MercaderiasService;
     mercaderias: Array<Mercaderia>;
@@ -37,25 +37,9 @@ export class OperacionesComponent implements OnInit {
     this.expo=null
   }
 
-  setupFormNewOperation() {
-    this.impo=new Operacion({
-      id:'',
-      mercaderia:'',
-      tns:'',
-      tipo: '',
-      giro_id:''
-    });
-    this.expo=new Operacion({
-      id:'',
-      mercaderia:'',
-      tns:'',
-      tipo: '',
-      giro_id:''
-    });
-  }
 
   ngOnInit() {
-    this.setupFormNewOperation()
+
     const scope=this
     this.mercaderiaService.getMercaderias(function(mercaderias) {
       scope.mercaderias = mercaderias;
@@ -66,6 +50,25 @@ export class OperacionesComponent implements OnInit {
     this.tipoService.getTipos(function(tipos) {
       scope.tipos = tipos;
     });
+    this.setupFormNewOperation()
   }
-
+  getTotal(){
+    return this.impo.tns + this.expo.tns
+  }
+  setupFormNewOperation() {
+    this.impo=new Operacion({
+      id:'',
+      mercaderia:'',
+      tns:0,
+      tipo: '',
+      giro_id:''
+    });
+    this.expo=new Operacion({
+      id:'',
+      mercaderia:'',
+      tns:0,
+      tipo: '',
+      giro_id:''
+    });
+  }
 }

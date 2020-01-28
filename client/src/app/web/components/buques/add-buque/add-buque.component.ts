@@ -1,12 +1,12 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
-import { Arboladura } from '../../models/arboladura';
-import { ArboladurasService } from '../../services/arboladura.service';
-import { Bandera } from '../../models/bandera';
-import { BanderasService } from '../../services/bandera.service';
-import { Buques } from '../../models/buques';
-import { BuquesService } from '../../services/buques.service';
+import { Arboladura } from '../../../models/arboladura';
+import { ArboladurasService } from '../../../services/arboladura.service';
+import { Bandera } from '../../../models/bandera';
+import { BanderasService } from '../../../services/bandera.service';
+import { Buques } from '../../../models/buques';
+import { BuquesService } from '../../../services/buques.service';
 
 @Component({
   selector: 'app-add-buque',
