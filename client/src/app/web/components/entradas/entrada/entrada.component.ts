@@ -1,4 +1,3 @@
-import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatDialog } from '@angular/material';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -7,7 +6,6 @@ import {
   MAT_MOMENT_DATE_FORMATS,
   MomentDateAdapter,
 } from '@angular/material-moment-adapter';
-import { map, startWith } from 'rxjs/operators';
 
 import { Agencias } from 'src/app/web/models/agencias';
 import { AgenciasService } from 'src/app/web/services/agencias.service';
@@ -23,18 +21,12 @@ import { Operacion } from 'src/app/web/models/operacion';
 import { OperacionsService } from 'src/app/web/services/operacion.service';
 import { Puerto } from 'src/app/web/models/puertos';
 import { PuertosService } from 'src/app/web/services/puertos.service';
+import { Router } from '@angular/router';
 import { Tipo } from 'src/app/web/models/tipo';
 import { TipoService } from 'src/app/web/services/tipo.service';
 import { Trafico } from 'src/app/web/models/trafico';
 import { TraficoService } from 'src/app/web/services/trafico.service';
 
-export interface ElementMercaderia {
-  impo: Operacion
-  expo: Operacion
-
-}
-
-const ELEMENT_DATA: ElementMercaderia[] = [,,];
 @Component({
   selector: 'app-entrada',
   templateUrl: './entrada.component.html',
@@ -71,16 +63,7 @@ export class EntradaComponent implements OnInit {
   // Trafico
   traficoService: TraficoService;
   traficos: Array<Trafico>;
-  //operaciones
-  operacionesService: OperacionsService;
-  operaciones: Array<Operacion>;
-  // Mercadeira
-  mercaderiaService: MercaderiasService;
-  mercaderias: Array<Mercaderia>;
-  //tipos
-  tipoService: TipoService;
-  tipos: Array<Tipo>;
-  ultimaSolicitudCargada: string;
+
   continueAdding = false;
   selectable = true;
   removable = true;
@@ -90,34 +73,25 @@ export class EntradaComponent implements OnInit {
   entradaInEdition: Entrada;
   isNew: boolean;
   siteMapLabel: string
-  displayedColumns: string[] = ['MERCADERIA', 'TNS','TIPO'];
-  columnsToDisplay: string[] = this.displayedColumns.slice();
-  data: ElementMercaderia[] = ELEMENT_DATA;
+
 
   constructor(
     private router: Router,
-    private ruteActive: ActivatedRoute,
     public dialog: MatDialog,
     serviceBuques: BuquesService,
     serviceAgencias: AgenciasService,
     servicePuertos: PuertosService,
     serviceGiros: GirosService,
     serviceTrafico: TraficoService,
-    serviceMercaderia: MercaderiasService,
     serviceEntrada: EntradasService,
-    serviceOperations: OperacionsService
   ) {
     this.buquesService = serviceBuques;
     this.agenciasService = serviceAgencias;
     this.puertosService = servicePuertos;
     this.girosService = serviceGiros;
     this.traficoService = serviceTrafico;
-    this.mercaderiaService = serviceMercaderia;
     this.entradasService = serviceEntrada;
-    this.operacionesService= serviceOperations
     this.entradaInEdition = null;
-    this.ultimaSolicitudCargada = null;
-
 
   }
   ngOnInit() {
@@ -140,17 +114,9 @@ export class EntradaComponent implements OnInit {
     this.traficoService.getTraficos(function(traficos) {
       scope.traficos = traficos;
     });
-    this.mercaderiaService.getMercaderias(function(mercaderias) {
-      scope.mercaderias = mercaderias;
-    });
-    this.operacionesService.getOperacions(function(operaciones) {
-      scope.operaciones = operaciones;
-    });
 
   }
-  getTotalCost() {
-    return this.data.map(t => t.expo.tns + t.impo.tns).reduce((acc, value) => acc + value, 0);
-  }
+
   navigateTo(value, id) {
     if (value=="AgregarBuque" || value=="AgregarAgencia") {
         this.router.navigate([`cgpds/${value}/${id}`]);

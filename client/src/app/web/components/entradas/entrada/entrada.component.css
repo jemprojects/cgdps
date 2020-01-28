@@ -13,21 +13,4 @@
   width: 500px;
 }
 
-.tabCard{
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
-  position: center;
-  text-align: center;
-}
-.tab-small-box {
-  height: 100px;
-  width: 100px;
-}
-table {
-  width: 40%;
-}
 
-tr.mat-footer-row {
-  font-weight: bold;
-}

@@ -3,6 +3,7 @@ import {
   MatCardModule,
   MatDatepickerModule,
   MatFormFieldModule,
+  MatGridListModule,
   MatIconModule,
   MatTabsModule,
   MatToolbarModule
@@ -26,7 +27,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatTabsModule,
     MatDatepickerModule,
     MatToolbarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatGridListModule
 
   ],
   exports: [
@@ -39,7 +41,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatTabsModule,
     MatDatepickerModule,
     MatToolbarModule,
-ReactiveFormsModule
+    ReactiveFormsModule,
+    MatGridListModule
 
   ]
 })

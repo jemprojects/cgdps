@@ -1,5 +1,8 @@
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
+import { AddAgenciaComponent } from './components/add-agencia/add-agencia.component';
+import { AddBuqueComponent } from './components/add-buque/add-buque.component';
+import { AddBuquesComponent } from './components/add-buques/add-buques.component';
 import { AngularFireAuthModule } from "angularfire2/auth";
 import { AngularFireDatabaseModule } from "angularfire2/database";
 import { AngularFireModule } from "angularfire2";
@@ -15,13 +18,11 @@ import { EntradasListComponent } from "./components/entradas/entradas-list/entra
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatMenuModule } from "@angular/material";
 import { NgModule } from "@angular/core";
+import { OperacionesComponent } from './components/operaciones/operaciones.component';
 import { WebAdminComponent } from "./web-admin.component";
 import { WebAdminMaterialModule } from "./web-admin.material.module";
 import { WebRoutingModule } from "./web-admin-routing.module";
 import { environment } from "../../environments/environment";
-import { AddBuqueComponent } from './components/add-buque/add-buque.component';
-import { AddAgenciaComponent } from './components/add-agencia/add-agencia.component';
-import { AddBuquesComponent } from './components/add-buques/add-buques.component';
 
 @NgModule({
   declarations: [
@@ -34,13 +35,13 @@ import { AddBuquesComponent } from './components/add-buques/add-buques.component
     ConsultasComponent,
     AddBuqueComponent,
     AddAgenciaComponent,
-    AddBuquesComponent
+    AddBuquesComponent,
+    OperacionesComponent,
   ],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
     CommonModule,
-
     WebRoutingModule,
     WebAdminMaterialModule,
     FormsModule,
@@ -49,7 +50,8 @@ import { AddBuquesComponent } from './components/add-buques/add-buques.component
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     FlexLayoutModule,
-    MatMenuModule
+    MatMenuModule,
+
   ]
 })
 export class WebModule {}

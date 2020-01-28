@@ -8,6 +8,8 @@ import {
   MatDialogModule,
   MatExpansionModule,
   MatFormFieldModule,
+  MatGridList,
+  MatGridListModule,
   MatIconModule,
   MatInputModule,
   MatListModule,
@@ -57,7 +59,8 @@ import { NgModule } from "@angular/core";
     NgxMatTimepickerModule,
     MatAutocompleteModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatGridListModule
   ],
   exports: [
     MatButtonModule,
@@ -87,7 +90,8 @@ import { NgModule } from "@angular/core";
     NgxMatTimepickerModule,
     MatAutocompleteModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatGridListModule
   ]
 })
 export class WebAdminMaterialModule {}

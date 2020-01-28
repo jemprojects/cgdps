@@ -1,0 +1,66 @@
+<mat-spinner class="spinner" *ngIf="operaciones == null"></mat-spinner>
+<div class='mat-typography' *ngIf="operaciones!=null">
+<mat-card class="example-card">
+  <mat-grid-list cols="3" rowHeight="2:1" max-width= "600px">
+  <mat-grid-tile class="mat-grid-tile1">MERCADERIA</mat-grid-tile>
+  <mat-grid-tile class="mat-grid-tile1">TNS</mat-grid-tile>
+  <mat-grid-tile class="mat-grid-tile1">TIPO</mat-grid-tile>
+  <mat-grid-tile>
+    <mat-form-field >
+      <mat-label>Mercaderia</mat-label>
+      <select matNativeControl  name="Mercaderia">
+        <option value="" selected></option>
+        <option *ngFor="let mercaderia of mercaderias" [value]="mercaderia.tipo">
+          {{mercaderia.tipo}}
+        </option>
+      </select>
+      </mat-form-field >
+  </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-form-field class="example-full-width">
+      <input matInput placeholder="TNS">
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-form-field >
+      <mat-label>Tipo</mat-label>
+      <select matNativeControl  name="Tipo">
+        <option value="" selected></option>
+        <option *ngFor="let tipo of tipos" [value]="tipo.tipo">
+          {{tipo.tipo}}
+        </option>
+      </select>
+    </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-form-field >
+      <mat-label>Mercaderia</mat-label>
+      <select matNativeControl  name="Mercaderia">
+        <option value="" selected></option>
+        <option *ngFor="let mercaderia of mercaderias" [value]="mercaderia.tipo">
+          {{mercaderia.tipo}}
+        </option>
+      </select>
+    </mat-form-field >
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-form-field class="example-full-width">
+    <input matInput placeholder="TNS">
+  </mat-form-field>
+  </mat-grid-tile>
+  <mat-grid-tile>
+  <mat-form-field >
+    <mat-label>Tipo</mat-label>
+    <select matNativeControl  name="Tipo" [(ngModel)]="impo.tipo">
+      <option value="" selected></option>
+      <option *ngFor="let tipo of tipos" [value]="tipo.tipo">
+        {{tipo.tipo}}
+      </option>
+    </select>
+  </mat-form-field>
+  </mat-grid-tile>
+  </mat-grid-list>
+
+</mat-card>
+
+</div>

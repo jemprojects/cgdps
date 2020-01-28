@@ -31,12 +31,8 @@ export class Entrada {
       this.id = +1;
     }
 
-    if(result.giro==0){
-      this.giro=50000 + 1
-    }
-    else{
-      this.giro = result.giro;
-    }
+    this.giro = result.giro;
+
     this.buque = result.buque;
     this.agencia = result.agencia;
     this.procedencia = result.procedencia;

@@ -14,7 +14,7 @@ export class TipoService {
   constructor(private db: AngularFireDatabase) {
     this.tipoRef = db.list("/tipo");
   }
-  gettipo(onTipoLoaded) {
+  getTipos(onTipoLoaded) {
     this.tipoRef
       .snapshotChanges()
       .pipe(
