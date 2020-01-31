@@ -1,7 +1,7 @@
 export class Entrada {
    id: number;
    giro: number;
-   buque: string;
+   buque: number;
    agencia: string;
    procedencia: string;
    destino: string;

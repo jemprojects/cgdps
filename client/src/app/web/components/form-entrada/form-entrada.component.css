@@ -1,0 +1,37 @@
+
+.inputSmall{
+  width: 120px;
+  max-width: 120px;
+  box-sizing: border-box;
+}
+
+.formEntradas{
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 10px;
+  width: 500px;
+}
+
+
+.mat-grid-tile1 {
+  background: lightblue;
+}
+.example-card {
+  max-width: 700px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 2em;
+}
+.box {
+  display: flex;
+}
+
+.box1 {
+  flex: 1 1 auto;
+}
+
+.box2 {
+  flex: 1 1 auto;
+}

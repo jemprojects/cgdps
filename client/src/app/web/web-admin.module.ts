@@ -18,11 +18,11 @@ import { FormDescargaComponent } from './components/form-descarga/form-descarga.
 import { MatMenuModule } from "@angular/material";
 import { NgModule } from "@angular/core";
 import { OperacionesComponent } from './components/operaciones/operaciones.component';
-import { SubFormBuqueComponent } from './components/sub-form-buque/sub-form-buque.component';
 import { WebAdminComponent } from "./web-admin.component";
 import { WebAdminMaterialModule } from "./web-admin.material.module";
 import { WebRoutingModule } from "./web-admin-routing.module";
 import { environment } from "../../environments/environment";
+import { FormEntradaComponent } from './components/form-entrada/form-entrada.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,8 @@ import { environment } from "../../environments/environment";
     BuquesListComponent,
     FormCargaComponent,
     FormDescargaComponent,
-    SubFormBuqueComponent
+    FormEntradaComponent,
+
   ],
   imports: [
     BrowserAnimationsModule,
