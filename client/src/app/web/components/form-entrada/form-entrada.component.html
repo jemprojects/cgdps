@@ -92,7 +92,74 @@
   </mat-form-field>
   <div class="box">
     <div class="box1">
-      
+      <mat-card class="example-card">
+        <mat-grid-list cols="3" rowHeight="2:1" max-width= "600px">
+        <mat-grid-tile class="mat-grid-tile1">MERCADERIA</mat-grid-tile>
+        <mat-grid-tile class="mat-grid-tile1">TNS</mat-grid-tile>
+        <mat-grid-tile class="mat-grid-tile1">TIPO</mat-grid-tile>
+        <div class="grid">
+        <mat-grid-tile>
+          <mat-form-field >
+            <mat-label>Mercaderia</mat-label>
+            <select matNativeControl  name="Mercaderia" [(ngModel)]="impo.mercaderia">
+              <option value="" selected></option>
+              <option *ngFor="let mercaderia of mercaderias" [value]="mercaderia.tipo">
+                {{mercaderia.tipo}}
+              </option>
+            </select>
+            </mat-form-field >
+        </mat-grid-tile>
+          <mat-grid-tile >
+            <mat-form-field class="example-full-width" >
+            <input matInput placeholder="TNS" [(ngModel)]="impo.tns">
+          </mat-form-field>
+        </mat-grid-tile >
+        <mat-grid-tile>
+          <mat-form-field >
+            <mat-label>Tipo</mat-label>
+            <select matNativeControl  name="Tipo" [(ngModel)]="impo.tipo">
+              <option value="" selected></option>
+              <option *ngFor="let tipo of tipos" [value]="tipo.tipo">
+                {{tipo.tipo}}
+              </option>
+            </select>
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field >
+            <mat-label>Mercaderia</mat-label>
+            <select matNativeControl  name="Mercaderia" [(ngModel)]="expo.mercaderia">
+              <option value="" selected></option>
+              <option *ngFor="let mercaderia of mercaderias" [value]="mercaderia.tipo">
+                {{mercaderia.tipo}}
+              </option>
+            </select>
+          </mat-form-field >
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-form-field class="example-full-width" >
+          <input matInput placeholder="TNS" [(ngModel)]="expo.tns">
+        </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile>
+        <mat-form-field >
+          <mat-label>Tipo</mat-label>
+          <select matNativeControl  name="Tipo" [(ngModel)]="expo.tipo">
+            <option value="" selected></option>
+            <option *ngFor="let tipo of tipos" [value]="tipo.tipo">
+              {{tipo.tipo}}
+            </option>
+          </select>
+        </mat-form-field>
+        </mat-grid-tile>
+      </div>
+        </mat-grid-list>
+        <mat-list>
+          <mat-divider></mat-divider>
+          <mat-list-item *ngIf="getTotal(impo.tns,expo.tns)!=null">Total: $ {{getTotal(impo.tns,expo.tns)}}</mat-list-item>
+          <mat-divider></mat-divider>
+        </mat-list>
+      </mat-card>
     </div>
     <div class="box2">
 
@@ -106,8 +173,9 @@
       <mat-grid-tile >{{buqueSelect.nombre}}</mat-grid-tile>
       <mat-grid-tile >{{buqueSelect.imo}}</mat-grid-tile>
     </div>
+    <div *ngIf="buques!=null && buqueSelect==null" >
+    </div>
       </mat-grid-list>
-
     </mat-card>
 
     </div>

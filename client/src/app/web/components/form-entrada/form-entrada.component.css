@@ -35,3 +35,14 @@
 .box2 {
   flex: 1 1 auto;
 }
+.mat-grid-tile1 {
+  background: lightblue;
+}
+.example-card {
+  max-width: 700px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 2em;
+}
