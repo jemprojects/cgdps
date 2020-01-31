@@ -1,5 +1,5 @@
-
-<mat-card class="example-card" *ngIf="mercaderias!=null || tipos!=null">
+<mat-progress-bar mode="indeterminate" *ngIf="operaciones===null | async"></mat-progress-bar>
+<mat-card class="example-card">
   <mat-grid-list cols="3" rowHeight="2:1" max-width= "600px">
   <mat-grid-tile class="mat-grid-tile1">MERCADERIA</mat-grid-tile>
   <mat-grid-tile class="mat-grid-tile1">TNS</mat-grid-tile>
@@ -63,7 +63,7 @@
   </mat-grid-list>
   <mat-list>
     <mat-divider></mat-divider>
-    <mat-list-item>Total: $ {{ impo.tns + expo.tns}}</mat-list-item>
+    <mat-list-item *ngIf="getTotal(impo.tns,expo.tns)!=null">Total: $ {{getTotal(impo.tns,expo.tns)}}</mat-list-item>
     <mat-divider></mat-divider>
   </mat-list>
 </mat-card>

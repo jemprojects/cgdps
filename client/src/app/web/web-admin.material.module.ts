@@ -16,6 +16,7 @@ import {
   MatMenuModule,
   MatNativeDateModule,
   MatPaginatorModule,
+  MatProgressBarModule,
   MatProgressSpinnerModule,
   MatSelectModule,
   MatSidenavModule,
@@ -50,7 +51,6 @@ import { NgModule } from "@angular/core";
     MatCheckboxModule,
     MatMenuModule,
     MatTabsModule,
-    MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
     MatToolbarModule,
@@ -60,7 +60,8 @@ import { NgModule } from "@angular/core";
     MatAutocompleteModule,
     MatTableModule,
     MatPaginatorModule,
-    MatGridListModule
+    MatGridListModule,
+    MatProgressBarModule
   ],
   exports: [
     MatButtonModule,
@@ -80,7 +81,6 @@ import { NgModule } from "@angular/core";
     MatCheckboxModule,
     MatExpansionModule,
     MatMenuModule,
-    MatDatepickerModule,
     MatNativeDateModule,
     MatTabsModule,
     MatSelectModule,
@@ -91,7 +91,8 @@ import { NgModule } from "@angular/core";
     MatAutocompleteModule,
     MatTableModule,
     MatPaginatorModule,
-    MatGridListModule
+    MatGridListModule,
+    MatProgressBarModule
   ]
 })
 export class WebAdminMaterialModule {}

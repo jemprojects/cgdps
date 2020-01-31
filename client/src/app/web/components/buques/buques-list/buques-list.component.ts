@@ -1,29 +1,27 @@
 import { AfterViewChecked, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatSort } from '@angular/material';
 
-import { Arboladura } from 'src/app/web/models/arboladura';
-import { ArboladurasService } from 'src/app/web/services/arboladura.service';
-import { Bandera } from 'src/app/web/models/bandera';
-import { BanderasService } from 'src/app/web/services/bandera.service';
 import { Buques } from 'src/app/web/models/buques';
 import { BuquesService } from 'src/app/web/services/buques.service';
 import { FormControl } from '@angular/forms';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
+import listaDeArboladura from 'src/assets/json/arboladura.json';
+import listaDeBanderas from 'src/assets/json/bandera.json';
+import listaDeBuques from 'src/assets/json/buques.json';
 
 @Component({
   selector: 'app-buques-list',
   templateUrl: './buques-list.component.html',
   styleUrls: ['./buques-list.component.css']
 })
-export class BuquesListComponent implements OnInit, AfterViewChecked {
+export class BuquesListComponent implements OnInit {
   service: BuquesService;
-  buques: Array<Buques>;
   search = new FormControl('');
-  serviceBandera: BanderasService;
-  banderas: Array<Bandera>;
-  arboladuras: Array<Arboladura>;
-  serviceArboladura: ArboladurasService;
+  buques: any=listaDeBuques;
+  banderas: any=listaDeBanderas;
+  arboladuras: any=listaDeArboladura;
+
     // tslint:disable-next-line: no-input-rename
   dataSource = new  MatTableDataSource<Buques>(this.buques);
   @ViewChild(MatSort, {static: false}) sort: MatSort;
@@ -31,11 +29,8 @@ export class BuquesListComponent implements OnInit, AfterViewChecked {
   columnsToDisplay: string[] = this.displayedColumns.slice();
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  constructor(public dialog: MatDialog, serviceBuques: BuquesService,
-              serviceBanderas: BanderasService, serviceArboladura: ArboladurasService) {
+  constructor(public dialog: MatDialog, serviceBuques: BuquesService ) {
     this.service = serviceBuques;
-    this.serviceArboladura = serviceArboladura;
-    this.serviceBandera = serviceBanderas;
     this.buques=null
   }
 
@@ -45,32 +40,12 @@ export class BuquesListComponent implements OnInit, AfterViewChecked {
       scope.buques = buques
 
     });
-    this.serviceArboladura.getarboladuras(function(arboladuras) {
-      scope.arboladuras = arboladuras;
-
-    });
-    this.serviceBandera.getBanderas(function(banderas) {
-      scope.banderas = banderas;
-
-    });
-
-    this.dataSource.paginator = this.paginator;
-  }
-
-  ngAfterViewChecked() {
     this.dataSource = new  MatTableDataSource<Buques>(this.buques);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
 
-  getNameBandera(elem) {
 
-    return this.banderas.find((element)=> element.orden == elem).bandera
-
-  }
-  getNameArboladura(elem) {
-    return this.arboladuras.find((element)=> element.codigo == elem).arboladura
-  }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();

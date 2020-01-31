@@ -17,6 +17,7 @@ import { CommonModule } from "@angular/common";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { FooterComponent } from "./components/layout/footer/footer.component";
 import { HeaderComponent } from "./components/layout/header/header.component";
+import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from "./components/login/login.component";
 import { MatPseudoCheckboxModule } from "@angular/material/core";
 import { MaterialModule } from "./material.module";
@@ -24,10 +25,6 @@ import { NgModule } from "@angular/core";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
 import { WebModule } from "./web/web-admin.module";
 import { environment } from "../environments/environment";
-
-// This import loads the firebase namespace along with all its type information.
-
-// These imports load individual services into the firebase namespace.
 
 @NgModule({
   declarations: [
@@ -49,7 +46,8 @@ import { environment } from "../environments/environment";
     MatPseudoCheckboxModule,
     FlexLayoutModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    HttpClientModule
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]

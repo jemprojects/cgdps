@@ -6,7 +6,7 @@ export class Agencias {
   telefono: number;
   mail: string
   constructor(result) {
-    this.orden = result.orden;
+    this.orden =result.orden;
     this.agencia = result.agencia;
     this.cuit = result.cuit;
     this.direccion = result.direccion;

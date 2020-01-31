@@ -15,7 +15,6 @@ import { EntradasListComponent } from "./components/entradas/entradas-list/entra
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormCargaComponent } from './components/form-carga/form-carga.component';
 import { FormDescargaComponent } from './components/form-descarga/form-descarga.component';
-import { FormEntradaComponent } from './components/entradas/form-entrada/form-entrada.component';
 import { MatMenuModule } from "@angular/material";
 import { NgModule } from "@angular/core";
 import { OperacionesComponent } from './components/operaciones/operaciones.component';
@@ -35,7 +34,6 @@ import { environment } from "../../environments/environment";
     AddAgenciaComponent,
     OperacionesComponent,
     BuquesListComponent,
-    FormEntradaComponent,
     FormCargaComponent,
     FormDescargaComponent,
     SubFormBuqueComponent

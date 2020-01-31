@@ -1,12 +1,10 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
-import { Arboladura } from '../../../models/arboladura';
-import { ArboladurasService } from '../../../services/arboladura.service';
-import { Bandera } from '../../../models/bandera';
-import { BanderasService } from '../../../services/bandera.service';
 import { Buques } from '../../../models/buques';
 import { BuquesService } from '../../../services/buques.service';
+import listaDeArboladura from 'src/assets/json/arboladura.json';
+import listaDeBanderas from 'src/assets/json/bandera.json';
 
 @Component({
   selector: 'app-add-buque',
@@ -20,37 +18,24 @@ export class AddBuqueComponent implements OnInit {
   enableBuqueCreation = false;
   isNew: boolean;
   continueAdding = false;
-  serviceArboladura: ArboladurasService;
-  serviceBandera: BanderasService;
-  arboladuras: Array<Arboladura>;
-  banderas: Array<Bandera>;
+  service:BuquesService
+  arboladuras: any= listaDeArboladura;
+  banderas: any= listaDeBanderas;
   constructor(
     private route: Router,
     private ruteActive: ActivatedRoute,
-    private serviceBuque: BuquesService,
-    serviceBanderas: BanderasService,
-    serviceArboladura: ArboladurasService
+    serviceBuques: BuquesService,
   ) {
+    this.service=serviceBuques
     this.entradaKey = this.ruteActive.snapshot.paramMap.get('id');
     this.buqueInEdition = null;
-    this.serviceArboladura= serviceArboladura
-    this.serviceBandera=serviceBanderas
   }
 
   ngOnInit(): void {
-    const scope = this;
     this.setupFormNewBuque();
-    this.serviceArboladura.getarboladuras(function(arboladuras) {
-      scope.arboladuras = arboladuras;
-
-    });
-    this.serviceBandera.getBanderas(function(banderas) {
-      scope.banderas = banderas;
-
-    });
   }
   backToEntradas(): void {
-    this.route.navigate(['/cgpds/SolicitudGiro']);
+    this.route.navigate(['/cgpds']);
   }
   setupFormNewBuque() {
     this.isNew = true;
@@ -77,7 +62,7 @@ export class AddBuqueComponent implements OnInit {
     const keyout = 'key';
     delete jsonBuque[keyout];
     if (this.isNew) {
-      this.serviceBuque.createBuque(jsonBuque, () => {
+      this.service.createBuque(jsonBuque, () => {
         if (this.continueAdding) {
           this.setupFormNewBuque();
           this.scrollToTop();
@@ -86,7 +71,7 @@ export class AddBuqueComponent implements OnInit {
         }
       });
     } else {
-      this.serviceBuque.updateBuque(this.entradaKey, jsonBuque);
+      this.service.updateBuque(this.entradaKey, jsonBuque);
     }
 
   }

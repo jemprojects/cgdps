@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Mercaderia } from '../../models/mercaderia';
-import { MercaderiasService } from '../../services/mercaderias.service';
 import { Operacion } from '../../models/operacion';
 import { OperacionsService } from '../../services/operacion.service';
-import { Tipo } from '../../models/tipo';
-import { TipoService } from '../../services/tipo.service';
+import listaDeMercaderias from 'src/assets/json/mercaderias.json';
+import listaDeTipos from 'src/assets/json/tipo.json';
 
 @Component({
   selector: 'app-operaciones',
@@ -13,47 +11,32 @@ import { TipoService } from '../../services/tipo.service';
   styleUrls: ['./operaciones.component.css']
 })
 export class OperacionesComponent implements OnInit {
+    service: OperacionsService
     //operaciones
-    operacionesService: OperacionsService;
     operaciones: Array<Operacion>;
     impo: Operacion
     expo: Operacion
     // Mercadeira
-    mercaderiaService: MercaderiasService;
-    mercaderias: Array<Mercaderia>;
+    mercaderias: any=listaDeMercaderias;
     //tipos
-    tipoService: TipoService;
-    tipos: Array<Tipo>;
+    tipos: any=listaDeTipos;
 
-  constructor(
-    serviceOperations: OperacionsService,
-    serviceTipos: TipoService,
-    serviceMercaderia: MercaderiasService,
-  ) {
-    this.operacionesService= serviceOperations
-    this.tipoService= serviceTipos
-    this.mercaderiaService = serviceMercaderia;
+  constructor(Oservice: OperacionsService) {
+    this.service=Oservice
     this.impo=null
     this.expo=null
   }
 
 
   ngOnInit() {
-
     const scope=this
-    this.mercaderiaService.getMercaderias(function(mercaderias) {
-      scope.mercaderias = mercaderias;
-    });
-    this.operacionesService.getOperacions(function(operaciones) {
-      scope.operaciones = operaciones;
-    });
-    this.tipoService.getTipos(function(tipos) {
-      scope.tipos = tipos;
-    });
+    this.service.getOperacions(operaciones=> scope.operaciones = operaciones);
     this.setupFormNewOperation()
   }
-  getTotal(){
-    return this.impo.tns + this.expo.tns
+  getTotal(n1,n2){
+
+    return parseInt(n1) + parseInt(n2)
+
   }
   setupFormNewOperation() {
     this.impo=new Operacion({
