@@ -23,6 +23,7 @@ import { WebAdminMaterialModule } from "./web-admin.material.module";
 import { WebRoutingModule } from "./web-admin-routing.module";
 import { environment } from "../../environments/environment";
 import { FormEntradaComponent } from './components/form-entrada/form-entrada.component';
+import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from 'ngx-mat-datetime-picker';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { FormEntradaComponent } from './components/form-entrada/form-entrada.com
     AngularFireDatabaseModule,
     FlexLayoutModule,
     MatMenuModule,
-
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
   ]
 })
 export class WebModule {}

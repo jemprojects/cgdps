@@ -94,12 +94,12 @@
     <div class="box1">
       <mat-card class="example-card">
         <mat-grid-list cols="3" rowHeight="2:1" max-width= "600px">
-        <mat-grid-tile class="mat-grid-tile1">MERCADERIA</mat-grid-tile>
-        <mat-grid-tile class="mat-grid-tile1">TNS</mat-grid-tile>
-        <mat-grid-tile class="mat-grid-tile1">TIPO</mat-grid-tile>
+        <mat-grid-tile class="mat-grid-title">MERCADERIA</mat-grid-tile>
+        <mat-grid-tile class="mat-grid-title">TNS</mat-grid-tile>
+        <mat-grid-tile class="mat-grid-title">TIPO</mat-grid-tile>
         <div class="grid">
         <mat-grid-tile>
-          <mat-form-field >
+          <mat-form-field appearance="outline" class="inputGrid">
             <mat-label>Mercaderia</mat-label>
             <select matNativeControl  name="Mercaderia" [(ngModel)]="impo.mercaderia">
               <option value="" selected></option>
@@ -107,15 +107,15 @@
                 {{mercaderia.tipo}}
               </option>
             </select>
-            </mat-form-field >
+            </mat-form-field>
         </mat-grid-tile>
           <mat-grid-tile >
-            <mat-form-field class="example-full-width" >
+            <mat-form-field appearance="outline" class="inputGrid">
             <input matInput placeholder="TNS" [(ngModel)]="impo.tns">
           </mat-form-field>
         </mat-grid-tile >
         <mat-grid-tile>
-          <mat-form-field >
+          <mat-form-field appearance="outline" class="inputGrid">
             <mat-label>Tipo</mat-label>
             <select matNativeControl  name="Tipo" [(ngModel)]="impo.tipo">
               <option value="" selected></option>
@@ -126,7 +126,7 @@
           </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile>
-          <mat-form-field >
+          <mat-form-field appearance="outline" class="inputGrid">
             <mat-label>Mercaderia</mat-label>
             <select matNativeControl  name="Mercaderia" [(ngModel)]="expo.mercaderia">
               <option value="" selected></option>
@@ -137,12 +137,12 @@
           </mat-form-field >
         </mat-grid-tile>
         <mat-grid-tile>
-          <mat-form-field class="example-full-width" >
+          <mat-form-field appearance="outline" class="inputGrid">
           <input matInput placeholder="TNS" [(ngModel)]="expo.tns">
         </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile>
-        <mat-form-field >
+        <mat-form-field appearance="outline" class="inputGrid" >
           <mat-label>Tipo</mat-label>
           <select matNativeControl  name="Tipo" [(ngModel)]="expo.tipo">
             <option value="" selected></option>

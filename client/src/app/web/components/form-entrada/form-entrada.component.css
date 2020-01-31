@@ -4,7 +4,12 @@
   max-width: 120px;
   box-sizing: border-box;
 }
-
+.inputGrid{
+  width: 180px;
+  max-width: 200px;
+  box-sizing: border-box;
+  text-align: center;
+}
 .formEntradas{
   margin: 0 auto;
   text-align: center;
@@ -19,11 +24,7 @@
 .example-card {
   max-width: 700px;
 }
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 2em;
-}
+
 .box {
   display: flex;
 }
@@ -35,8 +36,13 @@
 .box2 {
   flex: 1 1 auto;
 }
-.mat-grid-tile1 {
+.mat-grid-title {
   background: lightblue;
+}
+.mat-grid-tile{
+  display: flex;
+  margin: 0 auto;
+  text-align: center;
 }
 .example-card {
   max-width: 700px;
