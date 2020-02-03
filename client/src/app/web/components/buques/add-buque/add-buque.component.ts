@@ -3,8 +3,15 @@ import { Component, OnInit } from '@angular/core';
 
 import { Buques } from '../../../models/buques';
 import { BuquesService } from '../../../services/buques.service';
+import { DialogComponent } from '../../dialog/dialog.component';
+import { MatDialog } from '@angular/material';
 import listaDeArboladura from 'src/assets/json/arboladura.json';
 import listaDeBanderas from 'src/assets/json/bandera.json';
+
+export interface Data {
+  id:number
+  nombre: string;
+}
 
 @Component({
   selector: 'app-add-buque',
@@ -21,7 +28,9 @@ export class AddBuqueComponent implements OnInit {
   service:BuquesService
   arboladuras: any= listaDeArboladura;
   banderas: any= listaDeBanderas;
+  id_count: number=0
   constructor(
+    public dialog: MatDialog,
     private route: Router,
     private ruteActive: ActivatedRoute,
     serviceBuques: BuquesService,
@@ -33,6 +42,32 @@ export class AddBuqueComponent implements OnInit {
 
   ngOnInit(): void {
     this.setupFormNewBuque();
+  }
+  id_count: number=0
+  openDialog(obj) {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '250px',
+      data:obj
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result.event == 'Add'){
+        this.addData(result.data);
+      }
+    });
+  }
+
+  addData(row_obj){
+    this.banderas.push(row_obj)
+  }
+
+  navigateTo(value, id) {
+    if (value === 'AgregarBandera' ) {
+      console.log('aca toy')
+      this.openDialog(value)
+
+    }
+    return false;
   }
   backToEntradas(): void {
     this.route.navigate(['/cgpds']);
