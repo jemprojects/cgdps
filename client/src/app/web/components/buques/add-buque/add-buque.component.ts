@@ -1,17 +1,13 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Arboladura, Bandera } from 'src/app/web/models/simpleData';
+import { Component, OnChanges, OnInit } from '@angular/core';
 
+import { BanderasService } from 'src/app/web/services/banderas.service';
 import { Buques } from '../../../models/buques';
 import { BuquesService } from '../../../services/buques.service';
 import { DialogComponent } from '../../dialog/dialog.component';
 import { MatDialog } from '@angular/material';
 import listaDeArboladura from 'src/assets/json/arboladura.json';
-import listaDeBanderas from 'src/assets/json/bandera.json';
-
-export interface Data {
-  id:number
-  nombre: string;
-}
 
 @Component({
   selector: 'app-add-buque',
@@ -26,48 +22,70 @@ export class AddBuqueComponent implements OnInit {
   isNew: boolean;
   continueAdding = false;
   service:BuquesService
-  arboladuras: any= listaDeArboladura;
-  banderas: any= listaDeBanderas;
-  id_count: number=0
+  serviceAdd:BanderasService
+  arboladuras: Array<Arboladura>;
+  banderas: Array<Bandera>;
+  orden_count: number
+  dataSelect: {a: number, b: string};
+
   constructor(
     public dialog: MatDialog,
     private route: Router,
     private ruteActive: ActivatedRoute,
     serviceBuques: BuquesService,
+    serviceAditional:BanderasService
   ) {
     this.service=serviceBuques
-    this.entradaKey = this.ruteActive.snapshot.paramMap.get('id');
+    this.serviceAdd=serviceAditional
+    this.entradaKey = this.ruteActive.snapshot.paramMap.get('orden');
     this.buqueInEdition = null;
+    this.banderas=[]
+    this.arboladuras=[]
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    const scope = this;
+    this.serviceAdd.getBanderas(function(banderas) {
+    scope.banderas = banderas;
+    });
+    this.serviceAdd.getArboladuras(function(arboladuras) {
+      scope.arboladuras = arboladuras;
+      });
     this.setupFormNewBuque();
   }
-  id_count: number=0
-  openDialog(obj) {
+
+  navigateTo(value) {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '250px',
-      data:obj
+      data:this.dataSelect
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if(result.event == 'Add'){
-        this.addData(result.data);
-      }
-    });
-  }
+    if (value == 'AgregarBandera') {
 
-  addData(row_obj){
-    this.banderas.push(row_obj)
-  }
+      dialogRef.afterClosed().subscribe(result => {
+        if(result.event == 'Add'){
+          this.addBandera(result.data);
+        }
 
-  navigateTo(value, id) {
-    if (value === 'AgregarBandera' ) {
-      console.log('aca toy')
-      this.openDialog(value)
+      });
+    } else if(value== 'AgregarArboladura'){
 
+      dialogRef.afterClosed().subscribe(result => {
+        if(result.event == 'Add'){
+          this.addArboladura(result.data);
+        }
+
+      });
     }
     return false;
+  }
+  addBandera(row_obj){
+    this.orden_count=this.banderas[this.banderas.length -1].orden
+    this.serviceAdd.createBandera({"orden": this.orden_count +1,"bandera":row_obj.name.toUpperCase()},()=>{})
+  }
+  addArboladura(row_obj){
+    this.orden_count=this.banderas[this.banderas.length -1].orden
+    this.serviceAdd.createArboladura({"codigo": this.orden_count +1,"arboladura":row_obj.name.toUpperCase()},()=>{})
   }
   backToEntradas(): void {
     this.route.navigate(['/cgpds']);

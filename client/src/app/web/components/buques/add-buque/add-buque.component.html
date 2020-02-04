@@ -13,9 +13,9 @@
 <!---Select Bandera-->
 <mat-form-field  >
   <mat-label>Bandera</mat-label>
-  <select matNativeControl [(ngModel)]="buqueInEdition.bandera" name="bandera" (change)="navigateTo($event.target.value,buqueInEdition.orden)">
+  <select matNativeControl [(ngModel)]="buqueInEdition.bandera" name="bandera" (change)="navigateTo($event.target.value)">
     <option value=""></option>
-    <option value="AgregarBandera" (click)="openDialog('Add',{})" >*AGREGAR NUEVO*</option>
+    <option value="AgregarBandera">*AGREGAR NUEVO*</option>
     <option *ngFor="let bandera of banderas" [value]="bandera.orden">
       {{bandera.bandera}}
     </option>
@@ -26,10 +26,10 @@
 <!--Select Arboladura-->
 <mat-form-field >
   <mat-label>Arboladura</mat-label>
-  <select matNativeControl [(ngModel)]="buqueInEdition.arboladura" name="arboladura" (change)="navigateTo($event.target.value,buqueInEdition.orden)" >
+  <select matNativeControl [(ngModel)]="buqueInEdition.arboladura" name="arboladura" (change)="navigateTo($event.target.value)">
     <option value="" selected></option>
     <option value="AgregarArboladura">*AGREGAR NUEVO*</option>
-    <option *ngFor="let arboladura of arboladuras" [value]="arboladura.orden">
+    <option *ngFor="let arboladura of arboladuras" [value]="arboladura.codigo">
       {{arboladura.arboladura}}
     </option>
   </select>

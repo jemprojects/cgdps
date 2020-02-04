@@ -1,5 +1,5 @@
 <!-- dialog-box.component.html -->
-<h1 mat-dialog-title>Row Action :: <strong>{{action}}</strong></h1>
+<h1 mat-dialog-title>Añadir :: <strong>{{action}}</strong></h1>
 <div mat-dialog-content>
   <mat-form-field *ngIf="action != 'Delete'; else elseTemplate">
     <input placeholder="{{action}} rubro" matInput [(ngModel)]="local_data.rubro">

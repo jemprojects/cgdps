@@ -3,7 +3,7 @@
 import { Component, Inject, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
-export interface UsersData {
+export interface Data {
   name: string;
   id: number;
 }
@@ -13,23 +13,21 @@ export interface UsersData {
   styleUrls: ['./dialog.component.css']
 })
 export class DialogComponent {
-  action:string;
   local_data:any;
 
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
-    //@Optional() is used to prevent error if no data is passed
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: UsersData) {
-    console.log(data);
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: Data) {
     this.local_data = {...data};
-    this.action = this.local_data.action;
+
   }
 
   doAction(){
-    this.dialogRef.close({event:this.action,data:this.local_data});
+    this.dialogRef.close({event:'Add',data:this.local_data});
   }
 
-  closeDialog(){
+  onNoClick(): void {
+    this.data=null
     this.dialogRef.close({event:'Cancel'});
   }
 

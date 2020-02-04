@@ -12,7 +12,7 @@ export class OperacionsService {
   operacions: any;
 
   constructor(private db: AngularFireDatabase) {
-    this.operacionsRef = db.list('/operacion');
+    this.operacionsRef = db.list('/operaciones');
   }
   getOperacions(onOperacionsLoaded) {
     this.operacionsRef

@@ -26,6 +26,7 @@ import { WebAdminComponent } from "./web-admin.component";
 import { WebAdminMaterialModule } from "./web-admin.material.module";
 import { WebRoutingModule } from "./web-admin-routing.module";
 import { environment } from "../../environments/environment";
+import { ServiciosPortuariosComponent } from './components/servicios-portuarios/servicios-portuarios.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { environment } from "../../environments/environment";
     FormEntradaComponent,
     DialogBoxComponent,
     DialogComponent,
+    ServiciosPortuariosComponent,
 
   ],
   imports: [

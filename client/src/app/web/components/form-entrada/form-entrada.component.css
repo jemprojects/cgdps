@@ -31,10 +31,23 @@
 
 .box1 {
   flex: 1 1 auto;
+  width: 50%;
 }
 
 .box2 {
   flex: 1 1 auto;
+  width: 50%;
+
+}
+.box3 {
+  flex: 1 1 auto;
+  width: 50%;
+  align-items: center;
+}
+
+.box4 {
+  flex: 1 1 auto;
+  width: 50%;
 }
 .mat-grid-title {
   background: lightblue;
