@@ -2,7 +2,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Arboladura, Bandera } from 'src/app/web/models/simpleData';
 import { Component, OnChanges, OnInit } from '@angular/core';
 
-import { BanderasService } from 'src/app/web/services/banderas.service';
+import { AditionalService } from 'src/app/web/services/banderas.service';
 import { Buques } from '../../../models/buques';
 import { BuquesService } from '../../../services/buques.service';
 import { DialogComponent } from '../../popUp/dialog/dialog.component';
@@ -21,7 +21,7 @@ export class AddBuqueComponent implements OnInit {
   buqueKey: string;
   enableBuqueCreation = false;
   isNew: boolean;
-  serviceAdd:BanderasService
+  serviceAdd:AditionalService
   arboladuras: Array<Arboladura>;
   banderas: Array<Bandera>;
   orden_count: number
@@ -33,7 +33,7 @@ export class AddBuqueComponent implements OnInit {
     private route: Router,
     private ruteActive: ActivatedRoute,
     serviceBuques: BuquesService,
-    serviceAditional:BanderasService
+    serviceAditional:AditionalService
   ) {
     this.service=serviceBuques
     this.serviceAdd=serviceAditional

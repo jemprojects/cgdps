@@ -16,3 +16,9 @@ td, th {
   overflow: auto;
 }
 
+.options{
+  width: 200px;
+  box-sizing: border-box;
+  align-content: center;
+
+}

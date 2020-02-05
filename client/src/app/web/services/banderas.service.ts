@@ -7,7 +7,7 @@ import { map } from "rxjs/operators";
 @Injectable({
   providedIn: "root"
 })
-export class BanderasService {
+export class AditionalService {
   banderasRef: AngularFireList<Bandera> = null;
   banderas: any;
   arboladurasRef:AngularFireList<Arboladura> = null;

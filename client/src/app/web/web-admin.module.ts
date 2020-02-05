@@ -27,7 +27,6 @@ import { WebAdminComponent } from "./web-admin.component";
 import { WebAdminMaterialModule } from "./web-admin.material.module";
 import { WebRoutingModule } from "./web-admin-routing.module";
 import { environment } from "../../environments/environment";
-import { EditBuqueComponent } from './components/Edits/edit-buque/edit-buque.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +44,7 @@ import { EditBuqueComponent } from './components/Edits/edit-buque/edit-buque.com
     DialogBoxComponent,
     DialogComponent,
     ServiciosPortuariosComponent,
-    EditBuqueComponent,
+
 
   ],
   imports: [
