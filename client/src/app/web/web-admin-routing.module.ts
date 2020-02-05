@@ -1,7 +1,7 @@
 import { RouterModule, Routes } from "@angular/router";
 
-import { AddAgenciaComponent } from './components/add-agencia/add-agencia.component';
-import { AddBuqueComponent } from './components/buques/add-buque/add-buque.component';
+import { AddAgenciaComponent } from './components/Add/add-agencia/add-agencia.component';
+import { AddBuqueComponent } from './components/Add/add-buque/add-buque.component';
 import { AuthGuard } from "../auth/auth-guard.service";
 import { BuquesListComponent } from "./components/buques/buques-list/buques-list.component";
 import { ConsultasComponent } from './components/consultas/consultas.component';
@@ -51,7 +51,7 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: "cgpds/buques/AgregarBuque",
+        path: "cgpds/EditarBuque/:id",
         component: AddBuqueComponent,
         canActivate: [AuthGuard]
       }

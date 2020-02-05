@@ -5,9 +5,8 @@ import { Component, OnChanges, OnInit } from '@angular/core';
 import { BanderasService } from 'src/app/web/services/banderas.service';
 import { Buques } from '../../../models/buques';
 import { BuquesService } from '../../../services/buques.service';
-import { DialogComponent } from '../../dialog/dialog.component';
+import { DialogComponent } from '../../popUp/dialog/dialog.component';
 import { MatDialog } from '@angular/material';
-import listaDeArboladura from 'src/assets/json/arboladura.json';
 
 @Component({
   selector: 'app-add-buque',
@@ -15,19 +14,20 @@ import listaDeArboladura from 'src/assets/json/arboladura.json';
   styleUrls: ['./add-buque.component.css']
 })
 export class AddBuqueComponent implements OnInit {
+  continueAdding = false;
   buqueInEdition: Buques;
+  service:BuquesService
   formTitle: string;
-  entradaKey: string;
+  buqueKey: string;
   enableBuqueCreation = false;
   isNew: boolean;
-  continueAdding = false;
-  service:BuquesService
   serviceAdd:BanderasService
   arboladuras: Array<Arboladura>;
   banderas: Array<Bandera>;
   orden_count: number
   dataSelect: {a: number, b: string};
-
+  buques: Array<Buques>
+  id_newBque:number=3061
   constructor(
     public dialog: MatDialog,
     private route: Router,
@@ -37,30 +37,40 @@ export class AddBuqueComponent implements OnInit {
   ) {
     this.service=serviceBuques
     this.serviceAdd=serviceAditional
-    this.entradaKey = this.ruteActive.snapshot.paramMap.get('orden');
     this.buqueInEdition = null;
     this.banderas=[]
     this.arboladuras=[]
+
   }
 
   ngOnInit() {
+    this.buqueKey = this.ruteActive.snapshot.paramMap.get('id')
+    if (this.buqueKey === 'null') {
+      this.id_newBque++
+      this.setupFormNewBuque()
+    } else {
+      this.setupFormEditBuque()
+    }
     const scope = this;
+    this.service.getBuques(function(buques){
+      scope.buques =buques
+    })
     this.serviceAdd.getBanderas(function(banderas) {
     scope.banderas = banderas;
     });
     this.serviceAdd.getArboladuras(function(arboladuras) {
       scope.arboladuras = arboladuras;
-      });
-    this.setupFormNewBuque();
+    });
+
   }
 
   navigateTo(value) {
-    const dialogRef = this.dialog.open(DialogComponent, {
-      width: '250px',
-      data:this.dataSelect
-    });
 
     if (value == 'AgregarBandera') {
+      const dialogRef = this.dialog.open(DialogComponent, {
+        width: '250px',
+        data:this.dataSelect
+      });
 
       dialogRef.afterClosed().subscribe(result => {
         if(result.event == 'Add'){
@@ -69,6 +79,10 @@ export class AddBuqueComponent implements OnInit {
 
       });
     } else if(value== 'AgregarArboladura'){
+      const dialogRef = this.dialog.open(DialogComponent, {
+        width: '250px',
+        data:this.dataSelect
+      });
 
       dialogRef.afterClosed().subscribe(result => {
         if(result.event == 'Add'){
@@ -90,12 +104,21 @@ export class AddBuqueComponent implements OnInit {
   backToEntradas(): void {
     this.route.navigate(['/cgpds']);
   }
+
+  setupFormEditBuque() {
+    this.isNew = false
+    this.service.getBuque(this.buqueKey, data => {
+      this.buqueInEdition = new Buques(data)
+      this.formTitle = `Editar Buque ${this.buqueInEdition.nombre}`
+    })
+  }
+
   setupFormNewBuque() {
     this.isNew = true;
     this.enableBuqueCreation = true;
-    this.formTitle = 'Agregar nueva buque';
+    this.formTitle = 'Agregar nuevo buque';
     this.buqueInEdition = new Buques({
-      orden: '',
+      orden: this.id_newBque,
       nombre: '',
       cuit: '',
       bandera: '',
@@ -105,11 +128,9 @@ export class AddBuqueComponent implements OnInit {
       puntal: '',
       trn: '',
       trb: '',
-      imo: '',
-      campo1: '',
+      imo: ''
     });
-    }
-
+  }
   savebuque(buque) {
     const jsonBuque = buque;
     const keyout = 'key';
@@ -124,7 +145,8 @@ export class AddBuqueComponent implements OnInit {
         }
       });
     } else {
-      this.service.updateBuque(this.entradaKey, jsonBuque);
+      this.service.updateBuque(this.buqueKey, jsonBuque);
+      this.backToEntradas();
     }
 
   }

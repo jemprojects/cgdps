@@ -10,15 +10,13 @@ import { Agencias } from 'src/app/web/models/agencias';
 import { AgenciasService } from 'src/app/web/services/agencias.service';
 import { Buques } from 'src/app/web/models/buques';
 import { BuquesService } from 'src/app/web/services/buques.service';
-import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { Entrada } from 'src/app/web/models/entradas';
 import { EntradasService } from 'src/app/web/services/entradas.service';
-import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material';
-import { Operacion } from '../../models/operacion';
-import { OperacionsService } from '../../services/operacion.service';
+import { Operacion } from '../../../models/operacion';
+import { OperacionsService } from '../../../services/operacion.service';
 import { Router } from '@angular/router';
-import { ServiciosPortuariosComponent } from '../servicios-portuarios/servicios-portuarios.component';
+import { ServiciosPortuariosComponent } from '../../servicios-portuarios/servicios-portuarios.component';
 import listaDeGiros from 'src/assets/json/giros.json';
 import listaDeMercaderias from 'src/assets/json/mercaderias.json';
 import listaDePuertos from 'src/assets/json/puertos.json';
@@ -89,15 +87,20 @@ export class FormEntradaComponent implements OnInit {
     this.buques = [];
     this.buqueSelect = null;
   }
-  navigateTo(value, id) {
+  navigateTo(value) {
     if (value === 'AgregarBuque' || value === 'AgregarAgencia') {
-    this.router.navigate([`cgpds/${value}/${id}`]);
-    } else {
+    this.router.navigate([`cgpds/${value}/null`]);
+    console.log(typeof(value))
+    }
+    else {
       this.buqueSelect = this.buques.find(b => b.orden == this.entradaInEdition.buque);
     }
     return false;
   }
+  navigateToEdits(id) {
+    this.router.navigate([`cgpds/EditarBuque/${id}`]);
 
+  }
   ngOnInit() {
     const scope = this;
     this.serviceBuque.getBuques(function(buques) {
@@ -166,5 +169,5 @@ export class FormEntradaComponent implements OnInit {
       giro_id: ''
     });
   }
-  
+
 }

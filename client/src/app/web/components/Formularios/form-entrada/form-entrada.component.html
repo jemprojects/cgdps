@@ -8,7 +8,7 @@
     &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
     <mat-form-field  appearance="outline">
       <mat-label>Nombre del Buque</mat-label>
-      <select matNativeControl [(ngModel)]="entradaInEdition.buque " (change)="navigateTo($event.target.value,entradaInEdition.id)" >
+      <select matNativeControl [(ngModel)]="entradaInEdition.buque " (change)="navigateTo($event.target.value)" >
         <option value=""></option>
         <option value="AgregarBuque">*AGREGAR NUEVO*</option>
         <option *ngFor="let buque of buques" [value]="buque.orden" >
@@ -19,7 +19,7 @@
     &nbsp; &nbsp; &nbsp;
     <mat-form-field appearance="outline">
       <mat-label>Agencia Maritima</mat-label>
-      <select matNativeControl (change)="navigateTo($event.target.value,entradaInEdition.id)" [(ngModel)]="entradaInEdition.agencia">
+      <select matNativeControl (change)="navigateTo($event.target.value)" [(ngModel)]="entradaInEdition.agencia">
         <option value=""></option>
         <option value="AgregarAgencia">*AGREGAR NUEVO*</option>
         <option *ngFor="let agencia of agencias" [value]="agencia.agencia" >
@@ -94,6 +94,7 @@
       </select>
     </mat-form-field>
     </div>
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
     <div class="box2">
       <app-servicios-portuarios></app-servicios-portuarios>
     </div>
@@ -179,8 +180,14 @@
 
         <mat-grid-tile >{{buqueSelect.orden}}</mat-grid-tile>
         <mat-grid-tile >{{buqueSelect.nombre}}</mat-grid-tile>
-        <mat-grid-tile >{{buqueSelect.imo}}</mat-grid-tile>
+        <mat-grid-tile ><div *ngIf="buqueSelect.imo!=null"> {{buqueSelect.imo}}</div>
+         </mat-grid-tile>
+
         </mat-grid-list>
+        <button class="buttonEdit" mat-mini-fab matTooltip="Editar" value="EditarBuque"
+        (click)="navigateToEdits(buqueSelect.key)" color="primary">
+              <mat-icon>edit</mat-icon>
+            </button>
       </mat-card>
     </div>
   </div>

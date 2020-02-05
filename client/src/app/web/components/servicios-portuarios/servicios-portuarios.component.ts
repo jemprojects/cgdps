@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatTable } from '@angular/material';
 
-import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
+import { DialogBoxComponent } from '../popUp/dialog-box/dialog-box.component';
 
 export interface EmpData {
   id:number

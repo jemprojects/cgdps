@@ -10,6 +10,7 @@ import listaDeArboladura from 'src/assets/json/arboladura.json';
 import listaDeBanderas from 'src/assets/json/bandera.json';
 import listaDeBuques from 'src/assets/json/buques.json';
 
+const ELEMENT_DATA: Buques[] = listaDeBuques;
 @Component({
   selector: 'app-buques-list',
   templateUrl: './buques-list.component.html',
@@ -21,9 +22,8 @@ export class BuquesListComponent implements OnInit {
   buques: any=listaDeBuques;
   banderas: any=listaDeBanderas;
   arboladuras: any=listaDeArboladura;
-
+  dataSource = ELEMENT_DATA;
     // tslint:disable-next-line: no-input-rename
-  dataSource = new  MatTableDataSource<Buques>(this.buques);
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   displayedColumns: string[] = ['orden', 'nombre', 'bandera', 'arboladura', 'eslora', 'manga', 'puntal', 'imo', 'trn', 'trb'];
   columnsToDisplay: string[] = this.displayedColumns.slice();
@@ -31,7 +31,6 @@ export class BuquesListComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   constructor(public dialog: MatDialog, serviceBuques: BuquesService ) {
     this.service = serviceBuques;
-    this.buques=null
   }
 
   ngOnInit() {
@@ -40,19 +39,13 @@ export class BuquesListComponent implements OnInit {
       scope.buques = buques
 
     });
-    this.dataSource = new  MatTableDataSource<Buques>(this.buques);
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+
   }
-
-
-
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  getBanderaName(element){
+    return ((this.banderas.find(b=> b.orden===element)).bandera)
+  }
+  getArboladuraName(element){
+    return ((this.arboladuras.find(b=> b.codigo==element)).arboladura)
   }
 }
 
