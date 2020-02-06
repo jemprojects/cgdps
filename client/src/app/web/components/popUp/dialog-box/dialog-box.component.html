@@ -1,16 +1,29 @@
 <!-- dialog-box.component.html -->
-<h1 mat-dialog-title>Añadir :: <strong>{{action}}</strong></h1>
+<h1 mat-dialog-title><strong>{{action}}</strong></h1>
 <div mat-dialog-content>
-  <mat-form-field *ngIf="action != 'Delete'; else elseTemplate">
-    <input placeholder="{{action}} rubro" matInput [(ngModel)]="local_data.rubro">
-
-  </mat-form-field>
-  <mat-form-field *ngIf="action != 'Delete'; else elseTemplate">
-    <input placeholder="{{action}} empresa" matInput [(ngModel)]="local_data.empresa">
-  </mat-form-field>
+  <form class="example-form" *ngIf="action != 'Delete'; else elseTemplate">
+    <mat-form-field class="example-full-width">
+      <input type="text" placeholder="{{action}} Rubro" aria-label="Rubro" matInput [formControl]="myControl" [matAutocomplete]="auto"  [(ngModel)]="local_data.rubro">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option.rubro_esp}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+  <form class="example-form" *ngIf="action != 'Delete'">
+    <mat-form-field class="example-full-width">
+      <input type="text" placeholder="{{action}} Empresa" aria-label="Empresa" matInput [formControl]="myControlE" [matAutocomplete]="auto1"  [(ngModel)]="local_data.empresa">
+      <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFnE">
+        <mat-option *ngFor="let option of filteredOptionsE | async" [value]="option">
+          {{option.esp}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
 
   <ng-template #elseTemplate>
-    Sure to delete <b>{{local_data.rubro}}</b>?
+    Sure to delete <b>{{local_data.rubro.rubro_esp}} - {{local_data.empresa.esp}}</b>?
   </ng-template>
 </div>
 <div mat-dialog-actions>

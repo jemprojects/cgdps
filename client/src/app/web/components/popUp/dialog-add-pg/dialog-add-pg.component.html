@@ -1,8 +1,10 @@
-<!-- dialog-box.component.html -->
 <h1 mat-dialog-title>Agregar Nuevo</h1>
 <div mat-dialog-content>
   <mat-form-field >
     <input matInput [(ngModel)]="local_data.name">
+  </mat-form-field>
+  <mat-form-field >
+    <input matInput [(ngModel)]="local_data.name2">
   </mat-form-field>
   <ng-template #elseTemplate>
     Sure to delete <b>{{local_data.name}}</b>?

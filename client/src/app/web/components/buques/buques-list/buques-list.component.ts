@@ -1,7 +1,7 @@
 import { Arboladura, Bandera } from 'src/app/web/models/simpleData';
 import { Component, OnInit } from '@angular/core';
 
-import { AditionalService } from 'src/app/web/services/banderas.service';
+import { AditionalService } from 'src/app/web/services/adicional.service';
 import { Buques } from 'src/app/web/models/buques';
 import { BuquesService } from 'src/app/web/services/buques.service';
 import { DialogComponent } from '../../popUp/dialog/dialog.component';

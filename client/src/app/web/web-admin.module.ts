@@ -11,6 +11,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { BuquesListComponent } from './components/buques/buques-list/buques-list.component';
 import { CommonModule } from "@angular/common";
 import { ConsultasComponent } from './components/consultas/consultas.component';
+import { DialogAddPGComponent } from './components/popUp/dialog-add-pg/dialog-add-pg.component';
 import { DialogBoxComponent } from './components/popUp/dialog-box/dialog-box.component';
 import { DialogComponent } from './components/popUp/dialog/dialog.component';
 import { EntradaComponent } from './components/entradas/entrada/entrada.component';
@@ -44,6 +45,7 @@ import { environment } from "../../environments/environment";
     DialogBoxComponent,
     DialogComponent,
     ServiciosPortuariosComponent,
+    DialogAddPGComponent,
 
 
   ],
@@ -64,6 +66,7 @@ import { environment } from "../../environments/environment";
     NgxMatTimepickerModule,
   ],
   entryComponents: [
+    DialogAddPGComponent,
     DialogComponent,
     DialogBoxComponent
   ],

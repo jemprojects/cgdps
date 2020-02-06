@@ -1,8 +1,8 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Arboladura, Bandera } from 'src/app/web/models/simpleData';
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { AditionalService } from 'src/app/web/services/banderas.service';
+import { AditionalService } from 'src/app/web/services/adicional.service';
 import { Buques } from '../../../models/buques';
 import { BuquesService } from '../../../services/buques.service';
 import { DialogComponent } from '../../popUp/dialog/dialog.component';
@@ -16,45 +16,45 @@ import { MatDialog } from '@angular/material';
 export class AddBuqueComponent implements OnInit {
   continueAdding = false;
   buqueInEdition: Buques;
-  service:BuquesService
+  service: BuquesService;
   formTitle: string;
   buqueKey: string;
   enableBuqueCreation = false;
   isNew: boolean;
-  serviceAdd:AditionalService
+  serviceAdd: AditionalService;
   arboladuras: Array<Arboladura>;
   banderas: Array<Bandera>;
-  orden_count: number
+  orden_count: number;
   dataSelect: {a: number, b: string};
-  buques: Array<Buques>
-  id_newBque:number=3061
+  buques: Array<Buques>;
+  id_newBque= 3061;
   constructor(
     public dialog: MatDialog,
     private route: Router,
     private ruteActive: ActivatedRoute,
     serviceBuques: BuquesService,
-    serviceAditional:AditionalService
+    serviceAditional: AditionalService
   ) {
-    this.service=serviceBuques
-    this.serviceAdd=serviceAditional
+    this.service = serviceBuques;
+    this.serviceAdd = serviceAditional;
     this.buqueInEdition = null;
-    this.banderas=[]
-    this.arboladuras=[]
+    this.banderas = [];
+    this.arboladuras = [];
 
   }
 
   ngOnInit() {
-    this.buqueKey = this.ruteActive.snapshot.paramMap.get('id')
+    this.buqueKey = this.ruteActive.snapshot.paramMap.get('id');
     if (this.buqueKey === 'null') {
-      this.id_newBque++
-      this.setupFormNewBuque()
+      this.id_newBque++;
+      this.setupFormNewBuque();
     } else {
-      this.setupFormEditBuque()
+      this.setupFormEditBuque();
     }
     const scope = this;
-    this.service.getBuques(function(buques){
-      scope.buques =buques
-    })
+    this.service.getBuques(function(buques) {
+      scope.buques = buques;
+    });
     this.serviceAdd.getBanderas(function(banderas) {
     scope.banderas = banderas;
     });
@@ -65,27 +65,26 @@ export class AddBuqueComponent implements OnInit {
   }
 
   navigateTo(value) {
-
     if (value == 'AgregarBandera') {
       const dialogRef = this.dialog.open(DialogComponent, {
         width: '250px',
-        data:this.dataSelect
+        data: this.dataSelect
       });
 
       dialogRef.afterClosed().subscribe(result => {
-        if(result.event == 'Add'){
+        if (result.event == 'Add') {
           this.addBandera(result.data);
         }
 
       });
-    } else if(value== 'AgregarArboladura'){
+    } else if (value == 'AgregarArboladura') {
       const dialogRef = this.dialog.open(DialogComponent, {
         width: '250px',
-        data:this.dataSelect
+        data: this.dataSelect
       });
 
       dialogRef.afterClosed().subscribe(result => {
-        if(result.event == 'Add'){
+        if (result.event == 'Add') {
           this.addArboladura(result.data);
         }
 
@@ -93,24 +92,24 @@ export class AddBuqueComponent implements OnInit {
     }
     return false;
   }
-  addBandera(row_obj){
-    this.orden_count=this.banderas[this.banderas.length -1].orden
-    this.serviceAdd.createBandera({"orden": this.orden_count +1,"bandera":row_obj.name.toUpperCase()},()=>{})
+  addBandera(row_obj) {
+    this.orden_count = this.banderas[this.banderas.length - 1].orden + 1;
+    this.serviceAdd.createBandera({'orden': this.orden_count,'bandera': row_obj.name.toUpperCase()}, () => {});
   }
-  addArboladura(row_obj){
-    this.orden_count=this.banderas[this.banderas.length -1].orden
-    this.serviceAdd.createArboladura({"codigo": this.orden_count +1,"arboladura":row_obj.name.toUpperCase()},()=>{})
+  addArboladura(row_obj) {
+    this.orden_count = this.banderas[this.banderas.length - 1].orden + 1;
+    this.serviceAdd.createArboladura({'codigo': this.orden_count,'arboladura': row_obj.name.toUpperCase()}, () => {});
   }
   backToEntradas(): void {
     this.route.navigate(['/cgpds']);
   }
 
   setupFormEditBuque() {
-    this.isNew = false
+    this.isNew = false;
     this.service.getBuque(this.buqueKey, data => {
-      this.buqueInEdition = new Buques(data)
-      this.formTitle = `Editar Buque ${this.buqueInEdition.nombre}`
-    })
+      this.buqueInEdition = new Buques(data);
+      this.formTitle = `Editar Buque ${this.buqueInEdition.nombre}`;
+    });
   }
 
   setupFormNewBuque() {

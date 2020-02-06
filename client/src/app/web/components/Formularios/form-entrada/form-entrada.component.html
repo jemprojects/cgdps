@@ -31,8 +31,9 @@
     &nbsp; &nbsp; &nbsp;
     <mat-form-field appearance="outline">
       <mat-label>Procedencia</mat-label>
-      <select matNativeControl [(ngModel)]="entradaInEdition.procedencia" name="PuertoProcendencia">
+      <select matNativeControl [(ngModel)]="entradaInEdition.procedencia" name="PuertoProcendencia" (change)="navigateTo($event.target.value)">
         <option value="" selected></option>
+        <option value="AgregarPuerto">*AGREGAR NUEVO*</option>
         <option *ngFor="let puerto of puertos" [value]="puerto.puerto">
           {{puerto.puerto}}
         </option>
@@ -52,8 +53,9 @@
     &nbsp; &nbsp; &nbsp;
     <mat-form-field appearance="outline">
       <mat-label>Muelle</mat-label>
-      <select matNativeControl [(ngModel)]="entradaInEdition.muelle" name="Muelle">
+      <select matNativeControl [(ngModel)]="entradaInEdition.muelle" name="Muelle" (change)="navigateTo($event.target.value)">
         <option value="" selected></option>
+        <option value="AgregarGiro">*AGREGAR NUEVO*</option>
         <option *ngFor="let giro of giros" [value]="giro.muelle">
           {{giro.muelle}}
         </option>
@@ -62,8 +64,9 @@
     &nbsp; &nbsp; &nbsp;
     <mat-form-field appearance="outline">
       <mat-label>Destino</mat-label>
-      <select matNativeControl [(ngModel)]="entradaInEdition.destino" name="PuertoDestino" >
-        <option value="" selected ></option>
+      <select matNativeControl [(ngModel)]="entradaInEdition.destino" name="PuertoDestino" (change)="navigateTo($event.target.value)">
+        <option value="" selected></option>
+        <option value="AgregarPuerto">*AGREGAR NUEVO*</option>
         <option *ngFor="let puerto1 of puertos" [value]="puerto1.puerto" >
         {{puerto1.puerto}}
         </option>
@@ -86,8 +89,9 @@
     &nbsp; &nbsp; &nbsp;
     <mat-form-field appearance="outline">
       <mat-label>Trafico</mat-label>
-      <select matNativeControl [(ngModel)]="entradaInEdition.trafico" name="Trafico">
+      <select matNativeControl [(ngModel)]="entradaInEdition.trafico" name="Trafico" (change)="navigateTo($event.target.value)">
         <option value="" selected></option>
+        <option value="AgregarTrafico">*AGREGAR NUEVO*</option>
         <option *ngFor="let trafico of traficos" [value]="trafico.trafico">
           {{trafico.trafico}}
         </option>

@@ -16,3 +16,23 @@ export class Arboladura {
     this.arboladura = result.arboladura;
   }
 }
+export class Trafico {
+  id: number;
+  trafico: string;
+
+  constructor(result) {
+    this.id = result.id;
+    this.trafico = result.trafico;
+  }
+}
+
+export class Tipo {
+  orden: number;
+  tipo: string;
+
+  constructor(result) {
+    this.orden = result.orden;
+    this.tipo = result.tipo;
+  }
+
+}
