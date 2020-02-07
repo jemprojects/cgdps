@@ -1,11 +1,10 @@
-
 //dialog-box.component.ts
-import { Component, Inject, Optional } from '@angular/core';
+import { Component, Inject, Optional, ViewChild, ElementRef } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-
 export interface Data {
-  name: string;
   id: number;
+  name: string;
+  title:string
 }
 @Component({
   selector: 'app-dialog',
@@ -14,12 +13,14 @@ export interface Data {
 })
 export class DialogComponent {
   local_data:any;
+  titleA: string
 
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: Data) {
-    this.local_data = {...data};
-
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
+      if(data){
+        this.titleA = data.title || this.titleA;
+        this.local_data= data || this.local_data}
   }
 
   doAction(){

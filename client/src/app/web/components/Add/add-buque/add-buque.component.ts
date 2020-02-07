@@ -25,7 +25,7 @@ export class AddBuqueComponent implements OnInit {
   arboladuras: Array<Arboladura>;
   banderas: Array<Bandera>;
   orden_count: number;
-  dataSelect: {a: number, b: string};
+  dataSimple: {id: number, name: string, title:string};
   buques: Array<Buques>;
   id_newBque= 3061;
   constructor(
@@ -68,7 +68,7 @@ export class AddBuqueComponent implements OnInit {
     if (value == 'AgregarBandera') {
       const dialogRef = this.dialog.open(DialogComponent, {
         width: '250px',
-        data: this.dataSelect
+        data: {data:this.dataSimple, title:"Bandera"},
       });
 
       dialogRef.afterClosed().subscribe(result => {
@@ -80,7 +80,7 @@ export class AddBuqueComponent implements OnInit {
     } else if (value == 'AgregarArboladura') {
       const dialogRef = this.dialog.open(DialogComponent, {
         width: '250px',
-        data: this.dataSelect
+        data: {data:this.dataSimple, title:"Arboladura"},
       });
 
       dialogRef.afterClosed().subscribe(result => {

@@ -15,11 +15,13 @@ export interface Data {
 })
 export class DialogAddPGComponent{
  local_data:any;
-
+ title: string
   constructor(
     public dialogRef: MatDialogRef<DialogAddPGComponent>,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: Data) {
-    this.local_data = {...data};
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
+      if(data){
+        this.title = data.title || this.title;
+        this.local_data= data || this.local_data}
   }
 
   doAction(){

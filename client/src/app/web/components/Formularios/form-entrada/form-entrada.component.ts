@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
 import {
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
@@ -15,19 +15,25 @@ import { DialogAddPGComponent } from '../../popUp/dialog-add-pg/dialog-add-pg.co
 import { DialogComponent } from '../../popUp/dialog/dialog.component';
 import { Entrada } from 'src/app/web/models/entradas';
 import { EntradasService } from 'src/app/web/services/entradas.service';
+import { FormControl } from '@angular/forms';
 import { Giros } from 'src/app/web/models/giros';
 import { MatDialog } from '@angular/material';
+import { Observable } from 'rxjs';
 import { Operacion } from '../../../models/operacion';
+import { OperacionesComponent } from '../../operaciones/operaciones.component';
 import { OperacionsService } from '../../../services/operacion.service';
 import { Puerto } from 'src/app/web/models/puertos';
 import { Router } from '@angular/router';
 import { ServiciosPortuariosComponent } from '../../servicios-portuarios/servicios-portuarios.component';
+import { Title } from '@angular/platform-browser';
 import { Trafico } from 'src/app/web/models/simpleData';
 import listaDeGiros from 'src/assets/json/giros.json';
 import listaDeMercaderias from 'src/assets/json/mercaderias.json';
 import listaDePuertos from 'src/assets/json/puertos.json';
 import listaDeTipos from 'src/assets/json/tipo.json';
 import listaDeTrafico from 'src/assets/json/trafico.json';
+import { map } from 'rxjs/operators';
+import { startWith } from 'rxjs/internal/operators/startWith';
 
 @Component({
   selector: 'app-form-entrada',
@@ -51,6 +57,8 @@ import listaDeTrafico from 'src/assets/json/trafico.json';
 })
 export class FormEntradaComponent implements OnInit {
   @ViewChild(ServiciosPortuariosComponent, {static: true}) tab: ServiciosPortuariosComponent;
+  @ViewChild(OperacionesComponent, {static: true}) operaciones: OperacionesComponent;
+  @Input() serv_port: ServiciosPortuariosComponent;
   entradas: Array<Entrada>;
   // Listas
   buques: Array<Buques>;
@@ -58,7 +66,7 @@ export class FormEntradaComponent implements OnInit {
   orden_count: number;
   puertos: Array<Puerto> = listaDePuertos;
   giros: Array<Giros> = listaDeGiros;
-  traficos:  Array<Trafico>= listaDeTrafico;
+  traficos: Array<Trafico> = listaDeTrafico;
   buqueSelect: Buques;
   // Entradas
   entradaKey: string;
@@ -69,16 +77,10 @@ export class FormEntradaComponent implements OnInit {
   service: EntradasService;
   serviceBuque: BuquesService;
   serviceAgencia: AgenciasService;
-  operationService: OperacionsService;
   serviceAdicional: AditionalService;
-  // operaciones
-  impo: Operacion;
-  expo: Operacion;
-  // Mercadeira
-  mercaderias: any = listaDeMercaderias;
-  // tipos
-  tipos: any = listaDeTipos;
-  dataSelect: {a: number, b: string, c: string, d:string};
+
+  dataSelect: {id: number, name: string, name2: string};
+  dataSimple: {id: number, name: string};
   constructor( public dialog: MatDialog,
                private router: Router,
                serviceEntrada: EntradasService,
@@ -92,23 +94,19 @@ export class FormEntradaComponent implements OnInit {
     this.service = serviceEntrada;
     this.serviceAgencia = serviceAgencia;
     this.serviceBuque = serviceBuque;
-    this.operationService = Oservice;
-
-    this.impo = null;
-    this.expo = null;
     this.entradas = null;
     this.buques = [];
     this.buqueSelect = null;
   }
   navigateTo(value) {
+
     if (value === 'AgregarBuque' || value === 'AgregarAgencia') {
     this.router.navigate([`cgpds/${value}/null`]);
     console.log(typeof(value));
-    }
-    else if (value === 'AgregarPuerto') {
+    } else if (value === 'AgregarPuerto') {
       const dialogRef = this.dialog.open(DialogAddPGComponent, {
         width: '250px',
-        data: this.dataSelect
+        data: {data: this.dataSelect, title:'Puerto'},
       });
 
       dialogRef.afterClosed().subscribe(result => {
@@ -120,7 +118,7 @@ export class FormEntradaComponent implements OnInit {
     }  else if (value === 'AgregarGiro') {
       const dialogRef = this.dialog.open(DialogAddPGComponent, {
         width: '250px',
-        data: this.dataSelect
+        data: {data: this.dataSelect, title:'Giro'},
       });
 
       dialogRef.afterClosed().subscribe(result => {
@@ -132,7 +130,8 @@ export class FormEntradaComponent implements OnInit {
     } else if (value === 'AgregarTrafico') {
       const dialogRef = this.dialog.open(DialogComponent, {
         width: '250px',
-        data: this.dataSelect
+        data: {data: this.dataSimple, title:'Trafico'},
+
       });
 
       dialogRef.afterClosed().subscribe(result => {
@@ -141,22 +140,23 @@ export class FormEntradaComponent implements OnInit {
         }
 
       });
-    }else {
+    } else {
       this.buqueSelect = this.buques.find(b => b.orden == this.entradaInEdition.buque);
     }
     return false;
   }
   addPuerto(row_obj) {
     this.orden_count = this.puertos[this.puertos.length - 1].orden + 1;
-    this.serviceAdicional.createPuerto({'orden': this.orden_count,'puerto': row_obj.name.toUpperCase(),'pais': row_obj.name2.toUpperCase()}, () => {});
+
+    this.serviceAdicional.createPuerto({orden: this.orden_count,puerto: row_obj.name.toUpperCase(),pais: row_obj.name2.toUpperCase()}, () => {});
   }
   addGiro(row_obj) {
     this.orden_count = this.giros[this.giros.length - 1].orden + 1;
-    this.serviceAdicional.createGiro({'orden': this.orden_count,'muelle': row_obj.name.toUpperCase(),'sector': row_obj.name2.toUpperCase()}, () => {});
+    this.serviceAdicional.createGiro({orden: this.orden_count,muelle: row_obj.name.toUpperCase(),sector: row_obj.name2.toUpperCase()}, () => {});
   }
-  addTrafico(row_obj){
-    this.orden_count=this.traficos[this.traficos.length -1].id +1
-    this.serviceAdicional.createTrafico({"id": this.orden_count,"trafico":row_obj.name.toUpperCase()},()=>{})
+  addTrafico(row_obj) {
+    this.orden_count = this.traficos[this.traficos.length - 1].id + 1;
+    this.serviceAdicional.createTrafico({'id': this.orden_count,'trafico': row_obj.name.toUpperCase()}, () => {});
   }
   navigateToEdits(id) {
     this.router.navigate([`cgpds/EditarBuque/${id}`]);
@@ -179,12 +179,13 @@ export class FormEntradaComponent implements OnInit {
     this.serviceAdicional.getTraficos(function(traficos) {
       scope.traficos = traficos;
     });
-    this.setupFormNewOperation();
     this.setupFormNewEntrada();
-
 
   }
 
+  mostrar() {
+    console.log(this.serv_port.dataSource)
+  }
   setupFormEditEntrada() {
     this.isNew = false;
     this.service.getEntrada(this.entradaKey, data => {
@@ -218,25 +219,6 @@ export class FormEntradaComponent implements OnInit {
     cal_ent1: '',
     cal_sal1: '',
     tipo: ''
-    });
-  }
-  getTotal(n1, n2) {
-    return parseInt(n1) + parseInt(n2);
-  }
-  setupFormNewOperation() {
-    this.impo = new Operacion({
-      id: '',
-      mercaderia: '',
-      tns: 0,
-      tipo: '',
-      giro_id: ''
-    });
-    this.expo = new Operacion({
-      id: '',
-      mercaderia: '',
-      tns: 0,
-      tipo: '',
-      giro_id: ''
     });
   }
 

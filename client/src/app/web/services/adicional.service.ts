@@ -1,5 +1,5 @@
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import { Arboladura, Bandera, Trafico } from '../models/simpleData';
+import { Arboladura, Bandera, Mercaderia, Tipo, Trafico } from '../models/simpleData';
 
 import { Giros } from '../models/giros';
 import { Injectable } from '@angular/core';
@@ -22,14 +22,22 @@ export class AditionalService {
   girosRef: AngularFireList<Giros> = null;
   giros: any;
 
-  traficosRef:  AngularFireList<Trafico> = null;
-  traficos:any;
+  traficosRef: AngularFireList<Trafico> = null;
+  traficos: any;
+
+  mercaderiasRef: AngularFireList<Mercaderia> = null;
+  mercaderias: any;
+
+  tiposRef: AngularFireList<Tipo> = null;
+  tipos: any;
   constructor(private db: AngularFireDatabase) {
     this.banderasRef = db.list('/banderas');
-    this.arboladurasRef = db.list('/arboladura');
+    this.arboladurasRef = db.list('/arboladuras');
     this.puertosRef = db.list('/puertos');
     this.girosRef = db.list('/giros');
     this.traficosRef = db.list('/traficos')
+    this.tiposRef= db.list('tipos')
+    this.mercaderiasRef = db.list('mercaderias')
   }
   // service bandera
   getBanderas(onBanderasLoaded) {
@@ -216,4 +224,53 @@ getArboladuras(onBanderasLoaded) {
     console.log(error);
   }
 
+  //Tipos
+  getTipos(onTipoLoaded) {
+    this.tiposRef
+      .snapshotChanges()
+      .pipe(
+        map(changes =>
+          changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+        )
+      )
+      .subscribe(tipos => {
+        const listTipos = Array<Tipo>();
+        tipos.forEach(function(tipo) {
+          listTipos.push(new Tipo(tipo));
+        });
+        onTipoLoaded(listTipos);
+      }, this.handleError);
+  }
+
+  getTipo(key: string, onLoaded) {
+    return this.db
+      .object(`tipos/${key}`)
+      .snapshotChanges()
+      .subscribe(data => onLoaded(data.payload.val()));
+  }
+
+  createTipo(tipo: Tipo, onSaved): void {
+    this.tiposRef.push(tipo).then(onSaved);
+  }
+  //Mercaderias
+  getMercaderias(onTipoLoaded) {
+    this.tiposRef
+      .snapshotChanges()
+      .pipe(
+        map(changes =>
+          changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+        )
+      )
+      .subscribe(tipos => {
+        const listTipos = Array<Tipo>();
+        tipos.forEach(function(tipo) {
+          listTipos.push(new Tipo(tipo));
+        });
+        onTipoLoaded(listTipos);
+      }, this.handleError);
+  }
+
+  createMercaderia(mercaderia: Mercaderia, onSaved): void {
+    this.mercaderiasRef.push(mercaderia).then(onSaved);
+  }
 }

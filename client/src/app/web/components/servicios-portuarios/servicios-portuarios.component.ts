@@ -69,5 +69,7 @@ export class ServiciosPortuariosComponent implements OnInit {
       return value.rubro != row_obj.rubro;
     });
   }
-
+  getData(){
+    return this.dataSource
+  }
 }

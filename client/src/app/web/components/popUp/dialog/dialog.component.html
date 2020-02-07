@@ -1,5 +1,10 @@
 <!-- dialog-box.component.html -->
 <h1 mat-dialog-title>Agregar Nuevo</h1>
+<mat-dialog-content>
+	<p>
+    {{titleA}}
+	</p>
+</mat-dialog-content>
 <div mat-dialog-content>
   <mat-form-field >
     <input matInput [(ngModel)]="local_data.name">

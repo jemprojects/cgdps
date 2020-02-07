@@ -9,3 +9,15 @@
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 2em;
 }
+.container {
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100vh;
+  display: flex;
+  margin-right: 8px;
+}
+.container .btn-holder {
+  margin-left: 50%;
+  justify-content: flex-end;
+  display: flex;
+}
