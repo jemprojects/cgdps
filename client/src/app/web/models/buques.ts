@@ -12,6 +12,9 @@ export class Buques {
   imo: number;
 
   constructor(result) {
+    if(result.key==null){
+
+    }
     this.key = result.key
     this.orden = result.orden;
     this.nombre = result.nombre;

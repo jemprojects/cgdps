@@ -9,6 +9,7 @@ table {
 
 td, th {
   width: 10px;
+  padding-right: 8px;
 }
 .example-container {
   height: 700px;
@@ -22,3 +23,24 @@ td, th {
   align-content: center;
 
 }
+
+.inputSmall{
+  width: 120px;
+  max-width: 120px;
+  box-sizing: border-box;
+}
+.inputGrid{
+  width: 180px;
+  max-width: 200px;
+  box-sizing: border-box;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+

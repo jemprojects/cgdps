@@ -67,7 +67,7 @@
   </mat-grid-list>
   <mat-list>
     <mat-divider></mat-divider>
-    <mat-list-item *ngIf="getTotal(impo.tns,expo.tns)!=null"  class="container">Total: $ {{getTotal(impo.tns,expo.tns)}}
+    <mat-list-item *ngIf="getTotal(impo.tns,expo.tns)!=null"  class="container">Total: &nbsp;&nbsp; {{getTotal(impo.tns,expo.tns)}} <span matSuffix>.00</span>
       <button mat-raised-button color="primary" class="btn-holder" (click)="saveOperation(impo,expo)">CARGAR OPERACIONES
       </button></mat-list-item>
 
