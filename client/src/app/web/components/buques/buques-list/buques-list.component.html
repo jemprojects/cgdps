@@ -18,13 +18,30 @@
           </option>
         </select>
       </mat-form-field>
-      <div *ngIf="buqueInEdition!=null">
-      <table class="example-full-width" cellspacing="0"><tr>
-        <td>Bandera: {{getBanderaName(buqueInEdition.bandera)}}</td>
-        <td>Arboladura: {{getArboladuraName(buqueInEdition.arboladura)}}</td>
-        <td>Imo: {{buqueInEdition.imo}}</td>
-      </tr></table>
-    </div>
+      <div *ngIf="buqueInEdition!=null" >
+        <mat-card class="example-card">
+          <mat-grid-list cols="8" rowHeight="8:2">
+          <mat-grid-tile class="mat-grid-tile1">ORDEN</mat-grid-tile>
+          <mat-grid-tile class="mat-grid-tile1">BANDERA</mat-grid-tile>
+          <mat-grid-tile class="mat-grid-tile1">ARBOLADURA</mat-grid-tile>
+          <mat-grid-tile class="mat-grid-tile1">IMO</mat-grid-tile>
+          <mat-grid-tile class="mat-grid-tile1">ESLORA</mat-grid-tile>
+          <mat-grid-tile class="mat-grid-tile1">MANGA</mat-grid-tile>
+          <mat-grid-tile class="mat-grid-tile1">TRN</mat-grid-tile>
+          <mat-grid-tile class="mat-grid-tile1">TRB</mat-grid-tile>
+
+          <mat-grid-tile >{{buqueInEdition.orden}}</mat-grid-tile>
+          <mat-grid-tile >{{bandera}}</mat-grid-tile>
+          <mat-grid-tile >{{arboladura}}</mat-grid-tile>
+          <mat-grid-tile >{{buqueInEdition.imo}}</mat-grid-tile>
+          <mat-grid-tile >{{buqueInEdition.eslora}}</mat-grid-tile>
+          <mat-grid-tile >{{buqueInEdition.manga}}</mat-grid-tile>
+          <mat-grid-tile >{{buqueInEdition.trn}}</mat-grid-tile>
+          <mat-grid-tile >{{buqueInEdition.trb}}</mat-grid-tile>
+
+      </mat-grid-list></mat-card>
+
+      </div>
     </form>
     <mat-form-field>
       <mat-label>Filter</mat-label>
@@ -32,8 +49,8 @@
     </mat-form-field>
     <div class="example-container mat-elevation-z8">
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-        <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
-          <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+        <ng-container  [matColumnDef]="column" *ngFor="let column of displayedColumns" >
+          <th mat-header-cell *matHeaderCellDef class="mat-grid-tile1"> {{column}} </th>
           <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
         </ng-container>
 

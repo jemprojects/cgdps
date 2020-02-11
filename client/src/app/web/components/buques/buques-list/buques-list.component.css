@@ -34,13 +34,11 @@ td, th {
   max-width: 200px;
   box-sizing: border-box;
 }
-.example-form {
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
+.mat-grid-tile1 {
+  background: lightblue;
 }
-
-.example-full-width {
-  width: 100%;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 2em;
 }
-

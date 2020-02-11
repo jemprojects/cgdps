@@ -21,11 +21,14 @@ export class BuquesListComponent implements OnInit{
   service: BuquesService;
   buqueInEdition: Buques;
   buqueOrd: number
+  bandera: string
+  arboladura:string
   buques: Array<Buques>=listaDeBuques;
   serviceAdd: AditionalService;
   arboladuras: Array<Arboladura>=listaDeArboladura;
   banderas: Array<Bandera>=listaDeBanderas;
   dataSelect: {a: number, b: string};
+  displayedColumnsBuque: string[] = ['ORDEN','BANDERA', 'ARBOLADURA', 'IMO','ESLORA', 'MANGA', 'TRN', 'TRB']
   displayedColumns: string[] = ['GIRO', 'AGENCIA', 'PROCENDENCIA', 'DESSTINO','ENTRADA','SALIDA','MUELLE', 'TRAFICO', 'DOCUMENTO', 'NRO'];
   dataSource =new MatTableDataSource<Entrada>();
   columnsToDisplay: string[] = this.displayedColumns.slice();
@@ -54,8 +57,11 @@ export class BuquesListComponent implements OnInit{
 
   }
   cargarDatosBuque(){
-    this.buqueInEdition=new Buques(this.buques.find(b=>b.orden== this.buqueOrd))
+    this.buqueInEdition=this.buques.find(b=>b.orden== this.buqueOrd)
+    this.bandera=(this.banderas.find(b => b.orden === this.buqueInEdition.bandera)).bandera
+    this.arboladura=(this.arboladuras.find(b => b.codigo == this.buqueInEdition.arboladura)).arboladura;
     console.log(this.buqueInEdition)
+
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -65,11 +71,7 @@ export class BuquesListComponent implements OnInit{
       this.dataSource.paginator.firstPage();
     }
   }
-  getBanderaName(element) {
-    return ((this.banderas.find(b => b.orden === element)).bandera);
-  }
-  getArboladuraName(element) {
-    return ((this.arboladuras.find(b => b.codigo == element)).arboladura);
-  }
+
+
 }
 

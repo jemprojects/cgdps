@@ -70,7 +70,6 @@ export class FormEntradaComponent implements OnInit {
   serviceBuque: BuquesService;
   serviceAgencia: AgenciasService;
   serviceAdicional: AditionalService;
-
   dataSelect: {id: number, name: string, name2: string};
   dataSimple: {id: number, name: string};
   constructor( public dialog: MatDialog,
@@ -156,6 +155,7 @@ export class FormEntradaComponent implements OnInit {
     this.router.navigate([`cgpds/EditarBuque/${id}`]);
 
   }
+
   ngOnInit() {
     const scope = this;
     this.serviceBuque.getBuques(function(buques) {
