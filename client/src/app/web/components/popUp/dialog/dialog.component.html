@@ -10,10 +10,10 @@
     <input matInput [(ngModel)]="local_data.name">
   </mat-form-field>
   <ng-template #elseTemplate>
-    Sure to delete <b>{{local_data.name}}</b>?
+    Esta seguro que desea eliminar <b>{{local_data.name}}</b>?
   </ng-template>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="doAction()">Add</button>
-  <button mat-button (click)="onNoClick()" mat-flat-button color="warn">Cancel</button>
+  <button mat-button (click)="doAction()">Añadir</button>
+  <button mat-button (click)="onNoClick()" mat-flat-button color="warn">Cancelar</button>
 </div>

@@ -1,9 +1,9 @@
 <!-- dialog-box.component.html -->
-<h1 mat-dialog-title><strong>{{action}}</strong></h1>
+<h1 mat-dialog-title><strong>{{changeText()}}</strong></h1>
 <div mat-dialog-content>
   <form class="example-form" *ngIf="action != 'Delete'; else elseTemplate">
     <mat-form-field class="example-full-width">
-      <input type="text" placeholder="{{action}} Rubro" aria-label="Rubro" matInput [formControl]="myControl" [matAutocomplete]="auto"  [(ngModel)]="local_data.rubro">
+      <input type="text" placeholder="{{changeText()}} Rubro" aria-label="Rubro" matInput [formControl]="myControl" [matAutocomplete]="auto"  [(ngModel)]="local_data.rubro">
       <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
           {{option.rubro_esp}}
@@ -13,7 +13,7 @@
   </form>
   <form class="example-form" *ngIf="action != 'Delete'">
     <mat-form-field class="example-full-width">
-      <input type="text" placeholder="{{action}} Empresa" aria-label="Empresa" matInput [formControl]="myControlE" [matAutocomplete]="auto1"  [(ngModel)]="local_data.empresa">
+      <input type="text" placeholder="{{changeText()}} Empresa" aria-label="Empresa" matInput [formControl]="myControlE" [matAutocomplete]="auto1"  [(ngModel)]="local_data.empresa">
       <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFnE">
         <mat-option *ngFor="let option of filteredOptionsE | async" [value]="option">
           {{option.esp}}
@@ -23,10 +23,10 @@
   </form>
 
   <ng-template #elseTemplate>
-    Sure to delete <b>{{local_data.rubro.rubro_esp}} - {{local_data.empresa.esp}}</b>?
+    Esta seguro que desea eliminar <b>{{local_data.rubro.rubro_esp}} - {{local_data.empresa.esp}}</b>?
   </ng-template>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="doAction()">{{action}}</button>
-  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+  <button mat-button (click)="doAction()">{{changeText()}}</button>
+  <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancelar</button>
 </div>

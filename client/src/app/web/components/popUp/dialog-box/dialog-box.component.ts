@@ -36,7 +36,7 @@ export class DialogBoxComponent  implements OnInit {
 
   action: string;
   local_data: any;
-
+  accion:string
   constructor(
     public dialogRef: MatDialogRef<DialogBoxComponent>,
     // @Optional() is used to prevent error if no data is passed
@@ -45,13 +45,23 @@ export class DialogBoxComponent  implements OnInit {
     this.local_data = {...data};
     this.action = this.local_data.action;
   }
+  changeText(){
 
+    if(this.action=='Add'){
+      this.accion='Añadir'
+    }else if(this.action=='Update'){
+      this.accion='Actualizar'
+    }else if(this.action=='Delete'){
+      this.accion='Eliminar'
+    }
+    return this.accion
+  }
   doAction() {
     this.dialogRef.close({event: this.action, data: this.local_data});
   }
 
   closeDialog() {
-    this.dialogRef.close({event: 'Cancel'});
+    this.dialogRef.close({event: 'Cancelar'});
   }
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges
