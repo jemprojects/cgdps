@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material';
 import {
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
@@ -15,6 +15,7 @@ import { DialogAddPGComponent } from '../../popUp/dialog-add-pg/dialog-add-pg.co
 import { DialogComponent } from '../../popUp/dialog/dialog.component';
 import { Entrada } from 'src/app/web/models/entradas';
 import { EntradasService } from 'src/app/web/services/entradas.service';
+import { FormCargaComponent } from '../form-carga/form-carga.component';
 import { Giros } from 'src/app/web/models/giros';
 import { MatDialog } from '@angular/material';
 import { OperacionesComponent } from '../../operaciones/operaciones.component';
@@ -50,7 +51,7 @@ import listaDeTrafico from 'src/assets/json/trafico.json';
 export class FormEntradaComponent implements OnInit {
   @ViewChild(ServiciosPortuariosComponent, {static: true}) tab: ServiciosPortuariosComponent;
   @ViewChild(OperacionesComponent, {static: true}) operaciones: OperacionesComponent;
-  @Input() serv_port: ServiciosPortuariosComponent;
+
   entradas: Array<Entrada>;
   // Listas
   buques: Array<Buques>;
@@ -72,8 +73,16 @@ export class FormEntradaComponent implements OnInit {
   serviceAdicional: AditionalService;
   dataSelect: {id: number, name: string, name2: string};
   dataSimple: {id: number, name: string};
+  @Input() sideBar: FormCargaComponent;
+
+  @HostListener('click')
+  click() {
+    this.sideBar.toggle();
+    this.entradaInEdition.giro=this.sideBar.nroGiroE
+  }
+
+
   constructor( public dialog: MatDialog,
-               private router: Router,
                serviceEntrada: EntradasService,
                serviceBuque: BuquesService,
                serviceAgencia: AgenciasService,
@@ -87,11 +96,12 @@ export class FormEntradaComponent implements OnInit {
     this.entradas = null;
     this.buques = [];
     this.buqueSelect = null;
-  }
-  navigateTo(value) {
 
+  }
+
+  navigateTo(value) {
     if (value === 'AgregarBuque' || value === 'AgregarAgencia') {
-    this.router.navigate([`cgpds/${value}/null`]);
+    window.open(`cgpds/${value}/null`, '_blank');
     } else if (value === 'AgregarPuerto') {
       const dialogRef = this.dialog.open(DialogAddPGComponent, {
         width: '250px',
@@ -99,7 +109,7 @@ export class FormEntradaComponent implements OnInit {
       });
 
       dialogRef.afterClosed().subscribe(result => {
-        if (result.event == 'Add') {
+        if (result.event === 'Add') {
           this.addPuerto(result.data);
         }
 
@@ -111,7 +121,7 @@ export class FormEntradaComponent implements OnInit {
       });
 
       dialogRef.afterClosed().subscribe(result => {
-        if (result.event == 'Add') {
+        if (result.event === 'Add') {
           this.addGiro(result.data);
         }
 
@@ -124,13 +134,14 @@ export class FormEntradaComponent implements OnInit {
       });
 
       dialogRef.afterClosed().subscribe(result => {
-        if (result.event == 'Add') {
+        if (result.event === 'Add') {
           this.addTrafico(result.data);
         }
 
       });
     } else {
-      this.buqueSelect = this.buques.find(b => b.orden == this.entradaInEdition.buque);
+      this.buqueSelect = this.buques.find(b => b.orden === this.entradaInEdition.buque);
+
     }
     return false;
   }
@@ -152,8 +163,7 @@ export class FormEntradaComponent implements OnInit {
     this.serviceAdicional.createTrafico({'id': this.orden_count, 'trafico': row_obj.name.toUpperCase()}, () => {});
   }
   navigateToEdits(id) {
-    this.router.navigate([`cgpds/EditarBuque/${id}`]);
-
+    window.open(`cgpds/EditarBuque/${id}`, '_blank');
   }
 
   ngOnInit() {
@@ -188,7 +198,7 @@ export class FormEntradaComponent implements OnInit {
     this.isNew = true;
     this.entradaInEdition = new Entrada({
     id: '',
-    giro: '',
+    giro: this.sideBar.nroGiroE,
     buque: '',
     agencia: '',
     procedencia: '',

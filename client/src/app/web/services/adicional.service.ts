@@ -1,5 +1,5 @@
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import { Arboladura, Bandera, Mercaderia, Tipo, Trafico } from '../models/simpleData';
+import { Arboladura, Bandera, Empresa, Envase, Mercaderia, Tipo, Trafico } from '../models/simpleData';
 
 import { Giros } from '../models/giros';
 import { Injectable } from '@angular/core';
@@ -30,14 +30,22 @@ export class AditionalService {
 
   tiposRef: AngularFireList<Tipo> = null;
   tipos: any;
+  // tslint:disable-next-line: variable-name
+  empresasCargDescRef: AngularFireList<Empresa> = null;
+  empresasCargDesc: any;
+
+  envasesRef: AngularFireList<Envase> = null;
+  envases: any;
   constructor(private db: AngularFireDatabase) {
     this.banderasRef = db.list('/banderas');
     this.arboladurasRef = db.list('/arboladuras');
     this.puertosRef = db.list('/puertos');
     this.girosRef = db.list('/giros');
     this.traficosRef = db.list('/traficos')
-    this.tiposRef= db.list('tipos')
-    this.mercaderiasRef = db.list('mercaderias')
+    this.tiposRef= db.list('/tipos')
+    this.mercaderiasRef = db.list('/mercaderias')
+    this.empresasCargDescRef = db.list('/empresas_carga_descarga')
+    this.envasesRef = db.list('/env_carga_descarga')
   }
   // service bandera
   getBanderas(onBanderasLoaded) {
@@ -254,23 +262,57 @@ getArboladuras(onBanderasLoaded) {
   }
   //Mercaderias
   getMercaderias(onTipoLoaded) {
-    this.tiposRef
+    this.mercaderiasRef
       .snapshotChanges()
       .pipe(
         map(changes =>
           changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
         )
       )
-      .subscribe(tipos => {
-        const listTipos = Array<Tipo>();
-        tipos.forEach(function(tipo) {
-          listTipos.push(new Tipo(tipo));
+      .subscribe(mercaderias => {
+        const listMercaderias = Array<Mercaderia>();
+          mercaderias.forEach(function(mercaderia) {
+          listMercaderias.push(new Mercaderia(mercaderia));
         });
-        onTipoLoaded(listTipos);
+        onTipoLoaded(listMercaderias);
       }, this.handleError);
   }
 
   createMercaderia(mercaderia: Mercaderia, onSaved): void {
     this.mercaderiasRef.push(mercaderia).then(onSaved);
+  }
+  //Empresas
+  getEmpresas(onTipoLoaded) {
+    this.empresasCargDescRef
+      .snapshotChanges()
+      .pipe(
+        map(changes =>
+          changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+        )
+      )
+      .subscribe(empresas => {
+        const listEmpresas = Array<Empresa>();
+        empresas.forEach(function(empresa) {
+          listEmpresas.push(new Empresa(empresa));
+        });
+        onTipoLoaded(listEmpresas);
+      }, this.handleError);
+  }
+   //Envases
+   getEnvases(onTipoLoaded) {
+    this.envasesRef
+      .snapshotChanges()
+      .pipe(
+        map(changes =>
+          changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+        )
+      )
+      .subscribe(envases => {
+        const listEnvases = Array<Envase>();
+        envases.forEach(function(envase) {
+          listEnvases.push(new Envase(envase));
+        });
+        onTipoLoaded(listEnvases);
+      }, this.handleError);
   }
 }

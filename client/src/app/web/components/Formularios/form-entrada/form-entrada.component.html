@@ -3,12 +3,12 @@
   <div class="box" >
     <div class="box1">
     <mat-form-field  appearance="outline" class="inputSmall">
-      <input matInput placeholder="Giro"  [(ngModel)]="entradaInEdition.giro"  required>
+      <input matInput placeholder="Giro" [(ngModel)]="sideBar.nroGiroE" [(ngModel)]="entradaInEdition.giro" required>
     </mat-form-field >
     &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
     <mat-form-field  appearance="outline">
       <mat-label>Nombre del Buque</mat-label>
-      <select matNativeControl [(ngModel)]="entradaInEdition.buque " (change)="navigateTo($event.target.value)" >
+      <select matNativeControl [(ngModel)]="entradaInEdition.buque " (change)="navigateTo($event.target.value)" required >
         <option value=""></option>
         <option value="AgregarBuque">*AGREGAR NUEVO*</option>
         <option *ngFor="let buque of buques" [value]="buque.orden" >
@@ -19,7 +19,7 @@
     &nbsp; &nbsp; &nbsp;
     <mat-form-field appearance="outline">
       <mat-label>Agencia Maritima</mat-label>
-      <select matNativeControl (change)="navigateTo($event.target.value)" [(ngModel)]="entradaInEdition.agencia">
+      <select matNativeControl (change)="navigateTo($event.target.value)" [(ngModel)]="entradaInEdition.agencia" required>
         <option value=""></option>
         <option value="AgregarAgencia">*AGREGAR NUEVO*</option>
         <option *ngFor="let agencia of agencias" [value]="agencia.agencia" >
@@ -31,7 +31,7 @@
     &nbsp; &nbsp; &nbsp;
     <mat-form-field appearance="outline">
       <mat-label>Procedencia</mat-label>
-      <select matNativeControl [(ngModel)]="entradaInEdition.procedencia" name="PuertoProcendencia" (change)="navigateTo($event.target.value)">
+      <select matNativeControl [(ngModel)]="entradaInEdition.procedencia" name="PuertoProcendencia" (change)="navigateTo($event.target.value)" required>
         <option value="" selected></option>
         <option value="AgregarPuerto">*AGREGAR NUEVO*</option>
         <option *ngFor="let puerto of puertos" [value]="puerto.puerto">
@@ -42,18 +42,18 @@
 
     <p></p>
     <mat-form-field appearance="outline">
-      <input matInput [ngxMatDatetimePicker]="pickerEntrada" placeholder="Fecha de Entrada"  [(ngModel)]="entradaInEdition.entrada">
+      <input matInput [ngxMatDatetimePicker]="pickerEntrada" placeholder="Fecha de Entrada"  [(ngModel)]="entradaInEdition.entrada" required>
       <mat-datepicker-toggle matSuffix [for]="pickerEntrada"></mat-datepicker-toggle>
       <ngx-mat-datetime-picker #pickerEntrada></ngx-mat-datetime-picker>
     </mat-form-field>
     &nbsp; &nbsp; &nbsp;
     <mat-form-field class="inputSmall" appearance="outline">
-      <input matInput placeholder="C/ ENT " required>
+      <input matInput placeholder="C/ ENT " [(ngModel)]="entradaInEdition.cal_ent" required>
     </mat-form-field>
     &nbsp; &nbsp; &nbsp;
     <mat-form-field appearance="outline">
       <mat-label>Muelle</mat-label>
-      <select matNativeControl [(ngModel)]="entradaInEdition.muelle" name="Muelle" (change)="navigateTo($event.target.value)">
+      <select matNativeControl [(ngModel)]="entradaInEdition.muelle" name="Muelle" (change)="navigateTo($event.target.value)" required>
         <option value="" selected></option>
         <option value="AgregarGiro">*AGREGAR NUEVO*</option>
         <option *ngFor="let giro of giros" [value]="giro.muelle">
@@ -64,7 +64,7 @@
     &nbsp; &nbsp; &nbsp;
     <mat-form-field appearance="outline">
       <mat-label>Destino</mat-label>
-      <select matNativeControl [(ngModel)]="entradaInEdition.destino" name="PuertoDestino" (change)="navigateTo($event.target.value)">
+      <select matNativeControl [(ngModel)]="entradaInEdition.destino" name="PuertoDestino" (change)="navigateTo($event.target.value)" required>
         <option value="" selected></option>
         <option value="AgregarPuerto">*AGREGAR NUEVO*</option>
         <option *ngFor="let puerto1 of puertos" [value]="puerto1.puerto" >
@@ -74,7 +74,7 @@
     </mat-form-field>
     <p></p>
     <mat-form-field appearance="outline">
-      <input matInput [ngxMatDatetimePicker]="pickerSalida" placeholder="Fecha de Salida" [(ngModel)]="entradaInEdition.salida">
+      <input matInput [ngxMatDatetimePicker]="pickerSalida" placeholder="Fecha de Salida" [(ngModel)]="entradaInEdition.salida" required>
       <mat-datepicker-toggle matSuffix [for]="pickerSalida"></mat-datepicker-toggle>
       <ngx-mat-datetime-picker #pickerSalida></ngx-mat-datetime-picker>
   </mat-form-field>
@@ -84,18 +84,28 @@
     </mat-form-field>
     &nbsp; &nbsp; &nbsp;
     <mat-form-field appearance="outline">
-      <input matInput placeholder="Nº Pasavante" [(ngModel)]="entradaInEdition.nroPasavante" required>
-    </mat-form-field>
-    &nbsp; &nbsp; &nbsp;
-    <mat-form-field appearance="outline">
       <mat-label>Trafico</mat-label>
-      <select matNativeControl [(ngModel)]="entradaInEdition.trafico" name="Trafico" (change)="navigateTo($event.target.value)">
+      <select matNativeControl [(ngModel)]="entradaInEdition.trafico" name="Trafico" (change)="navigateTo($event.target.value)" required >
         <option value="" selected></option>
         <option value="AgregarTrafico">*AGREGAR NUEVO*</option>
         <option *ngFor="let trafico of traficos" [value]="trafico.trafico">
           {{trafico.trafico}}
         </option>
       </select>
+    </mat-form-field>
+
+    &nbsp; &nbsp;
+    <mat-form-field appearance="outline" class="inputSmall">
+      <mat-label>Nº Pasavante</mat-label>
+      <input matInput placeholder="Nº Pasavante" [(ngModel)]="entradaInEdition.nroPasavante" required>
+    </mat-form-field>
+    &nbsp;
+    <mat-form-field appearance="outline" class="inputSmall">
+      <mat-label>Documento</mat-label>
+      <mat-select [(ngModel)]="entradaInEdition.documento" required>
+        <mat-option value="NO INGRESO">NO INGRESO</mat-option>
+        <mat-option *ngIf="entradaInEdition.trafico!='NO INGRESO'"value="PASAVANTE">PASAVANTE</mat-option>
+      </mat-select>
     </mat-form-field>
     </div>
     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;

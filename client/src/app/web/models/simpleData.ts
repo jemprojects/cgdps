@@ -1,3 +1,5 @@
+import { Puerto } from './puertos';
+
 export class Bandera {
   orden: number;
   bandera: string;
@@ -45,4 +47,45 @@ export class Tipo {
     this.tipo = result.tipo;
   }
 
+}
+export class Empresa {
+  id: number;
+  empresa: string;
+
+  constructor(result) {
+    this.id = result.id;
+    this.empresa = result.empresa;
+  }
+
+}
+export class Envase {
+  id: number;
+  envase: string;
+
+  constructor(result) {
+    this.id = result.id;
+    this.envase = result.envase;
+  }
+
+}
+export class Movimiento {
+  nroGiro: number;
+  tipo: string;
+  operacion: string;
+  empresa: string;
+  envase: string;
+  cantidad: number;
+  puertoOrigen: Puerto;
+  producto: string;
+
+  constructor(result) {
+    this.nroGiro = result.nroGiro;
+    this.tipo = result.tipo;
+    this.operacion = result.operacion;
+    this.empresa = result.empresa;
+    this.envase = result.envase;
+    this.cantidad = result.cantidad;
+    this.puertoOrigen = result.puertoOrigen;
+    this.producto = result.producto;
+  }
 }

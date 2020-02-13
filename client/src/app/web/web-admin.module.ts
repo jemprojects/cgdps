@@ -11,6 +11,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { BuquesListComponent } from './components/buques/buques-list/buques-list.component';
 import { CommonModule } from "@angular/common";
 import { ConsultasComponent } from './components/consultas/consultas.component';
+import { DialogAddABComponent } from './components/popUp/dialog-add-ab/dialog-add-ab.component';
 import { DialogAddPGComponent } from './components/popUp/dialog-add-pg/dialog-add-pg.component';
 import { DialogBoxComponent } from './components/popUp/dialog-box/dialog-box.component';
 import { DialogComponent } from './components/popUp/dialog/dialog.component';
@@ -18,7 +19,6 @@ import { EntradaComponent } from './components/entradas/entrada/entrada.componen
 import { EntradasListComponent } from "./components/entradas/entradas-list/entradas-list.component";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormCargaComponent } from './components/Formularios/form-carga/form-carga.component';
-import { FormDescargaComponent } from './components/Formularios/form-descarga/form-descarga.component';
 import { FormEntradaComponent } from './components/Formularios/form-entrada/form-entrada.component';
 import { MatMenuModule } from "@angular/material";
 import { NgModule } from "@angular/core";
@@ -40,12 +40,12 @@ import { environment } from "../../environments/environment";
     OperacionesComponent,
     BuquesListComponent,
     FormCargaComponent,
-    FormDescargaComponent,
     FormEntradaComponent,
     DialogBoxComponent,
     DialogComponent,
     ServiciosPortuariosComponent,
     DialogAddPGComponent,
+    DialogAddABComponent,
 
 
   ],

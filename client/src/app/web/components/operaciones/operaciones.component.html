@@ -7,7 +7,7 @@
   <mat-grid-tile class="mat-grid-tile1">TIPO</mat-grid-tile>
   <div class="grid">
   <mat-grid-tile>
-    <mat-form-field >
+    <mat-form-field>
       <mat-label>Mercaderia</mat-label>
       <select matNativeControl  name="Mercaderia" [(ngModel)]="impo.mercaderia"(change)="navigateTo($event.target.value)">
         <option value="" selected></option>
@@ -16,7 +16,7 @@
           {{mercaderia.tipo}}
         </option>
       </select>
-      </mat-form-field >
+    </mat-form-field>
   </mat-grid-tile>
     <mat-grid-tile >
       <mat-form-field class="example-full-width" >

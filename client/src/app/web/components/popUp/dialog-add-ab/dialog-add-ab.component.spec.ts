@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormDescargaComponent } from './form-descarga.component';
+import { DialogAddABComponent } from './dialog-add-ab.component';
 
-describe('FormDescargaComponent', () => {
-  let component: FormDescargaComponent;
-  let fixture: ComponentFixture<FormDescargaComponent>;
+describe('DialogAddABComponent', () => {
+  let component: DialogAddABComponent;
+  let fixture: ComponentFixture<DialogAddABComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormDescargaComponent ]
+      declarations: [ DialogAddABComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FormDescargaComponent);
+    fixture = TestBed.createComponent(DialogAddABComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

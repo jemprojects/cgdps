@@ -9,11 +9,11 @@ import { DialogComponent } from '../../popUp/dialog/dialog.component';
 import { MatDialog } from '@angular/material';
 
 @Component({
-  selector: 'app-add-buque',
-  templateUrl: './add-buque.component.html',
-  styleUrls: ['./add-buque.component.css']
+  selector: 'app-dialog-add-ab',
+  templateUrl: './dialog-add-ab.component.html',
+  styleUrls: ['./dialog-add-ab.component.css']
 })
-export class AddBuqueComponent implements OnInit {
+export class DialogAddABComponent implements OnInit {
   continueAdding = false;
   buqueInEdition: Buques;
   service: BuquesService;
@@ -101,7 +101,7 @@ export class AddBuqueComponent implements OnInit {
     this.serviceAdd.createArboladura({'codigo': this.orden_count,'arboladura': row_obj.name.toUpperCase()}, () => {});
   }
   backToEntradas(): void {
-    window.close();
+    this.route.navigate(['/cgpds']);
   }
 
   setupFormEditBuque() {

@@ -83,6 +83,7 @@ export class OperacionesComponent implements OnInit {
     const scope = this;
     this.service.getOperacions(function(operaciones) { scope.operaciones = operaciones;});
     this.serviceAditional.getTipos(tipos => scope.tipos = tipos);
+    this.serviceAditional.getMercaderias(mercaderias => scope.mercaderias = mercaderias);
     this.setupFormNewOperation();
   }
 

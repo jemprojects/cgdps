@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
+
+import { FormEntradaComponent } from '../../Formularios/form-entrada/form-entrada.component';
 
 @Component({
   selector: 'app-entrada',
@@ -7,17 +9,7 @@ import { Component, OnInit } from '@angular/core';
 
 })
 
-export class EntradaComponent implements OnInit {
-  constructor( ) {
-
-
-    }
-
-  ngOnInit() {
-
-  }
-
-
-
+export class EntradaComponent  {
+  @Input() formEnt: FormEntradaComponent;
 
 }

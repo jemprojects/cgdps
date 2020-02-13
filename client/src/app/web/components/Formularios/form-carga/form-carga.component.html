@@ -1,1 +1,90 @@
-<p>form-carga works!</p>
+Nº Giro: {{load()}}
+<form class="example-form">
+  <table class="example-full-width" cellspacing="0" ><tr>
+    <td><h4>Movimiento *</h4>
+      <mat-form-field>
+        <mat-label>Seleccione</mat-label>
+        <mat-select name="tipo" [(value)]="movimiento.tipo" [(ngModel)]="movimiento.tipo" required>
+          <mat-option value="Carga">Carga</mat-option>
+          <mat-option value="Descarga">Descarga</mat-option>
+        </mat-select>
+      </mat-form-field></td>
+      &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
+    <td> <h4>Operacion *</h4>
+      <mat-form-field>
+        <mat-label>Seleccione</mat-label>
+        <mat-select matNativeControl name="operacion" [(ngModel)]="movimiento.operacion" required>
+          <mat-option *ngIf="movimiento.tipo==='Descarga'" value="Importacion">Importacion</mat-option>
+          <mat-option *ngIf="movimiento.tipo==='Descarga'" value="Cabotaje Entrado">Cabotaje Entrado</mat-option>
+          <mat-option *ngIf="movimiento.tipo==='Descarga'" value="Transbordo/Transito Entrado">Transbordo/Transito Entrado</mat-option>
+          <mat-option *ngIf="movimiento.tipo==='Carga'" value="Exportacion">Exportacion</mat-option>
+          <mat-option *ngIf="movimiento.tipo==='Carga'" value="Cabotaje Salido">Cabotaje Salido</mat-option>
+          <mat-option *ngIf="movimiento.tipo==='Carga'" value="Transbordo/Transito Salido">Transbordo/Transito Salido</mat-option>
+        </mat-select>
+      </mat-form-field></td>
+      &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
+    <td> <h4>Exportador *</h4>
+      <mat-form-field>
+        <mat-label>Seleccione</mat-label>
+        <select matNativeControl name="empresa" [(ngModel)]="movimiento.empresa"  (change)="navigateTo($event.target.value)" required>
+          <option value="" selected></option>
+          <option value="AgregarEmpresa">*AGREGAR NUEVO*</option>
+          <option *ngFor="let empresa of empresas" [value]="empresa.empresa">
+            {{empresa.empresa}}
+          </option>
+        </select>
+      </mat-form-field></td>
+      &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
+      <td> <h4>Producto *</h4>
+        <mat-form-field>
+          <mat-label>Seleccione</mat-label>
+          <select matNativeControl name="producto" [(ngModel)]="movimiento.producto"(change)="navigateTo($event.target.value)" required>
+            <option value="" selected></option>
+            <option value="AgregarProducto">*AGREGAR NUEVO*</option>
+            <option *ngFor="let producto of productos" [value]="producto.tipo">
+              {{producto.tipo}}
+            </option>
+          </select>
+        </mat-form-field></td>
+        &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
+        <td> <h4>Forma de Presentacion *</h4>
+          <mat-form-field>
+            <mat-label>Seleccione</mat-label>
+            <select  matNativeControl name="envases" [(ngModel)]="movimiento.envase" (change)="navigateTo($event.target.value)" required>
+              <option value="" selected></option>
+              <option value="AgregarEnvase">*AGREGAR NUEVO*</option>
+              <option *ngFor="let envase of envases" [value]="envase.envase">
+                {{envase.envase}}
+              </option>
+            </select>
+          </mat-form-field></td>
+          &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
+    <td> <h4>Cantidad *</h4>
+      <mat-form-field class="example-full-width">
+        <input matInput value="0" placeholder="Ingrese" [(ngModel)]="movimiento.cantidad" name="cantidad" required>
+      </mat-form-field></td>
+      &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
+      <td> <h4>Puerto de Origen *</h4>
+        <mat-form-field>
+          <mat-label>Seleccione</mat-label>
+          <select matNativeControl [(ngModel)]="selectedPort"   name="puerto" (change)="navigateTo($event.target.value)" required>
+            <option value="" selected></option>
+            <option value="AgregarPuerto">*AGREGAR NUEVO*</option>
+            <option *ngFor="let origen of puertos" [value]="origen.puerto">
+              {{origen.puerto}}
+            </option>
+          </select>
+        </mat-form-field>
+     </td>
+        &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
+        <td><h4>Pais origen *</h4>
+          <mat-form-field class="example-full-width" *ngIf="movimiento.puertoOrigen!=null">
+            <input matInput disabled [(ngModel)]="movimiento.puertoOrigen.pais" name="pais" required>
+          </mat-form-field>
+         </td>
+
+          &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
+
+  </tr></table>
+
+</form>

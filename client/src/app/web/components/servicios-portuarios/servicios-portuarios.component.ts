@@ -16,7 +16,7 @@ const ELEMENT_DATA: EmpData[] = [
   templateUrl: './servicios-portuarios.component.html',
   styleUrls: ['./servicios-portuarios.component.css']
 })
-export class ServiciosPortuariosComponent implements OnInit {
+export class ServiciosPortuariosComponent {
   title: string="EMPRESAS DE SERVICIOS PORTUARIOS QUE OPERAN EN EL BUQUE"
   constructor(public dialog: MatDialog) {}
   displayedColumns: string[] = ['rubro', 'empresa', 'action'];
@@ -24,10 +24,6 @@ export class ServiciosPortuariosComponent implements OnInit {
 
   @ViewChild(MatTable,{static:true}) table: MatTable<any>;
 
-
-  ngOnInit() {
-
-  }
   id_count: number=0
   openDialog(action,obj) {
     obj.action = action;
@@ -66,7 +62,7 @@ export class ServiciosPortuariosComponent implements OnInit {
   }
   deleteRowData(row_obj){
     this.dataSource = this.dataSource.filter((value,key)=>{
-      return value.rubro != row_obj.rubro;
+      return row_obj.id!= value.id;
     });
   }
   getData(){

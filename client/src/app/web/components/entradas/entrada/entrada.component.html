@@ -1,24 +1,25 @@
 <mat-horizontal-stepper>
   <mat-step label="Solicitud De Giro">
-  <app-form-entrada></app-form-entrada>
+  <app-form-entrada [sideBar]="sideBar"></app-form-entrada>
 
       <div>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button  matStepperNext >Siguiente </button>
       </div>
 </mat-step>
   <mat-step label="Carga">
     <div>
-      
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button matStepperNext>Next</button>
+      <app-form-carga #sideBar ></app-form-carga>
+
+      <button mat-button matStepperPrevious>Atras</button>
+      <button mat-button matStepperNext>Siguiente</button>
     </div>
 
 </mat-step>
 <mat-step>
-  <ng-template matStepLabel>Done</ng-template>
-  You are now done.
+  <ng-template matStepLabel>Listo</ng-template>
+  Aca finalizarias la carga de datos para una solicitud de giro.
   <div>
-    <button mat-button matStepperPrevious>Back</button>
+    <button mat-button matStepperPrevious>Atras</button>
   </div>
 </mat-step>
 

@@ -29,7 +29,7 @@ export class BuquesListComponent implements OnInit{
   banderas: Array<Bandera>=listaDeBanderas;
   dataSelect: {a: number, b: string};
   displayedColumnsBuque: string[] = ['ORDEN','BANDERA', 'ARBOLADURA', 'IMO','ESLORA', 'MANGA', 'TRN', 'TRB']
-  displayedColumns: string[] = ['GIRO', 'AGENCIA', 'PROCENDENCIA', 'DESSTINO','ENTRADA','SALIDA','MUELLE', 'TRAFICO', 'DOCUMENTO', 'NRO'];
+  displayedColumns: string[] = ['GIRO', 'AGENCIA', 'PROCENDENCIA', 'DESTINO','ENTRADA','SALIDA','MUELLE', 'TRAFICO', 'DOCUMENTO', 'NRO'];
   dataSource =new MatTableDataSource<Entrada>();
   columnsToDisplay: string[] = this.displayedColumns.slice();
   resultsLength:number;

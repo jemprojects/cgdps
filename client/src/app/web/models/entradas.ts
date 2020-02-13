@@ -8,8 +8,8 @@ export class Entrada {
    entrada: Date;
    salida: Date;
    muelle: string;
-   trafico: number;
-   documento: number;
+   trafico: string;
+   documento: string;
    nroPasavante: number;
    cal_ent: number;
    cal_sal: number;
