@@ -1,15 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatTable } from '@angular/material';
 
 import { DialogBoxComponent } from '../popUp/dialog-box/dialog-box.component';
+import { Esp } from '../../models/simpleData';
 
-export interface EmpData {
-  id:number
-  empresa: string;
-  rubro: string;
-}
-
-const ELEMENT_DATA: EmpData[] = [
+const ELEMENT_DATA: Esp[] = [
 ];
 @Component({
   selector: 'app-servicios-portuarios',
@@ -21,10 +16,11 @@ export class ServiciosPortuariosComponent {
   constructor(public dialog: MatDialog) {}
   displayedColumns: string[] = ['rubro', 'empresa', 'action'];
   dataSource = ELEMENT_DATA;
+  esp: Esp
+  @Input() giro_id: number;
 
   @ViewChild(MatTable,{static:true}) table: MatTable<any>;
 
-  id_count: number=0
   openDialog(action,obj) {
     obj.action = action;
     const dialogRef = this.dialog.open(DialogBoxComponent, {
@@ -45,24 +41,28 @@ export class ServiciosPortuariosComponent {
 
   addRowData(row_obj){
     this.dataSource.push({
-      id:this.id_count++,
+      nroGiro:this.giro_id,
       rubro:row_obj.rubro,
       empresa:row_obj.empresa,
     });
+
     this.table.renderRows();
+    console.log(this.dataSource)
   }
+
   updateRowData(row_obj){
     this.dataSource = this.dataSource.filter((value,key)=>{
-      if(value.id == row_obj.id){
+      if(value.nroGiro == row_obj.nroGiro){
         value.rubro=row_obj.rubro
         value.empresa = row_obj.empresa;
       }
       return true;
     });
   }
+
   deleteRowData(row_obj){
     this.dataSource = this.dataSource.filter((value,key)=>{
-      return row_obj.id!= value.id;
+      return row_obj.nroGiro!= value.nroGiro;
     });
   }
   getData(){

@@ -1,5 +1,5 @@
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import { Arboladura, Bandera, Empresa, Envase, Mercaderia, Tipo, Trafico } from '../models/simpleData';
+import { Arboladura, Bandera, Empresa, EmpresaServPorts, Envase, Mercaderia, Rubro, Tipo, Trafico } from '../models/simpleData';
 
 import { Giros } from '../models/giros';
 import { Injectable } from '@angular/core';
@@ -36,6 +36,7 @@ export class AditionalService {
 
   envasesRef: AngularFireList<Envase> = null;
   envases: any;
+
   constructor(private db: AngularFireDatabase) {
     this.banderasRef = db.list('/banderas');
     this.arboladurasRef = db.list('/arboladuras');
@@ -46,6 +47,9 @@ export class AditionalService {
     this.mercaderiasRef = db.list('/mercaderias')
     this.empresasCargDescRef = db.list('/empresas_carga_descarga')
     this.envasesRef = db.list('/env_carga_descarga')
+
+
+
   }
   // service bandera
   getBanderas(onBanderasLoaded) {
@@ -271,7 +275,7 @@ getArboladuras(onBanderasLoaded) {
       )
       .subscribe(mercaderias => {
         const listMercaderias = Array<Mercaderia>();
-          mercaderias.forEach(function(mercaderia) {
+        mercaderias.forEach(function(mercaderia) {
           listMercaderias.push(new Mercaderia(mercaderia));
         });
         onTipoLoaded(listMercaderias);
@@ -315,4 +319,5 @@ getArboladuras(onBanderasLoaded) {
         onTipoLoaded(listEnvases);
       }, this.handleError);
   }
+ 
 }

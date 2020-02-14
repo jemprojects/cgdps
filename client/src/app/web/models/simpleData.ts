@@ -89,3 +89,31 @@ export class Movimiento {
     this.producto = result.producto;
   }
 }
+export class Rubro {
+  id: number;
+  rubro_esp: string;
+  constructor(result){
+    this.id=result.id
+    this.rubro_esp=result.rubro_esp
+  }
+}
+export class EmpresaServPorts {
+  id: number;
+  esp: string;
+
+  constructor(result){
+    this.id=result.id
+    this.esp=result.esp
+  }
+}
+export class Esp {
+  nroGiro:number
+  empresa: string
+  rubro: string
+
+  constructor(result){
+    this.nroGiro=result.nroGiro
+    this.empresa=result.empresa
+    this.rubro= result.rubro
+  }
+}

@@ -7,16 +7,18 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { User } from 'firebase';
+import { AditionalService } from 'src/app/web/services/adicional.service';
+import { EspService } from 'src/app/web/services/esp.service';
 export interface Data {
   rubro: Rubro;
-  empresa: Empresa;
+  empresa: EmpresaServPort;
   id: number;
 }
 export interface Rubro {
   id: number;
   rubro_esp: string;
 }
-export interface Empresa {
+export interface EmpresaServPort {
   id: number;
   esp: string;
 }
@@ -32,18 +34,20 @@ export class DialogBoxComponent  implements OnInit {
   filteredOptions: Observable<Rubro[]>;
   myControlE = new FormControl();
   optionsE: any = listaEmpresas;
-  filteredOptionsE: Observable<Empresa[]>;
-
+  filteredOptionsE: Observable<EmpresaServPort[]>;
+  isNew:boolean
   action: string;
   local_data: any;
   accion:string
-  constructor(
+  service: EspService
+  constructor( service: EspService,
     public dialogRef: MatDialogRef<DialogBoxComponent>,
     // @Optional() is used to prevent error if no data is passed
     @Optional() @Inject(MAT_DIALOG_DATA) public data: Data) {
     console.log(data);
     this.local_data = {...data};
     this.action = this.local_data.action;
+    this.service=service
   }
   changeText(){
 
@@ -64,12 +68,21 @@ export class DialogBoxComponent  implements OnInit {
     this.dialogRef.close({event: 'Cancelar'});
   }
   ngOnInit() {
+    const scope=this
+    this.service.getRubros(function(rubros){
+      scope.options=rubros
+    })
+    this.service.getEmpServPort(function(emp_serv_port){
+      scope.optionsE=emp_serv_port
+    })
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
         startWith(''),
         map(value => typeof value === 'string' ? value : value.rubro_esp),
         map(rubro_esp => rubro_esp ? this._filter(rubro_esp) : this.options.slice())
+
       );
+
     this.filteredOptionsE = this.myControlE.valueChanges
       .pipe(
         startWith(''),
@@ -88,7 +101,7 @@ export class DialogBoxComponent  implements OnInit {
     return this.options.filter(option => option.rubro_esp.toLowerCase().indexOf(filterValue) === 0);
   }
   //
-  displayFnE(e?: Empresa): string | undefined {
+  displayFnE(e?: EmpresaServPort): string | undefined {
     return e ? e.esp : undefined;
   }
 

@@ -24,6 +24,7 @@ import { Puerto } from 'src/app/web/models/puertos';
 import { Router } from '@angular/router';
 import { ServiciosPortuariosComponent } from '../../servicios-portuarios/servicios-portuarios.component';
 import { Trafico } from 'src/app/web/models/simpleData';
+import listaDeBuques from 'src/assets/json/buques.json';
 import listaDeGiros from 'src/assets/json/giros.json';
 import listaDePuertos from 'src/assets/json/puertos.json';
 import listaDeTrafico from 'src/assets/json/trafico.json';
@@ -54,7 +55,7 @@ export class FormEntradaComponent implements OnInit {
 
   entradas: Array<Entrada>;
   // Listas
-  buques: Array<Buques>;
+  buques: Array<Buques>=listaDeBuques;
   agencias: Array<Agencias>;
   orden_count: number;
   puertos: Array<Puerto> = listaDePuertos;
@@ -73,6 +74,8 @@ export class FormEntradaComponent implements OnInit {
   serviceAdicional: AditionalService;
   dataSelect: {id: number, name: string, name2: string};
   dataSimple: {id: number, name: string};
+  checked = false;
+
   @Input() sideBar: FormCargaComponent;
 
   @HostListener('click')
@@ -101,7 +104,7 @@ export class FormEntradaComponent implements OnInit {
 
   navigateTo(value) {
     if (value === 'AgregarBuque' || value === 'AgregarAgencia') {
-    window.open(`cgpds/${value}/null`, '_blank');
+      window.open(`cgpds/${value}/null`, '_blank');
     } else if (value === 'AgregarPuerto') {
       const dialogRef = this.dialog.open(DialogAddPGComponent, {
         width: '250px',
@@ -140,7 +143,9 @@ export class FormEntradaComponent implements OnInit {
 
       });
     } else {
-      this.buqueSelect = this.buques.find(b => b.orden === this.entradaInEdition.buque);
+      // tslint:disable-next-line: triple-equals
+      this.buqueSelect = this.buques.find(b => b.orden == this.entradaInEdition.buque);
+
 
     }
     return false;
@@ -211,16 +216,14 @@ export class FormEntradaComponent implements OnInit {
     nroPasavante: '',
     cal_ent: '',
     cal_sal: '',
-    envase_desc: '',
-    empresa_desc: '',
-    carga: '',
-    tns_carga: '',
-    envase_carg: '',
-    empresa_car: '',
-    cal_ent1: '',
-    cal_sal1: '',
-    tipo: ''
+
     });
   }
+  saveEntrada(entrada) {
 
+    if (this.checked) {
+      this.service.createEntrada(entrada, () => {});
+    }
+
+  }
 }

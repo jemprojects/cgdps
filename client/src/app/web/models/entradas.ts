@@ -13,15 +13,7 @@ export class Entrada {
    nroPasavante: number;
    cal_ent: number;
    cal_sal: number;
-   envase_desc: string;
-   empresa_desc: string;
-   carga: string;
-   tns_carga: string;
-   envase_carg: string;
-   empresa_car: string;
-   cal_ent1: string;
-   cal_sal1: string;
-   tipo: string;
+
 
   constructor(result) {
     if(result.id!=0){
@@ -45,11 +37,6 @@ export class Entrada {
     this.nroPasavante = result.nro;
     this.cal_ent = result.cal_ent;
     this.cal_sal = result.cal_sal;
-    this.envase_carg = result.envase_carg;
-    this.envase_desc = result.envase_desc;
-    this.carga = result.carga;
-    this.tns_carga = result.tns_carga;
-    this.empresa_car = result.empresa_car;
-    this.empresa_desc = result.empresa_desc;
+  
   }
 }
