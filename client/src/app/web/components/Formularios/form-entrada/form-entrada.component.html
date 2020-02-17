@@ -113,7 +113,7 @@
     &nbsp; &nbsp;
       <mat-checkbox
           class="example-margin"
-          [(ngModel)]="checked">
+          [(ngModel)]="checked" *ngIf="entradaInEdition.giro!=null">
         Continuar con operaciones y empresas de servicio portuario que operan en el buque.
       </mat-checkbox>
     </section>

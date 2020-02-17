@@ -1,7 +1,7 @@
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
+import { Mercaderia, Operacion, Tipo } from '../models/operacion';
 
 import { Injectable } from "@angular/core";
-import { Operacion } from '../models/operacion';
 import { map } from "rxjs/operators";
 
 @Injectable({
@@ -10,9 +10,16 @@ import { map } from "rxjs/operators";
 export class OperacionsService {
   operacionsRef: AngularFireList<Operacion> = null;
   operacions: any;
+  mercaderiasRef: AngularFireList<Mercaderia> = null;
+  mercaderias: any;
 
+  tiposRef: AngularFireList<Tipo> = null;
+  tipos: any;
   constructor(private db: AngularFireDatabase) {
     this.operacionsRef = db.list('/operaciones');
+    this.tiposRef= db.list('/tipos')
+    this.mercaderiasRef = db.list('/mercaderias')
+
   }
   getOperacions(onOperacionsLoaded) {
     this.operacionsRef
@@ -52,5 +59,54 @@ export class OperacionsService {
 
   private handleError(error) {
     console.log(error);
+  }
+  //Tipos
+  getTipos(onTipoLoaded) {
+    this.tiposRef
+      .snapshotChanges()
+      .pipe(
+        map(changes =>
+          changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+        )
+      )
+      .subscribe(tipos => {
+        const listTipos = Array<Tipo>();
+        tipos.forEach(function(tipo) {
+          listTipos.push(new Tipo(tipo));
+        });
+        onTipoLoaded(listTipos);
+      }, this.handleError);
+  }
+
+  getTipo(key: string, onLoaded) {
+    return this.db
+      .object(`tipos/${key}`)
+      .snapshotChanges()
+      .subscribe(data => onLoaded(data.payload.val()));
+  }
+
+  createTipo(tipo: Tipo, onSaved): void {
+    this.tiposRef.push(tipo).then(onSaved);
+  }
+  //Mercaderias
+  getMercaderias(onTipoLoaded) {
+    this.mercaderiasRef
+      .snapshotChanges()
+      .pipe(
+        map(changes =>
+          changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+        )
+      )
+      .subscribe(mercaderias => {
+        const listMercaderias = Array<Mercaderia>();
+        mercaderias.forEach(function(mercaderia) {
+          listMercaderias.push(new Mercaderia(mercaderia));
+        });
+        onTipoLoaded(listMercaderias);
+      }, this.handleError);
+  }
+
+  createMercaderia(mercaderia: Mercaderia, onSaved): void {
+    this.mercaderiasRef.push(mercaderia).then(onSaved);
   }
 }

@@ -15,6 +15,7 @@ import { DialogAddABComponent } from './components/popUp/dialog-add-ab/dialog-ad
 import { DialogAddPGComponent } from './components/popUp/dialog-add-pg/dialog-add-pg.component';
 import { DialogBoxComponent } from './components/popUp/dialog-box/dialog-box.component';
 import { DialogComponent } from './components/popUp/dialog/dialog.component';
+import { DialogOperationsComponent } from './components/popUp/dialog-operations/dialog-operations.component';
 import { EntradaComponent } from './components/entradas/entrada/entrada.component';
 import { EntradasListComponent } from "./components/entradas/entradas-list/entradas-list.component";
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -28,6 +29,7 @@ import { WebAdminComponent } from "./web-admin.component";
 import { WebAdminMaterialModule } from "./web-admin.material.module";
 import { WebRoutingModule } from "./web-admin-routing.module";
 import { environment } from "../../environments/environment";
+import { TableOperationsComponent } from './components/table-operations/table-operations.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import { environment } from "../../environments/environment";
     ServiciosPortuariosComponent,
     DialogAddPGComponent,
     DialogAddABComponent,
+    DialogOperationsComponent,
+    TableOperationsComponent,
 
 
   ],

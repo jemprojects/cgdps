@@ -74,8 +74,6 @@ export class FormEntradaComponent implements OnInit {
   serviceAdicional: AditionalService;
   dataSelect: {id: number, name: string, name2: string};
   dataSimple: {id: number, name: string};
-  checked = false;
-
   @Input() sideBar: FormCargaComponent;
 
   @HostListener('click')
@@ -83,7 +81,7 @@ export class FormEntradaComponent implements OnInit {
     this.sideBar.toggle();
     this.entradaInEdition.giro=this.sideBar.nroGiroE
   }
-
+  checked = false;
 
   constructor( public dialog: MatDialog,
                serviceEntrada: EntradasService,

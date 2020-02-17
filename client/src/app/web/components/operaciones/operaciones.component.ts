@@ -1,10 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Mercaderia, Tipo } from '../../models/simpleData';
+import { Mercaderia, Operacion, Tipo } from '../../models/operacion';
 
-import { AditionalService } from '../../services/adicional.service';
 import { DialogComponent } from '../popUp/dialog/dialog.component';
 import { MatDialog } from '@angular/material';
-import { Operacion } from '../../models/operacion';
 import { OperacionsService } from '../../services/operacion.service';
 import listaDeMercaderias from 'src/assets/json/mercaderias.json';
 import listaDeOperaciones from 'src/assets/json/operacion.json';
@@ -28,14 +26,12 @@ export class OperacionesComponent implements OnInit {
     tipos: Array<Tipo> = listaDeTipos;
     dataSimple: {id: number, name: string};
     orden_count: number;
-    serviceAditional: AditionalService;
     idO: number = this.operaciones.pop().id;
 
     checked = false;
 
-  constructor(public dialog: MatDialog, Oservice: OperacionsService, servAdi: AditionalService) {
+  constructor(public dialog: MatDialog, Oservice: OperacionsService) {
     this.service = Oservice;
-    this.serviceAditional = servAdi;
     this.impo = null;
     this.expo = null;
   }
@@ -72,18 +68,18 @@ export class OperacionesComponent implements OnInit {
   }
   addTipo(row_obj) {
       this.orden_count = this.tipos[this.tipos.length - 1].id + 1;
-      this.serviceAditional.createTipo({'id': this.orden_count, 'tipo': row_obj.name.toUpperCase()}, () => {});
+      this.service.createTipo({'id': this.orden_count, 'tipo': row_obj.name.toUpperCase()}, () => {});
   }
   addMercaderia(row_obj) {
     this.orden_count = this.mercaderias[this.mercaderias.length - 1].orden + 1;
-    this.serviceAditional.createMercaderia({'orden': this.orden_count, 'tipo': row_obj.name.toUpperCase()}, () => {});
+    this.service.createMercaderia({'orden': this.orden_count, 'tipo': row_obj.name.toUpperCase()}, () => {});
 
 }
   ngOnInit() {
     const scope = this;
     this.service.getOperacions(function(operaciones) { scope.operaciones = operaciones;});
-    this.serviceAditional.getTipos(tipos => scope.tipos = tipos);
-    this.serviceAditional.getMercaderias(mercaderias => scope.mercaderias = mercaderias);
+    this.service.getTipos(tipos => scope.tipos = tipos);
+    this.service.getMercaderias(mercaderias => scope.mercaderias = mercaderias);
     this.setupFormNewOperation();
   }
 

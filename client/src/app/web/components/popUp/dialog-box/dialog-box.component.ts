@@ -7,12 +7,12 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { User } from 'firebase';
-import { AditionalService } from 'src/app/web/services/adicional.service';
+
 import { EspService } from 'src/app/web/services/esp.service';
 export interface Data {
   rubro: Rubro;
   empresa: EmpresaServPort;
-  id: number;
+  id: 0;
 }
 export interface Rubro {
   id: number;
@@ -35,7 +35,7 @@ export class DialogBoxComponent  implements OnInit {
   myControlE = new FormControl();
   optionsE: any = listaEmpresas;
   filteredOptionsE: Observable<EmpresaServPort[]>;
-  isNew:boolean
+
   action: string;
   local_data: any;
   accion:string
@@ -61,6 +61,7 @@ export class DialogBoxComponent  implements OnInit {
     return this.accion
   }
   doAction() {
+
     this.dialogRef.close({event: this.action, data: this.local_data});
   }
 

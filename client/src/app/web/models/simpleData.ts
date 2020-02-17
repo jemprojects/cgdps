@@ -28,26 +28,7 @@ export class Trafico {
   }
 }
 
-export class Mercaderia {
-  orden: number;
-  tipo: string;
 
-  constructor(result) {
-    this.orden = result.orden;
-    this.tipo = result.tipo;
-  }
-
-}
-export class Tipo {
-  id: number;
-  tipo: string;
-
-  constructor(result) {
-    this.id = result.id;
-    this.tipo = result.tipo;
-  }
-
-}
 export class Empresa {
   id: number;
   empresa: string;
@@ -107,11 +88,13 @@ export class EmpresaServPorts {
   }
 }
 export class Esp {
+  id:number
   nroGiro:number
-  empresa: string
-  rubro: string
+  empresa: EmpresaServPorts
+  rubro: Rubro
 
   constructor(result){
+    this.id=result.id
     this.nroGiro=result.nroGiro
     this.empresa=result.empresa
     this.rubro= result.rubro

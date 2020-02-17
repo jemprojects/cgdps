@@ -80,6 +80,14 @@ getEsps(onBanderasLoaded) {
   createRubro(rubro: Rubro, onSaved): void {
     this.rubrosRef.push(rubro).then(onSaved);
   }
+
+  updateRubro(key: string, value: any): void {
+    this.rubrosRef.update(key, value).catch(error => this.handleError(error));
+  }
+
+  deleteRubro(key: string): void {
+    this.rubrosRef.remove(key).catch(error => this.handleError(error));
+  }
   //empServPorts
   getEmpServPort(onTipoLoaded) {
     this.empServPortRef

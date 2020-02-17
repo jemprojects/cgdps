@@ -1,47 +1,47 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import {EmpresaServPorts, Esp, Rubro} from '../../models/simpleData';
 import { MatDialog, MatTable } from '@angular/material';
+import { Mercaderia, Operacion, Tipo } from '../../models/operacion';
 
-import { DialogBoxComponent } from '../popUp/dialog-box/dialog-box.component';
-import { EspService } from '../../services/esp.service';
+import { DialogOperationsComponent } from '../popUp/dialog-operations/dialog-operations.component';
+import { OperacionsService } from '../../services/operacion.service';
 
-const ELEMENT_DATA: Esp[] = [
+const ELEMENT_DATA: Operacion[] = [
 ];
 @Component({
-  selector: 'app-servicios-portuarios',
-  templateUrl: './servicios-portuarios.component.html',
-  styleUrls: ['./servicios-portuarios.component.css']
+  selector: 'app-table-operations',
+  templateUrl: './table-operations.component.html',
+  styleUrls: ['./table-operations.component.css']
 })
-export class ServiciosPortuariosComponent implements OnInit {
-  service: EspService;
+export class TableOperationsComponent implements OnInit {
+  service: OperacionsService;
 
   title='EMPRESAS DE SERVICIOS PORTUARIOS QUE OPERAN EN EL BUQUE'
-  constructor(service: EspService, public dialog: MatDialog) {
+  constructor(service: OperacionsService, public dialog: MatDialog) {
     this.service = service;
   }
-  displayedColumns: string[] = ['rubro', 'empresa', 'action'];
+  displayedColumns: string[] = ['mercaderia', 'tns', 'tipo', 'action'];
   dataSource = ELEMENT_DATA;
   count = 0;
-  esp: Esp;
-  rubro: Rubro;
-  empresa: EmpresaServPorts;
-  rubros: Array<Rubro>;
-  empresas: Array<EmpresaServPorts>;
+  operacion: Operacion;
+  mercaderia: Mercaderia;
+  tipo: Tipo;
+  mercaderias: Array<Mercaderia>;
+  tipos: Array<Tipo>;
   @Input() giro_id: number;
 
   @ViewChild(MatTable, {static: true}) table: MatTable<any>;
   ngOnInit(): void {
     const scope = this;
-    this.service.getRubros(function(rubros) {
-      scope.rubros = rubros;
+    this.service.getTipos(function(tipos) {
+      scope.tipos = tipos;
     });
-    this.service.getEmpServPort(function(emp_serv_port) {
-      scope.empresas = emp_serv_port;
+    this.service.getMercaderias(function(mercaderias) {
+      scope.mercaderias = mercaderias;
     });
   }
   openDialog(action, obj) {
     obj.action = action;
-    const dialogRef = this.dialog.open(DialogBoxComponent, {
+    const dialogRef = this.dialog.open(DialogOperationsComponent, {
       width: '250px',
       data: obj
     });
@@ -56,7 +56,7 @@ export class ServiciosPortuariosComponent implements OnInit {
       }
     });
   }
-  create(row_obj): Esp {
+ /* create(row_obj): Esp {
     const isRubro = typeof(row_obj.rubro) === typeof('fgg');
     const isEmpresa = typeof(row_obj.empresa) === typeof('fgg');
 
@@ -93,20 +93,27 @@ export class ServiciosPortuariosComponent implements OnInit {
       empresa: this.empresa,
     };
 
-  }
+  }*/
 
   addRowData(row_obj) {
-    this.dataSource.push(this.create(row_obj));
+    this.dataSource.push({
+      id: row_obj.id,
+      mercaderia: row_obj.mercaderia.tipo,
+      tns: row_obj.tns,
+      tipo:row_obj.tipo.tipo,
+      giro_id: this.giro_id
+      });
     this.table.renderRows();
     console.log(this.dataSource);
   }
 
   updateRowData(row_obj) {
-    let esp= this.create(row_obj)
+    //let op= this.create(row_obj)
     this.dataSource = this.dataSource.filter((value, key) => {
       if (value.id === row_obj.id) {
-        value.rubro = esp.rubro;
-        value.empresa = esp.empresa;
+        value.mercaderia = row_obj.mercaderia.tipo;
+        value.tns = row_obj.tns;
+        value.tipo = row_obj.tipo.tipo
       }
       return true;
     });
@@ -119,6 +126,9 @@ export class ServiciosPortuariosComponent implements OnInit {
   }
 
   saveESP(){
-    this.dataSource.forEach(a=>this.service.createEsp(a, ()=>{}))
+    this.dataSource.forEach(a=>this.service.createOperacion(a, ()=>{}))
+  }
+  getTotalCost() {
+    return this.dataSource.map(t => t.tns).reduce((acc, value) => acc + value, 0);
   }
 }

@@ -1,10 +1,12 @@
-import { Bandera, Empresa, Envase, Mercaderia, Movimiento } from 'src/app/web/models/simpleData';
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Bandera, Empresa, Envase, Movimiento } from 'src/app/web/models/simpleData';
+import { Component, HostBinding, OnInit } from '@angular/core';
 
 import { AditionalService } from 'src/app/web/services/adicional.service';
 import { DialogAddPGComponent } from '../../popUp/dialog-add-pg/dialog-add-pg.component';
 import { DialogComponent } from '../../popUp/dialog/dialog.component';
 import { MatDialog } from '@angular/material';
+import { Mercaderia } from 'src/app/web/models/operacion';
+import { OperacionsService } from 'src/app/web/services/operacion.service';
 import { Puerto } from 'src/app/web/models/puertos';
 import listaDePuertos from 'src/assets/json/puertos.json';
 
@@ -15,7 +17,6 @@ import listaDePuertos from 'src/assets/json/puertos.json';
 })
 
 export class FormCargaComponent implements OnInit {
-
   selected: string;
   service: AditionalService;
   dataSimple: {id: number, name: string};
@@ -28,14 +29,15 @@ export class FormCargaComponent implements OnInit {
   movimiento: Movimiento;
   selectedPort: string;
   nroGiroE:number
-
+  serviceO:OperacionsService
   @HostBinding('class.is-open')
   isOpen = false;
 
   toggle() {
     this.isOpen = !this.isOpen;
   }
-  constructor(public dialog: MatDialog, servicioAdicional: AditionalService) {
+  constructor(public dialog: MatDialog, servicioAdicional: AditionalService, serviceO:OperacionsService) {
+    this.serviceO=serviceO
     this.service = servicioAdicional;
     this.movimiento = null;
   }
@@ -48,7 +50,7 @@ export class FormCargaComponent implements OnInit {
     this.service.getEnvases(function(envases) {
       scope.envases =  envases;
     });
-    this.service.getMercaderias(function(productos) {
+    this.serviceO.getMercaderias(function(productos) {
       scope.productos =  productos;
     });
     this.service.getPuertos(function(puertos) {
@@ -62,7 +64,7 @@ export class FormCargaComponent implements OnInit {
   }
   load(){
     return this.movimiento.nroGiro=this.nroGiroE
- 
+
   }
   setupFormNewMov() {
     this.movimiento = new Movimiento({
@@ -120,6 +122,6 @@ export class FormCargaComponent implements OnInit {
   }
   addMercaderia(row_obj) {
     let orden_count = this.productos[this.productos.length - 1].orden + 1;
-    this.service.createMercaderia({orden: orden_count, tipo: row_obj.name.toUpperCase()}, () => {});
+    this.serviceO.createMercaderia({orden: orden_count, tipo: row_obj.name.toUpperCase()}, () => {});
   }
 }
