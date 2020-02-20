@@ -37,6 +37,6 @@ export class Entrada {
     this.nroPasavante = result.nro;
     this.cal_ent = result.cal_ent;
     this.cal_sal = result.cal_sal;
-  
+
   }
 }

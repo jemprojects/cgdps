@@ -36,7 +36,6 @@
 
 .box2 {
   flex: 1 1 auto;
-  width: 50%;
 
 }
 .box3 {
@@ -57,8 +56,8 @@
   margin: 0 auto;
   text-align: center;
 }
-.example-card {
-  max-width: 700px;
+.miniBuque-card {
+  max-width: 300px;
 }
 .grid {
   display: grid;

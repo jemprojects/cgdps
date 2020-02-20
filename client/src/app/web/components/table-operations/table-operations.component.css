@@ -1,0 +1,28 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+  margin-right: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2em;
+}
+
+td, th {
+  width: 30%;
+  height: 70px;
+
+}
+.rows{
+  background: lightblue;
+}
+
+.headt td {
+  min-width: 235px;
+  height: 100px;
+  background-color: #433;
+}
+

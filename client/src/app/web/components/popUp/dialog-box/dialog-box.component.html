@@ -4,7 +4,7 @@
   <mat-spinner class="spinner" *ngIf="filteredOptions == null"></mat-spinner>
   <form class="example-form" *ngIf="action != 'Delete'; else elseTemplate">
     <mat-form-field class="example-full-width">
-      <input type="text" placeholder="{{changeText()}} Rubro" aria-label="Rubro" matInput [formControl]="myControl" [matAutocomplete]="auto"  [(ngModel)]="local_data.rubro">
+      <input type="text" placeholder="{{changeText()}} Rubro"  matInput [formControl]="myControl" [matAutocomplete]="auto"  [(ngModel)]="local_data.rubro">
       <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
         <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
           {{option.rubro_esp}}
@@ -14,7 +14,7 @@
   </form>
   <form class="example-form" *ngIf="action != 'Delete'">
     <mat-form-field class="example-full-width">
-      <input type="text" placeholder="{{changeText()}} Empresa" aria-label="Empresa" matInput [formControl]="myControlE" [matAutocomplete]="auto1"  [(ngModel)]="local_data.empresa">
+      <input type="text" placeholder="{{changeText()}} Empresa"  matInput [formControl]="myControlE" [matAutocomplete]="auto1"  [(ngModel)]="local_data.empresa">
       <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayFnE">
         <mat-option *ngFor="let option of filteredOptionsE | async" [value]="option">
           {{option.esp}}

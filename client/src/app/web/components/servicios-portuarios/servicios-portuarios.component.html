@@ -31,3 +31,15 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+  <section class="example-section">
+    <mat-checkbox
+        class="example-margin"
+        [disabled]="!test()" [checked]="test()">
+      Debe completar los campos para guardar operaciones
+    </mat-checkbox>
+    <div *ngIf="test()">
+      <strong> Desea guardar las operaciones ingresadas? </strong> &nbsp;
+    <button mat-raised-button color="primary"  class="btn-holder" (click)="saveESP()">Guardar <mat-icon>done_all</mat-icon></button>
+    </div>
+</section>
+

@@ -1,25 +1,35 @@
 <mat-horizontal-stepper>
   <mat-step label="Solicitud De Giro">
-  <app-form-entrada [sideBar]="sideBar"></app-form-entrada>
+  <app-form-entrada #formEnt></app-form-entrada>
 
       <div>
-        <button mat-button  matStepperNext >Siguiente </button>
+        <button mat-stroked-button class="btn-holder" color="primary" matStepperNext *ngIf="formEnt.checked" (click)="formEnt.save()" >Guardar y Continuar </button>
       </div>
 </mat-step>
-  <mat-step label="Carga">
+  <mat-step label="Operaciones">
     <div>
-      <app-form-carga #sideBar ></app-form-carga>
+      <div class="box">
 
-      <button mat-button matStepperPrevious>Atras</button>
-      <button mat-button matStepperNext>Siguiente</button>
+        <div class="box1" >
+         <app-table-operations #operaciones [giro_id]="formEnt.entradaInEdition.giro"></app-table-operations>
+        </div>
+
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        <div class="box2"  >
+          <app-servicios-portuarios #servPort [giro_id]="formEnt.entradaInEdition.giro"></app-servicios-portuarios>
+        </div>
+      </div>
+
+      &nbsp; &nbsp; &nbsp; &nbsp;
+      <button mat-stroked-button matStepperPrevious>Atras</button>
+      <button mat-stroked-button class="btn-holder" matStepperNext >Siguiente</button>
     </div>
 
 </mat-step>
 <mat-step>
+  <app-entradas-list [ultimaCargada]="formEnt.ultimaCargada"></app-entradas-list>
+  Listoo
   <ng-template matStepLabel>Listo</ng-template>
-  <div class="box2">
-    <app-servicios-portuarios #tab></app-servicios-portuarios>
-  </div>
   <div>
     <button mat-button matStepperPrevious>Atras</button>
   </div>

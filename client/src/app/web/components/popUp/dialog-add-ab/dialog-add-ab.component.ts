@@ -24,10 +24,8 @@ export class DialogAddABComponent implements OnInit {
   serviceAdd: AditionalService;
   arboladuras: Array<Arboladura>;
   banderas: Array<Bandera>;
-  orden_count: number;
-  dataSimple: {id: number, name: string, title:string};
+  dataSimple: {id: number, name: string, title: string};
   buques: Array<Buques>;
-  id_newBque= 3061;
   constructor(
     public dialog: MatDialog,
     private route: Router,
@@ -46,7 +44,6 @@ export class DialogAddABComponent implements OnInit {
   ngOnInit() {
     this.buqueKey = this.ruteActive.snapshot.paramMap.get('id');
     if (this.buqueKey === 'null') {
-      this.id_newBque++;
       this.setupFormNewBuque();
     } else {
       this.setupFormEditBuque();
@@ -68,7 +65,7 @@ export class DialogAddABComponent implements OnInit {
     if (value == 'AgregarBandera') {
       const dialogRef = this.dialog.open(DialogComponent, {
         width: '250px',
-        data: {data:this.dataSimple, title:"Bandera"},
+        data: {data: this.dataSimple, title:'Bandera'},
       });
 
       dialogRef.afterClosed().subscribe(result => {
@@ -80,7 +77,7 @@ export class DialogAddABComponent implements OnInit {
     } else if (value == 'AgregarArboladura') {
       const dialogRef = this.dialog.open(DialogComponent, {
         width: '250px',
-        data: {data:this.dataSimple, title:"Arboladura"},
+        data: {data: this.dataSimple, title:'Arboladura'},
       });
 
       dialogRef.afterClosed().subscribe(result => {
@@ -93,12 +90,12 @@ export class DialogAddABComponent implements OnInit {
     return false;
   }
   addBandera(row_obj) {
-    this.orden_count = this.banderas[this.banderas.length - 1].orden + 1;
-    this.serviceAdd.createBandera({'orden': this.orden_count,'bandera': row_obj.name.toUpperCase()}, () => {});
+    let orden_count = this.banderas[this.banderas.length - 1].orden + 1;
+    this.serviceAdd.createBandera({orden: orden_count,bandera: row_obj.name.toUpperCase()}, () => {});
   }
   addArboladura(row_obj) {
-    this.orden_count = this.banderas[this.banderas.length - 1].orden + 1;
-    this.serviceAdd.createArboladura({'codigo': this.orden_count,'arboladura': row_obj.name.toUpperCase()}, () => {});
+    let orden_count = this.banderas[this.banderas.length - 1].orden + 1;
+    this.serviceAdd.createArboladura({codigo: orden_count,arboladura: row_obj.name.toUpperCase()}, () => {});
   }
   backToEntradas(): void {
     this.route.navigate(['/cgpds']);
@@ -115,9 +112,10 @@ export class DialogAddABComponent implements OnInit {
   setupFormNewBuque() {
     this.isNew = true;
     this.enableBuqueCreation = true;
+    let id_newBque = this.buques[this.buques.length - 1].orden + 1;
     this.formTitle = 'Agregar nuevo buque';
     this.buqueInEdition = new Buques({
-      orden: this.id_newBque,
+      orden: id_newBque,
       nombre: '',
       cuit: '',
       bandera: '',

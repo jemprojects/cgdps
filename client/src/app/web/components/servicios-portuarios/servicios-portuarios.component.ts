@@ -14,7 +14,6 @@ const ELEMENT_DATA: Esp[] = [
 })
 export class ServiciosPortuariosComponent implements OnInit {
   service: EspService;
-
   title='EMPRESAS DE SERVICIOS PORTUARIOS QUE OPERAN EN EL BUQUE'
   constructor(service: EspService, public dialog: MatDialog) {
     this.service = service;
@@ -27,6 +26,7 @@ export class ServiciosPortuariosComponent implements OnInit {
   empresa: EmpresaServPorts;
   rubros: Array<Rubro>;
   empresas: Array<EmpresaServPorts>;
+ // @Input() sideBar: FormEntradaComponent;
   @Input() giro_id: number;
 
   @ViewChild(MatTable, {static: true}) table: MatTable<any>;
@@ -61,27 +61,22 @@ export class ServiciosPortuariosComponent implements OnInit {
     const isEmpresa = typeof(row_obj.empresa) === typeof('fgg');
 
     if (isEmpresa && isRubro) {
-      console.log('ambos');
       this.rubro = new Rubro({id: this.rubros.length , rubro_esp: row_obj.rubro.toUpperCase()});
       this.empresa = new EmpresaServPorts({id: this.empresas.length , esp: row_obj.empresa.toUpperCase()});
       this.service.createRubro(this.rubro,()=>{})
       this.service.createEmpServPort(this.empresa,()=>{})
     } else if (isRubro || isEmpresa) {
-      console.log('or');
       if (isRubro) {
-        console.log('only rubro');
         this.rubro = new Rubro({id: this.rubros.length , rubro_esp: row_obj.rubro.toUpperCase()});
         this.empresa = new EmpresaServPorts(row_obj.empresa);
         this.service.createRubro(this.rubro,()=>{})
       }
       if (isEmpresa) {
-        console.log('only emp');
         this.rubro = new Rubro(row_obj.rubro);
         this.empresa = new EmpresaServPorts({id: this.empresas.length , esp: row_obj.empresa.toUpperCase()});
         this.service.createEmpServPort(this.empresa,()=>{})
       }
     } else {
-      console.log('ninguno');
       this.rubro = new Rubro(row_obj.rubro);
       this.empresa = new EmpresaServPorts(row_obj.empresa);
     }
@@ -98,7 +93,6 @@ export class ServiciosPortuariosComponent implements OnInit {
   addRowData(row_obj) {
     this.dataSource.push(this.create(row_obj));
     this.table.renderRows();
-    console.log(this.dataSource);
   }
 
   updateRowData(row_obj) {
@@ -117,8 +111,12 @@ export class ServiciosPortuariosComponent implements OnInit {
       return row_obj.id != value.id ;
     });
   }
-
+  test(){
+     return this.dataSource.length!= 0
+  }
   saveESP(){
-    this.dataSource.forEach(a=>this.service.createEsp(a, ()=>{}))
+    //this.dataSource.forEach(a=>this.service.createEsp(a, ()=>{}))
+    console.log(this.dataSource)
+
   }
 }

@@ -1,11 +1,21 @@
-.inline-control {
-  display: inline-block;
-  width: 150px;
-  margin-right: 16px;
-  padding: 16px 0;
-  vertical-align: top;
+table {
+  width: 100%;
 }
 
-.error-helper {
-  color: #dd2c00;
+
+td, th {
+  width: 10%;
+  align-items: center;
+  align-content: center;
+  font-size: 14px;
+}
+.example-container {
+  height: 700px;
+  width: 100%;
+  overflow: auto;
+}
+
+
+.mat-grid-tile1 {
+  background: lightblue;
 }

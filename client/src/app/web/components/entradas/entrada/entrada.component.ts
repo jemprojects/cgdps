@@ -1,6 +1,8 @@
 import { Component, HostListener, Input } from '@angular/core';
 
 import { FormEntradaComponent } from '../../Formularios/form-entrada/form-entrada.component';
+import { ServiciosPortuariosComponent } from '../../servicios-portuarios/servicios-portuarios.component';
+import { TableOperationsComponent } from '../../table-operations/table-operations.component';
 
 @Component({
   selector: 'app-entrada',
@@ -10,6 +12,10 @@ import { FormEntradaComponent } from '../../Formularios/form-entrada/form-entrad
 })
 
 export class EntradaComponent  {
+
   @Input() formEnt: FormEntradaComponent;
+  @Input() servPort: ServiciosPortuariosComponent;
+  @Input() operaciones: TableOperationsComponent;
+
 
 }

@@ -7,6 +7,7 @@ import { BuquesListComponent } from "./components/buques/buques-list/buques-list
 import { ConsultasComponent } from './components/consultas/consultas.component';
 import { EntradaComponent } from './components/entradas/entrada/entrada.component';
 import { EntradasListComponent } from "./components/entradas/entradas-list/entradas-list.component";
+import { FormCargaComponent } from './components/Formularios/form-carga/form-carga.component';
 import { NgModule } from "@angular/core";
 import { WebAdminComponent } from "./web-admin.component";
 
@@ -37,7 +38,7 @@ const routes: Routes = [
       },
       {
         path: "cgpds/consultas",
-        component: ConsultasComponent,
+        component: FormCargaComponent,
         canActivate: [AuthGuard]
       },
       {
