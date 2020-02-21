@@ -1,14 +1,19 @@
 import { Arboladura, Bandera } from 'src/app/web/models/simpleData';
-import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatTableDataSource } from '@angular/material';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { DataTable, EntradasListComponent } from '../../entradas/entradas-list/entradas-list.component';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 import { AditionalService } from 'src/app/web/services/adicional.service';
 import { Buques } from 'src/app/web/models/buques';
 import { BuquesService } from 'src/app/web/services/buques.service';
 import { Entrada } from 'src/app/web/models/entradas';
+import {
+EntradasService
+} from 'src/app/web/services/entradas.service';
 import listaDeArboladura from 'src/assets/json/arboladura.json';
 import listaDeBanderas from 'src/assets/json/bandera.json';
 import listaDeBuques from 'src/assets/json/buques.json';
+import listaDeEntradas from 'src/assets/json/entradas.json';
 
 const ELEMENT_DATA: Buques[] = listaDeBuques;
 @Component({
@@ -17,51 +22,90 @@ const ELEMENT_DATA: Buques[] = listaDeBuques;
   styleUrls: ['./buques-list.component.css']
 })
 export class BuquesListComponent implements OnInit{
+  serviceEntrada: EntradasService
+  entradas: Array<Entrada>=listaDeEntradas;
 
   service: BuquesService;
-  buqueInEdition: Buques;
-  buqueOrd: number
-  bandera: string
-  arboladura:string
+  buqueSelect: Buques;
+  bandera: Bandera
+  arboladura:Arboladura
   buques: Array<Buques>=listaDeBuques;
   serviceAdd: AditionalService;
   arboladuras: Array<Arboladura>=listaDeArboladura;
   banderas: Array<Bandera>=listaDeBanderas;
-  dataSelect: {a: number, b: string};
   displayedColumnsBuque: string[] = ['ORDEN','BANDERA', 'ARBOLADURA', 'IMO','ESLORA', 'MANGA', 'TRN', 'TRB']
   displayedColumns: string[] = ['GIRO', 'AGENCIA', 'PROCENDENCIA', 'DESTINO','ENTRADA','SALIDA','MUELLE', 'TRAFICO', 'DOCUMENTO', 'NRO'];
-  dataSource =new MatTableDataSource<Entrada>();
+  dataSource: MatTableDataSource<DataTable>;
   columnsToDisplay: string[] = this.displayedColumns.slice();
   resultsLength:number;
-  constructor(public dialog: MatDialog,
-              serviceBuques: BuquesService,
-              serviceAditional: AditionalService ) {
+  entradasFiltradas: DataTable[]
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
+  constructor(serviceBuques: BuquesService,
+              serviceAditional: AditionalService,
+              serviceEntrada: EntradasService) {
     this.service = serviceBuques;
     this.serviceAdd = serviceAditional;
-    this.buqueInEdition = null;
-    this.banderas = [];
-    this.arboladuras = [];
+    this.serviceEntrada= serviceEntrada
+    this.entradas=listaDeEntradas
+    this.entradasFiltradas = null
+
   }
 
   ngOnInit() {
     const scope = this;
+    this.serviceAdd.getArboladuras(function(arboladuras) {
+      scope.arboladuras = arboladuras;
+    });
     this.service.getBuques(function(buques) {
       scope.buques = buques;
     });
     this.serviceAdd.getBanderas(function(banderas) {
       scope.banderas = banderas;
     });
-    this.serviceAdd.getArboladuras(function(arboladuras) {
-      scope.arboladuras = arboladuras;
-    });
 
+    this.setupFormNewBuque();
+  }
+  completeTable(){
+    let table: DataTable[]=[]
+
+    Object.entries(this.entradas).filter(([_, value]) => value.buque=== this.buqueSelect.orden);
+    console.log(Object.entries(this.entradas).filter(([_, value])=> value.buque== this.buqueSelect.orden))
+    return table
+  }
+
+  setupFormNewBuque() {
+    this.buqueSelect = new Buques({
+      key:'',
+      orden: '',
+      nombre: '',
+      cuit: '',
+      bandera: '',
+      arboladura: '',
+      eslora: '',
+      manga: '',
+      puntal: '',
+      trn: '',
+      trb: '',
+      imo: ''
+    });
+  }
+  vacio(){
+    return !(this.buqueSelect.nombre==='')
+  }
+  navigateToEdits(id) {
+    window.open(`cgpds/EditarBuque/${id}`, '_blank');
   }
   cargarDatosBuque(){
-    this.buqueInEdition=this.buques.find(b=>b.orden== this.buqueOrd)
-    this.bandera=(this.banderas.find(b => b.orden === this.buqueInEdition.bandera)).bandera
-    this.arboladura=(this.arboladuras.find(b => b.codigo == this.buqueInEdition.arboladura)).arboladura;
-    console.log(this.buqueInEdition)
-
+  //  this.buqueSelect=this.buques.find(b=>b.orden== this.buqueOrd);
+    this.bandera=(this.banderas.find(b => b.orden === this.buqueSelect.bandera))
+   // console.log(this.arboladuras)
+    this.arboladura= (this.arboladuras.find(b => b.codigo === this.buqueSelect.arboladura))
+   // console.log(this.arboladura)
+   // console.log(this.bandera)
+   this.dataSource = new MatTableDataSource(this.completeTable());
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -71,7 +115,9 @@ export class BuquesListComponent implements OnInit{
       this.dataSource.paginator.firstPage();
     }
   }
-
+  getEntradasOfBuque(){
+    //this.dataSource=
+  }
 
 }
 

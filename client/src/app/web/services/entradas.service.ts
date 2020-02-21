@@ -54,3 +54,19 @@ export class EntradasService {
     console.log(error);
   }
 }
+export class DataTable {
+  id: number;
+  giro: number
+  buque: string;
+  agencia: string
+  procedencia: string
+  destino: string
+  entrada: Date
+  salida: Date
+  muelle: string
+  trafico: string
+  documento: string
+  nroPasavante : number
+  cal_ent: number
+  cal_sal: number
+}

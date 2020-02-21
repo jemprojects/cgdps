@@ -9,40 +9,40 @@
     &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
   <form *ngIf="buques!=null">
     <form class="example-form">
-      <mat-form-field  appearance="outline" class="inputGrid" (click)=cargarDatosBuque()>
+      <mat-form-field  appearance="outline" class="inputGrid" >
         <mat-label>Nombre del Buque</mat-label>
-        <select matNativeControl [(ngModel)]="buqueOrd" name="Buque">
-          <option value=""></option>
-          <option *ngFor="let buque of buques" [value]="buque.orden" >
+        <mat-select [(ngModel)]="buqueSelect" name="buque">
+          <mat-option *ngFor="let buque of buques" [value]="buque">
             {{buque.nombre}}
-          </option>
-        </select>
+          </mat-option>
+        </mat-select>
       </mat-form-field>
-      <div *ngIf="buqueInEdition!=null" >
-        <mat-card class="example-card">
-          <mat-grid-list cols="8" rowHeight="8:2">
-          <mat-grid-tile class="mat-grid-tile1">ORDEN</mat-grid-tile>
-          <mat-grid-tile class="mat-grid-tile1">BANDERA</mat-grid-tile>
-          <mat-grid-tile class="mat-grid-tile1">ARBOLADURA</mat-grid-tile>
-          <mat-grid-tile class="mat-grid-tile1">IMO</mat-grid-tile>
-          <mat-grid-tile class="mat-grid-tile1">ESLORA</mat-grid-tile>
-          <mat-grid-tile class="mat-grid-tile1">MANGA</mat-grid-tile>
-          <mat-grid-tile class="mat-grid-tile1">TRN</mat-grid-tile>
-          <mat-grid-tile class="mat-grid-tile1">TRB</mat-grid-tile>
-
-          <mat-grid-tile >{{buqueInEdition.orden}}</mat-grid-tile>
-          <mat-grid-tile >{{bandera}}</mat-grid-tile>
-          <mat-grid-tile >{{arboladura}}</mat-grid-tile>
-          <mat-grid-tile >{{buqueInEdition.imo}}</mat-grid-tile>
-          <mat-grid-tile >{{buqueInEdition.eslora}}</mat-grid-tile>
-          <mat-grid-tile >{{buqueInEdition.manga}}</mat-grid-tile>
-          <mat-grid-tile >{{buqueInEdition.trn}}</mat-grid-tile>
-          <mat-grid-tile >{{buqueInEdition.trb}}</mat-grid-tile>
-
-      </mat-grid-list></mat-card>
-
-      </div>
     </form>
+    <div class="example-card" *ngIf="vacio()">
+      <mat-grid-list cols="8" rowHeight="8:2">{{cargarDatosBuque()}}
+      <mat-grid-tile class="mat-grid-tile1">ORDEN</mat-grid-tile>
+      <mat-grid-tile class="mat-grid-tile1">BANDERA</mat-grid-tile>
+      <mat-grid-tile class="mat-grid-tile1">ARBOLADURA</mat-grid-tile>
+      <mat-grid-tile class="mat-grid-tile1">IMO</mat-grid-tile>
+      <mat-grid-tile class="mat-grid-tile1">ESLORA</mat-grid-tile>
+      <mat-grid-tile class="mat-grid-tile1">MANGA</mat-grid-tile>
+      <mat-grid-tile class="mat-grid-tile1">TRN</mat-grid-tile>
+      <mat-grid-tile class="mat-grid-tile1">TRB</mat-grid-tile>
+
+      <mat-grid-tile >{{buqueSelect.orden}}</mat-grid-tile>
+      <mat-grid-tile >{{bandera.bandera}}</mat-grid-tile>
+      <mat-grid-tile >{{arboladura.arboladura}}</mat-grid-tile>
+      <mat-grid-tile >{{buqueSelect.imo}}</mat-grid-tile>
+      <mat-grid-tile >{{buqueSelect.eslora}}</mat-grid-tile>
+      <mat-grid-tile >{{buqueSelect.manga}}</mat-grid-tile>
+      <mat-grid-tile >{{buqueSelect.trn}}</mat-grid-tile>
+      <mat-grid-tile >{{buqueSelect.trb}}</mat-grid-tile>
+
+  </mat-grid-list>
+  <button class="buttonEdit" mat-mini-fab matTooltip="Editar" value="EditarBuque"
+  (click)="navigateToEdits(buqueSelect.key)"color="primary">
+        <mat-icon>edit</mat-icon>
+      </button></div>
     <mat-form-field>
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">

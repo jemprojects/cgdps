@@ -35,7 +35,7 @@ export class AditionalService {
 
   constructor(private db: AngularFireDatabase) {
     this.banderasRef = db.list('/banderas');
-    this.arboladurasRef = db.list('/arboladuras');
+    this.arboladurasRef = db.list('/arbuladuras');
     this.puertosRef = db.list('/puertos');
     this.girosRef = db.list('/giros');
     this.traficosRef = db.list('/traficos')
@@ -83,7 +83,7 @@ export class AditionalService {
   }
 
 // service Arboladura
-getArboladuras(onBanderasLoaded) {
+getArboladuras(onArboladuraLoaded) {
   this.arboladurasRef
     .snapshotChanges()
     .pipe(
@@ -96,12 +96,12 @@ getArboladuras(onBanderasLoaded) {
       arboladuras.forEach(function(arboladura) {
         listArboladuras.push(new Arboladura(arboladura));
       });
-      onBanderasLoaded(listArboladuras);
+      onArboladuraLoaded(listArboladuras);
     }, this.handleError);
 }
   getArboladura(key: string, onLoaded) {
     return this.db
-      .object(`arboladura/${key}`)
+      .object(`arboladuras/${key}`)
       .snapshotChanges()
       .subscribe(data => onLoaded(data.payload.val()));
   }
