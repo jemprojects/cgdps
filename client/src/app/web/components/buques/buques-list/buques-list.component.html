@@ -37,12 +37,14 @@
       <mat-grid-tile >{{buqueSelect.manga}}</mat-grid-tile>
       <mat-grid-tile >{{buqueSelect.trn}}</mat-grid-tile>
       <mat-grid-tile >{{buqueSelect.trb}}</mat-grid-tile>
+    </mat-grid-list>
 
-  </mat-grid-list>
-  <button class="buttonEdit" mat-mini-fab matTooltip="Editar" value="EditarBuque"
-  (click)="navigateToEdits(buqueSelect.key)"color="primary">
-        <mat-icon>edit</mat-icon>
-      </button></div>
+    <button class="buttonEdit" mat-mini-fab matTooltip="Editar"
+    value="EditarBuque" (click)="navigateToEdits(buqueSelect.key)" color="primary">
+          <mat-icon>edit</mat-icon>
+        </button>
+  </div>
+  <div *ngIf="buqueSelect!=null">
     <mat-form-field>
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
@@ -57,7 +59,7 @@
         <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
         <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
       </table>
-
+    </div>
   </div>
   </form>
   </mat-card>
