@@ -13,7 +13,7 @@ class EntradasController {
 
     public async getOne(req: Request, res: Response): Promise<any> {
         const { id } = req.params;
-        const   entradas = await pool.query('SELECT * FROM entradas WHERE ID = ?', [id]);
+        const   entradas = await pool.query('SELECT * FROM entradas WHERE id = ?', [id]);
         console.log(entradas.length);
         if (    entradas.length > 0) {
             return res.json(    entradas[0]);
@@ -29,13 +29,13 @@ class EntradasController {
     public async update(req: Request, res: Response): Promise<void> {
         const { id } = req.params;
         const oldEntrada = req.body;
-        await pool.query('UPDATE entradas set ? WHERE ID = ?', [req.body, id]);
+        await pool.query('UPDATE entradas set ? WHERE id = ?', [req.body, id]);
         res.json({ message: "The input was Updated" });
     }
 
     public async delete(req: Request, res: Response): Promise<void> {
         const { id } = req.params;
-        await pool.query('DELETE FROM entradas WHERE ID = ?', [id]);
+        await pool.query('DELETE FROM entradas WHERE id = ?', [id]);
         res.json({ message: "The input was deleted" });
     }
 }

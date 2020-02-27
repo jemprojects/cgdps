@@ -10,7 +10,9 @@ class IndexRoutes {
     }
 
     config(): void {
+        this.router.get('/login', indexController.login);
         this.router.get('/', indexController.index);
+        this.router.get('**', indexController.notFound);
     }
 
 }
