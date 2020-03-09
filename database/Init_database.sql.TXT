@@ -1,31 +1,31 @@
-CREATE DATABASE cgpds;
+CREATE DATABASE puertodocksud_appbuques;
 
-USE cgpds;
+USE puertodocksud_appbuques;
 
-CREATE TABLE IF NOT EXISTS `cgpds`.`AGENCIAS` (`ORDEN` int(3), `Agencia` varchar(26), `Cuit` varchar(13), `Direccion` varchar(40), `Telefono` int(7)) ;
-CREATE TABLE IF NOT EXISTS `cgpds`.`ARBOLADURA` (`CODIGO` int(2), `ARBOLADURA` varchar(25)) ;
-CREATE TABLE IF NOT EXISTS `cgpds`.`BANDERA` (`ORDEN` int(2), `Bandera` varchar(16)) ;
-CREATE TABLE IF NOT EXISTS `cgpds`.`BUQUES` (`ORDEN` int(4), `NOMBRE` varchar(30), `BANDERA` int(2), `ARBOLADURA` int(2), `ESLORA` int(5), `MANGA` int(4), `PUNTAL` int(3), `TRN` int(5), `TRB` int(6), `IMO` int(9), `Campo1` int(4)) ;
-CREATE TABLE IF NOT EXISTS `cgpds`.`DOCUMENTO` (`DOCUMENTO` varchar(10), `ID` int(1)) ;
-CREATE TABLE IF NOT EXISTS `cgpds`.`EMP_SERV_PORT` (`id` int(3), `ESP` varchar(44)) ;
-CREATE TABLE IF NOT EXISTS `cgpds`.`EMPRESAS_CARGA` (`ID` int(2), `EMPRESA` varchar(30)) ;
-CREATE TABLE IF NOT EXISTS `cgpds`.`EMPRESAS_DESCARGA` (`ID` int(2), `EMPRESA` varchar(30)) ;
-CREATE TABLE IF NOT EXISTS `cgpds`.`ENTRADAS` (`ID` int(5), `GIRO` int(4), `BUQUE` int(4), `AGENCIA` int(3), `PROCEDENCIA` int(3), `DESTINO` int(3), `ENTRADA` varchar(10), `SALIDA` varchar(10), `MUELLE` int(2), `TRAFICO` int(1), `DOCUMENTO` int(1), `Nº` int(5), `CAL_ENT` int(2), `CAL_SAL` int(1), `ENVASE DESC` varchar(10), `EMPRESAS_DEC` varchar(10), `CARGA` varchar(10), `TNS_CARG` varchar(10), `ENVASE CARG` varchar(10), `EMPRESAS_CAR` varchar(10), `CAL_ENT1` varchar(10), `CAL_SAL1` varchar(10), `TIPO` varchar(10)) ;
-CREATE TABLE IF NOT EXISTS `cgpds`.`ENVASE_CARG` (`ID` int(2), `ENVASE` varchar(14)) ;
-CREATE TABLE IF NOT EXISTS `cgpds`.`ENVASE_DESC` (`ID` int(2), `ENVASE` varchar(14)) ;
-CREATE TABLE IF NOT EXISTS `cgpds`.`Errores_de_pegado` (`GIRO` int(2), `BUQUE` varchar(4), `AGENCIA` varchar(13), `PROCEDENCIA` varchar(10), `DESTINO` varchar(10), `ENTRADA` varchar(10), `SALIDA` varchar(10), `MUELLE` varchar(4), `TRAFICO` varchar(8), `DOCUMENTO` varchar(9), `Nº` int(5), `DESCARGA` varchar(6), `TNS_DES` int(1), `ENVASE DESC` varchar(10), `EMPRESAS_DEC` varchar(10), `CARGA` varchar(22), `TNS_CARG` int(4), `ENVASE CARG` varchar(14), `EMPRESAS_CAR` varchar(11), `CAL_ENT` int(1), `CAL_SAL` int(1), `TIPO` varchar(6)) ;
-CREATE TABLE IF NOT EXISTS `cgpds`.`ESP` (`id` int(5), `EMP SERV POR` int(3), `RUBRO` int(2), `EMPRESA` int(5)) ;
-CREATE TABLE IF NOT EXISTS `cgpds`.`GIROS` (`ORDEN` int(2), `MUELLE` varchar(10), `SECTOR` varchar(10)) ;
-CREATE TABLE IF NOT EXISTS `cgpds`.`MERCADERIAS` (`ORDEN` int(3), `TIPO` varchar(44)) ;
-CREATE TABLE IF NOT EXISTS `cgpds`.`OPERACION` (`Id` int(4), `MERCADERIA` int(3), `TNS` varchar(11), `TIPO` int(2), `giro_id` int(5)) ;
-CREATE TABLE IF NOT EXISTS `cgpds`.`PUERTOS` (`ORDEN` int(3), `Puerto` varchar(22), `Pais` varchar(20)) ;
-CREATE TABLE IF NOT EXISTS `cgpds`.`PUERTOS1` (`ORDEN` int(3), `Puerto` varchar(22), `Pais` varchar(19)) ;
-CREATE TABLE IF NOT EXISTS `cgpds`.`RUBRO_ESP` (`ID` int(2), `RUBRO ESP` varchar(40)) ;
-CREATE TABLE IF NOT EXISTS `cgpds`.`TIPO` (`Id` int(2), `TIPO` varchar(10)) ;
-CREATE TABLE IF NOT EXISTS `cgpds`.`TRAFICO` (`ID` int(1), `TRAFICO` varchar(12)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`AGENCIAS` (`ORDEN` int(3), `Agencia` varchar(26), `Cuit` varchar(13), `Direccion` varchar(40), `Telefono` int(7)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`ARBOLADURA` (`CODIGO` int(2), `ARBOLADURA` varchar(25)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`BANDERA` (`ORDEN` int(2), `Bandera` varchar(16)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`BUQUES` (`ORDEN` int(4), `NOMBRE` varchar(30), `BANDERA` int(2), `ARBOLADURA` int(2), `ESLORA` int(5), `MANGA` int(4), `PUNTAL` int(3), `TRN` int(5), `TRB` int(6), `IMO` int(9), `Campo1` int(4)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`DOCUMENTO` (`DOCUMENTO` varchar(10), `ID` int(1)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`EMP_SERV_PORT` (`id` int(3), `ESP` varchar(44)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`EMPRESAS_CARGA` (`ID` int(2), `EMPRESA` varchar(30)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`EMPRESAS_DESCARGA` (`ID` int(2), `EMPRESA` varchar(30)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`ENTRADAS` (`ID` int(5), `GIRO` int(4), `BUQUE` int(4), `AGENCIA` int(3), `PROCEDENCIA` int(3), `DESTINO` int(3), `ENTRADA` varchar(10), `SALIDA` varchar(10), `MUELLE` int(2), `TRAFICO` int(1), `DOCUMENTO` int(1), `Nº` int(5), `CAL_ENT` int(2), `CAL_SAL` int(1), `ENVASE DESC` varchar(10), `EMPRESAS_DEC` varchar(10), `CARGA` varchar(10), `TNS_CARG` varchar(10), `ENVASE CARG` varchar(10), `EMPRESAS_CAR` varchar(10), `CAL_ENT1` varchar(10), `CAL_SAL1` varchar(10), `TIPO` varchar(10)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`ENVASE_CARG` (`ID` int(2), `ENVASE` varchar(14)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`ENVASE_DESC` (`ID` int(2), `ENVASE` varchar(14)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`Errores_de_pegado` (`GIRO` int(2), `BUQUE` varchar(4), `AGENCIA` varchar(13), `PROCEDENCIA` varchar(10), `DESTINO` varchar(10), `ENTRADA` varchar(10), `SALIDA` varchar(10), `MUELLE` varchar(4), `TRAFICO` varchar(8), `DOCUMENTO` varchar(9), `Nº` int(5), `DESCARGA` varchar(6), `TNS_DES` int(1), `ENVASE DESC` varchar(10), `EMPRESAS_DEC` varchar(10), `CARGA` varchar(22), `TNS_CARG` int(4), `ENVASE CARG` varchar(14), `EMPRESAS_CAR` varchar(11), `CAL_ENT` int(1), `CAL_SAL` int(1), `TIPO` varchar(6)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`ESP` (`id` int(5), `EMP SERV POR` int(3), `RUBRO` int(2), `EMPRESA` int(5)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`GIROS` (`ORDEN` int(2), `MUELLE` varchar(10), `SECTOR` varchar(10)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`MERCADERIAS` (`ORDEN` int(3), `TIPO` varchar(44)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`OPERACION` (`Id` int(4), `MERCADERIA` int(3), `TNS` varchar(11), `TIPO` int(2), `giro_id` int(5)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`PUERTOS` (`ORDEN` int(3), `Puerto` varchar(22), `Pais` varchar(20)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`PUERTOS1` (`ORDEN` int(3), `Puerto` varchar(22), `Pais` varchar(19)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`RUBRO_ESP` (`ID` int(2), `RUBRO ESP` varchar(40)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`TIPO` (`Id` int(2), `TIPO` varchar(10)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`TRAFICO` (`ID` int(1), `TRAFICO` varchar(12)) ;
 
-INSERT INTO `cgpds`.`DOCUMENTO` (`ID`,`DOCUMENTO`) VALUES (2, `PASAVANTE`), (3, `NO INGRESO`),(4, `NO INGRESO`)
-INSERT INTO `cgpds`.`AGENCIAS` (`ORDEN`, `Agencia`, `Cuit`, `Direccion`, `Telefono`) VALUES (1, 'SHIPS', NULL, 'Piedras 77 6º (1002) C.F.', 3421958),
+INSERT INTO `puertodocksud_appbuques`.`DOCUMENTO` (`ID`,`DOCUMENTO`) VALUES (2, `PASAVANTE`), (3, `NO INGRESO`),(4, `NO INGRESO`)
+INSERT INTO `puertodocksud_appbuques`.`AGENCIAS` (`ORDEN`, `Agencia`, `Cuit`, `Direccion`, `Telefono`) VALUES (1, 'SHIPS', NULL, 'Piedras 77 6º (1002) C.F.', 3421958),
  (7, 'ARGOCEAN S.A.', NULL, 'Maipu 471 12º (1376) C.F.', 3947111),
  (10, 'BATTISTA S.A.', NULL, 'Avda. Patricios 118 5º Of. G (1265) C.F.', 3102300),
  (13, 'CROCE HNOS.', NULL, 'Caboto 591 (1157) C.F.', 3627792),
@@ -83,8 +83,8 @@ INSERT INTO `cgpds`.`AGENCIAS` (`ORDEN`, `Agencia`, `Cuit`, `Direccion`, `Telefo
  (146, 'ONE', NULL, NULL, 0),
  (147, 'AMI', NULL, NULL, 0);
 
- INSERT INTO `cgpds`.`ARBOLADURA` (`CODIGO`, `ARBOLADURA`) VALUES (1, 'BUQUE CARGA GENERAL'), (3, 'BUQUE TANQUE'), (6, 'BUQUE PORTACONTENEDORES'), (7, 'BUQUE GASERO'), (9, 'BUQUE QUIMICOS'), (12, 'BARCAZA TANQUE'), (13, 'REMOLCADOR'), (14, 'GRUA FLOTANTE'), (15, 'BUQUE ARENERO'), (16, 'PONTON'), (17, 'DRAGA'), (18, 'BARCAZA PORTACONTENEDORES'), (19, 'BUQUE MOTOR'), (23, 'BUQUE TANQUE QUIMIQUERO'), (24, 'BUQUE AGUATERO');
- INSERT INTO `cgpds`.`BANDERA` (`ORDEN`, `Bandera`) VALUES (1, 'ALEMANA'),
+ INSERT INTO `puertodocksud_appbuques`.`ARBOLADURA` (`CODIGO`, `ARBOLADURA`) VALUES (1, 'BUQUE CARGA GENERAL'), (3, 'BUQUE TANQUE'), (6, 'BUQUE PORTACONTENEDORES'), (7, 'BUQUE GASERO'), (9, 'BUQUE QUIMICOS'), (12, 'BARCAZA TANQUE'), (13, 'REMOLCADOR'), (14, 'GRUA FLOTANTE'), (15, 'BUQUE ARENERO'), (16, 'PONTON'), (17, 'DRAGA'), (18, 'BARCAZA PORTACONTENEDORES'), (19, 'BUQUE MOTOR'), (23, 'BUQUE TANQUE QUIMIQUERO'), (24, 'BUQUE AGUATERO');
+ INSERT INTO `puertodocksud_appbuques`.`BANDERA` (`ORDEN`, `Bandera`) VALUES (1, 'ALEMANA'),
  (2, 'ANTIGUA'),
  (3, 'ANTILLAS'),
  (4, 'ARGELIA'),
@@ -171,7 +171,7 @@ INSERT INTO `cgpds`.`AGENCIAS` (`ORDEN`, `Agencia`, `Cuit`, `Direccion`, `Telefo
  (88, 'DINAMARCA'),
  (89, 'BARBADOS');
 
-INSERT INTO `cgpds`.`BUQUES` (`ORDEN`, `NOMBRE`, `BANDERA`, `ARBOLADURA`, `ESLORA`, `MANGA`, `PUNTAL`, `TRN`, `TRB`, `IMO`, `Campo1`) VALUES (27, 'ESTRELLA DEL PARANA', 5, 3, 109, 20, NULL, 1720, NULL, NULL, NULL),
+INSERT INTO `puertodocksud_appbuques`.`BUQUES` (`ORDEN`, `NOMBRE`, `BANDERA`, `ARBOLADURA`, `ESLORA`, `MANGA`, `PUNTAL`, `TRN`, `TRB`, `IMO`, `Campo1`) VALUES (27, 'ESTRELLA DEL PARANA', 5, 3, 109, 20, NULL, 1720, NULL, NULL, NULL),
  (28, 'ESTRELLA AUSTRAL', 5, 3, 197, 32, NULL, 15795, NULL, NULL, NULL),
  (30, 'SEALAND URUGUAY', 1, 6, 206, 30, NULL, 12275, NULL, NULL, NULL),
  (31, 'PARANA FEEDER', 51, 6, 81, 12, NULL, 328, NULL, NULL, NULL),
@@ -2523,7 +2523,7 @@ INSERT INTO `cgpds`.`BUQUES` (`ORDEN`, `NOMBRE`, `BANDERA`, `ARBOLADURA`, `ESLOR
  (3060, 'BOW NEON', 81, 3, 165, 26, 13, 8365, 17139, 9777369, NULL),
  (3061, 'CHESHIRE', 40, 3, 174, 28, 17, 6909, 23032, 9369772, NULL);
 
- INSERT INTO `cgpds`.`EMP_SERV_PORT` (`id`, `ESP`) VALUES (1, 'EXOLGAN'),
+ INSERT INTO `puertodocksud_appbuques`.`EMP_SERV_PORT` (`id`, `ESP`) VALUES (1, 'EXOLGAN'),
  (2, 'PRACTICAJE Y PILOTAJE'),
  (3, 'ANTARES'),
  (5, 'SAMBA S.A.'),
@@ -2617,11 +2617,11 @@ INSERT INTO `cgpds`.`BUQUES` (`ORDEN`, `NOMBRE`, `BANDERA`, `ARBOLADURA`, `ESLOR
  (107, 'SVITSER REMOLQUES'),
  (108, 'COOPERATIVA AZOPARDO');
 
-INSERT INTO `cgpds`.`EMPRESAS_CARGA` (`ID`, `EMPRESA`) VALUES (1, 'SHELL CAPSA'), (2, 'ORVOL'), (3, 'YPF'), (5, 'DAPSA'), (6, 'PETROBRAS'), (7, 'EXOLGAN'), (8, 'LOGINTER S.A.'), (9, 'TRANSPORTES FLUVIALES JILGUERO'), (10, 'PETRORIO'), (11, 'TAGSA'), (12, 'DECOSUR'), (13, 'JILGUERO'), (14, 'HAPAG LLOYD'), (15, 'BLINKI'), (16, 'ULTRAMAR'), (17, 'CSAV'), (18, 'MSC'), (19, 'DELFINO'), (20, 'GRIMALDI'), (24, 'MERANOL S.A.'), (25, 'SIDERAR'), (26, 'BBC NORDKAP'), (27, 'ANTIVARI'), (28, 'PETROLERA DEL CONOSUR'), (29, 'PROPANEROS'), (30, 'ARENERA TIMOR'), (31, 'CINTRA SRL');
+INSERT INTO `puertodocksud_appbuques`.`EMPRESAS_CARGA` (`ID`, `EMPRESA`) VALUES (1, 'SHELL CAPSA'), (2, 'ORVOL'), (3, 'YPF'), (5, 'DAPSA'), (6, 'PETROBRAS'), (7, 'EXOLGAN'), (8, 'LOGINTER S.A.'), (9, 'TRANSPORTES FLUVIALES JILGUERO'), (10, 'PETRORIO'), (11, 'TAGSA'), (12, 'DECOSUR'), (13, 'JILGUERO'), (14, 'HAPAG LLOYD'), (15, 'BLINKI'), (16, 'ULTRAMAR'), (17, 'CSAV'), (18, 'MSC'), (19, 'DELFINO'), (20, 'GRIMALDI'), (24, 'MERANOL S.A.'), (25, 'SIDERAR'), (26, 'BBC NORDKAP'), (27, 'ANTIVARI'), (28, 'PETROLERA DEL CONOSUR'), (29, 'PROPANEROS'), (30, 'ARENERA TIMOR'), (31, 'CINTRA SRL');
 
-INSERT INTO `cgpds`.`EMPRESAS_DESCARGA` (`ID`, `EMPRESA`) VALUES (1, 'SHELL CAPSA'), (2, 'ORVOL'), (3, 'YPF'), (5, 'DAPSA'), (6, 'PETROBRAS'), (7, 'EXOLGAN'), (8, 'LOGINTER S.A.'), (9, 'TRANSPORTES FLUVIALES JILGUERO'), (10, 'PETRORIO'), (11, 'TAGSA'), (12, 'DECOSUR'), (13, 'JILGUERO'), (14, 'HAPAG LLOYD'), (15, 'BLINKI'), (16, 'ULTRAMAR'), (17, 'CSAV'), (18, 'MSC'), (19, 'DELFINO'), (20, 'GRIMALDI'), (24, 'MERANOL S.A.'), (25, 'SIDERAR'), (26, 'BBC NORDKAP'), (27, 'ANTIVARI'), (28, 'PETROLERA DEL CONOSUR'), (29, 'PROPANEROS'), (30, 'ARENERA TIMOR'), (31, 'CINTRA SRL');
+INSERT INTO `puertodocksud_appbuques`.`EMPRESAS_DESCARGA` (`ID`, `EMPRESA`) VALUES (1, 'SHELL CAPSA'), (2, 'ORVOL'), (3, 'YPF'), (5, 'DAPSA'), (6, 'PETROBRAS'), (7, 'EXOLGAN'), (8, 'LOGINTER S.A.'), (9, 'TRANSPORTES FLUVIALES JILGUERO'), (10, 'PETRORIO'), (11, 'TAGSA'), (12, 'DECOSUR'), (13, 'JILGUERO'), (14, 'HAPAG LLOYD'), (15, 'BLINKI'), (16, 'ULTRAMAR'), (17, 'CSAV'), (18, 'MSC'), (19, 'DELFINO'), (20, 'GRIMALDI'), (24, 'MERANOL S.A.'), (25, 'SIDERAR'), (26, 'BBC NORDKAP'), (27, 'ANTIVARI'), (28, 'PETROLERA DEL CONOSUR'), (29, 'PROPANEROS'), (30, 'ARENERA TIMOR'), (31, 'CINTRA SRL');
 
-INSERT INTO `cgpds`.`ENTRADAS` (`ID`, `GIRO`, `BUQUE`, `AGENCIA`, `PROCEDENCIA`, `DESTINO`, `ENTRADA`, `SALIDA`, `MUELLE`, `TRAFICO`, `DOCUMENTO`, `Nº`, `CAL_ENT`, `CAL_SAL`, `ENVASE DESC`, `EMPRESAS_DEC`, `CARGA`, `TNS_CARG`, `ENVASE CARG`, `EMPRESAS_CAR`, `CAL_ENT1`, `CAL_SAL1`, `TIPO`) VALUES (13118, 1, 2707, 139, 110, 42, '01/01/2019', '03/01/2019', 1, 2, 2, 44670, 9, 9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+INSERT INTO `puertodocksud_appbuques`.`ENTRADAS` (`ID`, `GIRO`, `BUQUE`, `AGENCIA`, `PROCEDENCIA`, `DESTINO`, `ENTRADA`, `SALIDA`, `MUELLE`, `TRAFICO`, `DOCUMENTO`, `Nº`, `CAL_ENT`, `CAL_SAL`, `ENVASE DESC`, `EMPRESAS_DEC`, `CARGA`, `TNS_CARG`, `ENVASE CARG`, `EMPRESAS_CAR`, `CAL_ENT1`, `CAL_SAL1`, `TIPO`) VALUES (13118, 1, 2707, 139, 110, 42, '01/01/2019', '03/01/2019', 1, 2, 2, 44670, 9, 9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
  (13119, 2, 2387, 49, 54, 54, '01/01/2019', '02/01/2019', 18, 3, 2, 44669, 4, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
  (13120, 3, 1805, 7, 57, 3, '02/01/2019', '03/01/2019', 20, 3, 2, 44674, 5, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
  (13121, 4, 2349, 131, 110, 106, '02/01/2019', '05/01/2019', 6, 4, 2, 44671, 8, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -3830,13 +3830,13 @@ INSERT INTO `cgpds`.`ENTRADAS` (`ID`, `GIRO`, `BUQUE`, `AGENCIA`, `PROCEDENCIA`,
  (14335, 1207, 2855, 37, 248, 248, '01/11/2019', '02/11/2019', 1, 3, 0, 45766, 3, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
  (14336, 1208, 2494, 37, 248, 248, '01/11/2019', '02/11/2019', 1, 3, 0, 45767, 3, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
- INSERT INTO `cgpds`.`ENVASE_CARG` (`ID`, `ENVASE`) VALUES (1, 'GRANEL LIQUIDO'), (2, 'GRANEL SOLIDO'), (3, 'BULTO'), (4, 'CONTENEDOR'), (5, 'MAQUINARIA'), (8, 'VARIOS'), (10, 'VAGONES'), (11, 'PIEZA'), (12, 'PAQUETES'), (13, 'ATADOS');
+ INSERT INTO `puertodocksud_appbuques`.`ENVASE_CARG` (`ID`, `ENVASE`) VALUES (1, 'GRANEL LIQUIDO'), (2, 'GRANEL SOLIDO'), (3, 'BULTO'), (4, 'CONTENEDOR'), (5, 'MAQUINARIA'), (8, 'VARIOS'), (10, 'VAGONES'), (11, 'PIEZA'), (12, 'PAQUETES'), (13, 'ATADOS');
 
- INSERT INTO `cgpds`.`ENVASE_DESC` (`ID`, `ENVASE`) VALUES (1, 'GRANEL LIQUIDO'), (2, 'GRANEL SOLIDO'), (3, 'BULTO'), (4, 'CONTENEDOR'), (5, 'MAQUINARIA'), (8, 'VARIOS'), (10, 'VAGONES'), (11, 'PIEZA'), (12, 'PAQUETES'), (13, 'ATADOS');
+ INSERT INTO `puertodocksud_appbuques`.`ENVASE_DESC` (`ID`, `ENVASE`) VALUES (1, 'GRANEL LIQUIDO'), (2, 'GRANEL SOLIDO'), (3, 'BULTO'), (4, 'CONTENEDOR'), (5, 'MAQUINARIA'), (8, 'VARIOS'), (10, 'VAGONES'), (11, 'PIEZA'), (12, 'PAQUETES'), (13, 'ATADOS');
 
- INSERT INTO `cgpds`.`Errores_de_pegado` (`GIRO`, `BUQUE`, `AGENCIA`, `PROCEDENCIA`, `DESTINO`, `ENTRADA`, `SALIDA`, `MUELLE`, `TRAFICO`, `DOCUMENTO`, `Nº`, `DESCARGA`, `TNS_DES`, `ENVASE DESC`, `EMPRESAS_DEC`, `CARGA`, `TNS_CARG`, `ENVASE CARG`, `EMPRESAS_CAR`, `CAL_ENT`, `CAL_SAL`, `TIPO`) VALUES (11, 'NANY', 'BATTISTA S.A.', 'ZONA COMUN', 'ZONA COMUN', NULL, '03/01/2019', 'A/24', 'CABOTAJE', 'PASAVANTE', 44673, 'LASTRE', 0, NULL, NULL, 'DERIVADOS DEL PETROLEO', 1750, 'GRANEL LIQUIDO', 'SHELL CAPSA', 3, 4, 'REMO S');
+ INSERT INTO `puertodocksud_appbuques`.`Errores_de_pegado` (`GIRO`, `BUQUE`, `AGENCIA`, `PROCEDENCIA`, `DESTINO`, `ENTRADA`, `SALIDA`, `MUELLE`, `TRAFICO`, `DOCUMENTO`, `Nº`, `DESCARGA`, `TNS_DES`, `ENVASE DESC`, `EMPRESAS_DEC`, `CARGA`, `TNS_CARG`, `ENVASE CARG`, `EMPRESAS_CAR`, `CAL_ENT`, `CAL_SAL`, `TIPO`) VALUES (11, 'NANY', 'BATTISTA S.A.', 'ZONA COMUN', 'ZONA COMUN', NULL, '03/01/2019', 'A/24', 'CABOTAJE', 'PASAVANTE', 44673, 'LASTRE', 0, NULL, NULL, 'DERIVADOS DEL PETROLEO', 1750, 'GRANEL LIQUIDO', 'SHELL CAPSA', 3, 4, 'REMO S');
 
- INSERT INTO `cgpds`.`ESP` (`id`, `EMP SERV POR`, `RUBRO`, `EMPRESA`) VALUES (1, 1, 1, 5),
+ INSERT INTO `puertodocksud_appbuques`.`ESP` (`id`, `EMP SERV POR`, `RUBRO`, `EMPRESA`) VALUES (1, 1, 1, 5),
  (2, 2, 2, 5),
  (3, 3, 7, 5),
  (4, 1, 6, 5),
@@ -19776,9 +19776,9 @@ INSERT INTO `cgpds`.`ENTRADAS` (`ID`, `GIRO`, `BUQUE`, `AGENCIA`, `PROCEDENCIA`,
  (15960, 25, 7, 13112),
  (15961, 80, 6, 13112);
 
- INSERT INTO `cgpds`.`GIROS` (`ORDEN`, `MUELLE`, `SECTOR`) VALUES (1, 'EXOLGAN', 'OESTE'), (2, '8', 'OESTE'), (3, '9', 'OESTE'), (4, '10', 'OESTE'), (5, '11', 'OESTE'), (6, '12', 'OESTE'), (7, '13', 'OESTE'), (8, '14', 'OESTE'), (9, 'A/15', 'ESTE'), (10, 'A/16', 'ESTE'), (11, 'B/17', 'ESTE'), (12, 'C/18', 'ESTE'), (13, 'D/19', 'ESTE'), (14, 'E/20', 'ESTE'), (15, 'F/21', 'ESTE'), (16, '7', 'ESTE'), (17, 'A/24', 'DDI'), (18, 'A/25', 'DDI'), (19, 'B/26', 'DDI'), (20, 'C/27', 'DDI'), (21, 'D/28', 'DDI'), (22, 'E/29', 'DDI'), (23, 'F/30', 'DDI'), (24, 'PROP.', 'DDP'), (25, 'RIACH.', 'RIACHUELO'), (26, 'NO INGRESO', 'NO INGRESO'), (27, 'ASTILLERO', 'SANYM'), (28, '22', 'ARENERA');
+ INSERT INTO `puertodocksud_appbuques`.`GIROS` (`ORDEN`, `MUELLE`, `SECTOR`) VALUES (1, 'EXOLGAN', 'OESTE'), (2, '8', 'OESTE'), (3, '9', 'OESTE'), (4, '10', 'OESTE'), (5, '11', 'OESTE'), (6, '12', 'OESTE'), (7, '13', 'OESTE'), (8, '14', 'OESTE'), (9, 'A/15', 'ESTE'), (10, 'A/16', 'ESTE'), (11, 'B/17', 'ESTE'), (12, 'C/18', 'ESTE'), (13, 'D/19', 'ESTE'), (14, 'E/20', 'ESTE'), (15, 'F/21', 'ESTE'), (16, '7', 'ESTE'), (17, 'A/24', 'DDI'), (18, 'A/25', 'DDI'), (19, 'B/26', 'DDI'), (20, 'C/27', 'DDI'), (21, 'D/28', 'DDI'), (22, 'E/29', 'DDI'), (23, 'F/30', 'DDI'), (24, 'PROP.', 'DDP'), (25, 'RIACH.', 'RIACHUELO'), (26, 'NO INGRESO', 'NO INGRESO'), (27, 'ASTILLERO', 'SANYM'), (28, '22', 'ARENERA');
 
- INSERT INTO `cgpds`.`MERCADERIAS` (`ORDEN`, `TIPO`) VALUES (1, 'CONTENEDORES'),
+ INSERT INTO `puertodocksud_appbuques`.`MERCADERIAS` (`ORDEN`, `TIPO`) VALUES (1, 'CONTENEDORES'),
  (2, 'COMBUSTIBLES LIQUIDOS'),
  (3, 'PETROLEO CRUDO'),
  (4, 'DERIVADOS DEL PETROLEO'),
@@ -19885,7 +19885,7 @@ INSERT INTO `cgpds`.`ENTRADAS` (`ID`, `GIRO`, `BUQUE`, `AGENCIA`, `PROCEDENCIA`,
  (206, NULL),
  (207, 'STAR CRUDO');
 
- INSERT INTO `cgpds`.`OPERACION` (`Id`, `MERCADERIA`, `TNS`, `TIPO`, `giro_id`) VALUES (1373, 1, '2000', 12, 13118),
+ INSERT INTO `puertodocksud_appbuques`.`OPERACION` (`Id`, `MERCADERIA`, `TNS`, `TIPO`, `giro_id`) VALUES (1373, 1, '2000', 12, 13118),
  (1374, 1, '2000', 13, 13118),
  (1375, 95, '1026,280029', 15, 13119),
  (1376, 95, '2102,290039', 15, 13120),
@@ -21953,7 +21953,7 @@ INSERT INTO `cgpds`.`ENTRADAS` (`ID`, `GIRO`, `BUQUE`, `AGENCIA`, `PROCEDENCIA`,
  (3445, 1, '300', 16, 14336),
  (3446, 1, '360', 16, 14336);
 
- INSERT INTO `cgpds`.`PUERTOS` (`ORDEN`, `Puerto`, `Pais`) VALUES (1, 'BUENOS AIRES', 'ARGENTINA'),
+ INSERT INTO `puertodocksud_appbuques`.`PUERTOS` (`ORDEN`, `Puerto`, `Pais`) VALUES (1, 'BUENOS AIRES', 'ARGENTINA'),
  (2, 'CAMPANA', 'ARGENTINA'),
  (3, 'LA PLATA', 'ARGENTINA'),
  (4, 'ARROYO SECO', 'ARGENTINA'),
@@ -22429,7 +22429,7 @@ INSERT INTO `cgpds`.`ENTRADAS` (`ID`, `GIRO`, `BUQUE`, `AGENCIA`, `PROCEDENCIA`,
  (547, 'TANGER', 'MARRUECOS'),
  (548, 'MAPUTO', 'MOZAMBIQUE');
 
- INSERT INTO `cgpds`.`PUERTOS` (`ORDEN`, `Puerto`, `Pais`) VALUES (1, 'BUENOS AIRES', 'ARGENTINA'),
+ INSERT INTO `puertodocksud_appbuques`.`PUERTOS` (`ORDEN`, `Puerto`, `Pais`) VALUES (1, 'BUENOS AIRES', 'ARGENTINA'),
  (2, 'CAMPANA', 'ARGENTINA'),
  (3, 'LA PLATA', 'ARGENTINA'),
  (4, 'ARROYO SECO', 'ARGENTINA'),
@@ -22905,7 +22905,7 @@ INSERT INTO `cgpds`.`ENTRADAS` (`ID`, `GIRO`, `BUQUE`, `AGENCIA`, `PROCEDENCIA`,
  (547, 'TANGER', 'MARRUECOS'),
  (548, 'MAPUTO', 'MOZAMBIQUE');
 
- INSERT INTO `cgpds`.`PUERTOS1` (`ORDEN`, `Puerto`, `Pais`) VALUES (1, 'BUENOS AIRES', 'ARGENTINA'),
+ INSERT INTO `puertodocksud_appbuques`.`PUERTOS1` (`ORDEN`, `Puerto`, `Pais`) VALUES (1, 'BUENOS AIRES', 'ARGENTINA'),
  (2, 'CAMPANA', 'ARGENTINA'),
  (3, 'LA PLATA', 'ARGENTINA'),
  (4, 'ARROYO SECO', 'ARGENTINA'),
@@ -23330,8 +23330,8 @@ INSERT INTO `cgpds`.`ENTRADAS` (`ID`, `GIRO`, `BUQUE`, `AGENCIA`, `PROCEDENCIA`,
  (472, 'PUERTO ROSALES', 'ARGENTINA'),
  (473, 'PUNTA PEREIRA', 'URUGUAY');
 
- INSERT INTO `cgpds`.`RUBRO_ESP` (`ID`, `RUBRO ESP`) VALUES (1, 'ESTIBAJE'), (2, 'PRACTICAJE'), (3, 'PROV. RANCHO'), (4, 'PROV. COMBUS.'), (5, 'PROV. AGUA'), (6, 'AMARRADORES'), (7, 'REMOLQUES'), (12, 'TRANSPORTE RESIDUOS PELIGROSO/ESPECIALES');
+ INSERT INTO `puertodocksud_appbuques`.`RUBRO_ESP` (`ID`, `RUBRO ESP`) VALUES (1, 'ESTIBAJE'), (2, 'PRACTICAJE'), (3, 'PROV. RANCHO'), (4, 'PROV. COMBUS.'), (5, 'PROV. AGUA'), (6, 'AMARRADORES'), (7, 'REMOLQUES'), (12, 'TRANSPORTE RESIDUOS PELIGROSO/ESPECIALES');
 
- INSERT INTO `cgpds`.`TIPO` (`Id`, `TIPO`) VALUES (12, 'IMPO'), (13, 'EXPO'), (14, 'REMO E'), (15, 'REMO S'), (16, 'TRANSBORDO');
+ INSERT INTO `puertodocksud_appbuques`.`TIPO` (`Id`, `TIPO`) VALUES (12, 'IMPO'), (13, 'EXPO'), (14, 'REMO E'), (15, 'REMO S'), (16, 'TRANSBORDO');
 
- INSERT INTO `cgpds`.`TRAFICO` (`ID`, `TRAFICO`) VALUES (2, 'ULTRAMAR'), (3, 'CABOTAJE'), (4, 'CAB MTMO INT'), (5, 'NO INGRESO');
+ INSERT INTO `puertodocksud_appbuques`.`TRAFICO` (`ID`, `TRAFICO`) VALUES (2, 'ULTRAMAR'), (3, 'CABOTAJE'), (4, 'CAB MTMO INT'), (5, 'NO INGRESO');

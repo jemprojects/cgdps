@@ -29,7 +29,7 @@ class PuertosController {
     public async update(req: Request, res: Response): Promise<void> {
         const { id } = req.params;
         const oldpuerto = req.body;
-        await pool.query('UPDATE puertos set ? WHERE orden = ?', [req.body, id]);
+        await pool.query('UPDATE puertos set ? WHERE ORDEN = ?', [req.body, id]);
         res.json({ message: "The puerto was Updated" });
     }
 

@@ -29,7 +29,7 @@ class MercaderiasController {
     public async update(req: Request, res: Response): Promise<void> {
         const { id } = req.params;
         const oldmercaderia = req.body;
-        await pool.query('UPDATE mercaderias set ? WHERE orden = ?', [req.body, id]);
+        await pool.query('UPDATE mercaderias set ? WHERE ORDEN = ?', [req.body, id]);
         res.json({ message: "The mercaderia was Updated" });
     }
 

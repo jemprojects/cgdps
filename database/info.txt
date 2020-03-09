@@ -1,40 +1,19 @@
-"ng": "ng",
-    "standardize": "prettier **/*.ts --write",
-    "start": "npm run standardize && ng serve --port 5001",
-    "build": "npm run standardize && ng build",
-    "build-production": "npm run standardize && ng build --prod",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
-    "deploy-dev": "npm run build",
-    "deploy-produccion": "npm run build-production"
-
-
-"devDependencies": {
-    "@angular-devkit/build-angular": "~0.13.0",
-    "@angular/cli": "~7.3.8",
-    "@angular/compiler-cli": "~7.2.0",
-    "@angular/language-service": "~7.2.0",
-    "@types/jasmine": "~2.8.8",
-    "@types/jasminewd2": "~2.0.3",
-    "@types/node": "~8.9.4",
-    "codelyzer": "~4.5.0",
-    "jasmine-core": "~2.99.1",
-    "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~4.0.0",
-    "karma-chrome-launcher": "~2.2.0",
-    "karma-coverage-istanbul-reporter": "~2.0.1",
-    "karma-jasmine": "~1.1.2",
-    "karma-jasmine-html-reporter": "^0.2.2",
-    "prettier": "^1.17.0",
-    "protractor": "~5.4.0",
-    "ts-node": "~7.0.0",
-    "tslint": "~5.11.0",
-    "typescript": "~3.2.2"
-  },
-  "prettier": {
-    "printWidth": 90,
-    "semi": false,
-    "singleQuote": true,
-    "trailingComma": "es5"
-  }
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`agencias` (`orden` int(3), `agencia` varchar(26), `cuit` varchar(13), `direccion` varchar(40), `telefono` int(7)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`arboladura` (`codigo` int(2), `arboladura` varchar(25)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`bandera` (`orden` int(2), `bandera` varchar(16)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`buques` (`orden` int(4), `nombre` varchar(30), `bandera` int(2), `arboladura` int(2), `eslora` int(5), `manga` int(4), `puntal` int(3), `trn` int(5), `trb` int(6), `imo` int(9), `campo1` int(4)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`documento` (`documento` varchar(10), `id` int(1)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`emp_serv_port` (`id` int(3), `esp` varchar(44)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`empresas_carg` (`id` int(2), `empresa` varchar(30)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`empresas_desc` (`id` int(2), `empresa` varchar(30)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`entradas` (`id` int(5), `GIRO` int(4), `buque` int(4), `agencia` int(3), `procendencia` int(3), `destino` int(3), `entrada` varchar(10), `salida` varchar(10), `muelle` int(2), `trafico` int(1), `documento` int(1), `nroPasavante` int(5), `cal_ent` int(2), `cal_sal` int(1), `envase_desc` varchar(10), `empresas_desc` varchar(10), `carga` varchar(10), `tns_carga` varchar(10), `envase_carg` varchar(10), `empresas_car` varchar(10), `cal_ent1` varchar(10), `cal_sal1` varchar(10), `tipo` varchar(10)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`envase_carg` (`id` int(2), `envase` varchar(14)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`envase_desc` (`id` int(2), `envase` varchar(14)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`esp` (`id` int(5), `emp_serv_port` int(3), `rubro` int(2), `empresa` int(5), `giro_id` int(5)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`giros` (`orden` int(2), `muelle` varchar(10), `sector` varchar(10)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`mercaderias` (`orden` int(3), `tipo` varchar(44)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`operaciones` (`id` int(4), `mercaderia` int(3), `TNS` varchar(11), `tipo` int(2), `giro_id` int(5)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`puertos` (`orden` int(3), `puerto` varchar(22), `pais` varchar(20)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`rubros_esp` (`id` int(2), `rubro esp` varchar(40)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`tipo` (`id` int(2), `tipo` varchar(10)) ;
+CREATE TABLE IF NOT EXISTS `puertodocksud_appbuques`.`trafico` (`id` int(1), `trafico` varchar(12)) ;

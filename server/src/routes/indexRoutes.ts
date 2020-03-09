@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import entradasController from '../controllers/entradasController';
 import { indexController } from '../controllers/indexController';
 
 class IndexRoutes {
@@ -10,9 +11,9 @@ class IndexRoutes {
     }
 
     config(): void {
-        this.router.get('/login', indexController.login);
+        this.router.get('/login', indexController.list);
         this.router.get('/', indexController.index);
-        this.router.get('**', indexController.notFound);
+        this.router.get('/entradas', entradasController.list);
     }
 
 }

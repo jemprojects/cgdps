@@ -13,7 +13,7 @@ class DocumentosController {
 
     public async getOne(req: Request, res: Response): Promise<any> {
         const { id } = req.params;
-        const documentos = await pool.query('SELECT * FROM documentos WHERE ORDEN = ?', [id]);
+        const documentos = await pool.query('SELECT * FROM documentos WHERE ID = ?', [id]);
         console.log(documentos.length);
         if (documentos.length > 0) {
             return res.json(documentos[0]);
@@ -29,13 +29,13 @@ class DocumentosController {
     public async update(req: Request, res: Response): Promise<void> {
         const { id } = req.params;
         const olddocumento = req.body;
-        await pool.query('UPDATE documentos set ? WHERE otden = ?', [req.body, id]);
+        await pool.query('UPDATE documentos set ? WHERE ID = ?', [req.body, id]);
         res.json({ message: "The documento was Updated" });
     }
 
     public async delete(req: Request, res: Response): Promise<void> {
         const { id } = req.params;
-        await pool.query('DELETE FROM documentos WHERE ORDEN = ?', [id]);
+        await pool.query('DELETE FROM documentos WHERE ID = ?', [id]);
         res.json({ message: "The documento was deleted" });
     }
 }

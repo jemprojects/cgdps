@@ -29,7 +29,7 @@ class AgenciasController {
     public async update(req: Request, res: Response): Promise<void> {
         const { id } = req.params;
         const oldagencia = req.body;
-        await pool.query('UPDATE agencias set ? WHERE otden = ?', [req.body, id]);
+        await pool.query('UPDATE agencias set ? WHERE ORDEN = ?', [req.body, id]);
         res.json({ message: "The agencia was Updated" });
     }
 

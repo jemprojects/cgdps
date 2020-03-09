@@ -13,7 +13,7 @@ class ArboladurasController {
 
     public async getOne(req: Request, res: Response): Promise<any> {
         const { id } = req.params;
-        const arboladuras = await pool.query('SELECT * FROM arboladuras WHERE ORDEN = ?', [id]);
+        const arboladuras = await pool.query('SELECT * FROM arboladuras WHERE CODIGO = ?', [id]);
         console.log(arboladuras.length);
         if (arboladuras.length > 0) {
             return res.json(arboladuras[0]);
@@ -29,13 +29,13 @@ class ArboladurasController {
     public async update(req: Request, res: Response): Promise<void> {
         const { id } = req.params;
         const oldarboladura = req.body;
-        await pool.query('UPDATE arboladuras set ? WHERE otden = ?', [req.body, id]);
+        await pool.query('UPDATE arboladuras set ? WHERE CODIGO = ?', [req.body, id]);
         res.json({ message: "The arboladura was Updated" });
     }
 
     public async delete(req: Request, res: Response): Promise<void> {
         const { id } = req.params;
-        await pool.query('DELETE FROM arboladuras WHERE ORDEN = ?', [id]);
+        await pool.query('DELETE FROM arboladuras WHERE CODIGO = ?', [id]);
         res.json({ message: "The arboladura was deleted" });
     }
 }

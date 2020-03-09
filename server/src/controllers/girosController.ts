@@ -29,7 +29,7 @@ class GirosController {
     public async update(req: Request, res: Response): Promise<void> {
         const { id } = req.params;
         const oldgiro = req.body;
-        await pool.query('UPDATE giros set ? WHERE orden = ?', [req.body, id]);
+        await pool.query('UPDATE giros set ? WHERE ORDEN = ?', [req.body, id]);
         res.json({ message: "The giro was Updated" });
     }
 

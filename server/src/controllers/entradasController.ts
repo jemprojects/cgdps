@@ -3,9 +3,6 @@ import { Request, Response, Router } from 'express';
 import pool from '../database';
 
 class EntradasController {
-    public prueba(req: Request, res: Response){
-        res.json({text: 'Probando Router entradasController'})
-    }
     public async list(req: Request, res: Response): Promise<void> {
         const entradas = await pool.query('SELECT * FROM entradas');
         res.json(entradas);

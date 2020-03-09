@@ -29,7 +29,7 @@ class BanderasController {
     public async update(req: Request, res: Response): Promise<void> {
         const { id } = req.params;
         const oldbandera = req.body;
-        await pool.query('UPDATE banderas set ? WHERE otden = ?', [req.body, id]);
+        await pool.query('UPDATE banderas set ? WHERE ORDEN = ?', [req.body, id]);
         res.json({ message: "The bandera was Updated" });
     }
 

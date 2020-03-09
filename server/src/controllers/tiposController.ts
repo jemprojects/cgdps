@@ -13,7 +13,7 @@ class TiposController {
 
     public async getOne(req: Request, res: Response): Promise<any> {
         const { id } = req.params;
-        const tipos = await pool.query('SELECT * FROM tipos WHERE ORDEN = ?', [id]);
+        const tipos = await pool.query('SELECT * FROM tipos WHERE ID = ?', [id]);
         console.log(tipos.length);
         if (tipos.length > 0) {
             return res.json(tipos[0]);
@@ -29,13 +29,13 @@ class TiposController {
     public async update(req: Request, res: Response): Promise<void> {
         const { id } = req.params;
         const oldtipo = req.body;
-        await pool.query('UPDATE tipos set ? WHERE orden = ?', [req.body, id]);
+        await pool.query('UPDATE tipos set ? WHERE ID = ?', [req.body, id]);
         res.json({ message: "The tipo was Updated" });
     }
 
     public async delete(req: Request, res: Response): Promise<void> {
         const { id } = req.params;
-        await pool.query('DELETE FROM tipos WHERE ORDEN = ?', [id]);
+        await pool.query('DELETE FROM tipos WHERE ID = ?', [id]);
         res.json({ message: "The tipo was deleted" });
     }
 }
