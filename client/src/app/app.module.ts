@@ -17,12 +17,13 @@ import { CommonModule } from "@angular/common";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { FooterComponent } from "./components/layout/footer/footer.component";
 import { HeaderComponent } from "./components/layout/header/header.component";
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from "@angular/common/http";
 import { LoginComponent } from "./components/login/login.component";
 import { MatPseudoCheckboxModule } from "@angular/material/core";
 import { MaterialModule } from "./material.module";
 import { NgModule } from "@angular/core";
 import { PageNotFoundComponent } from "./components/page-not-found/page-not-found.component";
+import {RouterTestingModule} from '@angular/router/testing/testing';
 import { WebModule } from "./web/web-admin.module";
 import { environment } from "../environments/environment";
 
@@ -48,6 +49,7 @@ import { environment } from "../environments/environment";
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     HttpClientModule
+
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]

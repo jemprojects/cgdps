@@ -1,5 +1,5 @@
 import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
-import { Mercaderia, Operacion, Tipo } from '../models/operacion';
+import { Mercaderia, Operacion, Tipo } from "../models/operacion";
 
 import { Injectable } from "@angular/core";
 import { map } from "rxjs/operators";
@@ -16,10 +16,9 @@ export class OperacionsService {
   tiposRef: AngularFireList<Tipo> = null;
   tipos: any;
   constructor(private db: AngularFireDatabase) {
-    this.operacionsRef = db.list('/operaciones');
-    this.tiposRef= db.list('/tipos')
-    this.mercaderiasRef = db.list('/mercaderias')
-
+    this.operacionsRef = db.list("/operaciones");
+    this.tiposRef = db.list("/tipos");
+    this.mercaderiasRef = db.list("/mercaderias");
   }
   getOperacions(onOperacionsLoaded) {
     this.operacionsRef
@@ -50,7 +49,9 @@ export class OperacionsService {
   }
 
   updateOperacion(key: string, value: any): void {
-    this.operacionsRef.update(key, value).catch(error => this.handleError(error));
+    this.operacionsRef
+      .update(key, value)
+      .catch(error => this.handleError(error));
   }
 
   deleteOperacion(key: string): void {

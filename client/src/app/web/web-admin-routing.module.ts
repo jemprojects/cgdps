@@ -1,13 +1,13 @@
 import { RouterModule, Routes } from "@angular/router";
 
-import { AddAgenciaComponent } from './components/Add/add-agencia/add-agencia.component';
-import { AddBuqueComponent } from './components/Add/add-buque/add-buque.component';
+import { AddAgenciaComponent } from "./components/Add/add-agencia/add-agencia.component";
+import { AddBuqueComponent } from "./components/Add/add-buque/add-buque.component";
 import { AuthGuard } from "../auth/auth-guard.service";
 import { BuquesListComponent } from "./components/buques/buques-list/buques-list.component";
-import { ConsultasComponent } from './components/consultas/consultas.component';
-import { EntradaComponent } from './components/entradas/entrada/entrada.component';
+import { ConsultasComponent } from "./components/consultas/consultas.component";
+import { EntradaComponent } from "./components/entradas/entrada/entrada.component";
 import { EntradasListComponent } from "./components/entradas/entradas-list/entradas-list.component";
-import { FormCargaComponent } from './components/Formularios/form-carga/form-carga.component';
+import { FormCargaComponent } from "./components/Formularios/form-carga/form-carga.component";
 import { NgModule } from "@angular/core";
 import { WebAdminComponent } from "./web-admin.component";
 

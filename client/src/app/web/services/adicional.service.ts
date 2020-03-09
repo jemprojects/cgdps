@@ -1,13 +1,19 @@
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import { Arboladura, Bandera, Empresa, Envase, Trafico } from '../models/simpleData';
+import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
+import {
+  Arboladura,
+  Bandera,
+  Empresa,
+  Envase,
+  Trafico
+} from "../models/simpleData";
 
-import { Giros } from '../models/giros';
-import { Injectable } from '@angular/core';
-import { Puerto } from '../models/puertos';
-import { map } from 'rxjs/operators';
+import { Giros } from "../models/giros";
+import { Injectable } from "@angular/core";
+import { Puerto } from "../models/puertos";
+import { map } from "rxjs/operators";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class AditionalService {
   banderasRef: AngularFireList<Bandera> = null;
@@ -25,7 +31,6 @@ export class AditionalService {
   traficosRef: AngularFireList<Trafico> = null;
   traficos: any;
 
-
   // tslint:disable-next-line: variable-name
   empresasCargDescRef: AngularFireList<Empresa> = null;
   empresasCargDesc: any;
@@ -34,16 +39,13 @@ export class AditionalService {
   envases: any;
 
   constructor(private db: AngularFireDatabase) {
-    this.banderasRef = db.list('/banderas');
-    this.arboladurasRef = db.list('/arbuladuras');
-    this.puertosRef = db.list('/puertos');
-    this.girosRef = db.list('/giros');
-    this.traficosRef = db.list('/traficos')
-    this.empresasCargDescRef = db.list('/empresas_carga_descarga')
-    this.envasesRef = db.list('/env_carga_descarga')
-
-
-
+    this.banderasRef = db.list("/banderas");
+    this.arboladurasRef = db.list("/arbuladuras");
+    this.puertosRef = db.list("/puertos");
+    this.girosRef = db.list("/giros");
+    this.traficosRef = db.list("/traficos");
+    this.empresasCargDescRef = db.list("/empresas_carga_descarga");
+    this.envasesRef = db.list("/env_carga_descarga");
   }
   // service bandera
   getBanderas(onBanderasLoaded) {
@@ -82,23 +84,23 @@ export class AditionalService {
     this.banderasRef.remove(key).catch(error => this.handleError(error));
   }
 
-// service Arboladura
-getArboladuras(onArboladuraLoaded) {
-  this.arboladurasRef
-    .snapshotChanges()
-    .pipe(
-      map(changes =>
-        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+  // service Arboladura
+  getArboladuras(onArboladuraLoaded) {
+    this.arboladurasRef
+      .snapshotChanges()
+      .pipe(
+        map(changes =>
+          changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+        )
       )
-    )
-    .subscribe(arboladuras => {
-      const listArboladuras = Array<Arboladura>();
-      arboladuras.forEach(function(arboladura) {
-        listArboladuras.push(new Arboladura(arboladura));
-      });
-      onArboladuraLoaded(listArboladuras);
-    }, this.handleError);
-}
+      .subscribe(arboladuras => {
+        const listArboladuras = Array<Arboladura>();
+        arboladuras.forEach(function(arboladura) {
+          listArboladuras.push(new Arboladura(arboladura));
+        });
+        onArboladuraLoaded(listArboladuras);
+      }, this.handleError);
+  }
   getArboladura(key: string, onLoaded) {
     return this.db
       .object(`arboladuras/${key}`)
@@ -111,7 +113,9 @@ getArboladuras(onArboladuraLoaded) {
   }
 
   updateArboladura(key: string, value: any): void {
-    this.arboladurasRef.update(key, value).catch(error => this.handleError(error));
+    this.arboladurasRef
+      .update(key, value)
+      .catch(error => this.handleError(error));
   }
 
   deleteArboladura(key: string): void {
@@ -230,7 +234,6 @@ getArboladuras(onArboladuraLoaded) {
     console.log(error);
   }
 
-
   //Empresas
   getEmpresas(onTipoLoaded) {
     this.empresasCargDescRef
@@ -248,8 +251,8 @@ getArboladuras(onArboladuraLoaded) {
         onTipoLoaded(listEmpresas);
       }, this.handleError);
   }
-   //Envases
-   getEnvases(onTipoLoaded) {
+  //Envases
+  getEnvases(onTipoLoaded) {
     this.envasesRef
       .snapshotChanges()
       .pipe(
@@ -265,5 +268,4 @@ getArboladuras(onArboladuraLoaded) {
         onTipoLoaded(listEnvases);
       }, this.handleError);
   }
-
 }

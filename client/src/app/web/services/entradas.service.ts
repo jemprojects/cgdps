@@ -8,13 +8,31 @@ import { map } from "rxjs/operators";
   providedIn: "root"
 })
 export class EntradasService {
+  entradasRef2019: AngularFireList<Entrada> = null;
   entradasRef: AngularFireList<Entrada> = null;
   entradas: any;
 
   constructor(private db: AngularFireDatabase) {
-    this.entradasRef = db.list("/entradas/2019");
+    this.entradasRef2019 = db.list("/entradas/2019");
+    this.entradasRef = db.list("/entradas");
   }
   getEntradas(onentradasLoaded) {
+    this.entradasRef2019
+      .snapshotChanges()
+      .pipe(
+        map(changes =>
+          changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+        )
+      )
+      .subscribe(entradas => {
+        const listEntradas = Array<Entrada>();
+        entradas.forEach(function(entrada) {
+          listEntradas.push(new Entrada(entrada));
+        });
+        onentradasLoaded(listEntradas);
+      }, this.handleError);
+  }
+  getEntradasDev(onentradasLoaded) {
     this.entradasRef
       .snapshotChanges()
       .pipe(
@@ -53,20 +71,4 @@ export class EntradasService {
   private handleError(error) {
     console.log(error);
   }
-}
-export class DataTable {
-  id: number;
-  giro: number
-  buque: string;
-  agencia: string
-  procedencia: string
-  destino: string
-  entrada: Date
-  salida: Date
-  muelle: string
-  trafico: string
-  documento: string
-  nroPasavante : number
-  cal_ent: number
-  cal_sal: number
 }

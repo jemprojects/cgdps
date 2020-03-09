@@ -3,7 +3,7 @@
   <app-form-entrada #formEnt></app-form-entrada>
 
       <div>
-        <button mat-stroked-button class="btn-holder" color="primary" matStepperNext *ngIf="formEnt.checked" (click)="formEnt.save()" >Guardar y Continuar </button>
+        <button mat-raised-button color="primary" color="primary" matStepperNext *ngIf="formEnt.checked" (click)="formEnt.save()" >Guardar y Continuar </button>
       </div>
 </mat-step>
   <mat-step label="Operaciones">
@@ -27,11 +27,11 @@
 
 </mat-step>
 <mat-step>
-  <app-entradas-list [ultimaCargada]="formEnt.ultimaCargada"></app-entradas-list>
-  Listoo
+  <app-entradas-list [formularioAbierto]="formEnt.isOpen" ></app-entradas-list>
+
   <ng-template matStepLabel>Listo</ng-template>
   <div>
-    <button mat-button matStepperPrevious>Atras</button>
+    <button mat-button matStepperPrevious>Agregar Nuevo</button>
   </div>
 </mat-step>
 

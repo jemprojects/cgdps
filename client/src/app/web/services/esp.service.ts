@@ -1,44 +1,43 @@
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import { EmpresaServPorts, Esp, Rubro } from '../models/simpleData';
+import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
+import { EmpresaServPorts, Esp, Rubro } from "../models/simpleData";
 
-import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { map } from "rxjs/operators";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class EspService {
-
-  rubrosRef:AngularFireList<Rubro> = null;
+  rubrosRef: AngularFireList<Rubro> = null;
   rubros: any;
 
-  empServPortRef:AngularFireList<EmpresaServPorts> = null;
+  empServPortRef: AngularFireList<EmpresaServPorts> = null;
   empServPorts: any;
 
   espsRef: AngularFireList<Esp> = null;
-  esps:any
+  esps: any;
   constructor(private db: AngularFireDatabase) {
-    this.rubrosRef = db.list('/rubros')
-    this.espsRef = db.list('/esp')
-    this.empServPortRef = db.list('/emp_serv_port')
+    this.rubrosRef = db.list("/rubros");
+    this.espsRef = db.list("/esp");
+    this.empServPortRef = db.list("/emp_serv_port");
   }
-// service esp
-getEsps(onBanderasLoaded) {
-  this.espsRef
-    .snapshotChanges()
-    .pipe(
-      map(changes =>
-        changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+  // service esp
+  getEsps(onBanderasLoaded) {
+    this.espsRef
+      .snapshotChanges()
+      .pipe(
+        map(changes =>
+          changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+        )
       )
-    )
-    .subscribe(esps => {
-      const listEsps = Array<Esp>();
-      esps.forEach(function(esp) {
-        listEsps.push(new Esp(esp));
-      });
-      onBanderasLoaded(listEsps);
-    }, this.handleError);
-}
+      .subscribe(esps => {
+        const listEsps = Array<Esp>();
+        esps.forEach(function(esp) {
+          listEsps.push(new Esp(esp));
+        });
+        onBanderasLoaded(listEsps);
+      }, this.handleError);
+  }
   getEsp(key: string, onLoaded) {
     return this.db
       .object(`esp/${key}`)
@@ -58,9 +57,8 @@ getEsps(onBanderasLoaded) {
     this.espsRef.remove(key).catch(error => this.handleError(error));
   }
 
-
-   //Rubros
-   getRubros(onTipoLoaded) {
+  //Rubros
+  getRubros(onTipoLoaded) {
     this.rubrosRef
       .snapshotChanges()
       .pipe(

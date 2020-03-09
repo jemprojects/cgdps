@@ -1,25 +1,25 @@
-export class Entrada {
-   id: number;
-   giro: number;
-   buque: number;
-   agencia: string;
-   procedencia: string;
-   destino: string;
-   entrada: Date;
-   salida: Date;
-   muelle: string;
-   trafico: string;
-   documento: string;
-   nroPasavante: number;
-   cal_ent: number;
-   cal_sal: number;
+import { DatePipe } from '@angular/common';
 
+export class Entrada {
+  id: number;
+  giro: number;
+  buque: number;
+  agencia: number;
+  procedencia: number;
+  destino: number;
+  entrada: Date;
+  salida: Date;
+  muelle: number;
+  trafico: number;
+  documento: number;
+  nroPasavante: number;
+  cal_ent: number;
+  cal_sal: number;
 
   constructor(result) {
-    if(result.id!=0){
+    if (result.id != 0) {
       this.id = result.id;
-    }
-    else{
+    } else {
       this.id = +1;
     }
 
@@ -34,9 +34,8 @@ export class Entrada {
     this.muelle = result.muelle;
     this.trafico = result.trafico;
     this.documento = result.documento;
-    this.nroPasavante = result.nro;
+    this.nroPasavante = result.nroPasavante;
     this.cal_ent = result.cal_ent;
     this.cal_sal = result.cal_sal;
-
   }
 }

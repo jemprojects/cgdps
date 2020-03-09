@@ -26,8 +26,12 @@ import {
   MatToolbarModule,
   MatTooltipModule
 } from "@angular/material";
-import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from 'ngx-mat-datetime-picker';
+import {
+  NgxMatDatetimePickerModule,
+  NgxMatTimepickerModule
+} from "ngx-mat-datetime-picker";
 
+import { DatePipe } from '@angular/common';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { NgModule } from "@angular/core";
 
@@ -92,7 +96,8 @@ import { NgModule } from "@angular/core";
     MatTableModule,
     MatPaginatorModule,
     MatGridListModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+
   ]
 })
 export class WebAdminMaterialModule {}

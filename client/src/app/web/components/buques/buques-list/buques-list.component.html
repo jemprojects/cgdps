@@ -7,7 +7,7 @@
   </div>
   <mat-card >
     &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
-  <form *ngIf="buques!=null">
+  <form *ngIf="buques!=null && agencias!=null" >
     <form class="example-form">
       <mat-form-field  appearance="outline" class="inputGrid" >
         <mat-label>Nombre del Buque</mat-label>
@@ -18,7 +18,7 @@
         </mat-select>
       </mat-form-field>
     </form>
-    <div class="example-card" *ngIf="vacio()">
+    <div class="example-card" *ngIf="buqueSelect.nombre!='' ">
       <mat-grid-list cols="8" rowHeight="8:2">{{cargarDatosBuque()}}
       <mat-grid-tile class="mat-grid-tile1">ORDEN</mat-grid-tile>
       <mat-grid-tile class="mat-grid-tile1">BANDERA</mat-grid-tile>
@@ -52,7 +52,7 @@
     <div class="example-container mat-elevation-z8">
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container  [matColumnDef]="column" *ngFor="let column of displayedColumns" >
-          <th mat-header-cell *matHeaderCellDef class="mat-grid-tile1"> {{column}} </th>
+          <th mat-header-cell *matHeaderCellDef class="mat-grid-tile1"> {{column.toUpperCase()}} </th>
           <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
         </ng-container>
 

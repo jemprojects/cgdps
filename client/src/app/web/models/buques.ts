@@ -1,5 +1,5 @@
 export class Buques {
-  key:string
+  key: string;
   orden: number;
   nombre: string;
   bandera: number;
@@ -12,10 +12,9 @@ export class Buques {
   imo: number;
 
   constructor(result) {
-    if(result.key==null){
-
+    if (result.key == null) {
     }
-    this.key = result.key
+    this.key = result.key;
     this.orden = result.orden;
     this.nombre = result.nombre;
     this.bandera = result.bandera;

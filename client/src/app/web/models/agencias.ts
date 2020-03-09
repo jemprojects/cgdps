@@ -4,13 +4,13 @@ export class Agencias {
   cuit: string;
   direccion: string;
   telefono: number;
-  mail: string
+  mail: string;
   constructor(result) {
-    this.orden =result.orden;
+    this.orden = result.orden;
     this.agencia = result.agencia;
     this.cuit = result.cuit;
     this.direccion = result.direccion;
     this.telefono = result.telefono;
-    this.mail=result.mail
+    this.mail = result.mail;
   }
 }

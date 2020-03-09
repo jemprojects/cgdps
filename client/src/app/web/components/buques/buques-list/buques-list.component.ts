@@ -1,182 +1,235 @@
-import { Arboladura, Bandera, Trafico } from 'src/app/web/models/simpleData';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { DataTable, EntradasListComponent } from '../../entradas/entradas-list/entradas-list.component';
-import { MatPaginator, MatSort, MatTable, MatTableDataSource } from '@angular/material';
-
-import { AditionalService } from 'src/app/web/services/adicional.service';
-import { Agencias } from 'src/app/web/models/agencias';
-import { AgenciasService } from 'src/app/web/services/agencias.service';
-import { Buques } from 'src/app/web/models/buques';
-import { BuquesService } from 'src/app/web/services/buques.service';
+import { Arboladura, Bandera, Trafico } from "src/app/web/models/simpleData";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import {
-EntradasService
-} from 'src/app/web/services/entradas.service';
-import { Giros } from 'src/app/web/models/giros';
-import { Puerto } from 'src/app/web/models/puertos';
-import listaDeAgencias from 'src/assets/json/agencias.json';
-import listaDeArboladura from 'src/assets/json/arboladura.json';
-import listaDeBanderas from 'src/assets/json/bandera.json';
-import listaDeBuques from 'src/assets/json/buques.json';
-import listaDeEntradas from 'src/assets/json/entradas.json';
-import listaDeGiros from 'src/assets/json/giros.json';
-import listaDePuertos from 'src/assets/json/puertos.json';
-import listaDeTrafico from 'src/assets/json/trafico.json';
-import listaDoc from 'src/assets/json/documento.json';
+  MatPaginator,
+  MatSort,
+  MatTable,
+  MatTableDataSource
+} from "@angular/material";
 
+import { AditionalService } from "src/app/web/services/adicional.service";
+import { Agencias } from "src/app/web/models/agencias";
+import { AgenciasService } from "src/app/web/services/agencias.service";
+import { Buques } from "src/app/web/models/buques";
+import { BuquesService } from "src/app/web/services/buques.service";
+import { Entrada } from 'src/app/web/models/entradas';
+import { EntradasService } from "src/app/web/services/entradas.service";
+import { Giros } from "src/app/web/models/giros";
+import { Puerto } from "src/app/web/models/puertos";
+import listaDeAgencias from "src/assets/json/agencias.json";
+import listaDeArboladura from "src/assets/json/arboladura.json";
+import listaDeBanderas from "src/assets/json/bandera.json";
+import listaDeBuques from "src/assets/json/buques.json";
+import listaDeEntradas from "src/assets/json/entradas.json";
+import listaDeGiros from "src/assets/json/giros.json";
+import listaDePuertos from "src/assets/json/puertos.json";
+import listaDeTrafico from "src/assets/json/trafico.json";
+import listaDoc from "src/assets/json/documento.json";
+
+export class DataTable {
+  id: number;
+  giro: number;
+  buque: string;
+  agencia: string;
+  procedencia: string;
+  destino: string;
+  entrada: Date;
+  salida: Date;
+  muelle: string;
+  trafico: string;
+  documento: string;
+  nroPasavante: number;
+  cal_ent: number;
+  cal_sal: number;
+}
+export interface Documento{
+  id: number,
+  documento: string
+}
 @Component({
-  selector: 'app-buques-list',
-  templateUrl: './buques-list.component.html',
-  styleUrls: ['./buques-list.component.css']
+  selector: "app-buques-list",
+  templateUrl: "./buques-list.component.html",
+  styleUrls: ["./buques-list.component.css"]
 })
-export class BuquesListComponent implements OnInit{
-  serviceEntrada: EntradasService
-  entradas: Array<DataTable>=listaDeEntradas;
-
-  service: BuquesService;
+export class BuquesListComponent implements OnInit {
+  entradas: Array<Entrada> = listaDeEntradas;
   buqueSelect: Buques;
-  bandera: Bandera
-  arboladura:Arboladura
-  buques: Array<Buques>=listaDeBuques;
-  serviceAdd: AditionalService;
-  arboladuras: Array<Arboladura>=listaDeArboladura;
-  banderas: Array<Bandera>=listaDeBanderas;
-  displayedColumnsBuque: string[] = ['ORDEN','BANDERA', 'ARBOLADURA', 'IMO','ESLORA', 'MANGA', 'TRN', 'TRB']
-  displayedColumns: string[] = ['GIRO', 'AGENCIA', 'PROCENDENCIA', 'DESTINO','ENTRADA','SALIDA','MUELLE', 'TRAFICO', 'DOCUMENTO', 'NRO'];
+  bandera: Bandera;
+  arboladura: Arboladura;
+  buques: Array<Buques> = listaDeBuques;
+  arboladuras: Array<Arboladura> = listaDeArboladura;
+  banderas: Array<Bandera> = listaDeBanderas;
+  displayedColumnsBuque: string[] = [
+    "ORDEN",
+    "BANDERA",
+    "ARBOLADURA",
+    "IMO",
+    "ESLORA",
+    "MANGA",
+    "TRN",
+    "TRB"
+  ];
+  displayedColumns: string[] = [
+    "giro",
+    "buque",
+    "agencia",
+    "procedencia",
+    "destino",
+    "entrada",
+    "salida",
+    "muelle",
+    "trafico",
+    "documento",
+    "nroPasavante"
+  ];
   columnsToDisplay: string[] = this.displayedColumns.slice();
-  resultsLength:number;
-  entradasFiltradas: DataTable[]
+  resultsLength: number;
+  entradasFiltradas: DataTable[];
   dataSource: MatTableDataSource<DataTable>;
-  agencias: Array<Agencias>= listaDeAgencias
+  agencias: Array<Agencias> = listaDeAgencias;
   puertos: Array<Puerto> = listaDePuertos;
   giros: Array<Giros> = listaDeGiros;
   traficos: Array<Trafico> = listaDeTrafico;
-  documentos: any= listaDoc
-  serviceAgencia: AgenciasService;
-  serviceAdicional: AditionalService;
-  @ViewChild(MatTable, {static: true}) table: MatTable<any>;
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
- @ViewChild(EntradasListComponent, {static: true}) entradasList: EntradasListComponent
+  documentos:  Array<Documento> = listaDoc;
 
-  constructor(serviceBuques: BuquesService,
-              serviceAditional: AditionalService,
-              serviceEntrada: EntradasService) {
-    this.service = serviceBuques;
-    this.serviceAdd = serviceAditional;
-    this.serviceEntrada= serviceEntrada
-    this.entradas=listaDeEntradas
-    this.entradasFiltradas = null
+  @ViewChild(MatTable, { static: true }) table: MatTable<any>;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+
+  constructor(
+    private serviceBuques: BuquesService,
+    private serviceAditional: AditionalService,
+    private serviceEntrada: EntradasService,
+    private serviceAgencias: AgenciasService
+  ) {
 
   }
 
   ngOnInit() {
     const scope = this;
-    this.serviceAdd.getArboladuras(function(arboladuras) {
+    this.serviceEntrada.getEntradas(function(entradas) {
+      scope.entradas = entradas;
+    });
+    this.serviceAditional.getArboladuras(function(arboladuras) {
       scope.arboladuras = arboladuras;
     });
-    this.service.getBuques(function(buques) {
+    this.serviceBuques.getBuques(function(buques) {
       scope.buques = buques;
     });
-    this.serviceAdd.getBanderas(function(banderas) {
+    this.serviceAditional.getBanderas(function(banderas) {
       scope.banderas = banderas;
     });
 
-    this.serviceAgencia.getAgencias(function(agencias) {
+    this.serviceAgencias.getAgencias(function(agencias) {
       scope.agencias = agencias;
     });
-    this.serviceAdicional.getPuertos(function(puertos) {
+    this.serviceAditional.getPuertos(function(puertos) {
       scope.puertos = puertos;
     });
-    this.serviceAdicional.getGiros(function(giros) {
+    this.serviceAditional.getGiros(function(giros) {
       scope.giros = giros;
     });
-    this.serviceAdicional.getTraficos(function(traficos) {
+    this.serviceAditional.getTraficos(function(traficos) {
       scope.traficos = traficos;
     });
-    this.setupFormNewBuque();
+
+
+
+    this.buqueSelect=new Buques({
+      key: "",
+      orden: "",
+      nombre: "",
+      cuit: "",
+      bandera: "",
+      arboladura: "",
+      eslora: "",
+      manga: "",
+      puntal: "",
+      trn: "",
+      trb: "",
+      imo: ""
+    });
+
+
   }
 
-  completeTable(){
-    let table: DataTable[]=[]
-    Object.entries(this.entradas).forEach(([_, value]) => {
-      let data= new DataTable
-      Object.entries(value).forEach(([key, dato]) => {
-        if(key=='id'){
-          data.giro=value.id
-        }
-        if(key=='entrada'){
-          data.entrada=value.entrada
-        }
-        if(key=='salida'){
-          data.salida=value.salida
-        }
-        if(key=='buque'){
-          data.buque= this.buques.find(b=> b.orden==parseInt(value.buque)).nombre
-        }
-        if(key=='agencia'){
-          data.agencia= this.agencias.find(b=> b.orden == parseInt(value.agencia)).agencia
-        }
-        if(key=='procedencia'){
-          data.procedencia= this.puertos.find(b=> b.orden ==  parseInt(value.procedencia)).puerto
-        }
-        if(key=='destino'){
-          data.destino= this.puertos.find(b=> b.orden ==  parseInt(value.destino)).puerto
-        }
-        if(key=='trafico'){
-          data.trafico= this.traficos.find(b=> b.id ==  parseInt(value.trafico) || (parseInt(value.trafico)===0) || (value.trafico==null)).trafico
-        }
-        if(key=='documento'){
-          data.documento= this.documentos.find(b=>(b.id ==  parseInt(value.documento) || (parseInt(value.documento)===0) )).documento
-        }
-        if(key=='muelle'){
-          data.muelle= this.giros.find(b=> (b.orden ==  parseInt(value.muelle)) || (parseInt(value.muelle)===0)).muelle
-        }
-        if(key=='nroPasavante'){
-          data.nroPasavante=value.nroPasavante
-        }
-        if(key=='cal_ent'){
-          data.cal_ent=value.cal_ent
-        }
-        if(key=='cal_sal'){
-          data.cal_sal=value.cal_sal
-        }
+  completeTable() {
+    console.log(this.entradas)
+    let data= this.entradas.filter(e => e.buque == this.buqueSelect.orden);
+    let table: any = [];
+    let tra = "",doc="",
+      mue = "",
+      buq = "",
+      des = "",
+      proc = "",
+      age = ""
 
-      })
-      if(data!= undefined){
-        table.push(data)
+    for (const element of data) {
+
+      if (this.buques.find(b => b.orden == element.buque) != undefined) {
+        buq = this.buques.find(b => b.orden == element.buque).nombre;
       }
-    });
+      if (this.agencias.find(a => a.orden == element.agencia) != undefined) {
+        age = this.agencias.find(a => a.orden == element.agencia).agencia;
+      }
+      if (this.puertos.find(p => p.orden == element.procedencia) != undefined) {
+        proc = this.puertos.find(p => p.orden == element.procedencia).puerto;
+      }
+      if (this.puertos.find(p => p.orden ==element.destino) != undefined) {
+        des = this.puertos.find(p => p.orden == element.destino).puerto;
+      }
 
-    return table
+      if (this.documentos.find(b => b.id === element.documento) != undefined) {
+        doc = this.documentos.find(d => d.id === element.documento).documento;
+
+      }
+      if (element.trafico != null) {
+        if (this.traficos.find(p => p.id == element.trafico) != undefined) {
+          tra = this.traficos.find(p => p.id == element.trafico).trafico;
+        }
+      }
+      if (element.muelle != null) {
+        if (this.giros.find(p => p.orden == element.muelle) != undefined) {
+          mue = this.giros.find(p => p.orden == element.muelle).muelle;
+        }
+      }
+
+      table.push({
+        id: element.id,
+        giro: element.giro,
+        buque: buq,
+        agencia: age,
+        procedencia: proc,
+        destino: des,
+        entrada: element.entrada,
+        salida: element.salida,
+        muelle: mue,
+        trafico: tra,
+        documento: doc,
+        nroPasavante: element.nroPasavante,
+        cal_ent: element.cal_ent,
+        cal_sal: element.cal_sal
+      });
+    }
+    return table;
   }
 
-  setupFormNewBuque() {
-    this.buqueSelect = new Buques({
-      key:'',
-      orden: '',
-      nombre: '',
-      cuit: '',
-      bandera: '',
-      arboladura: '',
-      eslora: '',
-      manga: '',
-      puntal: '',
-      trn: '',
-      trb: '',
-      imo: ''
-    });
-  }
-  vacio(){
-    return !(this.buqueSelect.nombre==='')
+
+  vacio() {
+    return !(this.buqueSelect.nombre === "");
   }
   navigateToEdits(id) {
-    window.open(`cgpds/EditarBuque/${id}`, '_blank');
+    window.open(`cgpds/EditarBuque/${id}`, "_blank");
   }
-  cargarDatosBuque(){
-    this.bandera=(this.banderas.find(b => b.orden === this.buqueSelect.bandera))
-    this.arboladura= (this.arboladuras.find(b => b.codigo === this.buqueSelect.arboladura))
+  cargarDatosBuque() {
+    this.bandera = this.banderas.find(
+      b => b.orden === this.buqueSelect.bandera
+    );
+    this.arboladura = this.arboladuras.find(
+      b => b.codigo === this.buqueSelect.arboladura
+    );
+    console.log(this.completeTable())
     this.dataSource = new MatTableDataSource(this.completeTable());
-
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -186,9 +239,5 @@ export class BuquesListComponent implements OnInit{
       this.dataSource.paginator.firstPage();
     }
   }
-  getEntradasOfBuque(){
-    //this.dataSource=
-  }
 
 }
-

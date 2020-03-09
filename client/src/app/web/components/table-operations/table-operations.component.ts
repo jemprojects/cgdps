@@ -1,16 +1,24 @@
-import { AfterViewInit, Component, HostBinding, HostListener, Input, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatTable, MatTableDataSource } from '@angular/material';
-import { Mercaderia, Operacion, Tipo } from '../../models/operacion';
+import {
+  AfterViewInit,
+  Component,
+  HostBinding,
+  HostListener,
+  Input,
+  OnInit,
+  ViewChild
+} from "@angular/core";
+import { MatDialog, MatTable, MatTableDataSource } from "@angular/material";
+import { Mercaderia, Operacion, Tipo } from "../../models/operacion";
 
-import { DialogComponent } from '../popUp/dialog/dialog.component';
-import { OperacionsService } from '../../services/operacion.service';
-import listaDeOperaciones from 'src/assets/json/operacion.json';
+import { DialogComponent } from "../popUp/dialog/dialog.component";
+import { OperacionsService } from "../../services/operacion.service";
+import listaDeOperaciones from "src/assets/json/operacion.json";
 
 const ELEMENT_DATA: Operacion[] = [];
 @Component({
-  selector: 'app-table-operations',
-  templateUrl: './table-operations.component.html',
-  styleUrls: ['./table-operations.component.css']
+  selector: "app-table-operations",
+  templateUrl: "./table-operations.component.html",
+  styleUrls: ["./table-operations.component.css"]
 })
 export class TableOperationsComponent implements OnInit {
   service: OperacionsService;
@@ -18,22 +26,28 @@ export class TableOperationsComponent implements OnInit {
   operaciones: Array<Operacion> = listaDeOperaciones;
   ELEMENT_DATA = [];
   dataSource = ELEMENT_DATA;
-  title = 'EMPRESAS DE SERVICIOS PORTUARIOS QUE OPERAN EN EL BUQUE';
-  dataSimple: {id: number, name: string};
+  title = "EMPRESAS DE SERVICIOS PORTUARIOS QUE OPERAN EN EL BUQUE";
+  dataSimple: { id: number; name: string };
   count = 0;
-  operacion = new Operacion({id: '', mercaderia: '', tns: 0, tipo: '', giro_id: this.giro_id});
+  operacion = new Operacion({
+    id: "",
+    mercaderia: "",
+    tns: 0,
+    tipo: "",
+    giro_id: this.giro_id
+  });
   mercaderia: Mercaderia;
   tipo: Tipo;
   mercaderias: Array<Mercaderia>;
   tipos: Array<Tipo>;
-  displayedColumns: string[] = ['mercaderia', 'tns', 'tipo', 'action'];
+  displayedColumns: string[] = ["mercaderia", "tns", "tipo", "action"];
 
   constructor(service: OperacionsService, public dialog: MatDialog) {
     this.service = service;
   }
 
-  @ViewChild(MatTable, {static: true}) table: MatTable<any>;
-  @HostBinding('class.is-open')
+  @ViewChild(MatTable, { static: true }) table: MatTable<any>;
+  @HostBinding("class.is-open")
   isOpen = false;
 
   toggle() {
@@ -62,7 +76,7 @@ export class TableOperationsComponent implements OnInit {
     return parseInt(n1) + parseInt(n2);
   }
   createNewOperation(id: number): Operacion {
-    return {id, mercaderia: '', tns: 0, tipo: '', giro_id: this.giro_id};
+    return { id, mercaderia: "", tns: 0, tipo: "", giro_id: this.giro_id };
   }
   addRow() {
     this.dataSource.push(this.createNewOperation(this.dataSource.length + 1));
@@ -71,69 +85,65 @@ export class TableOperationsComponent implements OnInit {
 
   deleteRow(id: number) {
     this.dataSource = this.dataSource.filter((value, key) => {
-      return id != value.id ;
+      return id != value.id;
     });
   }
   getTotalCost() {
     let suma = 0;
     for (let i = 0; i < this.dataSource.length; i++) {
-        suma =suma + this.dataSource[i].tns
+      suma = suma + this.dataSource[i].tns;
     }
     return suma;
   }
   navigateTo(value) {
-    if (value === 'AgregarTipo') {
+    if (value === "AgregarTipo") {
       const dialogRef = this.dialog.open(DialogComponent, {
-        width: '250px',
-        data: {data: this.dataSimple, title: 'Tipo'},
-
+        width: "250px",
+        data: { data: this.dataSimple, title: "Tipo" }
       });
 
       dialogRef.afterClosed().subscribe(result => {
-        if (result.event == 'Add') {
+        if (result.event == "Add") {
           this.addTipo(result.data);
         }
-
       });
-    } else if (value === 'AgregarMercaderia') {
+    } else if (value === "AgregarMercaderia") {
       const dialogRef = this.dialog.open(DialogComponent, {
-        width: '250px',
-        data: {data: this.dataSimple, title: 'Mercaderia'},
-
+        width: "250px",
+        data: { data: this.dataSimple, title: "Mercaderia" }
       });
 
       dialogRef.afterClosed().subscribe(result => {
-        if (result.event == 'Add') {
+        if (result.event == "Add") {
           this.addMercaderia(result.data);
         }
-
       });
     }
     return false;
   }
   addTipo(row_obj) {
     let orden_count = this.tipos[this.tipos.length - 1].id + 1;
-    this.service.createTipo({'id': orden_count, 'tipo': row_obj.name.toUpperCase()}, () => {});
+    this.service.createTipo(
+      { id: orden_count, tipo: row_obj.name.toUpperCase() },
+      () => {}
+    );
   }
   addMercaderia(row_obj) {
     let orden_count = this.mercaderias[this.mercaderias.length - 1].orden + 1;
-    this.service.createMercaderia({'orden': orden_count, 'tipo': row_obj.name.toUpperCase()}, () => {});
+    this.service.createMercaderia(
+      { orden: orden_count, tipo: row_obj.name.toUpperCase() },
+      () => {}
+    );
   }
-  test(){
+  test() {
     let vacia = this.dataSource.map(function(d) {
-
-      return (d.mercaderia!= '' && d.tipo != '');
-   });
-   return vacia.some(t=> t==true)
+      return d.mercaderia != "" && d.tipo != "";
+    });
+    return vacia.some(t => t == true);
   }
   saveOperations() {
-    this.dataSource[0].giro_id=this.giro_id
-    this.dataSource[1].giro_id=this.giro_id
-    this.dataSource.map(function(d) {
-      if(d.mercaderia!= '' && d.tipo != ''){
-        console.log(d)
-      //this.service.createOperacion(d, () => {}));
-      }
-   });
+    this.dataSource[0].giro_id = this.giro_id;
+    this.dataSource[1].giro_id = this.giro_id;
+    this.dataSource.forEach(a => this.service.createOperacion(a, () => {}));
   }
 }

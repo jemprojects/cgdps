@@ -67,14 +67,14 @@
   &nbsp; &nbsp;
     <mat-form-field appearance="outline">
       <mat-label>Fecha de Entrada</mat-label>
-      <input matInput [ngxMatDatetimePicker]="pickerEntrada"  [(ngModel)]="entradaInEdition.entrada" required>
+      <input matInput [ngxMatDatetimePicker]="pickerEntrada"  [(ngModel)]="entradaInEdition.entrada" name="entrada" required>
       <mat-datepicker-toggle matSuffix [for]="pickerEntrada"></mat-datepicker-toggle>
       <ngx-mat-datetime-picker #pickerEntrada></ngx-mat-datetime-picker>
     </mat-form-field>
     &nbsp; &nbsp;
     <mat-form-field appearance="outline">
       <mat-label>Fecha de Salida</mat-label>
-      <input matInput [ngxMatDatetimePicker]="pickerSalida" [(ngModel)]="entradaInEdition.salida" required>
+      <input matInput [ngxMatDatetimePicker]="pickerSalida" [(ngModel)]="entradaInEdition.salida" name="salida" required>
       <mat-datepicker-toggle matSuffix [for]="pickerSalida"></mat-datepicker-toggle>
       <ngx-mat-datetime-picker #pickerSalida></ngx-mat-datetime-picker>
   </mat-form-field>
@@ -121,22 +121,23 @@
           class="example-margin"
           [(ngModel)]="checked" [disabled]="test(entradaInEdition.giro)" >
         Continuar con operaciones y empresas de servicio portuario que operan en el buque.
-      </mat-checkbox>
+      </mat-checkbox><p></p>
+
     </section>
 
     </div>
     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
     <div class="box2" >
       <mat-card class="miniBuque-card"  *ngIf="buqueSelect!=null">
-        <mat-grid-list cols="3" rowHeight="2:1" width= "300px">
+        <mat-grid-list cols="4" rowHeight="3:3" width= "350px">
         <mat-grid-tile class="mat-grid-tile1">ORDEN</mat-grid-tile>
         <mat-grid-tile class="mat-grid-tile1">NOMBRE</mat-grid-tile>
         <mat-grid-tile class="mat-grid-tile1">IMO</mat-grid-tile>
-
+        <mat-grid-tile class="mat-grid-tile1">TRN</mat-grid-tile>
         <mat-grid-tile >{{buqueSelect.orden}}</mat-grid-tile>
         <mat-grid-tile >{{buqueSelect.nombre}}</mat-grid-tile>
         <mat-grid-tile ><div *ngIf="buqueSelect.imo!=null"> {{buqueSelect.imo}}</div></mat-grid-tile>
-
+        <mat-grid-tile ><div *ngIf="buqueSelect.trn!=null"> {{buqueSelect.trn}}</div></mat-grid-tile>
         </mat-grid-list>
         <button class="buttonEdit" mat-mini-fab matTooltip="Editar" value="EditarBuque"
         (click)="navigateToEdits(buqueSelect.key)" color="primary">
@@ -144,6 +145,6 @@
             </button>
       </mat-card>
     </div>
-  </div>
+    </div>
 
 

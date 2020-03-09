@@ -1,17 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from "@angular/core";
 
 @Component({
-  selector: 'app-consultas',
-  templateUrl: './consultas.component.html',
-  styleUrls: ['./consultas.component.css']
+  selector: "app-consultas",
+  templateUrl: "./consultas.component.html",
+  styleUrls: ["./consultas.component.css"]
 })
 export class ConsultasComponent implements OnInit {
-
   constructor() {}
 
-  ngOnInit() {
-
-  }
- 
-
+  ngOnInit() {}
 }

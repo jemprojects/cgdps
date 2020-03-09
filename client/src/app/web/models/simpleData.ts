@@ -1,4 +1,4 @@
-import { Puerto } from './puertos';
+import { Puerto } from "./puertos";
 
 export class Bandera {
   orden: number;
@@ -18,6 +18,7 @@ export class Arboladura {
     this.arboladura = result.arboladura;
   }
 }
+
 export class Trafico {
   id: number;
   trafico: string;
@@ -28,7 +29,6 @@ export class Trafico {
   }
 }
 
-
 export class Empresa {
   id: number;
   empresa: string;
@@ -37,7 +37,6 @@ export class Empresa {
     this.id = result.id;
     this.empresa = result.empresa;
   }
-
 }
 export class Envase {
   id: number;
@@ -47,7 +46,6 @@ export class Envase {
     this.id = result.id;
     this.envase = result.envase;
   }
-
 }
 export class Movimiento {
   nroGiro: number;
@@ -73,30 +71,30 @@ export class Movimiento {
 export class Rubro {
   id: number;
   rubro_esp: string;
-  constructor(result){
-    this.id=result.id
-    this.rubro_esp=result.rubro_esp
+  constructor(result) {
+    this.id = result.id;
+    this.rubro_esp = result.rubro_esp;
   }
 }
 export class EmpresaServPorts {
   id: number;
   esp: string;
 
-  constructor(result){
-    this.id=result.id
-    this.esp=result.esp
+  constructor(result) {
+    this.id = result.id;
+    this.esp = result.esp;
   }
 }
 export class Esp {
-  id:number
-  nroGiro:number
-  empresa: EmpresaServPorts
-  rubro: Rubro
+  id: number;
+  nroGiro: number;
+  empresa: EmpresaServPorts;
+  rubro: Rubro;
 
-  constructor(result){
-    this.id=result.id
-    this.nroGiro=result.nroGiro
-    this.empresa=result.empresa
-    this.rubro= result.rubro
+  constructor(result) {
+    this.id = result.id;
+    this.nroGiro = result.nroGiro;
+    this.empresa = result.empresa;
+    this.rubro = result.rubro;
   }
 }

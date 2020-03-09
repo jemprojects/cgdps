@@ -2,15 +2,15 @@ export class Operacion {
   id: number;
   mercaderia: string;
   tns: number;
-  tipo:string
-  giro_id:number
+  tipo: string;
+  giro_id: number;
 
   constructor(result) {
-    this.id= result.id
+    this.id = result.id;
     this.mercaderia = result.mercaderia;
     this.tns = result.tns;
     this.tipo = result.tipo;
-    this.giro_id= result.giro_id
+    this.giro_id = result.giro_id;
   }
 }
 export class Mercaderia {
@@ -21,7 +21,6 @@ export class Mercaderia {
     this.orden = result.orden;
     this.tipo = result.tipo;
   }
-
 }
 export class Tipo {
   id: number;
@@ -31,5 +30,4 @@ export class Tipo {
     this.id = result.id;
     this.tipo = result.tipo;
   }
-
 }

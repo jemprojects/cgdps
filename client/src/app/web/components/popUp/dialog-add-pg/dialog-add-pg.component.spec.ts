@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { DialogAddPGComponent } from './dialog-add-pg.component';
+import { DialogAddPGComponent } from "./dialog-add-pg.component";
 
-describe('DialogAddPGComponent', () => {
+describe("DialogAddPGComponent", () => {
   let component: DialogAddPGComponent;
   let fixture: ComponentFixture<DialogAddPGComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DialogAddPGComponent ]
-    })
-    .compileComponents();
+      declarations: [DialogAddPGComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('DialogAddPGComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
