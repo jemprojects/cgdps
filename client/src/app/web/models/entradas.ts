@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 
 export class Entrada {
+  key: string
   id: number;
   giro: number;
   buque: number;
@@ -17,14 +18,9 @@ export class Entrada {
   cal_sal: number;
 
   constructor(result) {
-    if (result.id != 0) {
-      this.id = result.id;
-    } else {
-      this.id = +1;
-    }
-
+    this.key = result.key
+    this.id = result.id;
     this.giro = result.giro;
-
     this.buque = result.buque;
     this.agencia = result.agencia;
     this.procedencia = result.procedencia;

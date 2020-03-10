@@ -1,13 +1,4 @@
-<mat-horizontal-stepper>
-  <mat-step label="Solicitud De Giro">
-  <app-form-entrada #formEnt></app-form-entrada>
 
-      <div>
-        <button mat-raised-button color="primary" color="primary" matStepperNext *ngIf="formEnt.checked" (click)="formEnt.save()" >Guardar y Continuar </button>
-      </div>
-</mat-step>
-  <mat-step label="Operaciones">
-    <div>
       <div class="box">
 
         <div class="box1" >
@@ -20,20 +11,4 @@
         </div>
       </div>
 
-      &nbsp; &nbsp; &nbsp; &nbsp;
-      <button mat-stroked-button matStepperPrevious>Atras</button>
-      <button mat-stroked-button class="btn-holder" matStepperNext >Siguiente</button>
-    </div>
-
-</mat-step>
-<mat-step>
-  <app-entradas-list [formularioAbierto]="formEnt.isOpen" ></app-entradas-list>
-
-  <ng-template matStepLabel>Listo</ng-template>
-  <div>
-    <button mat-button matStepperPrevious>Agregar Nuevo</button>
-  </div>
-</mat-step>
-
-</mat-horizontal-stepper>
 

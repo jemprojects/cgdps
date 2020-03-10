@@ -1,1 +1,147 @@
-<p>edit-entrada works!</p>
+<mat-card>
+  <mat-progress-bar mode="indeterminate" *ngIf="buques == null && agencias == null"></mat-progress-bar>
+  <div *ngIf="entradaInEdition!=null ">
+    <div class="box" >
+      <div class="box1">
+      <mat-form-field  appearance="outline" class="inputSmall">
+        <mat-label>Giro</mat-label>
+        <input matInput placeholder="Giro" [(ngModel)]="entradaInEdition.giro">
+      </mat-form-field >
+      &nbsp; &nbsp;
+      <mat-form-field  appearance="outline">
+        <mat-label>Nombre del Buque</mat-label>
+        <select matNativeControl [(ngModel)]="entradaInEdition.buque " (change)="navigateTo($event.target.value)" >
+          <option value=""></option>
+          <option value="AgregarBuque">*AGREGAR NUEVO*</option>
+          <option *ngFor="let buque of buques" [value]="buque.orden" >
+            {{buque.nombre}}
+          </option>
+        </select>
+      </mat-form-field>
+      &nbsp; &nbsp;
+      <mat-form-field appearance="outline">
+        <mat-label>Agencia Maritima</mat-label>
+        <select matNativeControl [(ngModel)]="entradaInEdition.agencia" (change)="navigateTo($event.target.value)" >
+          <option value=""></option>
+          <option value="AgregarAgencia">*AGREGAR NUEVO*</option>
+          <option *ngFor="let agencia of agencias" [value]="agencia.orden" >
+            {{agencia.agencia}}
+          </option>
+        </select>
+      </mat-form-field>
+      &nbsp; &nbsp;
+      <mat-form-field appearance="outline">
+        <mat-label>Procedencia</mat-label>
+        <select matNativeControl  name="PuertoProcendencia" [(ngModel)]="entradaInEdition.procedencia" (change)="navigateTo($event.target.value)" >
+          <option value=""></option>
+          <option value="AgregarPuerto">*AGREGAR NUEVO*</option>
+          <option *ngFor="let puerto of puertos" [value]="puerto.orden">
+            {{puerto.puerto}}
+          </option>
+        </select>
+      </mat-form-field>
+      &nbsp; &nbsp;
+      <mat-form-field appearance="outline">
+        <mat-label>Destino</mat-label>
+        <select matNativeControl name="PuertoDestino" [(ngModel)]="entradaInEdition.destino" (change)="navigateTo($event.target.value)">
+          <option value=""></option>
+          <option value="AgregarPuerto">*AGREGAR NUEVO*</option>
+          <option *ngFor="let puerto1 of puertos" [value]="puerto1.orden" >
+          {{puerto1.puerto}}
+          </option>
+        </select>
+      </mat-form-field>
+      &nbsp; &nbsp;
+      <mat-form-field appearance="outline">
+        <mat-label>Muelle</mat-label>
+        <select matNativeControl [(ngModel)]="entradaInEdition.muelle" name="Muelle" (change)="navigateTo($event.target.value)" >
+          <option value=""></option>
+          <option value="AgregarGiro">*AGREGAR NUEVO*</option>
+          <option *ngFor="let giro of giros" [value]="giro.orden">
+            {{giro.muelle}}
+          </option>
+        </select>
+      </mat-form-field>
+    &nbsp; &nbsp;
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha de Entrada</mat-label>
+        <input matInput [ngxMatDatetimePicker]="pickerEntrada"  [(ngModel)]="entradaInEdition.entrada" name="entrada">
+        <mat-datepicker-toggle matSuffix [for]="pickerEntrada"></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker #pickerEntrada></ngx-mat-datetime-picker>
+      </mat-form-field>
+      &nbsp; &nbsp;
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha de Salida</mat-label>
+        <input matInput [ngxMatDatetimePicker]="pickerSalida" [(ngModel)]="entradaInEdition.salida" name="salida">
+        <mat-datepicker-toggle matSuffix [for]="pickerSalida"></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker #pickerSalida></ngx-mat-datetime-picker>
+    </mat-form-field>
+    &nbsp;&nbsp;
+      <mat-form-field appearance="outline">
+        <mat-label>Trafico</mat-label>
+        <select matNativeControl [(ngModel)]="entradaInEdition.trafico" name="Trafico" (change)="navigateTo($event.target.value)"  >
+          <option value="" selected> </option>
+          <option value="AgregarTrafico">*AGREGAR NUEVO*</option>
+          <option *ngFor="let trafico of traficos" [value]="trafico.id" >
+            {{trafico.trafico}}
+          </option>
+        </select>
+      </mat-form-field>
+      &nbsp; &nbsp;
+      <mat-form-field appearance="outline">
+        <mat-label>Documento</mat-label>
+        <select matNativeControl name="Documento" [(ngModel)]="entradaInEdition.documento" >
+          <option *ngFor="let documento of documentos" [value]="documento.id" >
+            {{documento.documento}}
+          </option>
+        </select>
+      </mat-form-field>
+      &nbsp; &nbsp;
+      <mat-form-field appearance="outline" >
+        <mat-label>Nº Pasavante</mat-label>
+        <input matInput type="number" placeholder="Nº Pasavante" [(ngModel)]="entradaInEdition.nroPasavante">
+      </mat-form-field>
+      &nbsp;
+
+      <mat-form-field appearance="outline">
+        <mat-label>C/ENT</mat-label>
+        <input matInput type="number" placeholder="C/ ENT " [(ngModel)]="entradaInEdition.cal_ent">
+      </mat-form-field>
+      &nbsp; &nbsp;
+      <mat-form-field appearance="outline">
+        <mat-label>C/SAL</mat-label>
+        <input matInput type="number" placeholder="C/SAL" [(ngModel)]="entradaInEdition.cal_sal">
+      </mat-form-field>
+      <p></p>
+
+      <section class="example-section">
+        <mat-checkbox *ngIf="isNew" [(ngModel)]="checked" [ngModelOptions]="{standalone: true}">Continuar
+          agregando
+        </mat-checkbox>
+         <button mat-raised-button color="primary" color="primary"  (click)="saveEntrada(entradaInEdition)" >Guardar y Continuar </button>
+      </section>
+
+      </div>
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      <div class="box2" >
+        <mat-card class="miniBuque-card"  *ngIf="buqueSelect!=null">
+          <mat-grid-list cols="4" rowHeight="3:3" width= "350px">
+          <mat-grid-tile class="mat-grid-tile1">ORDEN</mat-grid-tile>
+          <mat-grid-tile class="mat-grid-tile1">NOMBRE</mat-grid-tile>
+          <mat-grid-tile class="mat-grid-tile1">IMO</mat-grid-tile>
+          <mat-grid-tile class="mat-grid-tile1">TRN</mat-grid-tile>
+          <mat-grid-tile >{{buqueSelect.orden}}</mat-grid-tile>
+          <mat-grid-tile >{{buqueSelect.nombre}}</mat-grid-tile>
+          <mat-grid-tile ><div *ngIf="buqueSelect.imo!=null"> {{buqueSelect.imo}}</div></mat-grid-tile>
+          <mat-grid-tile ><div *ngIf="buqueSelect.trn!=null"> {{buqueSelect.trn}}</div></mat-grid-tile>
+          </mat-grid-list>
+          <button class="buttonEdit" mat-mini-fab matTooltip="Editar" value="EditarBuque"
+          (click)="navigateToEdits(buqueSelect.key)" color="primary">
+                <mat-icon>edit</mat-icon>
+              </button>
+        </mat-card>
+      </div>
+      </div>
+
+    </div>
+</mat-card>

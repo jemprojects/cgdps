@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -28,13 +29,11 @@ import { DialogAddPGComponent } from "../../popUp/dialog-add-pg/dialog-add-pg.co
 import { DialogComponent } from "../../popUp/dialog/dialog.component";
 import { Entrada } from "src/app/web/models/entradas";
 import { EntradasService } from "src/app/web/services/entradas.service";
-import { FormCargaComponent } from "../form-carga/form-carga.component";
 import { Giros } from "src/app/web/models/giros";
 import { MatDialog } from "@angular/material";
 import { Puerto } from "src/app/web/models/puertos";
-import { ServiciosPortuariosComponent } from "../../servicios-portuarios/servicios-portuarios.component";
-import { TableOperationsComponent } from "../../table-operations/table-operations.component";
 import { Trafico } from "src/app/web/models/simpleData";
+import listDoc from 'src/assets/json/documento.json';
 import listaDeAgencias from "src/assets/json/agencias.json";
 import listaDeBuques from "src/assets/json/buques.json";
 import listaDeGiros from "src/assets/json/giros.json";
@@ -71,7 +70,9 @@ export class FormEntradaComponent implements OnInit, AfterViewInit {
     private serviceBuque: BuquesService,
     private serviceAgencia: AgenciasService,
     private serviceAdicional: AditionalService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private ruteActive: ActivatedRoute,
+    private route: Router
 
   ) {
     this.entradaInEdition = null;
@@ -79,12 +80,6 @@ export class FormEntradaComponent implements OnInit, AfterViewInit {
     this.isOpen=true
     this.entradas=null
   }
-
-  @ViewChild(ServiciosPortuariosComponent, { static: true })
-  serv_port: ServiciosPortuariosComponent;
-  @ViewChild(TableOperationsComponent, { static: true })
-  operaciones: TableOperationsComponent;
-
   formTitle: string;
   // Listas
   buques: Array<Buques> = listaDeBuques;
@@ -102,16 +97,14 @@ export class FormEntradaComponent implements OnInit, AfterViewInit {
   dataSelect: { id: number; name: string; name2: string };
   dataSimple: { id: number; name: string };
   nroGiro: number=null
-  @Input() sideBar: FormCargaComponent;
-
+  documentos:any=listDoc
   @HostBinding("class.is-open")
-
-
 
   checked = false;
 
 
   ngOnInit() {
+   this.setupFormNewEntrada();
     const scope = this;
     this.serviceBuque.getBuques(function(buques) {
       scope.buques = buques;
@@ -133,7 +126,7 @@ export class FormEntradaComponent implements OnInit, AfterViewInit {
       scope.nroGiro=scope.entradas[scope.entradas.length-1].giro
 
     });
-    this.setupFormNewEntrada();
+
 
   }
 
@@ -227,15 +220,7 @@ export class FormEntradaComponent implements OnInit, AfterViewInit {
     });
   }
 
-  checkTrafico() {
-    if (this.entradaInEdition.trafico == 3) {
-      this.entradaInEdition.procedencia = 315;
-      this.entradaInEdition.destino = 315;
-      this.entradaInEdition.documento = 3;
-      this.entradaInEdition.muelle = 26;
-    }
-    return this.entradaInEdition.trafico == 3;
-  }
+
   setupFormNewEntrada() {
     this.isNew = true;
     this.entradaInEdition = new Entrada({
@@ -257,7 +242,7 @@ export class FormEntradaComponent implements OnInit, AfterViewInit {
 
   }
 
-  saveEntrada2(entrada) {
+  saveEntrada(entrada) {
     entrada.entrada=this.datepipe.transform( this.entradaInEdition.entrada, 'yyyy/MM/dd hh:mm:ss')
     entrada.salida=this.datepipe.transform( this.entradaInEdition.salida, 'yyyy/MM/dd hh:mm:ss')
     const jsonEntrada = entrada;
@@ -266,10 +251,15 @@ export class FormEntradaComponent implements OnInit, AfterViewInit {
     if (this.isNew) {
       this.serviceEntrada.createEntrada(jsonEntrada, () => {
         this.ultimaCargada = jsonEntrada;
-        console.log(entrada)
-      });
+        if (!this.checked) {
+          this.setupFormNewEntrada()
+          this.scrollToTop()
+        }else {
+          this.backToOperaciones()
+        }
+      })
     } else {
-      this.serviceEntrada.updateEntrada(this.entradaKey, jsonEntrada);
+      this.serviceEntrada.updateEntrada(this.entradaKey, jsonEntrada)
     }
   }
   getUltimaCargada(){
@@ -283,7 +273,8 @@ export class FormEntradaComponent implements OnInit, AfterViewInit {
   test(nro) {
     return nro == "";
   }
-  save(){
-    this.saveEntrada2(this.entradaInEdition)
+  backToOperaciones(): void {
+    this.route.navigate(['/cgpds/operaciones'])
   }
+
 }

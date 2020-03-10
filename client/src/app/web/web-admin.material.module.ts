@@ -31,6 +31,7 @@ import {
   NgxMatTimepickerModule
 } from "ngx-mat-datetime-picker";
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DatePipe } from '@angular/common';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { NgModule } from "@angular/core";
@@ -65,7 +66,8 @@ import { NgModule } from "@angular/core";
     MatTableModule,
     MatPaginatorModule,
     MatGridListModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    BrowserAnimationsModule
   ],
   exports: [
     MatButtonModule,
@@ -97,6 +99,7 @@ import { NgModule } from "@angular/core";
     MatPaginatorModule,
     MatGridListModule,
     MatProgressBarModule,
+    BrowserAnimationsModule
 
   ]
 })

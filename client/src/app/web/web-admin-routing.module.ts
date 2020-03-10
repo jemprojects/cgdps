@@ -5,10 +5,13 @@ import { AddBuqueComponent } from "./components/Add/add-buque/add-buque.componen
 import { AuthGuard } from "../auth/auth-guard.service";
 import { BuquesListComponent } from "./components/buques/buques-list/buques-list.component";
 import { ConsultasComponent } from "./components/consultas/consultas.component";
+import { EditEntradaComponent } from './components/entradas/edit-entrada/edit-entrada.component';
 import { EntradaComponent } from "./components/entradas/entrada/entrada.component";
 import { EntradasListComponent } from "./components/entradas/entradas-list/entradas-list.component";
 import { FormCargaComponent } from "./components/Formularios/form-carga/form-carga.component";
+import { FormEntradaComponent } from './components/Formularios/form-entrada/form-entrada.component';
 import { NgModule } from "@angular/core";
+import { TableOperationsComponent } from './components/table-operations/table-operations.component';
 import { WebAdminComponent } from "./web-admin.component";
 
 const routes: Routes = [
@@ -23,7 +26,12 @@ const routes: Routes = [
       },
       {
         path: "cgpds",
-        component: EntradaComponent,
+        component: EditEntradaComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: "cgpds/entrada/:id",
+        component: EditEntradaComponent,
         canActivate: [AuthGuard]
       },
       {
@@ -55,7 +63,13 @@ const routes: Routes = [
         path: "cgpds/EditarBuque/:id",
         component: AddBuqueComponent,
         canActivate: [AuthGuard]
+      },
+      {
+        path: "cgpds/operaciones",
+        component: EntradaComponent,
+        canActivate: [AuthGuard]
       }
+
     ]
   }
 ];

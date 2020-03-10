@@ -26,7 +26,7 @@ export class TableOperationsComponent implements OnInit {
   operaciones: Array<Operacion> = listaDeOperaciones;
   ELEMENT_DATA = [];
   dataSource = ELEMENT_DATA;
-  title = "EMPRESAS DE SERVICIOS PORTUARIOS QUE OPERAN EN EL BUQUE";
+  title = "CARGA / DESCARGA";
   dataSimple: { id: number; name: string };
   count = 0;
   operacion = new Operacion({
@@ -64,12 +64,9 @@ export class TableOperationsComponent implements OnInit {
     this.service.getOperacions(function(operaciones) {
       scope.operaciones = operaciones;
     });
-    this.initTable();
+
   }
-  initTable() {
-    this.dataSource.push(this.createNewOperation(1));
-    this.dataSource.push(this.createNewOperation(2));
-  }
+
 
   getTotal(n1, n2) {
     // tslint:disable-next-line: radix
@@ -142,8 +139,6 @@ export class TableOperationsComponent implements OnInit {
     return vacia.some(t => t == true);
   }
   saveOperations() {
-    this.dataSource[0].giro_id = this.giro_id;
-    this.dataSource[1].giro_id = this.giro_id;
     this.dataSource.forEach(a => this.service.createOperacion(a, () => {}));
   }
 }

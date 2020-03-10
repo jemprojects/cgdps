@@ -154,7 +154,6 @@ export class BuquesListComponent implements OnInit {
   }
 
   completeTable() {
-    console.log(this.entradas)
     let data= this.entradas.filter(e => e.buque == this.buqueSelect.orden);
     let table: any = [];
     let tra = "",doc="",
@@ -228,7 +227,6 @@ export class BuquesListComponent implements OnInit {
     this.arboladura = this.arboladuras.find(
       b => b.codigo === this.buqueSelect.arboladura
     );
-    console.log(this.completeTable())
     this.dataSource = new MatTableDataSource(this.completeTable());
   }
   applyFilter(event: Event) {

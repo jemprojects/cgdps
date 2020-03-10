@@ -1,150 +1,149 @@
-<mat-progress-bar mode="indeterminate" *ngIf="buques == null && agencias == null"></mat-progress-bar>
-<div *ngIf="entradaInEdition!=null ">
-  <div class="box" >
-    <div class="box1">
-    <mat-form-field  appearance="outline" class="inputSmall">
-      <mat-label>Giro</mat-label>
-      <input matInput placeholder="Giro" [(ngModel)]="entradaInEdition.giro" [(ngModel)]="checked" required>
-    </mat-form-field >
+<mat-card>
+  <mat-progress-bar mode="indeterminate" *ngIf="buques == null && agencias == null"></mat-progress-bar>
+  <div *ngIf="entradaInEdition!=null ">
+    <div class="box" >
+      <div class="box1">
+      <mat-form-field  appearance="outline" class="inputSmall">
+        <mat-label>Giro</mat-label>
+        <input matInput placeholder="Giro" [(ngModel)]="entradaInEdition.giro" required>
+      </mat-form-field >
+      &nbsp; &nbsp;
+      <mat-form-field  appearance="outline">
+        <mat-label>Nombre del Buque</mat-label>
+        <select matNativeControl [(ngModel)]="entradaInEdition.buque " (change)="navigateTo($event.target.value)" required >
+          <option value=""></option>
+          <option value="AgregarBuque">*AGREGAR NUEVO*</option>
+          <option *ngFor="let buque of buques" [value]="buque.orden" >
+            {{buque.nombre}}
+          </option>
+        </select>
+      </mat-form-field>
+      &nbsp; &nbsp;
+      <mat-form-field appearance="outline">
+        <mat-label>Agencia Maritima</mat-label>
+        <select matNativeControl [(ngModel)]="entradaInEdition.agencia" (change)="navigateTo($event.target.value)"  required>
+          <option value=""></option>
+          <option value="AgregarAgencia">*AGREGAR NUEVO*</option>
+          <option *ngFor="let agencia of agencias" [value]="agencia.agencia" >
+            {{agencia.agencia}}
+          </option>
+        </select>
+      </mat-form-field>
+      &nbsp; &nbsp;
+      <mat-form-field appearance="outline" >
+        <mat-label>Procedencia</mat-label>
+        <select matNativeControl  name="PuertoProcendencia" [(ngModel)]="entradaInEdition.procedencia" (change)="navigateTo($event.target.value)"  required>
+          <option value=""></option>
+          <option value="AgregarPuerto">*AGREGAR NUEVO*</option>
+          <option *ngFor="let puerto of puertos" [value]="puerto.puerto">
+            {{puerto.puerto}}
+          </option>
+        </select>
+      </mat-form-field>
+      &nbsp; &nbsp;
+      <mat-form-field appearance="outline" >
+        <mat-label>Destino</mat-label>
+        <select matNativeControl name="PuertoDestino" [(ngModel)]="entradaInEdition.destino" (change)="navigateTo($event.target.value)" required>
+          <option value=""></option>
+          <option value="AgregarPuerto">*AGREGAR NUEVO*</option>
+          <option *ngFor="let puerto1 of puertos" [value]="puerto1.puerto" >
+          {{puerto1.puerto}}
+          </option>
+        </select>
+      </mat-form-field>
+      &nbsp; &nbsp;
+      <mat-form-field appearance="outline">
+        <mat-label>Muelle</mat-label>
+        <select matNativeControl [(ngModel)]="entradaInEdition.muelle" name="Muelle" (change)="navigateTo($event.target.value)" required >
+          <option value=""></option>
+          <option value="AgregarGiro">*AGREGAR NUEVO*</option>
+          <option *ngFor="let giro of giros" [value]="giro.muelle">
+            {{giro.muelle}}
+          </option>
+        </select>
+      </mat-form-field>
     &nbsp; &nbsp;
-    <mat-form-field  appearance="outline">
-      <mat-label>Nombre del Buque</mat-label>
-      <select matNativeControl [(ngModel)]="entradaInEdition.buque " (change)="navigateTo($event.target.value)" required >
-        <option value=""></option>
-        <option value="AgregarBuque">*AGREGAR NUEVO*</option>
-        <option *ngFor="let buque of buques" [value]="buque.orden" >
-          {{buque.nombre}}
-        </option>
-      </select>
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha de Entrada</mat-label>
+        <input matInput [ngxMatDatetimePicker]="pickerEntrada"  [(ngModel)]="entradaInEdition.entrada" name="entrada" required>
+        <mat-datepicker-toggle matSuffix [for]="pickerEntrada"></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker #pickerEntrada></ngx-mat-datetime-picker>
+      </mat-form-field>
+      &nbsp; &nbsp;
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha de Salida</mat-label>
+        <input matInput [ngxMatDatetimePicker]="pickerSalida" [(ngModel)]="entradaInEdition.salida" name="salida" required>
+        <mat-datepicker-toggle matSuffix [for]="pickerSalida"></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker #pickerSalida></ngx-mat-datetime-picker>
     </mat-form-field>
-    &nbsp; &nbsp;
-    <mat-form-field appearance="outline">
-      <mat-label>Agencia Maritima</mat-label>
-      <select matNativeControl (change)="navigateTo($event.target.value)" [(ngModel)]="entradaInEdition.agencia" required>
-        <option value=""></option>
-        <option value="AgregarAgencia">*AGREGAR NUEVO*</option>
-        <option *ngFor="let agencia of agencias" [value]="agencia.agencia" >
-          {{agencia.agencia}}
-        </option>
-      </select>
-    </mat-form-field>
-    &nbsp; &nbsp;
-    <mat-form-field appearance="outline" >
-      <mat-label>Procedencia</mat-label>
-      <select matNativeControl  name="PuertoProcendencia" (change)="navigateTo($event.target.value)" [(ngModel)]="entradaInEdition.procedencia" [disabled]="checkTrafico()" required>
-        <option value="" *ngIf="!checkTrafico()" ></option>
-        <option value="NO INGRESO" [selected]="checkTrafico()" >NO INGRESO</option>
-        <option value="AgregarPuerto">*AGREGAR NUEVO*</option>
-        <option *ngFor="let puerto of puertos" [value]="puerto.puerto">
-          {{puerto.puerto}}
-        </option>
-      </select>
-    </mat-form-field>
-    &nbsp; &nbsp;
-    <mat-form-field appearance="outline" >
-      <mat-label>Destino</mat-label>
-      <select matNativeControl name="PuertoDestino" (change)="navigateTo($event.target.value)" [(ngModel)]="entradaInEdition.destino" [disabled]="checkTrafico()" required>
-        <option value="" *ngIf="!checkTrafico()" > </option>
-        <option value="NO INGRESO" [selected]="checkTrafico()" > NO INGRESO</option>
-        <option value="AgregarPuerto">*AGREGAR NUEVO*</option>
-        <option *ngFor="let puerto1 of puertos" [value]="puerto1.puerto" >
-        {{puerto1.puerto}}
-        </option>
-      </select>
-    </mat-form-field>
-    &nbsp; &nbsp;
-    <mat-form-field appearance="outline">
-      <mat-label>Muelle</mat-label>
-      <select matNativeControl [(ngModel)]="entradaInEdition.muelle" name="Muelle" (change)="navigateTo($event.target.value)"  [disabled]="checkTrafico()"  required >
-        <option value="" *ngIf="!checkTrafico()"></option>
-        <option value="NO INGRESO" [selected]="checkTrafico()">NO INGRESO</option>
-        <option value="AgregarGiro">*AGREGAR NUEVO*</option>
-        <option *ngFor="let giro of giros" [value]="giro.muelle">
-          {{giro.muelle}}
-        </option>
-      </select>
-    </mat-form-field>
-  &nbsp; &nbsp;
-    <mat-form-field appearance="outline">
-      <mat-label>Fecha de Entrada</mat-label>
-      <input matInput [ngxMatDatetimePicker]="pickerEntrada"  [(ngModel)]="entradaInEdition.entrada" name="entrada" required>
-      <mat-datepicker-toggle matSuffix [for]="pickerEntrada"></mat-datepicker-toggle>
-      <ngx-mat-datetime-picker #pickerEntrada></ngx-mat-datetime-picker>
-    </mat-form-field>
-    &nbsp; &nbsp;
-    <mat-form-field appearance="outline">
-      <mat-label>Fecha de Salida</mat-label>
-      <input matInput [ngxMatDatetimePicker]="pickerSalida" [(ngModel)]="entradaInEdition.salida" name="salida" required>
-      <mat-datepicker-toggle matSuffix [for]="pickerSalida"></mat-datepicker-toggle>
-      <ngx-mat-datetime-picker #pickerSalida></ngx-mat-datetime-picker>
-  </mat-form-field>
-  &nbsp;&nbsp;
-    <mat-form-field appearance="outline">
-      <mat-label>Trafico</mat-label>
-      <select matNativeControl [(ngModel)]="entradaInEdition.trafico" name="Trafico" (change)="navigateTo($event.target.value)"  required >
-        <option value="" selected> </option>
-        <option value="AgregarTrafico">*AGREGAR NUEVO*</option>
-        <option *ngFor="let trafico of traficos" [value]="trafico.trafico" >
-          {{trafico.trafico}}
-        </option>
-      </select>
-    </mat-form-field>
-    &nbsp; &nbsp;
-    <mat-form-field appearance="outline">
-      <mat-label>Documento</mat-label>
-      <select matNativeControl name="Documento" [(ngModel)]="entradaInEdition.documento" [disabled]="checkTrafico()">
-        <option value="" *ngIf="!checkTrafico()"></option>
-        <option value="NO INGRESO" [selected]="checkTrafico()">NO INGRESO</option>
-        <option value="PASAVANTE">PASAVANTE</option>
-      </select>
-    </mat-form-field>
-    &nbsp; &nbsp;
-    <mat-form-field appearance="outline" >
-      <mat-label>Nº Pasavante</mat-label>
-      <input matInput type="number" placeholder="Nº Pasavante" [(ngModel)]="entradaInEdition.nroPasavante" required>
-    </mat-form-field>
-    &nbsp;
-    <p></p>
-    <mat-form-field appearance="outline">
-      <mat-label>C/ENT</mat-label>
-      <input matInput type="number" placeholder="C/ ENT " [(ngModel)]="entradaInEdition.cal_ent" required>
-    </mat-form-field>
-    &nbsp; &nbsp;
-    <mat-form-field appearance="outline">
-      <mat-label>C/SAL</mat-label>
-      <input matInput type="number" placeholder="C/SAL" [(ngModel)]="entradaInEdition.cal_sal" required>
-    </mat-form-field>
-    <p></p>
+    &nbsp;&nbsp;
+      <mat-form-field appearance="outline">
+        <mat-label>Trafico</mat-label>
+        <select matNativeControl [(ngModel)]="entradaInEdition.trafico" name="Trafico" (change)="navigateTo($event.target.value)"  required >
+          <option value="" selected> </option>
+          <option value="AgregarTrafico">*AGREGAR NUEVO*</option>
+          <option *ngFor="let trafico of traficos" [value]="trafico.trafico" >
+            {{trafico.trafico}}
+          </option>
+        </select>
+      </mat-form-field>
+      &nbsp; &nbsp;
+      <mat-form-field appearance="outline">
+        <mat-label>Documento</mat-label>
+        <select matNativeControl name="Documento" [(ngModel)]="entradaInEdition.documento" >
+          <option *ngFor="let documento of documentos" [value]="documento.id" >
+            {{documento.documento}}
+          </option>
+        </select>
+      </mat-form-field>
+      &nbsp; &nbsp;
+      <mat-form-field appearance="outline" >
+        <mat-label>Nº Pasavante</mat-label>
+        <input matInput type="number" placeholder="Nº Pasavante" [(ngModel)]="entradaInEdition.nroPasavante" required>
+      </mat-form-field>
+      &nbsp;
+      <p></p>
+      <mat-form-field appearance="outline">
+        <mat-label>C/ENT</mat-label>
+        <input matInput type="number" placeholder="C/ ENT " [(ngModel)]="entradaInEdition.cal_ent" required>
+      </mat-form-field>
+      &nbsp; &nbsp;
+      <mat-form-field appearance="outline">
+        <mat-label>C/SAL</mat-label>
+        <input matInput type="number" placeholder="C/SAL" [(ngModel)]="entradaInEdition.cal_sal" required>
+      </mat-form-field>
+      <p></p>
 
-    <section class="example-section">
-      <mat-checkbox
-          class="example-margin"
-          [(ngModel)]="checked" [disabled]="test(entradaInEdition.giro)" >
-        Continuar con operaciones y empresas de servicio portuario que operan en el buque.
-      </mat-checkbox><p></p>
+      <section class="example-section">
+        <mat-checkbox
+            class="example-margin"
+            [(ngModel)]="checked" [disabled]="test(entradaInEdition.giro)" >
+          Continuar con operaciones y empresas de servicio portuario que operan en el buque.
+        </mat-checkbox><p></p>
+         <button mat-raised-button color="primary" color="primary"  (click)="saveEntrada(entradaInEdition)" >Guardar y Continuar </button>
+      </section>
 
-    </section>
+      </div>
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+      <div class="box2" >
+        <mat-card class="miniBuque-card"  *ngIf="buqueSelect!=null">
+          <mat-grid-list cols="4" rowHeight="3:3" width= "350px">
+          <mat-grid-tile class="mat-grid-tile1">ORDEN</mat-grid-tile>
+          <mat-grid-tile class="mat-grid-tile1">NOMBRE</mat-grid-tile>
+          <mat-grid-tile class="mat-grid-tile1">IMO</mat-grid-tile>
+          <mat-grid-tile class="mat-grid-tile1">TRN</mat-grid-tile>
+          <mat-grid-tile >{{buqueSelect.orden}}</mat-grid-tile>
+          <mat-grid-tile >{{buqueSelect.nombre}}</mat-grid-tile>
+          <mat-grid-tile ><div *ngIf="buqueSelect.imo!=null"> {{buqueSelect.imo}}</div></mat-grid-tile>
+          <mat-grid-tile ><div *ngIf="buqueSelect.trn!=null"> {{buqueSelect.trn}}</div></mat-grid-tile>
+          </mat-grid-list>
+          <button class="buttonEdit" mat-mini-fab matTooltip="Editar" value="EditarBuque"
+          (click)="navigateToEdits(buqueSelect.key)" color="primary">
+                <mat-icon>edit</mat-icon>
+              </button>
+        </mat-card>
+      </div>
+      </div>
 
     </div>
-    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-    <div class="box2" >
-      <mat-card class="miniBuque-card"  *ngIf="buqueSelect!=null">
-        <mat-grid-list cols="4" rowHeight="3:3" width= "350px">
-        <mat-grid-tile class="mat-grid-tile1">ORDEN</mat-grid-tile>
-        <mat-grid-tile class="mat-grid-tile1">NOMBRE</mat-grid-tile>
-        <mat-grid-tile class="mat-grid-tile1">IMO</mat-grid-tile>
-        <mat-grid-tile class="mat-grid-tile1">TRN</mat-grid-tile>
-        <mat-grid-tile >{{buqueSelect.orden}}</mat-grid-tile>
-        <mat-grid-tile >{{buqueSelect.nombre}}</mat-grid-tile>
-        <mat-grid-tile ><div *ngIf="buqueSelect.imo!=null"> {{buqueSelect.imo}}</div></mat-grid-tile>
-        <mat-grid-tile ><div *ngIf="buqueSelect.trn!=null"> {{buqueSelect.trn}}</div></mat-grid-tile>
-        </mat-grid-list>
-        <button class="buttonEdit" mat-mini-fab matTooltip="Editar" value="EditarBuque"
-        (click)="navigateToEdits(buqueSelect.key)" color="primary">
-              <mat-icon>edit</mat-icon>
-            </button>
-      </mat-card>
-    </div>
-    </div>
-
-
+</mat-card>
