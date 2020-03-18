@@ -6,7 +6,7 @@
       Nuevo</button>
   </div>
   <mat-card >
-    &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+    <h4>Seleccione un buque para mostrar los datos del mismo.</h4>
   <form *ngIf="buques!=null && agencias!=null" >
     <form class="example-form">
       <mat-form-field  appearance="outline" class="inputGrid" >
@@ -43,12 +43,8 @@
     value="EditarBuque" (click)="navigateToEdits(buqueSelect.key)" color="primary">
           <mat-icon>edit</mat-icon>
         </button>
-  </div>
-  <div *ngIf="buqueSelect!=null">
-    <mat-form-field>
-      <mat-label>Filter</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
-    </mat-form-field>
+
+  <div *ngIf="buqueSelect!=null ">
     <div class="example-container mat-elevation-z8">
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
         <ng-container  [matColumnDef]="column" *ngFor="let column of displayedColumns" >
@@ -61,6 +57,7 @@
       </table>
     </div>
   </div>
+</div>
   </form>
   </mat-card>
 
