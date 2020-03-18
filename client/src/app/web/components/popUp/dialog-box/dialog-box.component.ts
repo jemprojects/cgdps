@@ -30,11 +30,9 @@ export interface EmpresaServPort {
 })
 export class DialogBoxComponent implements OnInit {
   myControl = new FormControl();
-  options: any = listaRubros;
-  filteredOptions: Observable<Rubro[]>;
+  rubros: any = listaRubros;
   myControlE = new FormControl();
-  optionsE: any = listaEmpresas;
-  filteredOptionsE: Observable<EmpresaServPort[]>;
+  empServPort: any = listaEmpresas;
 
   action: string;
   local_data: any;
@@ -71,47 +69,12 @@ export class DialogBoxComponent implements OnInit {
   ngOnInit() {
     const scope = this;
     this.service.getRubros(function(rubros) {
-      scope.options = rubros;
+      scope.rubros = rubros;
     });
     this.service.getEmpServPort(function(emp_serv_port) {
-      scope.optionsE = emp_serv_port;
+      scope.empServPort = emp_serv_port;
     });
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(""),
-      map(value => (typeof value === "string" ? value : value.rubro_esp)),
-      map(rubro_esp =>
-        rubro_esp ? this._filter(rubro_esp) : this.options.slice()
-      )
-    );
 
-    this.filteredOptionsE = this.myControlE.valueChanges.pipe(
-      startWith(""),
-      map(value => (typeof value === "string" ? value : value.esp)),
-      map(esp => (esp ? this._filterE(esp) : this.optionsE.slice()))
-    );
   }
 
-  displayFn(rubro?: Rubro): string | undefined {
-    return rubro ? rubro.rubro_esp : undefined;
-  }
-
-  private _filter(name: string): User[] {
-    const filterValue = name.toLowerCase();
-
-    return this.options.filter(
-      option => option.rubro_esp.toLowerCase().indexOf(filterValue) === 0
-    );
-  }
-  //
-  displayFnE(e?: EmpresaServPort): string | undefined {
-    return e ? e.esp : undefined;
-  }
-
-  private _filterE(name: string): User[] {
-    const filterValue = name.toLowerCase();
-
-    return this.optionsE.filter(
-      option => option.esp.toLowerCase().indexOf(filterValue) === 0
-    );
-  }
 }

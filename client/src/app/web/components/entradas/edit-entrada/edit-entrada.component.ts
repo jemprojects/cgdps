@@ -74,6 +74,7 @@ export class EditEntradaComponent implements OnInit {
       private route: Router
 
     ) {
+      this.entradaInEdition = null;
       this.buqueSelect = null;
       this.isOpen = true;
       this.entradas = null;
@@ -128,10 +129,7 @@ export class EditEntradaComponent implements OnInit {
       this.serviceEntrada.getEntradas(function(entradas) {
         scope.entradas = entradas;
         scope.nroGiro = scope.entradas[scope.entradas.length - 1].giro;
-
       });
-
-
     }
 
     ngAfterViewInit() {
@@ -220,6 +218,7 @@ export class EditEntradaComponent implements OnInit {
     setupFormEditEntrada() {
       this.isNew = false;
       this.serviceEntrada.getEntrada(this.entradaKey, data => {
+        console.log(data)
         this.entradaInEdition = new Entrada({
           id: data.id,
           giro: data.giro,
@@ -236,8 +235,11 @@ export class EditEntradaComponent implements OnInit {
           cal_ent: data.cal_ent,
           cal_sal: data.cal_sal
         });
-
+        this.buqueSelect = this.buques.find(
+          b => b.orden == data.buque
+        );
       });
+
     }
     setupFormNewEntrada() {
       this.isNew = true;
@@ -276,11 +278,10 @@ export class EditEntradaComponent implements OnInit {
           }
         });
       } else {
-        console.log(jsonEntrada)
         this.serviceEntrada.updateEntrada(this.entradaKey, jsonEntrada);
       }
       this.backToHome()
-      console.log(this.entradas)
+
     }
     backToHome(){
       this.route.navigate(['/cgpds']);

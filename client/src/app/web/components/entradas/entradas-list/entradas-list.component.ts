@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit, ViewChild } from "@angular/core";
+import { AfterViewInit, ChangeDetectorRef, Component, HostListener, Input, OnInit, ViewChild } from "@angular/core";
 import { MatPaginator, MatSort, MatTableDataSource } from "@angular/material";
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
@@ -7,6 +7,7 @@ import { Agencias } from "src/app/web/models/agencias";
 import { AgenciasService } from "src/app/web/services/agencias.service";
 import { Buques } from "src/app/web/models/buques";
 import { BuquesService } from "src/app/web/services/buques.service";
+import { ConsultasComponent } from '../../consultas/consultas.component';
 import { Entrada } from "src/app/web/models/entradas";
 import { EntradasService } from "src/app/web/services/entradas.service";
 import { FormControl } from "@angular/forms";
@@ -24,7 +25,7 @@ import listaDeTrafico from "src/assets/json/trafico.json";
 import listaDoc from "src/assets/json/documento.json";
 
 export class DataTable {
-  key:number
+  key:string | number;
   id: number;
   giro: number;
   buque: string;
@@ -45,10 +46,10 @@ export class DataTable {
   templateUrl: "./entradas-list.component.html",
   styleUrls: ["./entradas-list.component.css"]
 })
-export class EntradasListComponent implements OnInit {
+export class EntradasListComponent implements OnInit, AfterViewInit {
   @Input() formEnt: FormEntradaComponent;
   @Input() formularioAbierto: boolean;
-  entradas: Array<Entrada>=listaDeEntradas
+  entradas: Array<Entrada>
   displayedColumns: string[] = [
     "giro",
     "buque",
@@ -73,11 +74,13 @@ export class EntradasListComponent implements OnInit {
   documentos: any = listaDoc;
   search = new FormControl("");
   entradasFiltradas: DataTable[];
-  ultima:Entrada
+
+
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-
+  @ViewChild(ConsultasComponent,{ static: false }) consult: ConsultasComponent
   dataSource: MatTableDataSource<DataTable>;
+
   checked = false;
 
 
@@ -86,18 +89,26 @@ export class EntradasListComponent implements OnInit {
     private serviceBuque: BuquesService,
     private serviceAgencia: AgenciasService,
     private serviceAdicional: AditionalService,
-    private route: Router
+    private route: Router,
+    private cd: ChangeDetectorRef,
   ) {
     this.entradasFiltradas = null;
+    this.entradas=null
+
+  }
+  ngAfterViewInit(): void {
+
+    this.dataSource = new MatTableDataSource(this.completeTable(this.entradas));
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+
+     this.cd.detectChanges();
 
   }
   ngOnInit() {
-
     const scope = this;
     this.service.getEntradas(function(entradas) {
       scope.entradas = entradas;
-     // scope.ultima= scope.entradas.pop()
-     // console.log(scope.ultima)
     });
 
     this.serviceBuque.getBuques(function(buques) {
@@ -115,24 +126,21 @@ export class EntradasListComponent implements OnInit {
     this.serviceAdicional.getTraficos(function(traficos) {
       scope.traficos = traficos;
     });
+
     this.dataSource = new MatTableDataSource(this.completeTable(this.entradas));
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    this.ultima= this.entradas.pop()
-    console.log(this.ultima)
+
+
   }
+
   completeTable(entradas :Entrada[]) {
     let table: DataTable[] = [];
-
-    Object.entries(entradas).forEach(([keydb, value]) => {
+    Object.entries(entradas).forEach(([_, value]) => {
       let data = new DataTable();
-
-
-      // tslint:disable-next-line: no-unused-expression
+      data.key = value.key
       Object.entries(value).forEach(([key, _]) => {
-        if(key=='key'){
-          data.key = value.giro-1
-        }
+
         if (key == "id") {
           data.id = value.id;
         }
@@ -149,19 +157,25 @@ export class EntradasListComponent implements OnInit {
           data.buque = this.buques.find(b => b.orden == value.buque).nombre;
         }
         if (key == "agencia") {
+        if( this.agencias.find(b => b.orden == value.agencia) != undefined){
           data.agencia = this.agencias.find(
             b => b.orden == value.agencia
           ).agencia;
         }
+
+        }
         if (key == "procedencia") {
-          data.procedencia = this.puertos.find(
-            b => b.orden == value.procedencia).puerto;
+          if(this.puertos.find(b => b.orden == value.procedencia) != undefined){
+            data.procedencia = this.puertos.find(b => b.orden == value.procedencia).puerto;
+          }
         }
         if (key == "destino") {
-          data.destino = this.puertos.find(
-            b => b.orden == value.destino).puerto;
+          if(this.puertos.find(b => b.orden == value.destino)!= undefined){
+            data.destino = this.puertos.find(b => b.orden == value.destino).puerto;
+          }
         }
         if (key == "trafico") {
+          if( this.traficos.find(b => b.id == value.trafico) != undefined ){
           data.trafico = this.traficos.find(
             b =>
               b.id == value.trafico ||
@@ -169,22 +183,18 @@ export class EntradasListComponent implements OnInit {
               value.trafico == null
           ).trafico;
         }
+        }
         if (key == "documento") {
           if(this.documentos.find(b =>b.id === value.documento) != undefined ){
-            data.documento = this.documentos.find(
-                        b =>
-                          b.id === value.documento
-                      ).documento;
-          }else{
-            data.documento=''
+            data.documento = this.documentos.find(b => b.id === value.documento).documento;
           }
 
         }
         if (key == "muelle") {
-          data.muelle = this.giros.find(
-            b =>
-              b.orden == value.muelle || value.muelle === 0
-          ).muelle;
+          if(this.giros.find(b =>b.orden == value.muelle)!= undefined){
+            data.muelle = this.giros.find(b =>b.orden == value.muelle).muelle;
+          }
+
         }
         if (key == "nroPasavante") {
           data.nroPasavante = value.nroPasavante;
@@ -196,11 +206,8 @@ export class EntradasListComponent implements OnInit {
           data.cal_sal = value.cal_sal;
         }
       });
-      if (data != undefined) {
-        table.push(data);
-      }
+      table.push(data);
     });
-
     return table;
   }
   applyFilter(event: Event) {
@@ -212,7 +219,6 @@ export class EntradasListComponent implements OnInit {
     }
   }
   navigateToEdits(id) {
-
     this.route.navigate([`cgpds/entrada/${id}`]);
   }
 }

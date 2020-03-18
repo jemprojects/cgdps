@@ -26,7 +26,7 @@ const routes: Routes = [
       },
       {
         path: "cgpds",
-        component: EditEntradaComponent,
+        component: FormEntradaComponent,
         canActivate: [AuthGuard]
       },
       {

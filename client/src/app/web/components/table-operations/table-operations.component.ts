@@ -11,6 +11,7 @@ import { MatDialog, MatTable, MatTableDataSource } from "@angular/material";
 import { Mercaderia, Operacion, Tipo } from "../../models/operacion";
 
 import { DialogComponent } from "../popUp/dialog/dialog.component";
+import { FormEntradaComponent } from '../Formularios/form-entrada/form-entrada.component';
 import { OperacionsService } from "../../services/operacion.service";
 import listaDeOperaciones from "src/assets/json/operacion.json";
 
@@ -22,7 +23,8 @@ const ELEMENT_DATA: Operacion[] = [];
 })
 export class TableOperationsComponent implements OnInit {
   service: OperacionsService;
-  @Input() giro_id: number;
+
+  @Input() giro_id:number
   operaciones: Array<Operacion> = listaDeOperaciones;
   ELEMENT_DATA = [];
   dataSource = ELEMENT_DATA;
@@ -140,5 +142,6 @@ export class TableOperationsComponent implements OnInit {
   }
   saveOperations() {
     this.dataSource.forEach(a => this.service.createOperacion(a, () => {}));
+    this.dataSource=null
   }
 }

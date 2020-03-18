@@ -1,0 +1,21 @@
+table {
+  width: 100%;
+}
+
+
+td, th {
+  width: 5%;
+  align-items: center;
+  align-content: center;
+  font-size: 14px;
+}
+.example-container {
+  height: 700px;
+  width: 100%;
+  overflow: auto;
+}
+
+
+.mat-grid-tile1 {
+  background: lightblue;
+}

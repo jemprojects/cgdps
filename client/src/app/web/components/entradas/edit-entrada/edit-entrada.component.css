@@ -1,0 +1,95 @@
+
+.inputSmall{
+  width: 120px;
+  max-width: 120px;
+  box-sizing: border-box;
+}
+.inputGrid{
+  width: 180px;
+  max-width: 200px;
+  box-sizing: border-box;
+  text-align: center;
+}
+.formEntradas{
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 10px;
+  width: 500px;
+}
+
+
+.mat-grid-tile1 {
+  background: lightblue;
+}
+.example-card {
+  max-width: 700px;
+}
+
+.box {
+  display: flex;
+}
+
+.box1 {
+  flex: 1 1 auto;
+  width: 50%;
+}
+
+.box2 {
+  flex: 1 1 auto;
+
+}
+.box3 {
+  flex: 1 1 auto;
+  width: 50%;
+  align-items: center;
+}
+
+.box4 {
+  flex: 1 1 auto;
+  width: 50%;
+}
+.mat-grid-title1 {
+  background: lightblue;
+}
+.mat-grid-tile{
+  display: flex;
+  margin: 0 auto;
+  text-align: center;
+}
+.miniBuque-card {
+  max-width: 300px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 2em;
+}
+table {
+  width: 100%;
+}
+
+
+td, th {
+  width: 25%;
+}
+table {
+  width: 100%;
+}
+
+
+td, th {
+  width: 5%;
+  align-items: center;
+  align-content: center;
+  font-size: 14px;
+}
+.example-container {
+  height: 800px;
+  width: 100%;
+  overflow: auto;
+}
+
+
+.mat-grid-tile1 {
+  background: lightblue;
+}

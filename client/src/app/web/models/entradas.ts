@@ -19,7 +19,7 @@ export class Entrada {
 
   constructor(result) {
     this.key = result.key
-    this.id = result.id;
+    this.id = result.key;
     this.giro = result.giro;
     this.buque = result.buque;
     this.agencia = result.agencia;

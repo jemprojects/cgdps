@@ -11,7 +11,8 @@ import {
 import {
   DateAdapter,
   MAT_DATE_FORMATS,
-  MAT_DATE_LOCALE
+  MAT_DATE_LOCALE,
+  MatTableDataSource
 } from "@angular/material";
 import {
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
@@ -24,6 +25,7 @@ import { Agencias } from "src/app/web/models/agencias";
 import { AgenciasService } from "src/app/web/services/agencias.service";
 import { Buques } from "src/app/web/models/buques";
 import { BuquesService } from "src/app/web/services/buques.service";
+import { DataTable } from '../../entradas/entradas-list/entradas-list.component';
 import { DatePipe } from '@angular/common';
 import { DialogAddPGComponent } from "../../popUp/dialog-add-pg/dialog-add-pg.component";
 import { DialogComponent } from "../../popUp/dialog/dialog.component";
@@ -63,23 +65,19 @@ import listaDeTrafico from "src/assets/json/trafico.json";
 export class FormEntradaComponent implements OnInit, AfterViewInit {
   ultimaCargada: string;
   isOpen:Boolean
-  constructor(
-    public datepipe: DatePipe,
-    public dialog: MatDialog,
-    private serviceEntrada: EntradasService,
-    private serviceBuque: BuquesService,
-    private serviceAgencia: AgenciasService,
-    private serviceAdicional: AditionalService,
-    private cd: ChangeDetectorRef,
-    private ruteActive: ActivatedRoute,
-    private route: Router
-
-  ) {
-    this.entradaInEdition = null;
-    this.buqueSelect = null;
-    this.isOpen=true
-    this.entradas=null
-  }
+  displayedColumns: string[] = [
+    "giro",
+    "buque",
+    "agencia",
+    "procedencia",
+    "destino",
+    "entrada",
+    "salida",
+    "muelle",
+    "trafico",
+    "documento",
+    "nroPasavante", "accion"
+  ];
   formTitle: string;
   // Listas
   buques: Array<Buques> = listaDeBuques;
@@ -99,12 +97,35 @@ export class FormEntradaComponent implements OnInit, AfterViewInit {
   nroGiro: number=null
   documentos:any=listDoc
   @HostBinding("class.is-open")
-
+  ultima:Entrada[]
   checked = false;
+  dataSource: MatTableDataSource<DataTable>;
+  constructor(
+    public datepipe: DatePipe,
+    public dialog: MatDialog,
+    private serviceEntrada: EntradasService,
+    private serviceBuque: BuquesService,
+    private serviceAgencia: AgenciasService,
+    private serviceAdicional: AditionalService,
+    private cd: ChangeDetectorRef,
+    private ruteActive: ActivatedRoute,
+    private route: Router
+
+  ) {
+    this.entradaInEdition = null;
+    this.buqueSelect = null;
+    this.isOpen=true
+    this.entradas=null
+  }
 
 
   ngOnInit() {
-   this.setupFormNewEntrada();
+    this.entradaKey = this.ruteActive.snapshot.paramMap.get('id');
+    if (this.entradaKey === null) {
+        this.setupFormNewEntrada()
+      } else {
+        this.setupFormEditEntrada()
+      }
     const scope = this;
     this.serviceBuque.getBuques(function(buques) {
       scope.buques = buques;
@@ -123,9 +144,12 @@ export class FormEntradaComponent implements OnInit, AfterViewInit {
     });
     this.serviceEntrada.getEntradas(function(entradas) {
       scope.entradas = entradas;
+      scope.ultima=[scope.entradas.pop()]
       scope.nroGiro=scope.entradas[scope.entradas.length-1].giro
 
+
     });
+
 
 
   }
@@ -134,7 +158,67 @@ export class FormEntradaComponent implements OnInit, AfterViewInit {
     this.cd.detectChanges();
 
   }
+  completeTable(entradas) {
+    let table: any = [];
+    let doc = "",
+      tra = "",
+      mue = "",
+      buq = "",
+      des = "",
+      proc = "",
+      age = "";
+    for (let entry of entradas) {
+      if (entry.documento != 0) {
+        if (this.documentos.find(d => d.id == entry.documento) != undefined) {
+          doc = this.documentos.find(d => d.id == entry.documento).documento;
+        }
+      }
 
+      if (entry.trafico != 0) {
+        if (this.traficos.find(p => p.id == entry.trafico) != undefined) {
+          tra = this.traficos.find(p => p.id == entry.trafico).trafico;
+        }
+      }
+      if (entry.muelle != 0) {
+        if (this.giros.find(p => p.orden == entry.muelle) != undefined) {
+          mue = this.giros.find(p => p.orden == entry.muelle).muelle;
+        }
+      }
+      if (this.buques.find(b => b.orden == entry.buque) != undefined) {
+        buq = this.buques.find(b => b.orden == entry.buque).nombre;
+      }
+      if (this.agencias.find(a => a.orden == entry.agencia) != undefined) {
+        age = this.agencias.find(a => a.orden == entry.agencia).agencia;
+      }
+      if (this.puertos.find(p => p.orden == entry.procedencia) != undefined) {
+        proc = this.puertos.find(p => p.orden == entry.procedencia).puerto;
+      }
+      if (this.puertos.find(p => p.orden == entry.destino) != undefined) {
+        des = this.puertos.find(p => p.orden == entry.destino).puerto;
+      }
+
+      table.push({
+        key: entry.key,
+        id: entry.id,
+        giro: entry.giro,
+        buque: buq,
+        agencia: age,
+        procedencia: proc,
+        destino: des,
+        entrada: entry.entrada,
+        salida: entry.salida,
+        muelle: mue,
+        trafico: tra,
+        documento: doc,
+        nroPasavante: entry.nroPasavante,
+        cal_ent: entry.cal_ent,
+        cal_sal: entry.cal_sal,
+        created_at: entry.created_at
+      });
+    }
+
+    return table;
+  }
   navigateTo(value) {
     if (value === "AgregarBuque" || value === "AgregarAgencia") {
       window.open(`cgpds/${value}/null`);
@@ -216,7 +300,23 @@ export class FormEntradaComponent implements OnInit, AfterViewInit {
   setupFormEditEntrada() {
     this.isNew = false;
     this.serviceEntrada.getEntrada(this.entradaKey, data => {
-      this.entradaInEdition = new Entrada(data);
+      this.entradaInEdition = new Entrada({
+        id: data.id,
+        giro: data.giro,
+        buque: data.buque,
+        agencia: data.agencia,
+        procedencia: data.procedencia,
+        destino:data.destino,
+        entrada: new Date(data.entrada),
+        salida: new Date(data.salida),
+        trafico: data.trafico,
+        muelle: data.muelle,
+        documento: data.documento,
+        nroPasavante: data.nroPasavante,
+        cal_ent: data.cal_ent,
+        cal_sal: data.cal_sal
+      });
+
     });
   }
 
@@ -250,6 +350,7 @@ export class FormEntradaComponent implements OnInit, AfterViewInit {
     delete jsonEntrada[keyout];
     if (this.isNew) {
       this.serviceEntrada.createEntrada(jsonEntrada, () => {
+
         this.ultimaCargada = jsonEntrada;
         if (!this.checked) {
           this.setupFormNewEntrada()
@@ -262,10 +363,7 @@ export class FormEntradaComponent implements OnInit, AfterViewInit {
       this.serviceEntrada.updateEntrada(this.entradaKey, jsonEntrada)
     }
   }
-  getUltimaCargada(){
-   let last= this.entradas.pop()
 
-  }
   scrollToTop() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }

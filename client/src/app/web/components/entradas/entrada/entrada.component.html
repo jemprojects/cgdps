@@ -1,14 +1,16 @@
+<app-consultas #consultas></app-consultas>
+<mat-card><div class="box">
+  <div class="box1" >
+    <app-table-operations #operaciones [giro_id]="consultas.giro_id"></app-table-operations>
+  </div>
 
-      <div class="box">
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+  <div class="box2"  >
+    <app-servicios-portuarios #servPort  [giro_id]="consultas.giro_id"></app-servicios-portuarios>
+  </div>
 
-        <div class="box1" >
-         <app-table-operations #operaciones [giro_id]="formEnt.entradaInEdition.giro"></app-table-operations>
-        </div>
+</div>
+</mat-card>
 
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-        <div class="box2"  >
-          <app-servicios-portuarios #servPort [giro_id]="formEnt.entradaInEdition.giro"></app-servicios-portuarios>
-        </div>
-      </div>
 
 
